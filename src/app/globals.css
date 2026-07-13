@@ -81,9 +81,10 @@
   --motion-distance-section: 18px;
   --motion-scale-media: 1.025;
   --motion-parallax: 6%;
-  --z-header: 40;
+  --z-header: 70;
   --z-overlay: 80;
   --z-modal: 90;
+  --z-mobile-nav: 130;
 }
 
 * {

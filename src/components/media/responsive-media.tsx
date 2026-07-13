@@ -41,7 +41,7 @@ export function ResponsiveMedia({
         className="bg-surface-muted relative size-full overflow-hidden"
         style={{ aspectRatio: `${ratio.width}/${ratio.height}` }}
       >
-        <picture>
+        <picture className="absolute inset-0">
           {mobile && (
             <source media="(max-width: 639px)" srcSet={mobile.srcSet} />
           )}

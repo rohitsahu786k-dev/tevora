@@ -266,115 +266,116 @@ export function SiteHeader() {
   const mobileProducts = productMenuGroups.flatMap((group) => group.items);
   const mobileSpaces = spaceMenuGroups.flatMap((group) => group.items);
   return (
-    <motion.header
-      ref={headerRef}
-      layout="position"
-      className={cn(
-        "top-0 z-50 w-full border-b transition-colors duration-200 motion-reduce:transition-none",
-        transparent
-          ? "fixed border-white/20 bg-transparent text-white"
-          : "border-line bg-canvas/95 text-graphite sticky backdrop-blur-sm",
-      )}
-    >
-      <div
+    <>
+      <header
+        ref={headerRef}
         className={cn(
-          "mx-auto flex max-w-[96rem] items-center gap-4 px-5 transition-[min-height] duration-300 motion-reduce:transition-none sm:px-8",
-          scrolled ? "min-h-16" : "min-h-20",
+          "top-0 z-[var(--z-header)] w-full border-b transition-colors duration-200 motion-reduce:transition-none",
+          transparent
+            ? "fixed border-white/20 bg-transparent text-white"
+            : "border-line bg-canvas/95 text-graphite sticky backdrop-blur-sm",
         )}
       >
-        <Link
-          href={routes.home}
-          className="mr-auto flex min-h-11 flex-col justify-center leading-none"
-          aria-label={`${brandSettings.brandName} home`}
+        <div
+          className={cn(
+            "mx-auto flex max-w-[96rem] items-center gap-2 px-4 transition-[min-height] duration-300 motion-reduce:transition-none sm:gap-4 sm:px-8",
+            scrolled ? "min-h-16" : "min-h-16 sm:min-h-20",
+          )}
         >
-          <BrandLogo
-            variant={transparent ? "light" : "dark"}
-            priority
-            className="w-36 sm:w-40"
-          />
-          <span
+          <Link
+            href={routes.home}
+            className="mr-auto flex min-h-11 min-w-0 flex-col justify-center leading-none"
+            aria-label={`${brandSettings.brandName} home`}
+          >
+            <BrandLogo
+              variant={transparent ? "light" : "dark"}
+              priority
+              className="w-32 sm:w-40"
+            />
+            <span
+              className={cn(
+                "type-caption mt-1 hidden pl-[1.85rem] min-[23rem]:block sm:pl-[2.05rem]",
+                transparent ? "text-white/65" : "text-ink-muted",
+              )}
+            >
+              {brandSettings.brandDescriptor}
+            </span>
+          </Link>
+          <nav
+            aria-label="Primary"
+            className="hidden h-20 items-stretch 2xl:flex"
+          >
+            {mainNavigation
+              .filter((item) => item.label !== "Contact")
+              .map((item) =>
+                "menu" in item ? (
+                  <button
+                    key={item.label}
+                    type="button"
+                    aria-expanded={desktopMenu === item.menu}
+                    aria-haspopup="true"
+                    onClick={() => toggleMenu(item.menu)}
+                    className={cn(
+                      "flex min-w-20 items-center justify-center gap-1 border-b-2 px-2 text-xs font-semibold",
+                      desktopMenu === item.menu || isActive(pathname, item.href)
+                        ? "border-accent"
+                        : "border-transparent",
+                    )}
+                  >
+                    {item.label}
+                    <ChevronDown aria-hidden className="size-3" />
+                  </button>
+                ) : (
+                  <Link
+                    key={item.label}
+                    href={item.href as never}
+                    onClick={close}
+                    aria-current={
+                      isActive(pathname, item.href) ? "page" : undefined
+                    }
+                    className={cn(
+                      "flex min-w-20 items-center justify-center border-b-2 px-2 text-xs font-semibold",
+                      isActive(pathname, item.href)
+                        ? "border-accent"
+                        : "border-transparent",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ),
+              )}
+          </nav>
+          <GlobalSearch inverse={transparent} />
+          <Link
+            href={routes.contact}
             className={cn(
-              "type-caption mt-1 pl-[2.05rem]",
-              transparent ? "text-white/65" : "text-ink-muted",
+              "hidden min-h-11 items-center border px-4 text-xs font-semibold lg:flex",
+              transparent
+                ? "text-brand-950 border-white bg-white"
+                : "border-brand-900 bg-brand-900 hover:bg-accent text-white",
             )}
           >
-            {brandSettings.brandDescriptor}
-          </span>
-        </Link>
-        <nav
-          aria-label="Primary"
-          className="hidden h-20 items-stretch 2xl:flex"
-        >
-          {mainNavigation
-            .filter((item) => item.label !== "Contact")
-            .map((item) =>
-              "menu" in item ? (
-                <button
-                  key={item.label}
-                  type="button"
-                  aria-expanded={desktopMenu === item.menu}
-                  aria-haspopup="true"
-                  onClick={() => toggleMenu(item.menu)}
-                  className={cn(
-                    "flex min-w-20 items-center justify-center gap-1 border-b-2 px-2 text-xs font-semibold",
-                    desktopMenu === item.menu || isActive(pathname, item.href)
-                      ? "border-accent"
-                      : "border-transparent",
-                  )}
-                >
-                  {item.label}
-                  <ChevronDown aria-hidden className="size-3" />
-                </button>
-              ) : (
-                <Link
-                  key={item.label}
-                  href={item.href as never}
-                  onClick={close}
-                  aria-current={
-                    isActive(pathname, item.href) ? "page" : undefined
-                  }
-                  className={cn(
-                    "flex min-w-20 items-center justify-center border-b-2 px-2 text-xs font-semibold",
-                    isActive(pathname, item.href)
-                      ? "border-accent"
-                      : "border-transparent",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ),
+            Discuss Your Project
+          </Link>
+          <button
+            ref={menuTriggerRef}
+            type="button"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setMobileOpen(true)}
+            className={cn(
+              "grid size-11 shrink-0 place-items-center border 2xl:hidden",
+              transparent ? "border-white/30" : "border-line",
             )}
-        </nav>
-        <GlobalSearch inverse={transparent} />
-        <Link
-          href={routes.contact}
-          className={cn(
-            "hidden min-h-11 items-center border px-4 text-xs font-semibold lg:flex",
-            transparent
-              ? "text-brand-950 border-white bg-white"
-              : "border-brand-900 bg-brand-900 hover:bg-accent text-white",
-          )}
-        >
-          Discuss Your Project
-        </Link>
-        <button
-          ref={menuTriggerRef}
-          type="button"
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-navigation"
-          onClick={() => setMobileOpen(true)}
-          className={cn(
-            "grid size-11 place-items-center border 2xl:hidden",
-            transparent ? "border-white/30" : "border-line",
-          )}
-          aria-label="Open navigation"
-        >
-          <Menu aria-hidden className="size-5" />
-        </button>
-      </div>
-      <AnimatePresence>
-        {desktopMenu && <MegaMenu name={desktopMenu} close={close} />}
-      </AnimatePresence>{" "}
+            aria-label="Open navigation"
+          >
+            <Menu aria-hidden className="size-5" />
+          </button>
+        </div>
+        <AnimatePresence>
+          {desktopMenu && <MegaMenu name={desktopMenu} close={close} />}
+        </AnimatePresence>
+      </header>
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -390,9 +391,9 @@ export function SiteHeader() {
               duration: motionTokens.duration.component,
               ease: motionTokens.easing.enter,
             }}
-            className="bg-brand-950 fixed inset-0 z-[110] overflow-y-auto text-white"
+            className="bg-brand-950 fixed inset-0 z-[var(--z-mobile-nav)] h-dvh w-screen overflow-y-auto overscroll-contain text-white"
           >
-            <div className="mx-auto max-w-3xl px-5 pb-10 sm:px-8">
+            <div className="mx-auto min-h-dvh max-w-3xl px-5 pt-[env(safe-area-inset-top)] pb-[calc(2.5rem+env(safe-area-inset-bottom))] sm:px-8">
               <header className="flex min-h-20 items-center justify-between border-b border-white/15">
                 <Link
                   href={routes.home}
@@ -470,6 +471,6 @@ export function SiteHeader() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
 }

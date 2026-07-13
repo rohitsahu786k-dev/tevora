@@ -173,7 +173,7 @@ export function GlobalSearch({
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         className={cn(
-          "inline-flex size-11 items-center justify-center border transition-colors",
+          "inline-flex size-11 shrink-0 items-center justify-center border transition-colors",
           inverse
             ? "border-white/30 text-white hover:border-white"
             : "border-line hover:border-graphite",

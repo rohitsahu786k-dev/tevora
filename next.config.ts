@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   typedRoutes: true,
   images: {
+    qualities: [68, 75],
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io", pathname: "/images/**" },
       {

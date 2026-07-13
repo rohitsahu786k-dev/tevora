@@ -101,7 +101,7 @@ export default function HomePage() {
                 key={family.slug}
                 href={routes.productFamily(family.slug)}
                 style={sharedElementStyle("family", family.slug)}
-                className="group bg-canvas hover:bg-accent-light grid min-h-[25rem] content-between p-6 transition-colors md:p-9"
+                className="group bg-canvas hover:bg-accent-light grid min-h-[18rem] content-between p-5 transition-colors sm:min-h-[21rem] sm:p-6 md:min-h-[25rem] md:p-9"
               >
                 <div className="flex items-start justify-between">
                   <span className="type-model text-ink-muted">
@@ -138,7 +138,7 @@ export default function HomePage() {
             {integrations.map((item, index) => (
               <li
                 key={item}
-                className="grid min-h-24 items-center gap-4 border-b border-white/20 py-5 sm:grid-cols-[5rem_1fr]"
+                className="grid min-h-20 items-center gap-3 border-b border-white/20 py-4 sm:min-h-24 sm:grid-cols-[5rem_1fr] sm:gap-4 sm:py-5"
               >
                 <span className="type-model text-emerald-300">
                   0{index + 1}
@@ -163,7 +163,7 @@ export default function HomePage() {
                 key={space.slug}
                 href={routes.space(space.slug)}
                 style={sharedElementStyle("space", space.slug)}
-                className="group bg-surface hover:bg-accent-light grid min-h-64 content-between p-6"
+                className="group bg-surface hover:bg-accent-light grid min-h-48 content-between p-5 sm:min-h-64 sm:p-6"
               >
                 <div className="flex justify-between">
                   <span className="type-model text-ink-muted">
@@ -239,7 +239,7 @@ export default function HomePage() {
               <h2 className="type-product mt-5">
                 Mobile AV furniture for changing spaces.
               </h2>
-              <div className="mt-10 space-y-16">
+              <div className="mt-10 space-y-10 sm:space-y-16">
                 {[
                   [
                     "01",
@@ -259,7 +259,7 @@ export default function HomePage() {
                 ].map(([number, title, copy]) => (
                   <article key={number} className="border-line border-t pt-5">
                     <span className="type-model text-ink-muted">{number}</span>
-                    <h3 className="type-h3 mt-10">{title}</h3>
+                    <h3 className="type-h3 mt-6 sm:mt-10">{title}</h3>
                     <p className="type-body text-ink-muted mt-4">{copy}</p>
                   </article>
                 ))}
@@ -287,7 +287,7 @@ export default function HomePage() {
             {professionals.map((professional, index) => (
               <div
                 key={professional}
-                className={`border-line flex min-h-28 items-center gap-5 py-5 ${index % 2 === 0 ? "md:border-r md:pr-8" : "md:pl-8"} ${index < professionals.length - 2 ? "border-b" : ""}`}
+                className={`border-line flex min-h-20 items-center gap-4 py-4 md:min-h-28 md:gap-5 md:py-5 ${index % 2 === 0 ? "md:border-r md:pr-8" : "md:pl-8"} ${index < professionals.length - 2 ? "border-b" : ""}`}
               >
                 <span className="type-model text-accent">0{index + 1}</span>
                 <h2 className="type-h3">{professional}</h2>
@@ -335,7 +335,7 @@ export default function HomePage() {
               <Link
                 key={application}
                 href={routes.projects}
-                className="group bg-surface hover:bg-accent-light grid min-h-56 content-between p-5"
+                className="group bg-surface hover:bg-accent-light grid min-h-44 content-between p-5 md:min-h-56"
               >
                 <span className="type-model text-ink-muted">0{index + 1}</span>
                 <div>
