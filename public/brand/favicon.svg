@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" role="img" aria-labelledby="title">
+  <title id="title">TEVORA</title>
+  <rect width="72" height="72" rx="8" fill="#17211f"/>
+  <path fill="#62b29e" d="M12 40l13 7v17H12V40Zm48 0-13 7v17h13V40Z"/>
+  <path fill="#fff" d="M6 8h60v13L45 32 36 50 27 32 6 21V8Zm25 39h10v17H31V47Z"/>
+</svg>
