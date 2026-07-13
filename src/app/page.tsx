@@ -138,7 +138,7 @@ export default function HomePage() {
             {integrations.map((item, index) => (
               <li
                 key={item}
-                className="grid min-h-20 items-center gap-3 border-b border-white/20 py-4 sm:min-h-24 sm:grid-cols-[5rem_1fr] sm:gap-4 sm:py-5"
+                className="grid min-h-20 grid-cols-[3rem_minmax(0,1fr)] items-center gap-3 border-b border-white/20 py-4 sm:min-h-24 sm:grid-cols-[5rem_1fr] sm:gap-4 sm:py-5"
               >
                 <span className="type-model text-emerald-300">
                   0{index + 1}

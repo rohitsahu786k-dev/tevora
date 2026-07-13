@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Home, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { GlobalSearch } from "@/components/search";
 import { BrandLogo } from "@/components/brand/brand-logo";
@@ -410,6 +410,18 @@ export function SiteHeader() {
                 </button>
               </header>
               <nav aria-label="Mobile primary" className="mt-5">
+                <Link
+                  href={routes.home}
+                  onClick={() => setMobileOpen(false)}
+                  aria-current={pathname === routes.home ? "page" : undefined}
+                  className={cn(
+                    "flex min-h-14 items-center gap-3 border-b border-white/15 text-lg",
+                    pathname === routes.home && "text-emerald-300",
+                  )}
+                >
+                  <Home aria-hidden className="size-5" />
+                  <span>Home</span>
+                </Link>
                 <MobileGroup
                   label="Products"
                   items={mobileProducts}
