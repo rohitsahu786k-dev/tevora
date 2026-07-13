@@ -146,6 +146,8 @@ Brand, homepage, company, design support, footer and SEO-default records are Stu
 
 Set production environment variables, run `npm run build`, and deploy the resulting Next.js application to a supported Node or serverless host. Configure the canonical domain through `NEXT_PUBLIC_SITE_URL`, use image-host allowlists when a CMS is introduced, and connect analytics through the isolated analytics module. CI should run lint, type checking, tests, formatting checks, and build.
 
+For Vercel, `vercel.json` pins the framework preset to Next.js and clears any inherited custom output directory. Keep the Vercel Build Command and Output Directory overrides disabled; Vercel will use `npm run build` and Next.js managed output.
+
 ## Future OnePWS endorsement
 
 The parent relationship is intentionally hidden initially. `brandSettings` contains `parentBrandName`, `parentBrandVisibility`, and `parentBrandRelationshipText`; the footer demonstrates conditional consumption. The CMS singleton exposes the same controls to support “TEVORA by OnePWS” or “TEVORA — A OnePWS Company” without changing component architecture. Do not encode the parent name directly in presentation components.
