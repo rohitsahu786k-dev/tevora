@@ -19,15 +19,11 @@ export interface ProductDetailContent {
 }
 const environment = "/media/home/technology-learning-hero.png";
 const mobile = "/media/home/mobile-av-cart-story.png";
-const moveProConcept =
-  "/media/products/mobile-av-carts/move-pro-mobile-av-cart-concept.png";
-const arcConcept = "/media/products/presentation-stations/arc-concept.png";
-const forumConcept =
-  "/media/products/collaboration-tables/forum-boardroom-table-concept.png";
-const vistaConcept =
-  "/media/products/display-stands/vista-single-display-stand-concept.png";
-const nexusConcept =
-  "/media/products/technology-credenzas/nexus-technology-credenza-concept.png";
+const moveProConcept = "/media/products/mobile-av-carts/MOVE Pro.png";
+const arcConcept = "/media/products/presentation-stations/ARC.png";
+const forumConcept = "/media/products/collaboration-tables/FORUM.png";
+const vistaConcept = "/media/products/display-stands/VISTA.png";
+const nexusConcept = "/media/products/technology-credenzas/NEXUS.png";
 const familyRepresentativeProduct: Record<string, string> = {
   "presentation-stations": "arc",
   "display-stands": "vista",

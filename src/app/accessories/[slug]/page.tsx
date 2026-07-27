@@ -105,7 +105,7 @@ export default async function AccessoryPage({
                 </SecondaryButton>
               </div>
             </div>
-            <figure className="bg-surface-muted lg:col-span-5 lg:col-start-8">
+            <figure className="bg-white lg:col-span-5 lg:col-start-8">
               {conceptMedia?.kind === "image" ? (
                 <>
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -117,7 +117,7 @@ export default async function AccessoryPage({
                       sizes="(min-width: 1024px) 42vw, 100vw"
                       placeholder={conceptMedia.blurDataURL ? "blur" : "empty"}
                       blurDataURL={conceptMedia.blurDataURL}
-                      className="object-cover"
+                      className="object-contain"
                     />
                   </div>
                   <figcaption className="type-caption text-ink-muted border-line border-t p-4">

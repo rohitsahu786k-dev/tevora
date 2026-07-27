@@ -43,7 +43,7 @@ export function StickyProductStory({ items }: { items: StickyStoryItem[] }) {
     <div className="grid gap-10 lg:grid-cols-12">
       <div
         className={cn(
-          "bg-surface-muted relative aspect-[4/3] overflow-hidden lg:col-span-7 lg:h-fit",
+          "relative aspect-[4/3] overflow-hidden bg-white lg:col-span-7 lg:h-fit",
           !limitedHeight && "lg:sticky lg:top-24",
         )}
       >
@@ -64,7 +64,7 @@ export function StickyProductStory({ items }: { items: StickyStoryItem[] }) {
               alt={items[active]!.alt}
               fill
               sizes="(min-width:1024px) 58vw, 100vw"
-              className="object-cover"
+              className="object-contain"
             />
           </motion.div>
         </AnimatePresence>

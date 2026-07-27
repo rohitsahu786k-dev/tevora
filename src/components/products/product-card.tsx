@@ -20,7 +20,7 @@ export function ProductCard({
         className="block focus-visible:outline-offset-4"
       >
         <MediaFrame
-          className="group-hover:bg-accent-light grid place-items-center transition-colors duration-[var(--duration-slow)]"
+          className="grid place-items-center bg-white transition-colors duration-[var(--duration-slow)]"
           style={sharedElementStyle("product", entry.slug)}
         >
           {media?.kind === "image" ? (
@@ -32,7 +32,7 @@ export function ProductCard({
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 placeholder={media.blurDataURL ? "blur" : "empty"}
                 blurDataURL={media.blurDataURL}
-                className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
               />
               <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                 CONCEPT IMAGE

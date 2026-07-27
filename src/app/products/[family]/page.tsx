@@ -180,7 +180,7 @@ export default async function ProductFamilyPage({
             </ViewportReveal>
             <ImageReveal
               priority
-              className="bg-surface-muted relative aspect-video lg:col-span-7"
+              className="relative aspect-video bg-white lg:col-span-7"
             >
               <div
                 className="absolute inset-0"
@@ -192,7 +192,7 @@ export default async function ProductFamilyPage({
                   fill
                   priority
                   sizes="(min-width:1024px) 58vw, 100vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
                 {familyConceptMedia?.kind === "image" && (
                   <span className="type-model text-graphite absolute right-4 bottom-4 bg-white/90 px-3 py-2">

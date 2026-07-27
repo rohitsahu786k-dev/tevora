@@ -63,7 +63,7 @@ export function ProductGallery({ items }: { items: GalleryItem[] }) {
   const imageView = (fullscreen = false) => (
     <div
       className={cn(
-        "bg-surface-muted relative overflow-hidden",
+        "relative overflow-hidden bg-white",
         fullscreen ? "h-[min(78vh,60rem)] w-full" : "aspect-[4/3]",
       )}
       onTouchStart={(event) =>
@@ -146,7 +146,7 @@ export function ProductGallery({ items }: { items: GalleryItem[] }) {
                   alt=""
                   fill
                   sizes="96px"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </button>
             ))}

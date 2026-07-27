@@ -189,7 +189,7 @@ export default async function ProductPage({
             </ViewportReveal>
             <ImageReveal
               priority
-              className="bg-surface-muted relative aspect-[4/3] lg:col-span-7"
+              className="relative aspect-[4/3] bg-white lg:col-span-7"
             >
               <div
                 className="absolute inset-0"
@@ -201,7 +201,7 @@ export default async function ProductPage({
                   fill
                   priority
                   sizes="(min-width:1024px) 58vw, 100vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
                 {conceptMedia && (
                   <span className="type-model text-graphite absolute right-4 bottom-4 bg-white/90 px-3 py-2">

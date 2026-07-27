@@ -54,7 +54,14 @@ const browseSpaces = [
   .map((slug) => spaces.find((space) => space.slug === slug))
   .filter((item): item is NonNullable<typeof item> => Boolean(item));
 const browseSectors = sectors.slice(0, 8);
-const presentationConcepts = ["arc", "arc-pro", "lift-access", "edu-station"]
+const presentationConcepts = [
+  "arc",
+  "arc-pro",
+  "lift",
+  "lift-access",
+  "pivot",
+  "edu-station",
+]
   .map((slug) => {
     const product = products.find((item) => item.slug === slug);
     const media = productConceptMediaBySlug[slug];
@@ -100,14 +107,20 @@ const technologyCredenzaConcepts = [
     return product && media?.kind === "image" ? { product, media } : null;
   })
   .filter((item): item is NonNullable<typeof item> => Boolean(item));
-const learningConcepts = ["edu", "learn", "lab", "flex-mobile"]
+const learningConcepts = ["edu", "learn", "lab", "flex", "flex-mobile"]
   .map((slug) => {
     const product = products.find((item) => item.slug === slug);
     const media = productConceptMediaBySlug[slug];
     return product && media?.kind === "image" ? { product, media } : null;
   })
   .filter((item): item is NonNullable<typeof item> => Boolean(item));
-const collaborationConcepts = ["forum", "converge", "huddle", "link-modular"]
+const collaborationConcepts = [
+  "forum",
+  "converge",
+  "huddle",
+  "link",
+  "link-modular",
+]
   .map((slug) => {
     const product = products.find((item) => item.slug === slug);
     const media = productConceptMediaBySlug[slug];
@@ -159,6 +172,19 @@ const interactiveKioskConcepts = [
   "touch-mini",
   "way",
   "check",
+]
+  .map((slug) => {
+    const product = products.find((item) => item.slug === slug);
+    const media = productConceptMediaBySlug[slug];
+    return product && media?.kind === "image" ? { product, media } : null;
+  })
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
+const technicalWorkstationConcepts = [
+  "analyst",
+  "studio",
+  "monitor",
+  "techdesk",
+  "techdesk-pro",
 ]
   .map((slug) => {
     const product = products.find((item) => item.slug === slug);
@@ -284,7 +310,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -292,7 +318,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -329,7 +355,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -337,7 +363,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -372,7 +398,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -380,7 +406,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -415,7 +441,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -423,7 +449,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -460,7 +486,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -468,7 +494,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -505,7 +531,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -513,7 +539,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -550,7 +576,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -558,7 +584,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -595,7 +621,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -603,7 +629,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -640,7 +666,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -648,7 +674,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -685,7 +711,7 @@ export default function ProductsPage() {
                 href={routes.product(product.slug)}
                 className="group bg-surface"
               >
-                <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
                     src={media.src}
                     alt={media.alt}
@@ -693,7 +719,7 @@ export default function ProductsPage() {
                     sizes="(min-width: 768px) 50vw, 100vw"
                     placeholder={media.blurDataURL ? "blur" : "empty"}
                     blurDataURL={media.blurDataURL}
-                    className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
                   <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                     CONCEPT IMAGE
@@ -703,6 +729,51 @@ export default function ProductsPage() {
                   <div>
                     <p className="type-series text-accent">
                       Interactive Kiosks
+                    </p>
+                    <h2 className="type-h3 mt-3">{product.name}</h2>
+                  </div>
+                  <ArrowRight
+                    aria-hidden
+                    className="motion-arrow size-5 shrink-0"
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </Container>
+      </Section>
+      <Section tone="muted">
+        <Container>
+          <SectionHeader
+            eyebrow="Technical Workstation Concepts"
+            title="Focused furniture for monitoring, editing and specialist work."
+            description="Representative concept imagery for reviewing visual direction. Final product form, equipment integration and technical details remain subject to design and engineering verification."
+          />
+          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
+            {technicalWorkstationConcepts.map(({ product, media }) => (
+              <Link
+                key={product.slug}
+                href={routes.product(product.slug)}
+                className="group bg-surface"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-white">
+                  <Image
+                    src={media.src}
+                    alt={media.alt}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    placeholder={media.blurDataURL ? "blur" : "empty"}
+                    blurDataURL={media.blurDataURL}
+                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                  />
+                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
+                    CONCEPT IMAGE
+                  </span>
+                </div>
+                <div className="flex items-end justify-between gap-5 p-6">
+                  <div>
+                    <p className="type-series text-accent">
+                      Technical Workstations
                     </p>
                     <h2 className="type-h3 mt-3">{product.name}</h2>
                   </div>

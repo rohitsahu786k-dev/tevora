@@ -55,7 +55,7 @@ export default function AccessoriesPage() {
                 {(() => {
                   const media = accessoryConceptMediaBySlug[accessory.slug];
                   return media?.kind === "image" ? (
-                    <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-white">
                       <Image
                         src={media.src}
                         alt={media.alt}
@@ -63,7 +63,7 @@ export default function AccessoriesPage() {
                         sizes="(min-width: 768px) 50vw, 100vw"
                         placeholder={media.blurDataURL ? "blur" : "empty"}
                         blurDataURL={media.blurDataURL}
-                        className="object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+                        className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                       />
                       <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
                         CONCEPT IMAGE
