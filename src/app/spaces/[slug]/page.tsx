@@ -126,7 +126,7 @@ export default async function SpacePage({
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,22,19,.9)_0%,rgba(10,22,19,.68)_42%,rgba(10,22,19,.12)_82%)]" />
-        <Container className="relative flex min-h-[72svh] flex-col pt-28 pb-12 md:min-h-[76svh] md:pb-16">
+        <Container className="relative flex min-h-[72svh] flex-col pt-20 pb-12 md:min-h-[76svh] md:pt-24 md:pb-16">
           <div className="[&_a:hover]:text-white [&_ol]:text-white/65 [&_span]:text-white">
             <Breadcrumbs items={getContentBreadcrumbs("space", slug)} />
           </div>

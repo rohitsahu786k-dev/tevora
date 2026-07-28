@@ -139,9 +139,9 @@ export default async function ProductPage({
         image={detail.heroMedia}
       />
       <section className="bg-surface">
-        <Container className="py-10 md:py-16">
+        <Container className="py-8 md:py-12">
           <Breadcrumbs items={getContentBreadcrumbs("product", product.slug)} />
-          <div className="mt-12 grid gap-10 lg:grid-cols-12">
+          <div className="mt-8 grid gap-10 lg:grid-cols-12">
             <ViewportReveal className="flex flex-col justify-end lg:col-span-5">
               <p className="type-eyebrow text-accent">{family.name}</p>
               <p className="type-series mt-6">{product.series} SERIES</p>

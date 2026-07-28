@@ -152,7 +152,7 @@ export default async function ProductFamilyPage({
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-surface">
-        <Container className="py-12 md:py-20">
+        <Container className="py-8 md:py-12">
           <Breadcrumbs
             items={[
               { label: "Home", href: "/" },
@@ -160,7 +160,7 @@ export default async function ProductFamilyPage({
               { label: family.name },
             ]}
           />
-          <div className="mt-14 grid gap-10 lg:grid-cols-12">
+          <div className="mt-8 grid gap-10 lg:grid-cols-12">
             <ViewportReveal className="flex flex-col justify-end lg:col-span-5">
               <Eyebrow>Product Family</Eyebrow>
               <MaskedHeading as="h1" className="type-h1 mt-6">

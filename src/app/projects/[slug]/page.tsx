@@ -75,14 +75,14 @@ export default async function ProjectPage({
     <main id="main-content" tabIndex={-1} className="outline-none">
       <ProjectJsonLd project={project} sectorName={sector?.name} />
       <section className="bg-surface">
-        <Container className="py-12 md:py-20">
+        <Container className="py-8 md:py-12">
           <Breadcrumbs
             items={[
               { label: "Projects", href: routes.projects },
               { label: project.projectName },
             ]}
           />
-          <div className="mt-14 grid gap-10 lg:grid-cols-12">
+          <div className="mt-8 grid gap-10 lg:grid-cols-12">
             <div className="flex flex-col justify-end lg:col-span-5">
               <Eyebrow>{sector?.name ?? "Project"}</Eyebrow>
               <h1 className="type-h1 mt-7">{project.projectName}</h1>
