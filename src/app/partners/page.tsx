@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ImageReveal, ViewportReveal } from "@/components/motion";
-import { ContextualImageMosaic } from "@/components/media/contextual-image-mosaic";
+import { SingleHeroImage } from "@/components/media/single-hero-image";
 import { Accordion } from "@/components/ui/disclosure";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/button";
 import {
@@ -32,20 +32,16 @@ export const metadata = createPageMetadata({
 });
 
 export default function PartnersPage() {
-  const partnerHeroImages = ["move-pro", "nexus", "panel"]
-    .map((slug) => productConceptMediaBySlug[slug])
-    .filter((media): media is NonNullable<typeof media> =>
-      Boolean(media?.kind === "image"),
-    );
+  const partnerHeroImage = productConceptMediaBySlug["move-pro"];
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 overflow-hidden text-white">
-        <Container className="grid min-h-[44rem] items-end gap-12 py-24 lg:grid-cols-12 lg:py-32">
-          <ViewportReveal className="min-w-0 lg:col-span-6">
+        <Container className="grid min-h-[42rem] items-end gap-12 py-24 lg:grid-cols-12 lg:gap-16 lg:py-32">
+          <ViewportReveal className="min-w-0 lg:col-span-5">
             <Eyebrow className="text-emerald-300">
               TEVORA Partner Network
             </Eyebrow>
-            <h1 className="type-hero mt-7 text-balance">
+            <h1 className="type-h1 mt-7 text-balance">
               Build better technology spaces with TEVORA.
             </h1>
             <p className="type-body-lg mt-7 max-w-2xl text-white/75">
@@ -68,13 +64,11 @@ export default function PartnersPage() {
               </SecondaryButton>
             </div>
           </ViewportReveal>
-          <ImageReveal className="min-w-0 lg:col-span-5 lg:col-start-8">
-            <ContextualImageMosaic
-              images={partnerHeroImages}
-              priority
-              className="min-h-[34rem]"
-            />
-          </ImageReveal>
+          {partnerHeroImage && (
+            <ImageReveal className="min-w-0 lg:col-span-7">
+              <SingleHeroImage image={partnerHeroImage} priority />
+            </ImageReveal>
+          )}
         </Container>
       </section>
 

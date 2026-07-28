@@ -1,12 +1,18 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import {
+  ImageReveal,
+  MaskedHeading,
+  ViewportReveal,
+} from "@/components/motion";
+import { SingleHeroImage } from "@/components/media/single-hero-image";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { Container, Eyebrow, Section } from "@/components/ui/system";
 import { productFamilies, spaces } from "@/content";
+import { mediaAssets } from "@/content/media";
 import { spaceToProductFamilies } from "@/content/relationships";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { MaskedHeading, ViewportReveal } from "@/components/motion";
 import { sharedElementStyle } from "@/lib/motion/shared-elements";
 export const metadata = createPageMetadata({
   title: "Spaces",
@@ -29,18 +35,25 @@ export default function SpacesPage() {
           <Breadcrumbs
             items={[{ label: "Home", href: "/" }, { label: "Spaces" }]}
           />
-          <ViewportReveal className="mt-16 grid gap-8 md:grid-cols-12">
-            <Eyebrow className="md:col-span-3">Spaces</Eyebrow>
-            <div className="md:col-span-8">
-              <MaskedHeading as="h1" className="type-h1">
+          <div className="mt-16 grid items-end gap-12 lg:grid-cols-12 lg:gap-16">
+            <ViewportReveal className="min-w-0 lg:col-span-5">
+              <Eyebrow>Spaces</Eyebrow>
+              <MaskedHeading as="h1" className="type-h1 mt-7 max-w-4xl">
                 Spaces shaped by technology
               </MaskedHeading>
               <p className="type-body-lg text-ink-muted mt-6 max-w-2xl">
                 Explore education, workplace, specialist and public environments
                 with clear links to relevant TEVORA product families and series.
               </p>
-            </div>
-          </ViewportReveal>
+            </ViewportReveal>
+            <ImageReveal priority className="min-w-0 lg:col-span-7">
+              <SingleHeroImage
+                image={mediaAssets.homepageHero}
+                priority
+                fit="cover"
+              />
+            </ImageReveal>
+          </div>
         </Container>
       </Section>
       {groups.map((group, groupIndex) => (

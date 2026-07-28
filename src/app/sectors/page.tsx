@@ -13,7 +13,7 @@ import {
   StaggerItem,
   ViewportReveal,
 } from "@/components/motion";
-import { ContextualImageMosaic } from "@/components/media/contextual-image-mosaic";
+import { SingleHeroImage } from "@/components/media/single-hero-image";
 export const metadata = createPageMetadata({
   title: "Sectors",
   description:
@@ -22,19 +22,15 @@ export const metadata = createPageMetadata({
 });
 
 export default function SectorsPage() {
-  const sectorHeroImages = ["forum", "touch", "techdesk-pro"]
-    .map((slug) => productConceptMediaBySlug[slug])
-    .filter((media): media is NonNullable<typeof media> =>
-      Boolean(media?.kind === "image"),
-    );
+  const sectorHeroImage = productConceptMediaBySlug.forum;
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 text-white">
-        <Container className="py-12 md:py-20">
+        <Container className="py-12 md:py-20 lg:py-24">
           <Breadcrumbs
             items={[{ label: "Home", href: "/" }, { label: "Sectors" }]}
           />
-          <div className="mt-16 grid gap-10 lg:grid-cols-12">
+          <div className="mt-16 grid items-end gap-12 lg:grid-cols-12 lg:gap-16">
             <ViewportReveal className="flex min-w-0 flex-col justify-end lg:col-span-5">
               <Eyebrow className="text-emerald-300">Sectors</Eyebrow>
               <MaskedHeading as="h1" className="type-h1 mt-7">
@@ -45,11 +41,13 @@ export default function SectorsPage() {
                 healthcare, public, media and specialist environments.
               </p>
             </ViewportReveal>
-            <ContextualImageMosaic
-              images={sectorHeroImages}
-              priority
-              className="min-w-0 lg:col-span-7"
-            />
+            {sectorHeroImage && (
+              <SingleHeroImage
+                image={sectorHeroImage}
+                priority
+                className="min-w-0 lg:col-span-7"
+              />
+            )}
           </div>
         </Container>
       </section>

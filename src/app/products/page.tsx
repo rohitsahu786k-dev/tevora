@@ -18,7 +18,7 @@ import {
   MaskedHeading,
   ViewportReveal,
 } from "@/components/motion";
-import { ContextualImageMosaic } from "@/components/media/contextual-image-mosaic";
+import { SingleHeroImage } from "@/components/media/single-hero-image";
 import { sharedElementStyle } from "@/lib/motion/shared-elements";
 export const metadata = createPageMetadata({
   title: "Products",
@@ -193,23 +193,19 @@ const technicalWorkstationConcepts = [
     return product && media?.kind === "image" ? { product, media } : null;
   })
   .filter((item): item is NonNullable<typeof item> => Boolean(item));
-const productHeroImages = ["arc", "vista", "forum"]
-  .map((slug) => productConceptMediaBySlug[slug])
-  .filter((media): media is NonNullable<typeof media> =>
-    Boolean(media?.kind === "image"),
-  );
+const productHeroImage = productConceptMediaBySlug.arc;
 export default function ProductsPage() {
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 overflow-hidden text-white">
-        <Container className="grid min-h-[72svh] items-end gap-12 pt-32 pb-16 lg:grid-cols-12">
-          <div className="min-w-0 lg:col-span-6">
+        <Container className="grid min-h-[42rem] items-end gap-12 pt-32 pb-16 lg:grid-cols-12 lg:gap-16">
+          <div className="min-w-0 lg:col-span-5">
             <Breadcrumbs
               items={[{ label: "Home", href: "/" }, { label: "Products" }]}
             />
             <ViewportReveal>
-              <Eyebrow className="mt-16 text-emerald-300">Products</Eyebrow>
-              <MaskedHeading as="h1" className="type-hero mt-7 max-w-5xl">
+              <Eyebrow className="mt-12 text-emerald-300">Products</Eyebrow>
+              <MaskedHeading as="h1" className="type-h1 mt-7 max-w-4xl">
                 Technology furniture, clearly organised.
               </MaskedHeading>
               <p className="type-body-lg mt-7 max-w-2xl text-white/70">
@@ -219,13 +215,11 @@ export default function ProductsPage() {
               </p>
             </ViewportReveal>
           </div>
-          <ImageReveal priority className="min-w-0 lg:col-span-6">
-            <ContextualImageMosaic
-              images={productHeroImages}
-              priority
-              className="min-h-[34rem]"
-            />
-          </ImageReveal>
+          {productHeroImage && (
+            <ImageReveal priority className="min-w-0 lg:col-span-7">
+              <SingleHeroImage image={productHeroImage} priority />
+            </ImageReveal>
+          )}
         </Container>
       </section>
       <Section>
