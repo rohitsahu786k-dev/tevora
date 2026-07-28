@@ -562,7 +562,7 @@ function SpaceProductEnvironment({
                   />
                 </summary>
                 <div
-                  className={`border-line absolute z-10 w-72 max-w-[min(18rem,82vw)] rounded-xl border bg-white/68 p-4 text-left shadow-[0_24px_70px_rgba(0,0,0,.32)] backdrop-blur-2xl ${environmentPopoverPositions[index]}`}
+                  className={`ring-brand-950/10 absolute z-10 w-72 max-w-[min(18rem,82vw)] rounded-2xl border border-white/55 bg-white/42 bg-linear-to-br from-white/65 via-white/38 to-white/24 p-4 text-left shadow-[0_24px_80px_rgba(0,0,0,.34)] ring-1 backdrop-blur-3xl backdrop-saturate-150 ${environmentPopoverPositions[index]}`}
                 >
                   <p className="type-series text-accent">0{index + 1}</p>
                   <h3 className="type-h5 mt-2">{product.name}</h3>
