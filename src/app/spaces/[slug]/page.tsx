@@ -473,6 +473,12 @@ function SpaceProductEnvironment({
             opacity: 0;
             transform: scale(.8);
           }
+          .space-product-plan [data-marker-core] {
+            transition:
+              background-color .18s ease,
+              box-shadow .18s ease,
+              transform .18s ease;
+          }
           .space-product-plan [data-marker]:hover [data-marker-pulse],
           .space-product-plan [data-marker][open] [data-marker-pulse],
           .space-product-plan:has([data-product-trigger="0"]:hover) [data-marker="0"] [data-marker-pulse],
@@ -484,14 +490,28 @@ function SpaceProductEnvironment({
             animation: tevora-marker-ping 1.15s cubic-bezier(0, 0, .2, 1) infinite;
             opacity: 1;
           }
+          .space-product-plan [data-marker]:hover [data-marker-core],
+          .space-product-plan [data-marker][open] [data-marker-core],
+          .space-product-plan:has([data-product-trigger="0"]:hover) [data-marker="0"] [data-marker-core],
+          .space-product-plan:has([data-product-trigger="1"]:hover) [data-marker="1"] [data-marker-core],
+          .space-product-plan:has([data-product-trigger="2"]:hover) [data-marker="2"] [data-marker-core],
+          .space-product-plan:has([data-product-trigger="3"]:hover) [data-marker="3"] [data-marker-core],
+          .space-product-plan:has([data-product-trigger="4"]:hover) [data-marker="4"] [data-marker-core],
+          .space-product-plan:has([data-product-trigger="5"]:hover) [data-marker="5"] [data-marker-core] {
+            background: var(--color-accent);
+            box-shadow:
+              0 0 0 6px rgba(67, 176, 151, .24),
+              0 0 28px rgba(67, 176, 151, .52);
+            transform: scale(1.45);
+          }
           @keyframes tevora-marker-ping {
             0% {
-              opacity: .5;
+              opacity: .85;
               transform: scale(.85);
             }
             80%, 100% {
               opacity: 0;
-              transform: scale(2.4);
+              transform: scale(3.15);
             }
           }
         `}
@@ -534,12 +554,15 @@ function SpaceProductEnvironment({
                 >
                   <span
                     data-marker-pulse
-                    className="bg-accent/35 absolute inset-0 rounded-full"
+                    className="bg-accent/60 absolute inset-0 rounded-full"
                   />
-                  <span className="bg-brand-950/80 size-2 rounded-full" />
+                  <span
+                    data-marker-core
+                    className="bg-brand-950/80 relative size-2 rounded-full"
+                  />
                 </summary>
                 <div
-                  className={`border-line absolute z-10 w-72 max-w-[min(18rem,82vw)] rounded-lg border bg-white/88 p-4 text-left shadow-[0_24px_70px_rgba(0,0,0,.28)] backdrop-blur-xl ${environmentPopoverPositions[index]}`}
+                  className={`border-line absolute z-10 w-72 max-w-[min(18rem,82vw)] rounded-xl border bg-white/68 p-4 text-left shadow-[0_24px_70px_rgba(0,0,0,.32)] backdrop-blur-2xl ${environmentPopoverPositions[index]}`}
                 >
                   <p className="type-series text-accent">0{index + 1}</p>
                   <h3 className="type-h5 mt-2">{product.name}</h3>
