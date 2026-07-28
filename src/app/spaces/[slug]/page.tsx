@@ -472,8 +472,8 @@ function SpaceProductEnvironment({
           </p>
         </div>
       </div>
-      <div className="bg-line border-line mt-8 grid gap-px border lg:grid-cols-[minmax(0,1.35fr)_minmax(22rem,0.65fr)]">
-        <ImageReveal className="relative aspect-[16/10] overflow-hidden bg-white">
+      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)] lg:items-start">
+        <ImageReveal className="border-line relative aspect-[16/10] overflow-hidden border bg-white">
           <Image
             src={image.src}
             alt={image.alt}
@@ -481,37 +481,43 @@ function SpaceProductEnvironment({
             sizes="(min-width:1024px) 63vw, 100vw"
             className="object-cover"
           />
-          <div className="from-brand-950/80 via-brand-950/30 absolute inset-x-0 bottom-0 bg-linear-to-t to-transparent p-5 text-white">
-            <p className="type-series text-emerald-300">Application view</p>
-            <p className="type-body-sm mt-2 max-w-lg text-white/75">
-              Numbered callouts connect typical product positions with the
-              specification schedule.
-            </p>
-          </div>
           <div className="absolute inset-0 hidden sm:block">
             {visibleProducts.map((product, index) => (
-              <Link
+              <details
                 key={product.slug}
-                href={routes.product(product.slug)}
-                className={`absolute ${environmentCalloutPositions[index]} group focus-visible:outline-accent text-brand-950 ring-brand-950/20 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/90 bg-white text-sm font-bold shadow-[0_14px_35px_rgba(0,0,0,.22)] ring-4 transition-transform hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2`}
-                aria-label={`${index + 1}. ${product.name}`}
+                className={`group absolute ${environmentCalloutPositions[index]} -translate-x-1/2 -translate-y-1/2`}
               >
-                {index + 1}
-                <span className="text-ink border-line pointer-events-none absolute top-12 left-1/2 hidden w-48 -translate-x-1/2 border bg-white px-3 py-2 text-left text-xs font-semibold shadow-xl group-hover:block group-focus-visible:block">
-                  {product.name}
-                </span>
-              </Link>
+                <summary
+                  className="focus-visible:outline-accent ring-brand-950/20 flex size-7 cursor-pointer list-none items-center justify-center rounded-full border border-white/80 bg-white/55 shadow-[0_10px_30px_rgba(0,0,0,.22)] ring-4 backdrop-blur-sm transition-transform hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 [&::-webkit-details-marker]:hidden"
+                  aria-label={`Show ${product.name} details`}
+                >
+                  <span className="bg-brand-950/80 size-2 rounded-full" />
+                </summary>
+                <div className="border-line absolute top-9 left-1/2 z-10 w-64 -translate-x-1/2 bg-white p-4 text-left shadow-2xl">
+                  <p className="type-series text-accent">0{index + 1}</p>
+                  <h3 className="type-h5 mt-2">{product.name}</h3>
+                  <p className="type-body-sm text-ink-muted mt-2">
+                    {product.summary}
+                  </p>
+                  <Link
+                    href={routes.product(product.slug)}
+                    className="motion-link mt-4 inline-flex items-center gap-2 text-sm font-semibold"
+                  >
+                    View product
+                    <ArrowRight aria-hidden className="motion-arrow size-4" />
+                  </Link>
+                </div>
+              </details>
             ))}
           </div>
         </ImageReveal>
-        <aside className="bg-surface">
+        <aside className="border-line bg-surface border">
           <div className="border-line border-b p-5">
             <Eyebrow>Specification schedule</Eyebrow>
-            <h3 className="type-h3 mt-5">Products to discuss first</h3>
+            <h3 className="type-h4 mt-4">Recommended products</h3>
             <p className="type-body-sm text-ink-muted mt-3">
-              These are planning recommendations. Final selection depends on
-              room size, user workflow, AV equipment, mounting and service
-              access.
+              Click a marker on the room image for product context, or open a
+              product directly from this list.
             </p>
           </div>
           <ol>
@@ -524,27 +530,23 @@ function SpaceProductEnvironment({
                 <li key={product.slug} className="border-line border-b">
                   <Link
                     href={routes.product(product.slug)}
-                    className="motion-card group hover:bg-accent-light grid grid-cols-[2.75rem_1fr] gap-4 p-5"
+                    className="motion-card group hover:bg-accent-light grid grid-cols-[2.25rem_1fr_auto] items-center gap-3 px-4 py-3"
                   >
-                    <span className="bg-brand-950 flex size-9 items-center justify-center rounded-full text-sm font-bold text-white">
-                      {index + 1}
+                    <span className="border-line text-ink-muted flex size-8 items-center justify-center rounded-full border bg-white text-xs font-bold">
+                      0{index + 1}
                     </span>
                     <span>
                       <span className="type-series text-accent">
                         {family?.name ?? product.series}
                       </span>
-                      <span className="type-h5 mt-2 block">{product.name}</span>
-                      <span className="type-body-sm text-ink-muted mt-2 block">
-                        {product.summary}
-                      </span>
-                      <span className="motion-link mt-4 inline-flex items-center gap-2 text-sm font-semibold">
-                        View product
-                        <ArrowRight
-                          aria-hidden
-                          className="motion-arrow size-4"
-                        />
+                      <span className="type-body-sm mt-1 block font-semibold">
+                        {product.name}
                       </span>
                     </span>
+                    <ArrowRight
+                      aria-hidden
+                      className="motion-arrow text-ink-muted size-4"
+                    />
                   </Link>
                 </li>
               );
