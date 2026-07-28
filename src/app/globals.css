@@ -236,31 +236,31 @@ textarea {
 .type-hero {
   font-size: clamp(3.25rem, 8vw, 7.75rem);
   font-weight: 470;
-  letter-spacing: -0.055em;
+  letter-spacing: 0;
   line-height: 0.92;
 }
 .type-section {
   font-size: clamp(2.35rem, 5vw, 5rem);
   font-weight: 470;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
   line-height: 0.98;
 }
 .type-h1 {
   font-size: clamp(2.6rem, 5vw, 4.75rem);
   font-weight: 480;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
   line-height: 1;
 }
 .type-h2 {
   font-size: clamp(2rem, 3.5vw, 3.25rem);
   font-weight: 500;
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
   line-height: 1.05;
 }
 .type-h3 {
   font-size: clamp(1.5rem, 2vw, 2rem);
   font-weight: 520;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   line-height: 1.15;
 }
 .type-h4 {
@@ -282,7 +282,7 @@ textarea {
 .type-product {
   font-size: clamp(1.75rem, 3vw, 2.75rem);
   font-weight: 500;
-  letter-spacing: -0.035em;
+  letter-spacing: 0;
   line-height: 1.05;
 }
 .type-series {
@@ -331,7 +331,7 @@ textarea {
 }
 .type-numeric {
   font-size: clamp(1.5rem, 3vw, 2.5rem);
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 .type-caption {
   font-size: 0.75rem;
@@ -340,6 +340,27 @@ textarea {
 .type-legal {
   font-size: 0.6875rem;
   line-height: 1.5;
+}
+
+@media (max-width: 40rem) {
+  .text-balance {
+    text-wrap: wrap;
+  }
+
+  .type-hero {
+    font-size: 2.9rem;
+    line-height: 0.98;
+  }
+
+  .type-section {
+    font-size: 2.2rem;
+    line-height: 1.04;
+  }
+
+  .type-h1 {
+    font-size: 2.35rem;
+    line-height: 1.04;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

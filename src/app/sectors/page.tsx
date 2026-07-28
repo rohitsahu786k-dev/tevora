@@ -35,7 +35,7 @@ export default function SectorsPage() {
             items={[{ label: "Home", href: "/" }, { label: "Sectors" }]}
           />
           <div className="mt-16 grid gap-10 lg:grid-cols-12">
-            <ViewportReveal className="flex flex-col justify-end lg:col-span-5">
+            <ViewportReveal className="flex min-w-0 flex-col justify-end lg:col-span-5">
               <Eyebrow className="text-emerald-300">Sectors</Eyebrow>
               <MaskedHeading as="h1" className="type-h1 mt-7">
                 Technology furniture across sectors.
@@ -48,7 +48,7 @@ export default function SectorsPage() {
             <ContextualImageMosaic
               images={sectorHeroImages}
               priority
-              className="lg:col-span-7"
+              className="min-w-0 lg:col-span-7"
             />
           </div>
         </Container>

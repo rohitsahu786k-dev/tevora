@@ -203,7 +203,7 @@ export default function ProductsPage() {
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 overflow-hidden text-white">
         <Container className="grid min-h-[72svh] items-end gap-12 pt-32 pb-16 lg:grid-cols-12">
-          <div className="lg:col-span-6">
+          <div className="min-w-0 lg:col-span-6">
             <Breadcrumbs
               items={[{ label: "Home", href: "/" }, { label: "Products" }]}
             />
@@ -219,7 +219,7 @@ export default function ProductsPage() {
               </p>
             </ViewportReveal>
           </div>
-          <ImageReveal priority className="lg:col-span-6">
+          <ImageReveal priority className="min-w-0 lg:col-span-6">
             <ContextualImageMosaic
               images={productHeroImages}
               priority

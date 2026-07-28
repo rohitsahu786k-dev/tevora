@@ -41,7 +41,7 @@ export default function PartnersPage() {
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 overflow-hidden text-white">
         <Container className="grid min-h-[44rem] items-end gap-12 py-24 lg:grid-cols-12 lg:py-32">
-          <ViewportReveal className="lg:col-span-6">
+          <ViewportReveal className="min-w-0 lg:col-span-6">
             <Eyebrow className="text-emerald-300">
               TEVORA Partner Network
             </Eyebrow>
@@ -68,7 +68,7 @@ export default function PartnersPage() {
               </SecondaryButton>
             </div>
           </ViewportReveal>
-          <ImageReveal className="lg:col-span-5 lg:col-start-8">
+          <ImageReveal className="min-w-0 lg:col-span-5 lg:col-start-8">
             <ContextualImageMosaic
               images={partnerHeroImages}
               priority
