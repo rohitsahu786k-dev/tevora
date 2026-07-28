@@ -30,12 +30,6 @@ import { getContentBreadcrumbs } from "@/lib/navigation/content-navigation";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { mediaAssets } from "@/content/media";
-import {
-  ImageReveal,
-  MaskedHeading,
-  ViewportReveal,
-} from "@/components/motion";
-import { sharedElementStyle } from "@/lib/motion/shared-elements";
 
 type RelatedProduct = ReturnType<typeof getRelatedProducts>[number];
 type SpaceEnvironmentImage = Pick<
@@ -121,43 +115,36 @@ export default async function SpacePage({
   ];
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
-      <section className="bg-surface">
-        <Container className="py-8 md:py-12">
-          <Breadcrumbs items={getContentBreadcrumbs("space", slug)} />
-          <div className="mt-8 grid gap-8 lg:grid-cols-12">
-            <ViewportReveal className="flex flex-col justify-end lg:col-span-5">
-              <Eyebrow>{space.group}</Eyebrow>
-              <MaskedHeading as="h1" className="type-h1 mt-7">
-                {space.name}
-              </MaskedHeading>
-              <p className="type-body-lg text-ink-muted mt-6">
-                {space.summary}
-              </p>
-              <PrimaryButton asChild className="mt-9 self-start">
-                <Link href={routes.contact}>
-                  Discuss Your Project{" "}
-                  <ArrowRight aria-hidden className="size-4" />
-                </Link>
-              </PrimaryButton>
-            </ViewportReveal>
-            <ImageReveal
-              priority
-              className="relative aspect-[16/10] bg-white lg:col-span-7"
+      <section className="bg-brand-950 relative min-h-[72svh] overflow-hidden text-white md:min-h-[76svh]">
+        <Image
+          src={spaceEnvironmentMedia.src}
+          alt={spaceEnvironmentMedia.alt}
+          fill
+          priority
+          quality={78}
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,22,19,.9)_0%,rgba(10,22,19,.68)_42%,rgba(10,22,19,.12)_82%)]" />
+        <Container className="relative flex min-h-[72svh] flex-col pt-28 pb-12 md:min-h-[76svh] md:pb-16">
+          <div className="[&_a:hover]:text-white [&_ol]:text-white/65 [&_span]:text-white">
+            <Breadcrumbs items={getContentBreadcrumbs("space", slug)} />
+          </div>
+          <div className="mt-auto max-w-3xl pt-16">
+            <Eyebrow className="text-emerald-300">{space.group}</Eyebrow>
+            <h1 className="type-h1 mt-7 text-balance">{space.name}</h1>
+            <p className="type-body-lg mt-6 max-w-2xl text-white/75">
+              {space.summary}
+            </p>
+            <PrimaryButton
+              asChild
+              className="text-brand-950! hover:border-accent hover:bg-accent! mt-9 self-start border-white bg-white! hover:text-white!"
             >
-              <div
-                className="absolute inset-0"
-                style={sharedElementStyle("space", space.slug)}
-              >
-                <Image
-                  src={spaceEnvironmentMedia.src}
-                  alt={spaceEnvironmentMedia.alt}
-                  fill
-                  priority
-                  sizes="(min-width:1024px) 58vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            </ImageReveal>
+              <Link href={routes.contact}>
+                Discuss Your Project{" "}
+                <ArrowRight aria-hidden className="size-4" />
+              </Link>
+            </PrimaryButton>
           </div>
         </Container>
       </section>
