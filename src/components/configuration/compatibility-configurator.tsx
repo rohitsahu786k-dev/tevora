@@ -76,9 +76,9 @@ export function CompatibilityConfigurator() {
           </select>
           <div className="border-accent bg-accent-light mt-6 border-l-2 p-4">
             <p className="type-body-sm">
-              Compatibility states are guidance for configuration. Provisional
-              and review states require technical confirmation before
-              specification.
+              Use this as a planning guide. TEVORA confirms accessory fit
+              against the final product, equipment schedule and installation
+              conditions.
             </p>
           </div>
           <AnimatePresence>

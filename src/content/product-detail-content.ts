@@ -44,7 +44,7 @@ const details: Record<string, ProductDetailContent> = {
     users:
       "Intended for educators, presenters and room operators working in teaching and presentation spaces.",
     technology:
-      "The product architecture is intended to organise presentation, control and connected AV equipment; product-level equipment support remains subject to verification.",
+      "The product architecture helps organise presentation devices, room controls and connected AV equipment around the presenter.",
     problem:
       "ARC provides a defined physical location for the presenter, user controls and supporting technology while keeping project infrastructure organised.",
     heroMedia: arcConcept,
@@ -57,7 +57,7 @@ const details: Record<string, ProductDetailContent> = {
         explanation:
           "The station establishes a clear presenter position in relation to the room display and audience.",
         technicalNote:
-          "Display and control compatibility must be confirmed for each project.",
+          "Display and control selections are confirmed against the project equipment list.",
         media: arcConcept,
       },
       {
@@ -95,7 +95,7 @@ const details: Record<string, ProductDetailContent> = {
         explanation:
           "A mobile furniture format allows shared technology to be repositioned as the space changes.",
         technicalNote:
-          "Mobility configuration and installed equipment must be verified before use.",
+          "Mobility and installed equipment are confirmed during project review.",
         media: moveProConcept,
       },
       {
@@ -145,9 +145,9 @@ const details: Record<string, ProductDetailContent> = {
         title: "Ventilation planning",
         topic: "Ventilation",
         explanation:
-          "Equipment heat and airflow requirements form part of project-level configuration and verification.",
+          "Equipment heat and airflow needs are reviewed as part of project configuration.",
         technicalNote:
-          "Cooling requirements depend on the verified equipment schedule.",
+          "Cooling requirements depend on the final equipment schedule.",
         media: nexusConcept,
       },
     ],
@@ -221,7 +221,7 @@ const details: Record<string, ProductDetailContent> = {
         title: "Modular planning",
         topic: "Modular accessories",
         explanation:
-          "The series framework prepares the table for different room formats and accessory categories.",
+          "The series can be planned with accessory categories for different room formats and meeting needs.",
         media: forumConcept,
       },
     ],
@@ -250,7 +250,7 @@ const details: Record<string, ProductDetailContent> = {
         title: "Equipment and cable access",
         topic: "Serviceability",
         explanation:
-          "Routing and access zones can be planned around the verified device schedule.",
+          "Routing and access zones can be planned around the final device schedule.",
         media: environment,
       },
       {

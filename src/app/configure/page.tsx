@@ -19,7 +19,7 @@ export default function ConfigurePage() {
           <SectionHeader
             eyebrow="Configure"
             title="Build around your technology."
-            description="Find a suitable product direction, capture the project requirement and organise a preliminary configuration for technical review."
+            description="Capture the room, equipment and product direction so TEVORA can help shape the right configuration."
           />
           <Suspense fallback={<ProductBrowserSkeleton />}>
             <ConfigureExperience />

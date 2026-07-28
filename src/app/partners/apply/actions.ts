@@ -84,7 +84,7 @@ export async function submitPartnerApplication(
     return {
       ok: false,
       message:
-        "Partner application delivery is not yet configured. Your entered information remains in the form and has not been submitted.",
+        "Partner applications are temporarily unavailable online. Your entered information remains in the form and has not been submitted.",
     };
 
   const input = parsed.data;

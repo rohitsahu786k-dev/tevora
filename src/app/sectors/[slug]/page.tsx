@@ -141,7 +141,7 @@ export default async function SectorPage({
           <SectionHeader
             eyebrow="Common challenges"
             title="What project teams need to resolve"
-            description="Planning themes are editorial starting points and must be assessed for each project."
+            description="Use these themes to clarify the room, users, equipment and installation needs before selecting products."
           />
           <ol className="border-line grid border-y md:grid-cols-2">
             {sector.challenges.map((challenge, index) => (
@@ -196,8 +196,8 @@ export default async function SectorPage({
         <Container>
           <SectionHeader
             eyebrow="Recommended product families"
-            title="Product architecture for the sector"
-            description="Recommendations follow the mapped space taxonomy and require project-level verification."
+            title="Product families to consider"
+            description="Compare the furniture families most relevant to the spaces and technology requirements in this sector."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-3">
             {recommendedFamilies.map((family) => (
@@ -227,7 +227,7 @@ export default async function SectorPage({
           <SectionHeader
             eyebrow="Recommended products"
             title={`Product series for ${sector.name}`}
-            description="Initial recommendations support discovery, not final suitability or compatibility."
+            description="Use these series as a starting point for the brief, then confirm fit against the room and device schedule."
           />
           <ResponsiveGrid columns={3}>
             {recommendedProducts.map((product) => (
@@ -246,7 +246,7 @@ export default async function SectorPage({
           <SectionHeader
             eyebrow="Integration considerations"
             title="Coordinate furniture and technology early"
-            description="A concise planning framework for integrators, consultants, architects and client teams."
+            description="Bring these decisions forward so furniture, AV, power, data and service access are planned together."
           />
           <ol className="grid gap-px bg-white/20 md:grid-cols-5">
             {integrationConsiderations.map((item, index) => (
@@ -286,8 +286,8 @@ export default async function SectorPage({
                 </div>
               ) : (
                 <EmptyState
-                  title="No verified projects published"
-                  description="Project examples will appear when client approval and project content are available."
+                  title="Project examples are coming"
+                  description="Speak with TEVORA about similar sector applications while public case studies are being prepared."
                 />
               )}
             </div>
@@ -307,7 +307,7 @@ export default async function SectorPage({
                     <div>
                       <h3 className="type-h5">{resource}</h3>
                       <p className="type-caption text-ink-muted mt-2">
-                        Available when published
+                        Available on request
                       </p>
                     </div>
                   </Link>

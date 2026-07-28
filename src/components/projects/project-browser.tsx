@@ -129,7 +129,7 @@ export function ProjectBrowser() {
                 </MediaFrame>
                 <div className="border-line border-t pt-5">
                   <span className="type-series text-accent">
-                    {sector?.name ?? "Sector not published"}
+                    {sector?.name ?? "Project application"}
                   </span>
                   <h2 className="type-h3 mt-4">{project.projectName}</h2>
                   <dl className="mt-6 grid grid-cols-2 gap-5">
@@ -160,12 +160,12 @@ export function ProjectBrowser() {
           <h2 className="type-h3">
             {hasFilters
               ? "No projects match these filters."
-              : "No approved projects are published yet."}
+              : "Project stories are being prepared."}
           </h2>
           <p className="type-body-sm text-ink-muted mt-4">
             {hasFilters
               ? "Reset filters or discuss an application directly with the project team."
-              : "Approved applications will appear here after client and project-team review."}
+              : "Talk to TEVORA about relevant applications for your sector, space or product family."}
           </p>
         </div>
       )}
@@ -209,7 +209,7 @@ function Meta({
     <div>
       <dt className="type-spec-label">{label}</dt>
       <dd className="type-caption text-ink-muted mt-1">
-        {value || "Not published"}
+        {value || "Discuss with TEVORA"}
       </dd>
     </div>
   );

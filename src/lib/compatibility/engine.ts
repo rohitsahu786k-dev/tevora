@@ -6,9 +6,9 @@ import type {
 } from "@/types/compatibility";
 
 const label: Record<CompatibilityStatus, string> = {
-  verified: "Verified",
-  provisional: "Provisional",
-  "requires-technical-review": "Requires technical review",
+  verified: "Ready to use",
+  provisional: "Review fit",
+  "requires-technical-review": "Confirm with TEVORA",
   "not-compatible": "Not compatible",
 };
 export const compatibilityStatusLabel = (status: CompatibilityStatus) =>
@@ -69,7 +69,7 @@ export function evaluateCompatibility(
     ) {
       status = "requires-technical-review";
       reasons.unshift(
-        "No verified product or product-family relationship is published.",
+        "Confirm this accessory against the selected product and equipment schedule.",
       );
     }
   }

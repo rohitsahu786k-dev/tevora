@@ -157,7 +157,7 @@ export const partnerFaqs = [
   {
     title: "Is there an application fee?",
     content:
-      "No application fee is defined in this provisional programme. Any future commercial requirements would be communicated before an agreement is made.",
+      "There is currently no application fee. Any commercial requirements would be discussed before an agreement is made.",
   },
   {
     title: "Does applying guarantee approval?",
@@ -182,7 +182,7 @@ export const partnerFaqs = [
   {
     title: "How are project opportunities handled?",
     content:
-      "Project collaboration may be available where appropriate. Registration, ownership and lead-handling policies remain subject to regional programme terms.",
+      "Project collaboration may be available where appropriate. Registration, ownership and lead-handling are agreed through the regional partner process.",
   },
   {
     title: "Can international companies apply?",

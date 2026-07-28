@@ -222,7 +222,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Featured Product Story"
             title="Technology that can move with the room."
-            description="A mobile AV cart provides a flexible furniture format for display, video collaboration and learning environments. Product-level details remain subject to project verification."
+            description="A mobile AV cart gives teams a movable position for display, camera, audio and connected devices in rooms that change through the day."
           />
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:sticky lg:top-28 lg:col-span-7 lg:h-fit">
@@ -328,7 +328,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Projects"
             title="Technology furniture across applications."
-            description="Applications span education, corporate, government, public and specialist environments. Published project stories require client approval."
+            description="See where TEVORA product families can support education, corporate, government, public and specialist environments."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-5">
             {applications.map((application, index) => (

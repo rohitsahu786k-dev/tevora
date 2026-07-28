@@ -69,7 +69,7 @@ const supportAreas = [
   ],
   [
     "CAD and BIM assistance",
-    "Support coordination workflows with available verified project files.",
+    "Help project teams identify the right drawings, models and coordination files for the current stage.",
   ],
   [
     "Finish support",
@@ -143,7 +143,7 @@ export default function DesignSupportPage() {
           <SectionHeader
             eyebrow="Areas of support"
             title="Coordinate the product around the project."
-            description="Support is collaborative and evidence-led. Final selections, compatibility and project details remain subject to technical validation."
+            description="Work through product direction, equipment fit, room planning and the details needed for a confident specification."
           />
           <ol className="border-line border-t">
             {supportAreas.map(([title, copy], index) => (

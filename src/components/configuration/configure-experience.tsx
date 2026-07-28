@@ -56,14 +56,14 @@ const entryOptions: Array<{
     mode: "find-product",
     title: "Find a Product",
     description:
-      "Answer project questions and review taxonomy-based recommendations.",
+      "Answer a few project questions and see product families that fit the room.",
     icon: PackageSearch,
   },
   {
     mode: "configure-product",
     title: "Configure a Product",
     description:
-      "Start with a known product and organise preliminary selections.",
+      "Start with a known product and capture the main equipment, finish and mobility needs.",
     icon: Settings2,
   },
   {
@@ -81,7 +81,7 @@ const entryOptions: Array<{
   {
     mode: "upload-layout",
     title: "Upload a Layout",
-    description: "Prepare a layout for project-team review.",
+    description: "Keep room drawings ready for a TEVORA planning conversation.",
     icon: FileUp,
   },
   {
@@ -159,9 +159,9 @@ export function ConfigureExperience() {
       accessories: getRelatedAccessories(product.slug).slice(0, 4),
       reasons: [
         state.finder.space &&
-          `Mapped to the selected ${spaces.find((space) => space.slug === state.finder.space)?.name ?? "space"}.`,
+          `Relevant to ${spaces.find((space) => space.slug === state.finder.space)?.name ?? "the selected space"}.`,
         state.finder.sector &&
-          `Appears in the current ${sectors.find((sector) => sector.slug === state.finder.sector)?.name ?? "sector"} taxonomy.`,
+          `Commonly considered for ${sectors.find((sector) => sector.slug === state.finder.sector)?.name ?? "this sector"} projects.`,
       ].filter((reason): reason is string => Boolean(reason)),
     }));
   }, [state.finder.sector, state.finder.space]);
@@ -232,11 +232,11 @@ export function ConfigureExperience() {
 
   const download = () => {
     const content = [
-      "TEVORA PRELIMINARY CONFIGURATION",
+      "TEVORA PROJECT CONFIGURATION STARTER",
       `Reference: ${state.id}`,
       `Updated: ${state.updatedAt}`,
       "",
-      "Configurations are preliminary and subject to technical validation by TEVORA.",
+      "Use this as a starting brief for discussion with TEVORA. Final product selections, dimensions and compatibility are confirmed during project review.",
       "",
       JSON.stringify(state, null, 2),
     ].join("\n");
@@ -302,8 +302,8 @@ export function ConfigureExperience() {
                 Define the requirement.
               </h2>
               <p className="type-body-sm text-ink-muted mt-5">
-                Inputs guide discovery only. Equipment details and suitability
-                require technical review.
+                Tell us the sector, room and equipment direction so the product
+                shortlist starts from the real project context.
               </p>
             </div>
             <form onSubmit={submitFinder} className="grid gap-7 sm:grid-cols-2">
@@ -419,7 +419,8 @@ export function ConfigureExperience() {
                   className="border-line bg-surface mt-2 min-h-12 w-full border p-3 text-sm"
                 />
                 <span className="type-caption text-ink-muted mt-2 block">
-                  The file remains local in this prototype and is not uploaded.
+                  Keep the drawing ready to share with TEVORA during the project
+                  review.
                 </span>
               </label>
               <div className="flex items-end">
@@ -488,12 +489,11 @@ export function ConfigureExperience() {
                           ))}
                         </ul>
                         <h4 className="type-spec-label mt-7">
-                          Important limitations
+                          What to confirm next
                         </h4>
                         <p className="type-caption text-ink-muted mt-3">
-                          Taxonomy match only. Model, equipment, dimensions,
-                          mounting and accessory compatibility require technical
-                          validation.
+                          Confirm model, equipment fit, dimensions, mounting,
+                          cable paths and accessory compatibility with TEVORA.
                         </p>
                         <h4 className="type-spec-label mt-7">
                           Compatible accessory groups
@@ -503,7 +503,7 @@ export function ConfigureExperience() {
                             ? relatedAccessories
                                 .map((item) => item.name)
                                 .join(" · ")
-                            : "No verified accessory mapping is currently published."}
+                            : "Accessory groups can be discussed once a product direction is selected."}
                         </p>
                       </div>
                       <div className="mt-8 flex flex-wrap gap-3">
@@ -532,8 +532,8 @@ export function ConfigureExperience() {
               >
                 <h3 className="type-h4">Select a sector or space to begin.</h3>
                 <p className="type-body-sm text-ink-muted mt-3">
-                  Recommendations appear only when an existing taxonomy
-                  relationship can support them.
+                  Recommendations appear after you choose where the product will
+                  be used.
                 </p>
               </motion.div>
             )}
@@ -555,7 +555,7 @@ export function ConfigureExperience() {
                 className="type-caption text-ink-muted"
               >
                 {status ||
-                  "Configurations are preliminary and subject to technical validation by TEVORA."}
+                  "Use this workspace to prepare a clear project brief before speaking with TEVORA."}
               </motion.p>
             </AnimatePresence>
             <div className="flex flex-wrap gap-2">
@@ -573,7 +573,7 @@ export function ConfigureExperience() {
               </SecondaryButton>
               <SecondaryButton type="button" onClick={download}>
                 <Download aria-hidden className="size-4" />
-                Preliminary specification
+                Project starter
               </SecondaryButton>
               <PrimaryButton asChild>
                 <Link href={`${routes.contact}?configuration=${state.id}`}>
@@ -643,7 +643,8 @@ function ConfigurationWorkspace({
               <Settings2 aria-hidden className="text-accent mx-auto size-7" />
               <p className="type-model text-ink-muted mt-4">PRODUCT VIEWPORT</p>
               <p className="type-body-sm text-ink-muted mt-2">
-                3D viewer interface prepared for a future server-backed adapter.
+                Product visuals, dimensions and exact options are reviewed with
+                TEVORA during project planning.
               </p>
             </div>
           </div>
@@ -789,8 +790,8 @@ function ConfigurationWorkspace({
           )}
           <div className="border-accent bg-accent-light mt-8 border-l-2 p-4">
             <p className="type-body-sm font-semibold">
-              Configurations are preliminary and subject to technical validation
-              by TEVORA.
+              TEVORA confirms the final product, equipment fit and installation
+              details before ordering.
             </p>
           </div>
         </aside>

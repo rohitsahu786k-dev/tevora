@@ -106,7 +106,10 @@ export function ResourceBrowser() {
     if (resource.accessLevel === "registered") setGate(resource);
     else if (resource.accessLevel === "restricted")
       setNotice("This resource requires approval from the project team.");
-    else setNotice("This resource is not currently available for download.");
+    else
+      setNotice(
+        "This file is available through Design Support while the online library is being prepared.",
+      );
   };
   const hasFilters = Object.values(filters).some(Boolean);
   return (
@@ -114,13 +117,12 @@ export function ResourceBrowser() {
       {previewMode && (
         <div className="border-accent bg-accent-light mb-10 border-l-2 p-5">
           <p className="type-spec-label text-accent">
-            Preview resource library
+            Resource library in preparation
           </p>
           <p className="type-body-sm mt-2 max-w-4xl">
-            These records are clearly marked placeholder data so the resource
-            browser and filters can be reviewed before approved documents are
-            uploaded. No technical file, revision, file size or publication date
-            is implied, and downloads remain disabled.
+            Browse the types of documents TEVORA can support for planning,
+            specification and coordination. Request the exact file you need and
+            Design Support will guide the next step.
           </p>
         </div>
       )}
@@ -226,12 +228,12 @@ export function ResourceBrowser() {
               <h2 className="type-h3">
                 {hasFilters
                   ? "No resources match these filters."
-                  : "No verified resources are published yet."}
+                  : "Resources are available through Design Support."}
               </h2>
               <p className="type-body-sm text-ink-muted mt-4">
                 {hasFilters
                   ? "Reset one or more filters, browse another resource type, or contact Design Support for project-specific information."
-                  : "Design Support can help with project-specific information while the document library is being prepared."}
+                  : "Tell us the product, room or project stage and we can help identify the right literature, drawings or planning information."}
               </p>
               <SecondaryButton
                 type="button"
@@ -255,7 +257,7 @@ export function ResourceBrowser() {
           complete={() => {
             setGate(null);
             setNotice(
-              "Your details were validated, but the requested file is not currently available.",
+              "Thanks. Design Support can follow up with the right file or next step for this project.",
             );
           }}
         />
@@ -302,7 +304,7 @@ function ResourceCard({
   const family = productFamilies.find(
     (item) => item.id === resource.productFamily,
   );
-  const placeholder = resource.dataStatus === "placeholder";
+  const requestOnly = resource.dataStatus === "placeholder";
   return (
     <article className="bg-surface grid min-h-[25rem] content-between p-6">
       <div>
@@ -312,9 +314,9 @@ function ResourceCard({
             <span className="type-series text-accent block">
               {resourceTypeLabels[resource.resourceType]}
             </span>
-            {placeholder && (
+            {requestOnly && (
               <span className="type-model text-ink-muted mt-2 block">
-                Placeholder data
+                Available on request
               </span>
             )}
           </div>
@@ -335,19 +337,18 @@ function ResourceCard({
         <button
           type="button"
           onClick={onOpen}
-          disabled={placeholder}
-          className="border-graphite hover:bg-brand-950 disabled:border-line disabled:bg-surface-muted disabled:text-ink-muted mt-6 flex min-h-12 w-full items-center justify-between border px-4 text-sm font-semibold hover:text-white disabled:cursor-not-allowed"
+          className="border-graphite hover:bg-brand-950 mt-6 flex min-h-12 w-full items-center justify-between border px-4 text-sm font-semibold hover:text-white"
         >
           <span>
-            {placeholder
-              ? "File pending"
+            {requestOnly
+              ? "Request file"
               : resource.accessLevel === "registered"
                 ? "Request download"
                 : resource.accessLevel === "restricted"
                   ? "Request access"
                   : "Download"}
           </span>
-          {placeholder ? (
+          {requestOnly ? (
             <FileText aria-hidden className="size-4" />
           ) : resource.accessLevel === "public" ? (
             <Download aria-hidden className="size-4" />
@@ -370,7 +371,7 @@ function Meta({
     <div>
       <dt className="type-spec-label">{label}</dt>
       <dd className="type-caption text-ink-muted mt-1">
-        {value ?? "Not published"}
+        {value ?? "Discuss with TEVORA"}
       </dd>
     </div>
   );

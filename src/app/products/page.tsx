@@ -861,7 +861,7 @@ export default function ProductsPage() {
             <Callout
               eyebrow="Resources"
               title="Information for project teams."
-              copy="Access verified product files as they become available."
+              copy="Request product files, drawings and planning information for your project stage."
               href={routes.resources}
               cta="Browse Resources"
             />

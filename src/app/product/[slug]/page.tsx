@@ -295,7 +295,7 @@ export default async function ProductPage({
           product.finishes.length ||
           product.model ? (
             <div className="border-line border p-6">
-              Verified variant data available.
+              Configured options are available for this series.
             </div>
           ) : (
             <EmptyState

@@ -206,8 +206,8 @@ export default async function SpacePage({
         <Container>
           <SectionHeader
             eyebrow="Recommended product families"
-            title="Start with the product architecture"
-            description="Family recommendations are taxonomy-based and require project-level verification."
+            title="Product families that fit this space"
+            description="Start with the room activity, then compare the furniture families most likely to support the users, equipment and layout."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-3">
             {recommendedFamilies.map((family) => (
@@ -236,7 +236,7 @@ export default async function SpacePage({
           <SectionHeader
             eyebrow="Recommended products"
             title={`Product series for ${space.name}`}
-            description="Initial recommendations support discovery, not final suitability or compatibility."
+            description="Use these series as a shortlist for discussion. Final dimensions, equipment fit and accessories are confirmed with the project team."
           />
           <ResponsiveGrid columns={3}>
             {relatedProducts.map((product) => (
@@ -254,7 +254,7 @@ export default async function SpacePage({
           <SectionHeader
             eyebrow="Example configurations"
             title="Three ways to begin planning"
-            description="Conceptual configuration directions only; no equipment or performance values are implied."
+            description="Choose the planning direction that best matches how the room will be used, then refine the equipment and furniture details."
           />
           <div className="grid gap-px bg-white/20 md:grid-cols-3">
             {configurations.map((configuration, index) => (
@@ -279,7 +279,7 @@ export default async function SpacePage({
           <SectionHeader
             eyebrow="Recommended accessories"
             title="Extend the selected product"
-            description="Accessory groups are provisional until product and model compatibility is reviewed."
+            description="Plan the supporting details early: mounting, power, connectivity, cable routing, mobility, access and security."
           />
           <div className="flex flex-wrap gap-2">
             {recommendedAccessories.map((accessory) => (
@@ -336,8 +336,8 @@ export default async function SpacePage({
                 </div>
               ) : (
                 <EmptyState
-                  title="No verified projects published"
-                  description="Project examples will appear when client approval and project content are available."
+                  title="Project examples are coming"
+                  description="Speak with TEVORA about similar applications while public case studies are being prepared."
                 />
               )}
             </div>
@@ -358,7 +358,7 @@ export default async function SpacePage({
                 <div>
                   <h2 className="type-h5">{resource}</h2>
                   <p className="type-caption text-ink-muted mt-2">
-                    Available when published
+                    Available on request
                   </p>
                 </div>
               </Link>

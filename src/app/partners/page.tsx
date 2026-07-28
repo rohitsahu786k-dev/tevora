@@ -89,7 +89,7 @@ export default function PartnersPage() {
           <SectionHeader
             eyebrow="Why Partner"
             title="A programme built around capable project organisations."
-            description="Partner support may include the following, subject to programme level, region, approval and written agreement."
+            description="Partners can access product knowledge, design support and commercial guidance matched to their market and role."
           />
           <div className="border-line grid border-t md:grid-cols-2 lg:grid-cols-3">
             {partnerBenefits.map((benefit, index) => (
@@ -217,7 +217,7 @@ export default function PartnersPage() {
           <SectionHeader
             eyebrow="Partner Support"
             title="Resources to support specification and delivery."
-            description="Support is subject to partner type, region, programme level and written agreement."
+            description="Support is shaped around the partner type, region and projects being developed."
           />
           <div className="grid gap-x-10 md:grid-cols-2">
             {partnerSupport.map((item) => (

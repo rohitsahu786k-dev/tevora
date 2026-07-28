@@ -52,7 +52,7 @@ export async function submitProjectEnquiry(
     return {
       ok: false,
       message:
-        "Online project enquiries are temporarily unavailable. Delivery must be configured before launch.",
+        "Online project enquiries are temporarily unavailable. Please contact TEVORA directly and we will help with your project.",
     };
   if (
     !(await projectEnquiryAdapters.spam.verify({

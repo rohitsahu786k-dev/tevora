@@ -1225,16 +1225,19 @@ export const projects: Project[] = [
   {
     id: "project-example",
     slug: "example-project",
-    title: "Example Project",
-    summary: "Project content placeholder.",
-    projectName: "Placeholder Project",
+    title: "Boardroom Technology Furniture Application",
+    summary:
+      "A sample application showing how meeting furniture, displays, power, cable routing and service access can be discussed together.",
+    projectName: "Boardroom Technology Furniture Application",
     clientDisplayName: null,
     location: null,
     projectType: null,
     sector: "sector-corporate",
     spaces: ["space-boardroom"],
-    challenge: "Placeholder content — no client or project claim.",
-    approach: "Placeholder content — approach to be confirmed.",
+    challenge:
+      "The room needs a clean meeting environment where collaboration technology is easy to use and equipment is not exposed.",
+    approach:
+      "Plan the collaboration table, display position, equipment storage, power and cable routing as one coordinated furniture package.",
     technologyRequirements: [],
     productsUsed: ["product-forum"],
     accessoriesUsed: [],
@@ -1242,7 +1245,10 @@ export const projects: Project[] = [
     gallery: [],
     testimonial: null,
     completionDate: null,
-    seo: draftSeo("Unpublished Project", "Unpublished project record."),
+    seo: draftSeo(
+      "Boardroom Technology Furniture Application",
+      "Sample boardroom application for TEVORA technology furniture.",
+    ),
     dataStatus: "placeholder",
   },
 ];
@@ -1375,8 +1381,8 @@ const resourceSeeds: Array<{
 export const resources: Resource[] = resourceSeeds.map((seed) => ({
   id: `resource-${seed.slug}`,
   slug: seed.slug,
-  title: `${seed.title} — Placeholder`,
-  summary: `Placeholder ${seed.title.toLowerCase()} record. No verified file is currently published.`,
+  title: seed.title,
+  summary: `${seed.title} can support product selection, coordination or specification. Request the current file from TEVORA for your project stage.`,
   kind: seed.resourceType === "planning-guide" ? "guide" : "download",
   resourceType: seed.resourceType,
   productFamily: seed.productFamily ?? null,

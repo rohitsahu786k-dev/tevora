@@ -26,7 +26,7 @@ export const compatibilityProfiles: AccessoryCompatibilityProfile[] =
       modelSpecificRules: [],
       status: "provisional",
       notes: [
-        "Taxonomy relationship only. Product-level compatibility requires technical review.",
+        "Confirm final fit against the selected product, equipment and installation conditions.",
       ],
       dataStatus: "placeholder",
     };

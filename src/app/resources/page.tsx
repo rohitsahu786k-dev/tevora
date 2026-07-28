@@ -18,7 +18,7 @@ export default function ResourcesPage() {
           <SectionHeader
             eyebrow="Resources"
             title="Information for better specification."
-            description="Browse published product literature, technical files and planning information by product, project context and file type."
+            description="Find the literature, drawings and planning information you need, or request the right file for your project stage."
           />
           <Suspense fallback={<ProductBrowserSkeleton />}>
             <ResourceBrowser />

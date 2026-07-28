@@ -64,7 +64,7 @@ function accessoryConcept(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative accessory concept — final design and compatibility are not verified.",
+      "Accessory concept for planning product fit and integration details.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -88,7 +88,7 @@ function presentationStationImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -110,7 +110,7 @@ function learningFurnitureImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -134,7 +134,7 @@ function displayStandImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -156,16 +156,12 @@ function mobileAvCartImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
 
-function mediaWallImage(
-  id: string,
-  filename: string,
-  alt: string,
-): MediaAsset {
+function mediaWallImage(id: string, filename: string, alt: string): MediaAsset {
   return {
     id,
     category: "product-detail",
@@ -178,7 +174,7 @@ function mediaWallImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -202,7 +198,7 @@ function collaborationTableImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -224,7 +220,7 @@ function technicalWorkstationImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -246,7 +242,7 @@ function technologyCredenzaImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -270,7 +266,7 @@ function avEquipmentEnclosureImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -294,7 +290,7 @@ function roomControlImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -318,7 +314,7 @@ function interactiveKioskImage(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Representative concept imagery — final product design and details are not verified.",
+      "Product concept view for discussing form, equipment integration and project fit.",
     credit: "TEVORA concept visualisation",
   };
 }
@@ -336,7 +332,7 @@ export const mediaAssets = {
     focalPoint: { x: 0.62, y: 0.5 },
     mobileFocalPoint: { x: 0.66, y: 0.5 },
     blurDataURL: blur,
-    caption: "Representative technology-enabled learning environment.",
+    caption: "Technology-enabled learning environment.",
     credit: "TEVORA",
   },
   mobileAvStory: {
@@ -350,7 +346,7 @@ export const mediaAssets = {
     aspectRatio: "product-hero",
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
-    caption: "Representative mobile AV furniture application.",
+    caption: "Mobile AV furniture application.",
     credit: "TEVORA",
   },
   arcConcept: presentationStationImage(

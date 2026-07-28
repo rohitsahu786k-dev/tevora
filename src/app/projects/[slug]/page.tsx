@@ -96,12 +96,12 @@ export default async function ProjectPage({
                   label="Space"
                   value={projectSpaces.map((item) => item.name).join(", ")}
                 />
-                <Meta label="Status" value="Placeholder record" />
+                <Meta label="Status" value="Project example" />
               </dl>
             </div>
             <MediaFrame className="grid place-items-center lg:col-span-7">
               <span className="type-model text-ink-muted">
-                PROJECT HERO — PLACEHOLDER
+                PROJECT APPLICATION IMAGE
               </span>
             </MediaFrame>
           </div>
@@ -116,8 +116,8 @@ export default async function ProjectPage({
             <div className="md:col-span-8">
               <h2 className="type-section">{project.summary}</h2>
               <p className="type-body mt-7 text-white/60">
-                This placeholder record contains no client identity, endorsement
-                or performance claim.
+                Use this application as a planning reference. Client-specific
+                details are shared only when approved for publication.
               </p>
             </div>
           </div>
@@ -149,8 +149,8 @@ export default async function ProjectPage({
             <EditorialList items={project.technologyRequirements} />
           ) : (
             <EmptyState
-              title="Requirements not yet published"
-              description="Verified technology requirements will be added when approved project information is available."
+              title="Technology requirements are reviewed by project"
+              description="Share the room brief and equipment schedule so TEVORA can help identify the right product direction."
             />
           )}
         </Container>
@@ -173,8 +173,8 @@ export default async function ProjectPage({
             </ResponsiveGrid>
           ) : (
             <EmptyState
-              title="Products not yet published"
-              description="Verified product selections will appear here."
+              title="Product selections are project-specific"
+              description="Discuss the space, users and equipment to shortlist the right TEVORA products."
             />
           )}
         </Container>
@@ -193,19 +193,19 @@ export default async function ProjectPage({
                 />
               ) : (
                 <EmptyState
-                  title="No verified integrations published"
-                  description="Accessory and integration details require project approval."
+                  title="Integrations are confirmed during planning"
+                  description="Accessory and equipment details depend on the selected product and room requirements."
                 />
               )}
             </div>
             <div>
               <SectionHeader
                 eyebrow="Technical highlights"
-                title="Verified project detail"
+                title="Details to review"
               />
               <EmptyState
-                title="Technical highlights pending"
-                description="Dimensions, equipment details, compatibility and performance information have not been published for this placeholder project."
+                title="Technical highlights are reviewed with TEVORA"
+                description="Dimensions, equipment details, compatibility and service access are confirmed for each project."
               />
             </div>
           </div>
@@ -229,8 +229,8 @@ export default async function ProjectPage({
             </div>
           ) : (
             <EmptyState
-              title="No approved project imagery"
-              description="Gallery content will appear only after image rights and project approval are confirmed."
+              title="Project imagery is available by request"
+              description="Talk to TEVORA about relevant visual references for similar applications."
             />
           )}
         </Container>
@@ -247,8 +247,8 @@ export default async function ProjectPage({
                 <EditorialList items={project.outcomes} />
               ) : (
                 <EmptyState
-                  title="No outcomes claimed"
-                  description="Outcomes will not be shown until they are verified and approved for publication."
+                  title="Outcomes depend on the project brief"
+                  description="TEVORA can help define the operational and integration goals for your room."
                 />
               )}
             </div>
@@ -266,8 +266,8 @@ export default async function ProjectPage({
                 </blockquote>
               ) : (
                 <EmptyState
-                  title="No testimonial published"
-                  description="No client quotation has been supplied or approved."
+                  title="Client references are shared selectively"
+                  description="Ask TEVORA about relevant experience for your sector or application."
                 />
               )}
             </div>
@@ -314,8 +314,8 @@ export default async function ProjectPage({
             </div>
           ) : (
             <EmptyState
-              title="No related projects published"
-              description="Additional approved project records will appear here."
+              title="Related examples are available through TEVORA"
+              description="Discuss your application and we can point you toward relevant product and space examples."
             />
           )}
         </Container>
@@ -357,7 +357,7 @@ function Meta({
     <div>
       <dt className="type-spec-label">{label}</dt>
       <dd className="type-caption text-ink-muted mt-2">
-        {value || "Not published"}
+        {value || "Discuss with TEVORA"}
       </dd>
     </div>
   );
