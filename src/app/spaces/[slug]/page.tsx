@@ -4,12 +4,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowRight, Download } from "lucide-react";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
-import { ProductCard } from "@/components/products/product-card";
 import { PrimaryButton } from "@/components/ui/button";
 import {
   Container,
   Eyebrow,
-  ResponsiveGrid,
   Section,
   SectionHeader,
 } from "@/components/ui/system";
@@ -31,13 +29,15 @@ import {
 import { getContentBreadcrumbs } from "@/lib/navigation/content-navigation";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { productConceptMediaBySlug } from "@/content/media";
+import { mediaAssets, productConceptMediaBySlug } from "@/content/media";
 import {
   ImageReveal,
   MaskedHeading,
   ViewportReveal,
 } from "@/components/motion";
 import { sharedElementStyle } from "@/lib/motion/shared-elements";
+
+type RelatedProduct = ReturnType<typeof getRelatedProducts>[number];
 
 const resources = [
   "Space planning guide",
@@ -117,6 +117,7 @@ export default async function SpacePage({
       copy: "Mobile or adaptable product formats considered for spaces that change between activities.",
     },
   ];
+  const spaceEnvironmentMedia = mediaAssets.homepageHero;
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-surface">
@@ -244,20 +245,11 @@ export default async function SpacePage({
       </Section>
       <Section>
         <Container>
-          <SectionHeader
-            eyebrow="Recommended products"
-            title={`Product series for ${space.name}`}
-            description="Use these series as a shortlist for discussion. Final dimensions, equipment fit and accessories are confirmed with the project team."
+          <SpaceProductEnvironment
+            spaceName={space.name}
+            products={relatedProducts}
+            image={spaceEnvironmentMedia}
           />
-          <ResponsiveGrid columns={3}>
-            {relatedProducts.map((product) => (
-              <ProductCard
-                key={product.slug}
-                entry={product}
-                href={routes.product(product.slug)}
-              />
-            ))}
-          </ResponsiveGrid>
         </Container>
       </Section>
       <Section tone="dark">
@@ -425,6 +417,104 @@ export default async function SpacePage({
     </main>
   );
 }
+
+const environmentCalloutPositions = [
+  "left-[18%] top-[38%]",
+  "left-[46%] top-[48%]",
+  "left-[72%] top-[35%]",
+  "left-[62%] top-[68%]",
+  "left-[31%] top-[66%]",
+  "left-[83%] top-[58%]",
+];
+
+function SpaceProductEnvironment({
+  spaceName,
+  products,
+  image,
+}: {
+  spaceName: string;
+  products: RelatedProduct[];
+  image: typeof mediaAssets.homepageHero;
+}) {
+  const visibleProducts = products.slice(0, environmentCalloutPositions.length);
+
+  return (
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(21rem,0.75fr)] lg:items-start">
+      <div>
+        <SectionHeader
+          eyebrow="Products in this space"
+          title={`A practical starting layout for ${spaceName.toLowerCase()}`}
+          description="Use the room view to understand where TEVORA furniture typically supports presentation, display, collaboration, mobility and equipment access."
+        />
+        <ImageReveal className="relative aspect-[16/9] overflow-hidden bg-white">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="(min-width:1024px) 58vw, 100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 hidden sm:block">
+            {visibleProducts.map((product, index) => (
+              <Link
+                key={product.slug}
+                href={routes.product(product.slug)}
+                className={`absolute ${environmentCalloutPositions[index]} group bg-brand-950 focus-visible:outline-accent flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/80 text-sm font-bold text-white shadow-lg transition-transform hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2`}
+                aria-label={`${index + 1}. ${product.name}`}
+              >
+                {index + 1}
+                <span className="text-ink pointer-events-none absolute top-11 left-1/2 hidden w-48 -translate-x-1/2 bg-white px-3 py-2 text-left text-xs font-semibold shadow-xl group-hover:block group-focus-visible:block">
+                  {product.name}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </ImageReveal>
+      </div>
+      <div className="border-line bg-line grid gap-px border">
+        <div className="bg-surface p-5">
+          <Eyebrow>Recommended series</Eyebrow>
+          <h2 className="type-h3 mt-5">Products to discuss first</h2>
+          <p className="type-body-sm text-ink-muted mt-3">
+            These are planning recommendations. Final selection depends on room
+            size, user workflow, AV equipment, mounting and service access.
+          </p>
+        </div>
+        {visibleProducts.map((product, index) => {
+          const family = productFamilies.find(
+            (item) => item.id === product.productFamily,
+          );
+
+          return (
+            <Link
+              key={product.slug}
+              href={routes.product(product.slug)}
+              className="motion-card group bg-surface hover:bg-accent-light grid grid-cols-[2.75rem_1fr] gap-4 p-5"
+            >
+              <span className="bg-brand-950 flex size-9 items-center justify-center rounded-full text-sm font-bold text-white">
+                {index + 1}
+              </span>
+              <span>
+                <span className="type-series text-accent">
+                  {family?.name ?? product.series}
+                </span>
+                <span className="type-h5 mt-2 block">{product.name}</span>
+                <span className="type-body-sm text-ink-muted mt-2 block">
+                  {product.summary}
+                </span>
+                <span className="motion-link mt-4 inline-flex items-center gap-2 text-sm font-semibold">
+                  View product
+                  <ArrowRight aria-hidden className="motion-arrow size-4" />
+                </span>
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function EditorialList({
   eyebrow,
   title,
