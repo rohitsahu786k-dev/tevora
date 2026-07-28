@@ -79,7 +79,7 @@ function LoginPanel({
             ? "The login request could not be saved. Please try again when access support is available."
             : "";
   return (
-    <div className="bg-surface border-line border p-6 sm:p-8">
+    <div className="glass-panel-strong p-6 sm:p-8">
       <LockKeyhole aria-hidden className="text-accent size-6" />
       <h2 className="type-h3 mt-5">Sign in or request access</h2>
       <p className="type-body-sm text-ink-muted mt-3">
@@ -89,7 +89,7 @@ function LoginPanel({
       {message && (
         <div
           role="status"
-          className="border-accent bg-accent-light mt-6 border-l-2 p-4"
+          className="glass-control border-accent/70 mt-6 border-l-2 p-4"
         >
           <p className="type-body-sm">{message}</p>
         </div>
@@ -102,7 +102,7 @@ function LoginPanel({
             type="email"
             autoComplete="email"
             required
-            className="border-line bg-surface focus:border-accent mt-2 min-h-12 w-full border px-4 outline-none"
+            className="glass-control focus:border-accent mt-2 min-h-12 w-full px-4 outline-none"
           />
         </label>
         <label>
@@ -111,7 +111,7 @@ function LoginPanel({
             name="tevoraId"
             autoComplete="one-time-code"
             required
-            className="border-line bg-surface focus:border-accent mt-2 min-h-12 w-full border px-4 outline-none"
+            className="glass-control focus:border-accent mt-2 min-h-12 w-full px-4 outline-none"
           />
         </label>
         <label>
@@ -120,7 +120,7 @@ function LoginPanel({
             name="company"
             autoComplete="organization"
             required
-            className="border-line bg-surface focus:border-accent mt-2 min-h-12 w-full border px-4 outline-none"
+            className="glass-control focus:border-accent mt-2 min-h-12 w-full px-4 outline-none"
           />
         </label>
         <div className="flex flex-wrap gap-3 pt-2">

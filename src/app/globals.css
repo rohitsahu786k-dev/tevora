@@ -170,6 +170,51 @@ a {
   box-shadow: var(--shadow-lift);
 }
 
+.glass-panel {
+  border: 1px solid rgb(255 255 255 / 56%);
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    rgb(255 255 255 / 70%),
+    rgb(255 255 255 / 38%) 52%,
+    rgb(255 255 255 / 24%)
+  );
+  box-shadow: 0 24px 80px rgb(16 32 29 / 18%);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+}
+
+.glass-panel-strong {
+  border: 1px solid rgb(255 255 255 / 68%);
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    rgb(255 255 255 / 84%),
+    rgb(255 255 255 / 54%) 55%,
+    rgb(255 255 255 / 34%)
+  );
+  box-shadow: 0 18px 60px rgb(16 32 29 / 16%);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+}
+
+.glass-control {
+  border: 1px solid rgb(255 255 255 / 58%);
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 52%);
+  box-shadow: 0 10px 32px rgb(16 32 29 / 10%);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+}
+
+.glass-bar {
+  border-color: rgb(255 255 255 / 60%);
+  background: rgb(255 255 255 / 58%);
+  box-shadow: 0 -18px 50px rgb(16 32 29 / 12%);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+}
+
 section.bg-brand-950 header .text-accent {
   color: #6ee7b7;
 }

@@ -542,7 +542,7 @@ export function ConfigureExperience() {
 
         <ConfigurationWorkspace state={state} updateState={updateState} />
 
-        <div className="border-line bg-surface/95 sticky bottom-0 z-30 mt-20 border-t py-4 backdrop-blur-sm">
+        <div className="glass-bar sticky bottom-0 z-30 mt-20 border-t py-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <AnimatePresence mode="wait" initial={false}>
               <motion.p

@@ -193,7 +193,7 @@ export function GlobalSearch({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: motionTokens.duration.fast }}
-                className="bg-brand-950/80 fixed inset-0 z-[120] p-0 sm:p-8"
+                className="bg-brand-950/72 fixed inset-0 z-[120] p-0 backdrop-blur-sm sm:p-8"
                 onMouseDown={(event) => {
                   if (event.currentTarget === event.target) setOpen(false);
                 }}
@@ -210,7 +210,7 @@ export function GlobalSearch({
                     duration: motionTokens.duration.component,
                     ease: motionTokens.easing.enter,
                   }}
-                  className="bg-surface text-graphite mx-auto flex h-full max-h-full w-full max-w-5xl flex-col sm:h-auto sm:max-h-[calc(100vh-4rem)]"
+                  className="glass-panel-strong text-graphite mx-auto flex h-full max-h-full w-full max-w-5xl flex-col overflow-hidden sm:h-auto sm:max-h-[calc(100vh-4rem)]"
                 >
                   <header className="border-line flex items-center justify-between border-b p-4 sm:p-6">
                     <div>
@@ -249,7 +249,7 @@ export function GlobalSearch({
                       onKeyDown={onKeyDown}
                       placeholder="Search products, spaces, sectors and resources"
                       aria-label="Search all content"
-                      className="type-body-lg bg-surface text-graphite caret-accent placeholder:text-ink-muted min-h-20 w-full touch-manipulation pr-5 pl-14 outline-none"
+                      className="type-body-lg text-graphite caret-accent placeholder:text-ink-muted min-h-20 w-full touch-manipulation bg-white/35 pr-5 pl-14 backdrop-blur-md outline-none"
                     />
                   </div>
                   <div

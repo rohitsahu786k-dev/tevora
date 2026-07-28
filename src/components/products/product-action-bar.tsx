@@ -24,7 +24,7 @@ export function ProductActionBar({
     }
   };
   return (
-    <div className="border-line bg-surface/95 sticky bottom-0 z-40 border-t backdrop-blur">
+    <div className="glass-bar sticky bottom-0 z-40 border-t">
       <div className="mx-auto flex min-h-16 max-w-[96rem] items-center gap-1 overflow-x-auto px-3 sm:px-8">
         <Link
           href={`${routes.configure}?product=${productSlug}` as never}

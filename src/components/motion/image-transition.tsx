@@ -81,7 +81,7 @@ export function BeforeAfterComparison({
           className="object-cover"
         />
       </div>
-      <label className="bg-surface/95 absolute inset-x-4 bottom-4 flex min-h-12 items-center gap-4 px-4">
+      <label className="glass-control absolute inset-x-4 bottom-4 flex min-h-12 items-center gap-4 px-4">
         <span className="type-spec-label">Before</span>
         <input
           type="range"

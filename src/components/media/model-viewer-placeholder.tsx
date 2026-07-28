@@ -21,7 +21,7 @@ export default function ModelViewerPlaceholder({
           : undefined
       }
     >
-      <span className="type-model bg-surface/90 text-ink-muted p-3">
+      <span className="glass-control type-model text-ink-muted p-3">
         PRODUCT VIEW
       </span>
     </div>
