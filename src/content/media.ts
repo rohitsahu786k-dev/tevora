@@ -319,6 +319,27 @@ function interactiveKioskImage(
   };
 }
 
+function generatedSectorHero(
+  slug: string,
+  name: string,
+  alt: string,
+): MediaAsset {
+  return {
+    id: `${slug}-sector-hero`,
+    category: "sector-hero",
+    kind: "image",
+    src: `/media/sectors/generated/${slug}.jpg`,
+    alt,
+    width: 1448,
+    height: 1086,
+    aspectRatio: "product-hero",
+    focalPoint: { x: 0.5, y: 0.5 },
+    blurDataURL: blur,
+    caption: `${name} sector technology-furniture environment.`,
+    credit: "Generated TEVORA sector visual",
+  };
+}
+
 export const mediaAssets = {
   homepageHero: {
     id: "homepage-learning-hero",
@@ -851,6 +872,69 @@ export const productConceptMediaBySlug: Partial<Record<string, MediaAsset>> = {
   monitor: mediaAssets.monitorWorkstationConcept,
   techdesk: mediaAssets.techdeskWorkstationConcept,
   "techdesk-pro": mediaAssets.techdeskProWorkstationConcept,
+};
+
+export const sectorHeroMediaBySlug: Partial<Record<string, MediaAsset>> = {
+  "higher-education": generatedSectorHero(
+    "higher-education",
+    "Higher Education",
+    "Modern university learning environment with integrated displays, presentation technology, mobile AV support and flexible furniture",
+  ),
+  schools: generatedSectorHero(
+    "schools",
+    "Schools",
+    "Contemporary school classroom with flexible learning tables, interactive display, presentation station and mobile device storage",
+  ),
+  corporate: generatedSectorHero(
+    "corporate",
+    "Corporate",
+    "Premium corporate meeting suite with collaboration table, integrated displays, video meeting equipment and concealed technology storage",
+  ),
+  government: generatedSectorHero(
+    "government",
+    "Government",
+    "Modern civic council chamber with curved desks, microphones, display wall and secure equipment furniture",
+  ),
+  healthcare: generatedSectorHero(
+    "healthcare",
+    "Healthcare",
+    "Clean healthcare consultation and training space with telehealth display, mobile technology furniture and integrated equipment storage",
+  ),
+  hospitality: generatedSectorHero(
+    "hospitality",
+    "Hospitality",
+    "Upscale hotel conference environment with presentation technology, display wall, mobile AV cart and guest-facing control points",
+  ),
+  "public-spaces": generatedSectorHero(
+    "public-spaces",
+    "Public Spaces",
+    "Bright public atrium with wayfinding kiosks, self-service technology, display wall and durable integrated furniture",
+  ),
+  "broadcast-media": generatedSectorHero(
+    "broadcast-media",
+    "Broadcast & Media",
+    "Modern broadcast production suite with technical workstations, video monitor wall, equipment storage and acoustic surfaces",
+  ),
+  "control-command": generatedSectorHero(
+    "control-command",
+    "Control & Command",
+    "Specialist command centre with operator consoles, monitoring displays, technical storage and integrated cable management",
+  ),
+  "training-centres": generatedSectorHero(
+    "training-centres",
+    "Training Centres",
+    "Professional training centre with reconfigurable tables, presentation station, mobile AV support and room controls",
+  ),
+  "events-venues": generatedSectorHero(
+    "events-venues",
+    "Events & Venues",
+    "Modern event venue with stage presentation station, large display, AV equipment furniture and venue control surfaces",
+  ),
+  "houses-of-worship": generatedSectorHero(
+    "houses-of-worship",
+    "Houses of Worship",
+    "Contemporary worship and community gathering space with media production workstation, display screens and discreet AV furniture",
+  ),
 };
 
 export const accessoryConceptMediaBySlug: Partial<Record<string, MediaAsset>> =

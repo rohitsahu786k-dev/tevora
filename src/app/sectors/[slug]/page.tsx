@@ -25,7 +25,7 @@ import {
 import { getContentBreadcrumbs } from "@/lib/navigation/content-navigation";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { productConceptMediaBySlug } from "@/content/media";
+import { sectorHeroMediaBySlug } from "@/content/media";
 
 const integrationConsiderations = [
   "Room layout and furniture coordination",
@@ -86,9 +86,7 @@ export default async function SectorPage({
     )
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const recommendedProducts = getRelatedProducts({ sector: slug }).slice(0, 6);
-  const heroMedia = recommendedProducts
-    .map((product) => productConceptMediaBySlug[product.slug])
-    .find((media) => media?.kind === "image");
+  const heroMedia = sectorHeroMediaBySlug[slug];
   const relatedProjects = publishedProjects.filter(
     (project) => projectRelationships[project.slug]?.sector === slug,
   );
@@ -127,7 +125,7 @@ export default async function SectorPage({
                 fill
                 priority
                 sizes="(min-width:1024px) 58vw, 100vw"
-                className="object-contain"
+                className="object-cover"
               />
             </div>
           </div>
