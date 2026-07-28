@@ -446,77 +446,100 @@ function SpaceProductEnvironment({
   const visibleProducts = products.slice(0, environmentCalloutPositions.length);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(21rem,0.75fr)] lg:items-start">
-      <div>
-        <SectionHeader
-          eyebrow="Products in this space"
-          title={`A practical starting layout for ${spaceName.toLowerCase()}`}
-          description="Use the room view to understand where TEVORA furniture typically supports presentation, display, collaboration, mobility and equipment access."
-        />
-        <ImageReveal className="relative aspect-[16/9] overflow-hidden bg-white">
+    <div className="border-line border-t pt-5">
+      <div className="grid gap-5 md:grid-cols-12">
+        <div className="md:col-span-3">
+          <Eyebrow>Products in this space</Eyebrow>
+        </div>
+        <div className="md:col-span-7">
+          <h2 className="type-section text-balance">
+            A room-led product plan for {spaceName.toLowerCase()}
+          </h2>
+          <p className="type-body-lg text-ink-muted mt-5 max-w-2xl">
+            See the space first, then review the TEVORA product series that
+            usually support the room activity, equipment and service access.
+          </p>
+        </div>
+      </div>
+      <div className="bg-line border-line mt-8 grid gap-px border lg:grid-cols-[minmax(0,1.35fr)_minmax(22rem,0.65fr)]">
+        <ImageReveal className="relative aspect-[16/10] overflow-hidden bg-white">
           <Image
             src={image.src}
             alt={image.alt}
             fill
-            sizes="(min-width:1024px) 58vw, 100vw"
+            sizes="(min-width:1024px) 63vw, 100vw"
             className="object-cover"
           />
+          <div className="from-brand-950/80 via-brand-950/30 absolute inset-x-0 bottom-0 bg-linear-to-t to-transparent p-5 text-white">
+            <p className="type-series text-emerald-300">Application view</p>
+            <p className="type-body-sm mt-2 max-w-lg text-white/75">
+              Numbered callouts connect typical product positions with the
+              specification schedule.
+            </p>
+          </div>
           <div className="absolute inset-0 hidden sm:block">
             {visibleProducts.map((product, index) => (
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className={`absolute ${environmentCalloutPositions[index]} group bg-brand-950 focus-visible:outline-accent flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/80 text-sm font-bold text-white shadow-lg transition-transform hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2`}
+                className={`absolute ${environmentCalloutPositions[index]} group focus-visible:outline-accent text-brand-950 ring-brand-950/20 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/90 bg-white text-sm font-bold shadow-[0_14px_35px_rgba(0,0,0,.22)] ring-4 transition-transform hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2`}
                 aria-label={`${index + 1}. ${product.name}`}
               >
                 {index + 1}
-                <span className="text-ink pointer-events-none absolute top-11 left-1/2 hidden w-48 -translate-x-1/2 bg-white px-3 py-2 text-left text-xs font-semibold shadow-xl group-hover:block group-focus-visible:block">
+                <span className="text-ink border-line pointer-events-none absolute top-12 left-1/2 hidden w-48 -translate-x-1/2 border bg-white px-3 py-2 text-left text-xs font-semibold shadow-xl group-hover:block group-focus-visible:block">
                   {product.name}
                 </span>
               </Link>
             ))}
           </div>
         </ImageReveal>
-      </div>
-      <div className="border-line bg-line grid gap-px border">
-        <div className="bg-surface p-5">
-          <Eyebrow>Recommended series</Eyebrow>
-          <h2 className="type-h3 mt-5">Products to discuss first</h2>
-          <p className="type-body-sm text-ink-muted mt-3">
-            These are planning recommendations. Final selection depends on room
-            size, user workflow, AV equipment, mounting and service access.
-          </p>
-        </div>
-        {visibleProducts.map((product, index) => {
-          const family = productFamilies.find(
-            (item) => item.id === product.productFamily,
-          );
+        <aside className="bg-surface">
+          <div className="border-line border-b p-5">
+            <Eyebrow>Specification schedule</Eyebrow>
+            <h3 className="type-h3 mt-5">Products to discuss first</h3>
+            <p className="type-body-sm text-ink-muted mt-3">
+              These are planning recommendations. Final selection depends on
+              room size, user workflow, AV equipment, mounting and service
+              access.
+            </p>
+          </div>
+          <ol>
+            {visibleProducts.map((product, index) => {
+              const family = productFamilies.find(
+                (item) => item.id === product.productFamily,
+              );
 
-          return (
-            <Link
-              key={product.slug}
-              href={routes.product(product.slug)}
-              className="motion-card group bg-surface hover:bg-accent-light grid grid-cols-[2.75rem_1fr] gap-4 p-5"
-            >
-              <span className="bg-brand-950 flex size-9 items-center justify-center rounded-full text-sm font-bold text-white">
-                {index + 1}
-              </span>
-              <span>
-                <span className="type-series text-accent">
-                  {family?.name ?? product.series}
-                </span>
-                <span className="type-h5 mt-2 block">{product.name}</span>
-                <span className="type-body-sm text-ink-muted mt-2 block">
-                  {product.summary}
-                </span>
-                <span className="motion-link mt-4 inline-flex items-center gap-2 text-sm font-semibold">
-                  View product
-                  <ArrowRight aria-hidden className="motion-arrow size-4" />
-                </span>
-              </span>
-            </Link>
-          );
-        })}
+              return (
+                <li key={product.slug} className="border-line border-b">
+                  <Link
+                    href={routes.product(product.slug)}
+                    className="motion-card group hover:bg-accent-light grid grid-cols-[2.75rem_1fr] gap-4 p-5"
+                  >
+                    <span className="bg-brand-950 flex size-9 items-center justify-center rounded-full text-sm font-bold text-white">
+                      {index + 1}
+                    </span>
+                    <span>
+                      <span className="type-series text-accent">
+                        {family?.name ?? product.series}
+                      </span>
+                      <span className="type-h5 mt-2 block">{product.name}</span>
+                      <span className="type-body-sm text-ink-muted mt-2 block">
+                        {product.summary}
+                      </span>
+                      <span className="motion-link mt-4 inline-flex items-center gap-2 text-sm font-semibold">
+                        View product
+                        <ArrowRight
+                          aria-hidden
+                          className="motion-arrow size-4"
+                        />
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ol>
+        </aside>
       </div>
     </div>
   );
