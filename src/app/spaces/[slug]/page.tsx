@@ -29,7 +29,7 @@ import {
 import { getContentBreadcrumbs } from "@/lib/navigation/content-navigation";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { mediaAssets, productConceptMediaBySlug } from "@/content/media";
+import { mediaAssets } from "@/content/media";
 import {
   ImageReveal,
   MaskedHeading,
@@ -77,9 +77,7 @@ export default async function SpacePage({
   const space = spaces.find((item) => item.slug === slug);
   if (!space) notFound();
   const relatedProducts = getRelatedProducts({ space: slug }).slice(0, 6);
-  const heroMedia = relatedProducts
-    .map((product) => productConceptMediaBySlug[product.slug])
-    .find((media) => media?.kind === "image");
+  const spaceEnvironmentMedia = getSpaceEnvironmentMedia(space);
   const relatedSectors = relatedProducts
     .flatMap((product) => getRelatedSectors(product.slug))
     .filter(
@@ -121,13 +119,12 @@ export default async function SpacePage({
       copy: "Mobile or adaptable product formats considered for spaces that change between activities.",
     },
   ];
-  const spaceEnvironmentMedia = getSpaceEnvironmentMedia(space);
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-surface">
-        <Container className="py-12 md:py-20">
+        <Container className="py-8 md:py-12">
           <Breadcrumbs items={getContentBreadcrumbs("space", slug)} />
-          <div className="mt-14 grid gap-10 lg:grid-cols-12">
+          <div className="mt-8 grid gap-8 lg:grid-cols-12">
             <ViewportReveal className="flex flex-col justify-end lg:col-span-5">
               <Eyebrow>{space.group}</Eyebrow>
               <MaskedHeading as="h1" className="type-h1 mt-7">
@@ -145,27 +142,19 @@ export default async function SpacePage({
             </ViewportReveal>
             <ImageReveal
               priority
-              className="relative aspect-[4/3] bg-white lg:col-span-7"
+              className="relative aspect-[16/10] bg-white lg:col-span-7"
             >
               <div
                 className="absolute inset-0"
                 style={sharedElementStyle("space", space.slug)}
               >
                 <Image
-                  src={
-                    heroMedia?.kind === "image"
-                      ? heroMedia.src
-                      : "/media/home/technology-learning-hero.png"
-                  }
-                  alt={
-                    heroMedia?.kind === "image"
-                      ? heroMedia.alt
-                      : `Technology-enabled ${space.name.toLowerCase()} environment`
-                  }
+                  src={spaceEnvironmentMedia.src}
+                  alt={spaceEnvironmentMedia.alt}
                   fill
                   priority
                   sizes="(min-width:1024px) 58vw, 100vw"
-                  className="object-contain"
+                  className="object-cover"
                 />
               </div>
             </ImageReveal>
