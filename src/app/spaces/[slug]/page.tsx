@@ -38,6 +38,10 @@ import {
 import { sharedElementStyle } from "@/lib/motion/shared-elements";
 
 type RelatedProduct = ReturnType<typeof getRelatedProducts>[number];
+type SpaceEnvironmentImage = Pick<
+  typeof mediaAssets.homepageHero,
+  "src" | "alt"
+>;
 
 const resources = [
   "Space planning guide",
@@ -117,7 +121,7 @@ export default async function SpacePage({
       copy: "Mobile or adaptable product formats considered for spaces that change between activities.",
     },
   ];
-  const spaceEnvironmentMedia = getSpaceEnvironmentMedia(space.group);
+  const spaceEnvironmentMedia = getSpaceEnvironmentMedia(space);
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-surface">
@@ -434,14 +438,11 @@ const environmentCalloutPositions = [
   "left-[83%] top-[58%]",
 ];
 
-function getSpaceEnvironmentMedia(group: string) {
-  if (group === "Education Spaces")
-    return mediaAssets.educationSpaceEnvironment;
-  if (group === "Corporate Spaces")
-    return mediaAssets.corporateSpaceEnvironment;
-  if (group === "Specialist Spaces")
-    return mediaAssets.specialistSpaceEnvironment;
-  return mediaAssets.publicSelfServiceSpaceEnvironment;
+function getSpaceEnvironmentMedia(space: (typeof spaces)[number]) {
+  return {
+    src: `/media/spaces/generated/${space.slug}.png`,
+    alt: `${space.name} environment with recommended TEVORA technology furniture products integrated into the room`,
+  };
 }
 
 function SpaceProductEnvironment({
@@ -451,7 +452,7 @@ function SpaceProductEnvironment({
 }: {
   spaceName: string;
   products: RelatedProduct[];
-  image: typeof mediaAssets.homepageHero;
+  image: SpaceEnvironmentImage;
 }) {
   const visibleProducts = products.slice(0, environmentCalloutPositions.length);
 
