@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     routes.configure,
     routes.projects,
     routes.resources,
+    routes.login,
     routes.designSupport,
     routes.partners,
     routes.partnerApply,

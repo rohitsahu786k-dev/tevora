@@ -21,6 +21,18 @@ async function verifyMongoDB() {
         .collection("submissionRateLimits")
         .createIndex({ createdAt: 1 }, { expireAfterSeconds: 600 }),
       database.collection("projectEnquiries").createIndex({ createdAt: -1 }),
+      database
+        .collection("resourceLoginRequests")
+        .createIndex({ reference: 1 }, { unique: true }),
+      database
+        .collection("resourceLoginRequests")
+        .createIndex({ workEmail: 1, submittedAt: -1 }),
+      database
+        .collection("resourceAccessRequests")
+        .createIndex({ reference: 1 }, { unique: true }),
+      database
+        .collection("resourceAccessRequests")
+        .createIndex({ workEmail: 1, submittedAt: -1 }),
     ]);
   } finally {
     await client.close();

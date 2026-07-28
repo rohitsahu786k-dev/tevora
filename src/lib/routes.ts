@@ -13,6 +13,7 @@ export const routes = {
   projects: "/projects",
   project: (slug: string) => `/projects/${slug}` as const,
   resources: "/resources",
+  login: "/login",
   designSupport: "/design-support",
   partners: "/partners",
   partnerApply: "/partners/apply",

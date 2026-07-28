@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Home, Menu, X } from "lucide-react";
+import { ChevronDown, Home, LockKeyhole, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { GlobalSearch } from "@/components/search";
 import { BrandLogo } from "@/components/brand/brand-logo";
@@ -347,6 +347,18 @@ export function SiteHeader() {
           </nav>
           <GlobalSearch inverse={transparent} />
           <Link
+            href={routes.login as never}
+            className={cn(
+              "hidden min-h-11 items-center gap-2 border px-4 text-xs font-semibold lg:flex",
+              transparent
+                ? "hover:text-brand-950 border-white/55 text-white hover:bg-white"
+                : "border-line hover:border-brand-900 hover:bg-surface-muted",
+            )}
+          >
+            <LockKeyhole aria-hidden className="size-4" />
+            Login
+          </Link>
+          <Link
             href={routes.contact}
             className={cn(
               "hidden min-h-11 items-center border px-4 text-xs font-semibold lg:flex",
@@ -477,6 +489,14 @@ export function SiteHeader() {
                   className="text-brand-950 mt-8 flex min-h-14 items-center justify-center bg-white px-5 font-semibold"
                 >
                   Discuss Your Project
+                </Link>
+                <Link
+                  href={routes.login as never}
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-3 flex min-h-14 items-center justify-center gap-2 border border-white/30 px-5 font-semibold"
+                >
+                  <LockKeyhole aria-hidden className="size-4" />
+                  Login for Downloads
                 </Link>
               </nav>
             </div>

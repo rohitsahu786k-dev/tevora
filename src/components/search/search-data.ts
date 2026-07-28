@@ -101,6 +101,14 @@ export const searchIndex: SearchResult[] = [
     keywords: "brochures data sheets cad bim step guides downloads",
   },
   {
+    id: "login",
+    title: "TEVORA Login",
+    description: "Access technical downloads with a TEVORA-issued account ID.",
+    href: routes.login,
+    category: "Resources" as const,
+    keywords: "login sign in downloads account tevora id access",
+  },
+  {
     id: "company",
     title: "Company",
     description:

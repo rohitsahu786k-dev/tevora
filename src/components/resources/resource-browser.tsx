@@ -4,7 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Download, FileText, LockKeyhole, RotateCcw, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type FieldPath } from "react-hook-form";
+import { submitResourceAccessRequest } from "@/app/resources/actions";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/button";
 import { SelectControl, TextField } from "@/components/forms/controls";
 import {
@@ -256,12 +257,7 @@ export function ResourceBrowser() {
         <ResourceGate
           resource={gate}
           close={() => setGate(null)}
-          complete={() => {
-            setGate(null);
-            setNotice(
-              "Thanks. Design Support can follow up with the right file or next step for this project.",
-            );
-          }}
+          complete={(message) => setNotice(message)}
         />
       )}
     </>
@@ -345,7 +341,7 @@ function ResourceCard({
             {requestOnly
               ? "Request TEVORA login"
               : resource.accessLevel === "registered"
-                ? "Sign in to download"
+                ? "Request TEVORA login"
                 : resource.accessLevel === "restricted"
                   ? "Request approved access"
                   : "Download"}
@@ -386,13 +382,42 @@ function ResourceGate({
 }: {
   resource: Resource;
   close: () => void;
-  complete: () => void;
+  complete: (message: string) => void;
 }) {
   const panel = useRef<HTMLDivElement>(null);
+  const [status, setStatus] = useState("");
+  const [reference, setReference] = useState("");
   const form = useForm<ResourceAccessInput>({
     resolver: zodResolver(resourceAccessSchema),
   });
   const errors = form.formState.errors;
+  const submit = form.handleSubmit(async (input) => {
+    setStatus("Submitting…");
+    const data = new FormData();
+    data.set(
+      "payload",
+      JSON.stringify({
+        ...input,
+        resourceId: resource.id,
+        resourceTitle: resource.title,
+      }),
+    );
+    const result = await submitResourceAccessRequest(data);
+    if (!result.ok) {
+      setStatus(result.message);
+      Object.entries(result.errors ?? {}).forEach(([field, messages]) =>
+        form.setError(field as FieldPath<ResourceAccessInput>, {
+          message: messages[0],
+        }),
+      );
+      return;
+    }
+    setReference(result.reference);
+    setStatus("Your TEVORA login request has been saved.");
+    complete(
+      "Thanks. Your TEVORA login request has been saved for Design Support review.",
+    );
+  });
   useEffect(() => {
     const dialog = panel.current;
     const first = dialog?.querySelector<HTMLElement>("button,input,select");
@@ -454,10 +479,20 @@ function ResourceGate({
           Share these details so Design Support can confirm the right access for
           your company, region and project type.
         </p>
-        <form
-          onSubmit={form.handleSubmit(complete)}
-          className="mt-8 grid gap-6 sm:grid-cols-2"
-        >
+        {status && (
+          <div
+            role="status"
+            className="border-accent bg-accent-light mt-5 border-l-2 p-4"
+          >
+            <p className="type-body-sm">{status}</p>
+            {reference && (
+              <p className="type-caption text-ink-muted mt-2">
+                Reference: {reference}
+              </p>
+            )}
+          </div>
+        )}
+        <form onSubmit={submit} className="mt-8 grid gap-6 sm:grid-cols-2">
           <TextField
             label="Name"
             error={errors.name?.message}
@@ -505,8 +540,11 @@ function ResourceGate({
             <option>Specialist environment</option>
           </SelectControl>
           <div className="sm:col-span-2">
-            <PrimaryButton type="submit">
-              Request TEVORA login <Download aria-hidden className="size-4" />
+            <PrimaryButton type="submit" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting
+                ? "Submitting…"
+                : "Request TEVORA login"}
+              <Download aria-hidden className="size-4" />
             </PrimaryButton>
           </div>
         </form>
