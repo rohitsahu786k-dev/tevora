@@ -438,6 +438,15 @@ const environmentCalloutPositions = [
   "left-[83%] top-[58%]",
 ];
 
+const environmentPopoverPositions = [
+  "bottom-9 left-0",
+  "bottom-9 left-1/2 -translate-x-1/2",
+  "right-0 bottom-9",
+  "bottom-9 left-1/2 -translate-x-1/2",
+  "bottom-9 left-1/2 -translate-x-1/2",
+  "right-0 bottom-9",
+];
+
 function getSpaceEnvironmentMedia(space: (typeof spaces)[number]) {
   return {
     src: `/media/spaces/generated/${space.slug}.png`,
@@ -457,7 +466,36 @@ function SpaceProductEnvironment({
   const visibleProducts = products.slice(0, environmentCalloutPositions.length);
 
   return (
-    <div className="border-line border-t pt-5">
+    <div className="space-product-plan border-line border-t pt-5">
+      <style>
+        {`
+          .space-product-plan [data-marker-pulse] {
+            opacity: 0;
+            transform: scale(.8);
+          }
+          .space-product-plan [data-marker]:hover [data-marker-pulse],
+          .space-product-plan [data-marker][open] [data-marker-pulse],
+          .space-product-plan:has([data-product-trigger="0"]:hover) [data-marker="0"] [data-marker-pulse],
+          .space-product-plan:has([data-product-trigger="1"]:hover) [data-marker="1"] [data-marker-pulse],
+          .space-product-plan:has([data-product-trigger="2"]:hover) [data-marker="2"] [data-marker-pulse],
+          .space-product-plan:has([data-product-trigger="3"]:hover) [data-marker="3"] [data-marker-pulse],
+          .space-product-plan:has([data-product-trigger="4"]:hover) [data-marker="4"] [data-marker-pulse],
+          .space-product-plan:has([data-product-trigger="5"]:hover) [data-marker="5"] [data-marker-pulse] {
+            animation: tevora-marker-ping 1.15s cubic-bezier(0, 0, .2, 1) infinite;
+            opacity: 1;
+          }
+          @keyframes tevora-marker-ping {
+            0% {
+              opacity: .5;
+              transform: scale(.85);
+            }
+            80%, 100% {
+              opacity: 0;
+              transform: scale(2.4);
+            }
+          }
+        `}
+      </style>
       <div className="grid gap-5 md:grid-cols-12">
         <div className="md:col-span-3">
           <Eyebrow>Products in this space</Eyebrow>
@@ -473,7 +511,7 @@ function SpaceProductEnvironment({
         </div>
       </div>
       <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
-        <ImageReveal className="relative aspect-[16/10] overflow-visible">
+        <div className="relative aspect-[16/10] overflow-visible">
           <div className="border-line absolute inset-0 overflow-hidden border bg-white">
             <Image
               src={image.src}
@@ -487,16 +525,22 @@ function SpaceProductEnvironment({
             {visibleProducts.map((product, index) => (
               <details
                 key={product.slug}
+                data-marker={index}
                 className={`group absolute ${environmentCalloutPositions[index]} -translate-x-1/2 -translate-y-1/2`}
               >
                 <summary
                   className="focus-visible:outline-accent ring-brand-950/15 relative flex size-7 cursor-pointer list-none items-center justify-center rounded-full border border-white/80 bg-white/55 shadow-[0_10px_30px_rgba(0,0,0,.22)] ring-4 backdrop-blur-sm transition-transform hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 [&::-webkit-details-marker]:hidden"
                   aria-label={`Show ${product.name} details`}
                 >
-                  <span className="bg-accent/35 absolute inset-0 animate-ping rounded-full" />
+                  <span
+                    data-marker-pulse
+                    className="bg-accent/35 absolute inset-0 rounded-full"
+                  />
                   <span className="bg-brand-950/80 size-2 rounded-full" />
                 </summary>
-                <div className="border-line absolute bottom-9 left-1/2 z-10 w-64 -translate-x-1/2 bg-white p-4 text-left shadow-2xl">
+                <div
+                  className={`border-line absolute z-10 w-72 max-w-[min(18rem,82vw)] rounded-lg border bg-white/88 p-4 text-left shadow-[0_24px_70px_rgba(0,0,0,.28)] backdrop-blur-xl ${environmentPopoverPositions[index]}`}
+                >
                   <p className="type-series text-accent">0{index + 1}</p>
                   <h3 className="type-h5 mt-2">{product.name}</h3>
                   <p className="type-body-sm text-ink-muted mt-2">
@@ -513,7 +557,7 @@ function SpaceProductEnvironment({
               </details>
             ))}
           </div>
-        </ImageReveal>
+        </div>
         <aside className="border-line bg-surface flex h-full flex-col border">
           <div className="border-line border-b p-4">
             <Eyebrow>Specification schedule</Eyebrow>
@@ -532,6 +576,7 @@ function SpaceProductEnvironment({
                 <li key={product.slug} className="border-line border-b">
                   <Link
                     href={routes.product(product.slug)}
+                    data-product-trigger={index}
                     className="motion-card group hover:bg-accent-light grid grid-cols-[1fr_auto] items-center gap-3 px-4 py-2.5"
                   >
                     <span>
