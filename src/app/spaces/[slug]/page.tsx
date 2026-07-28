@@ -170,22 +170,29 @@ export default async function SpacePage({
       </section>
       <Section tone="dark">
         <Container>
-          <div className="grid gap-12 md:grid-cols-12">
+          <div className="grid gap-8 md:grid-cols-12">
             <div className="md:col-span-3">
               <Eyebrow className="text-emerald-300">What happens here</Eyebrow>
             </div>
             <div className="md:col-span-8">
-              <h2 className="type-section">{space.description}</h2>
-              <ul className="mt-10 grid gap-px border-y border-white/20 sm:grid-cols-2">
+              <h2 className="type-h2 max-w-3xl">
+                Room activity and planning focus
+              </h2>
+              <p className="type-body-lg mt-5 max-w-3xl text-white/65">
+                {space.description}
+              </p>
+              <ul className="mt-7 grid gap-px border-y border-white/20 sm:grid-cols-2">
                 {space.activities.map((activity, index) => (
                   <li
                     key={activity}
-                    className="min-h-28 border-white/20 p-4 sm:odd:border-r"
+                    className="min-h-20 border-white/20 p-4 sm:odd:border-r"
                   >
                     <span className="type-model text-emerald-300">
                       0{index + 1}
                     </span>
-                    <p className="type-h5 mt-7">{activity}</p>
+                    <p className="type-body-sm mt-4 font-semibold text-white">
+                      {activity}
+                    </p>
                   </li>
                 ))}
               </ul>
