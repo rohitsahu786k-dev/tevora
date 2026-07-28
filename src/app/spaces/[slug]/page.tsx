@@ -472,15 +472,17 @@ function SpaceProductEnvironment({
           </p>
         </div>
       </div>
-      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)] lg:items-start">
-        <ImageReveal className="border-line relative aspect-[16/10] overflow-hidden border bg-white">
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(min-width:1024px) 63vw, 100vw"
-            className="object-cover"
-          />
+      <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
+        <ImageReveal className="relative aspect-[16/10] overflow-visible">
+          <div className="border-line absolute inset-0 overflow-hidden border bg-white">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes="(min-width:1024px) 63vw, 100vw"
+              className="object-cover"
+            />
+          </div>
           <div className="absolute inset-0 hidden sm:block">
             {visibleProducts.map((product, index) => (
               <details
@@ -488,12 +490,13 @@ function SpaceProductEnvironment({
                 className={`group absolute ${environmentCalloutPositions[index]} -translate-x-1/2 -translate-y-1/2`}
               >
                 <summary
-                  className="focus-visible:outline-accent ring-brand-950/20 flex size-7 cursor-pointer list-none items-center justify-center rounded-full border border-white/80 bg-white/55 shadow-[0_10px_30px_rgba(0,0,0,.22)] ring-4 backdrop-blur-sm transition-transform hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 [&::-webkit-details-marker]:hidden"
+                  className="focus-visible:outline-accent ring-brand-950/15 relative flex size-7 cursor-pointer list-none items-center justify-center rounded-full border border-white/80 bg-white/55 shadow-[0_10px_30px_rgba(0,0,0,.22)] ring-4 backdrop-blur-sm transition-transform hover:scale-110 focus-visible:scale-110 focus-visible:outline-2 focus-visible:outline-offset-2 [&::-webkit-details-marker]:hidden"
                   aria-label={`Show ${product.name} details`}
                 >
+                  <span className="bg-accent/35 absolute inset-0 animate-ping rounded-full" />
                   <span className="bg-brand-950/80 size-2 rounded-full" />
                 </summary>
-                <div className="border-line absolute top-9 left-1/2 z-10 w-64 -translate-x-1/2 bg-white p-4 text-left shadow-2xl">
+                <div className="border-line absolute bottom-9 left-1/2 z-10 w-64 -translate-x-1/2 bg-white p-4 text-left shadow-2xl">
                   <p className="type-series text-accent">0{index + 1}</p>
                   <h3 className="type-h5 mt-2">{product.name}</h3>
                   <p className="type-body-sm text-ink-muted mt-2">
@@ -511,13 +514,12 @@ function SpaceProductEnvironment({
             ))}
           </div>
         </ImageReveal>
-        <aside className="border-line bg-surface border">
-          <div className="border-line border-b p-5">
+        <aside className="border-line bg-surface flex h-full flex-col border">
+          <div className="border-line border-b p-4">
             <Eyebrow>Specification schedule</Eyebrow>
-            <h3 className="type-h4 mt-4">Recommended products</h3>
-            <p className="type-body-sm text-ink-muted mt-3">
-              Click a marker on the room image for product context, or open a
-              product directly from this list.
+            <h3 className="type-h5 mt-3">Recommended products</h3>
+            <p className="type-caption text-ink-muted mt-2">
+              Click a room marker for context, or open a product directly.
             </p>
           </div>
           <ol>
@@ -530,16 +532,13 @@ function SpaceProductEnvironment({
                 <li key={product.slug} className="border-line border-b">
                   <Link
                     href={routes.product(product.slug)}
-                    className="motion-card group hover:bg-accent-light grid grid-cols-[2.25rem_1fr_auto] items-center gap-3 px-4 py-3"
+                    className="motion-card group hover:bg-accent-light grid grid-cols-[1fr_auto] items-center gap-3 px-4 py-2.5"
                   >
-                    <span className="border-line text-ink-muted flex size-8 items-center justify-center rounded-full border bg-white text-xs font-bold">
-                      0{index + 1}
-                    </span>
                     <span>
                       <span className="type-series text-accent">
                         {family?.name ?? product.series}
                       </span>
-                      <span className="type-body-sm mt-1 block font-semibold">
+                      <span className="mt-1 block text-sm font-semibold">
                         {product.name}
                       </span>
                     </span>
