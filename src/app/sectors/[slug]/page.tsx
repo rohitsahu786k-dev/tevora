@@ -93,41 +93,44 @@ export default async function SectorPage({
 
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
-      <section className="bg-surface">
-        <Container className="py-12 md:py-20">
-          <Breadcrumbs items={getContentBreadcrumbs("sector", slug)} />
-          <div className="mt-14 grid gap-10 lg:grid-cols-12">
-            <div className="flex flex-col justify-end lg:col-span-5">
-              <Eyebrow>Sector</Eyebrow>
-              <h1 className="type-h1 mt-7">{sector.name}</h1>
-              <p className="type-body-lg text-ink-muted mt-6">
-                {sector.summary}
-              </p>
-              <PrimaryButton asChild className="mt-9 self-start">
-                <Link href={routes.contact}>
-                  Discuss Your Project
-                  <ArrowRight aria-hidden className="size-4" />
-                </Link>
-              </PrimaryButton>
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden bg-white lg:col-span-7">
-              <Image
-                src={
-                  heroMedia?.kind === "image"
-                    ? heroMedia.src
-                    : "/media/home/technology-learning-hero.png"
-                }
-                alt={
-                  heroMedia?.kind === "image"
-                    ? heroMedia.alt
-                    : `Technology-enabled environment for ${sector.name}`
-                }
-                fill
-                priority
-                sizes="(min-width:1024px) 58vw, 100vw"
-                className="object-cover"
-              />
-            </div>
+      <section className="bg-brand-950 relative min-h-[72svh] overflow-hidden text-white md:min-h-[76svh]">
+        <Image
+          src={
+            heroMedia?.kind === "image"
+              ? heroMedia.src
+              : "/media/home/technology-learning-hero.png"
+          }
+          alt={
+            heroMedia?.kind === "image"
+              ? heroMedia.alt
+              : `Technology-enabled environment for ${sector.name}`
+          }
+          fill
+          priority
+          quality={78}
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,22,19,.9)_0%,rgba(10,22,19,.68)_42%,rgba(10,22,19,.12)_82%)]" />
+        <Container className="relative flex min-h-[72svh] flex-col pt-28 pb-12 md:min-h-[76svh] md:pb-16">
+          <div className="[&_a:hover]:text-white [&_ol]:text-white/65 [&_span]:text-white">
+            <Breadcrumbs items={getContentBreadcrumbs("sector", slug)} />
+          </div>
+          <div className="mt-auto max-w-3xl pt-16">
+            <Eyebrow className="text-emerald-300">Sector</Eyebrow>
+            <h1 className="type-h1 mt-7 text-balance">{sector.name}</h1>
+            <p className="type-body-lg mt-6 max-w-2xl text-white/75">
+              {sector.summary}
+            </p>
+            <PrimaryButton
+              asChild
+              className="text-brand-950! hover:border-accent hover:bg-accent! mt-9 self-start border-white bg-white! hover:text-white!"
+            >
+              <Link href={routes.contact}>
+                Discuss Your Project
+                <ArrowRight aria-hidden className="size-4" />
+              </Link>
+            </PrimaryButton>
           </div>
         </Container>
       </section>
