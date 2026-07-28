@@ -93,7 +93,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Product Families"
             title="Furniture for the way technology is used."
-            description="Six starting points for presentation, display, mobility, equipment integration, collaboration and interaction."
+            description="Explore furniture families designed for presentations, displays, mobile AV, equipment storage, collaboration and interactive spaces."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {featuredFamilies.map((family, index) => (
