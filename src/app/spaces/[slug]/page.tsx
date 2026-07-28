@@ -8,7 +8,6 @@ import { ProductCard } from "@/components/products/product-card";
 import { PrimaryButton } from "@/components/ui/button";
 import {
   Container,
-  EmptyState,
   Eyebrow,
   ResponsiveGrid,
   Section,
@@ -308,36 +307,44 @@ export default async function SpacePage({
       </Section>
       <Section tone="white">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-2">
-            <div>
-              <SectionHeader
-                eyebrow="Related sectors"
-                title="Where this space appears"
-              />
-              <div className="flex flex-wrap gap-2">
+          <div className="border-line bg-line grid gap-px border-y lg:grid-cols-2">
+            <div className="bg-surface px-5 py-8 sm:px-8 lg:py-10">
+              <Eyebrow>Related sectors</Eyebrow>
+              <h2 className="type-h3 mt-5 max-w-xl">
+                Where this space is commonly used
+              </h2>
+              <p className="type-body-sm text-ink-muted mt-3 max-w-xl">
+                Connect this room type to the sector environments where the same
+                furniture, AV and service requirements often appear.
+              </p>
+              <div className="mt-8 grid gap-2 sm:grid-cols-2">
                 {relatedSectors.map((sector) => (
                   <Link
                     key={sector.slug}
                     href={routes.sector(sector.slug)}
-                    className="border-line hover:border-accent min-h-11 border px-4 py-3 text-sm font-semibold"
+                    className="border-line bg-canvas hover:border-accent hover:bg-accent-light flex min-h-12 items-center border px-4 text-sm font-semibold"
                   >
                     {sector.name}
                   </Link>
                 ))}
               </div>
             </div>
-            <div>
-              <SectionHeader
-                eyebrow="Projects"
-                title="Applications in practice"
-              />
+            <div className="bg-surface px-5 py-8 sm:px-8 lg:py-10">
+              <Eyebrow>Projects</Eyebrow>
+              <h2 className="type-h3 mt-5 max-w-xl">
+                Applications in practice
+              </h2>
+              <p className="type-body-sm text-ink-muted mt-3 max-w-xl">
+                Review real project contexts or use Design Support to discuss a
+                comparable application for this space.
+              </p>
               {relatedProjects.length ? (
-                <div>
+                <div className="mt-8">
                   {relatedProjects.map((project) => (
                     <Link
                       key={project.slug}
                       href={routes.project(project.slug)}
-                      className="border-line block border-y py-5"
+                      className="border-line group block border-t py-5 last:border-b"
                     >
                       <h3 className="type-h4">{project.projectName}</h3>
                       <p className="type-caption text-ink-muted mt-2">
@@ -347,10 +354,20 @@ export default async function SpacePage({
                   ))}
                 </div>
               ) : (
-                <EmptyState
-                  title="Project examples are coming"
-                  description="Speak with TEVORA about similar applications while public case studies are being prepared."
-                />
+                <div className="bg-canvas mt-8 p-6">
+                  <h3 className="type-h4">Discuss a similar application</h3>
+                  <p className="type-body-sm text-ink-muted mt-3 max-w-lg">
+                    Public case studies are being prepared. TEVORA can still
+                    help compare this space with similar project requirements.
+                  </p>
+                  <Link
+                    href={routes.contact}
+                    className="motion-link mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold"
+                  >
+                    Speak with Design Support
+                    <ArrowRight aria-hidden className="motion-arrow size-4" />
+                  </Link>
+                </div>
               )}
             </div>
           </div>

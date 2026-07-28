@@ -8,7 +8,6 @@ import { ProductCard } from "@/components/products/product-card";
 import { PrimaryButton } from "@/components/ui/button";
 import {
   Container,
-  EmptyState,
   Eyebrow,
   ResponsiveGrid,
   Section,
@@ -275,19 +274,24 @@ export default async function SectorPage({
 
       <Section>
         <Container>
-          <div className="grid gap-14 lg:grid-cols-2">
-            <div>
-              <SectionHeader
-                eyebrow="Projects"
-                title="Applications in practice"
-              />
+          <div className="border-line bg-line grid gap-px border-y lg:grid-cols-2">
+            <div className="bg-surface px-5 py-8 sm:px-8 lg:py-10">
+              <Eyebrow>Projects</Eyebrow>
+              <h2 className="type-h3 mt-5 max-w-xl">
+                Applications in practice
+              </h2>
+              <p className="type-body-sm text-ink-muted mt-3 max-w-xl">
+                Review project contexts for this sector or speak with TEVORA
+                about a comparable application while public case studies are
+                prepared.
+              </p>
               {relatedProjects.length ? (
-                <div>
+                <div className="mt-8">
                   {relatedProjects.map((project) => (
                     <Link
                       key={project.slug}
                       href={routes.project(project.slug)}
-                      className="border-line block border-y py-5"
+                      className="border-line group block border-t py-5 last:border-b"
                     >
                       <h3 className="type-h4">{project.projectName}</h3>
                       <p className="type-caption text-ink-muted mt-2">
@@ -297,18 +301,30 @@ export default async function SectorPage({
                   ))}
                 </div>
               ) : (
-                <EmptyState
-                  title="Project examples are coming"
-                  description="Speak with TEVORA about similar sector applications while public case studies are being prepared."
-                />
+                <div className="bg-canvas mt-8 p-6">
+                  <h3 className="type-h4">Discuss a similar application</h3>
+                  <p className="type-body-sm text-ink-muted mt-3 max-w-lg">
+                    Public case studies are being prepared. TEVORA can help
+                    compare this sector with similar project requirements.
+                  </p>
+                  <Link
+                    href={routes.contact}
+                    className="motion-link mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold"
+                  >
+                    Speak with Design Support
+                    <ArrowRight aria-hidden className="motion-arrow size-4" />
+                  </Link>
+                </div>
               )}
             </div>
-            <div>
-              <SectionHeader
-                eyebrow="Resources"
-                title="Plan with project teams"
-              />
-              <div className="border-line bg-line grid gap-px border sm:grid-cols-2">
+            <div className="bg-surface px-5 py-8 sm:px-8 lg:py-10">
+              <Eyebrow>Resources</Eyebrow>
+              <h2 className="type-h3 mt-5 max-w-xl">Plan with project teams</h2>
+              <p className="type-body-sm text-ink-muted mt-3 max-w-xl">
+                Use these resource types to align furniture, technology and
+                coordination requirements before specification.
+              </p>
+              <div className="border-line bg-line mt-8 grid gap-px border sm:grid-cols-2">
                 {resourceTypes.map((resource) => (
                   <Link
                     key={resource}
