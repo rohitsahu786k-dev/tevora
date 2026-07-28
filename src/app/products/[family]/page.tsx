@@ -197,11 +197,6 @@ export default async function ProductFamilyPage({
                   sizes="(min-width:1024px) 58vw, 100vw"
                   className="object-contain"
                 />
-                {familyConceptMedia?.kind === "image" && (
-                  <span className="type-model text-graphite absolute right-4 bottom-4 bg-white/90 px-3 py-2">
-                    REPRESENTATIVE CONCEPT IMAGE
-                  </span>
-                )}
               </div>
             </ImageReveal>
           </div>

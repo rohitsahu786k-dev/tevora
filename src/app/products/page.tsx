@@ -320,9 +320,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -365,9 +362,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -408,9 +402,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -451,9 +442,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -496,9 +484,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -541,9 +526,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -586,9 +568,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -631,9 +610,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -676,9 +652,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -721,9 +694,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
@@ -766,9 +736,6 @@ export default function ProductsPage() {
                     blurDataURL={media.blurDataURL}
                     className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
                   />
-                  <span className="type-model text-graphite absolute right-3 bottom-3 bg-white/90 px-2 py-1">
-                    CONCEPT IMAGE
-                  </span>
                 </div>
                 <div className="flex items-end justify-between gap-5 p-6">
                   <div>
