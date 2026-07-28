@@ -50,7 +50,7 @@ export default function AccessoriesPage() {
               <Link
                 key={accessory.slug}
                 href={routes.accessory(accessory.slug)}
-                className="group bg-canvas hover:bg-accent-light"
+                className="motion-card group bg-canvas hover:bg-accent-light"
               >
                 {(() => {
                   const media = accessoryConceptMediaBySlug[accessory.slug];

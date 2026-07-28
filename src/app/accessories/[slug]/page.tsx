@@ -195,7 +195,7 @@ export default async function AccessoryPage({
                 <Link
                   key={product.slug}
                   href={routes.product(product.slug)}
-                  className="group bg-surface hover:bg-accent-light grid min-h-48 content-between p-5"
+                  className="motion-card group bg-surface hover:bg-accent-light grid min-h-48 content-between p-5"
                 >
                   <span className="type-series text-accent">
                     {product.series}

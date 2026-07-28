@@ -323,7 +323,7 @@ export default async function ProductFamilyPage({
               <Link
                 key={space.slug}
                 href={routes.space(space.slug)}
-                className="group hover:bg-accent-light min-h-40 p-5"
+                className="motion-card group hover:bg-accent-light min-h-40 p-5"
               >
                 <p className="type-caption text-ink-muted">{space.group}</p>
                 <h3 className="type-h4 mt-10">{space.name}</h3>
@@ -426,7 +426,7 @@ export default async function ProductFamilyPage({
               <Link
                 key={resource}
                 href={routes.resources}
-                className="group bg-surface min-h-48 p-5"
+                className="motion-card group bg-surface min-h-48 p-5"
               >
                 <Download aria-hidden className="text-accent size-4" />
                 <h3 className="type-h4 mt-20">{resource}</h3>
@@ -446,7 +446,7 @@ export default async function ProductFamilyPage({
               <Link
                 key={related.slug}
                 href={routes.productFamily(related.slug)}
-                className="group bg-canvas hover:bg-accent-light grid min-h-64 content-between p-6"
+                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-64 content-between p-6"
               >
                 <span className="type-series text-accent">
                   {related.series.length} series

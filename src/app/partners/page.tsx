@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ImageReveal, ViewportReveal } from "@/components/motion";
-import { ResponsiveMedia } from "@/components/media/responsive-media";
+import { ContextualImageMosaic } from "@/components/media/contextual-image-mosaic";
 import { Accordion } from "@/components/ui/disclosure";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/button";
 import {
@@ -20,7 +20,7 @@ import {
   partnerSupport,
   partnerTypeContent,
 } from "@/content/partners";
-import { mediaAssets } from "@/content/media";
+import { productConceptMediaBySlug } from "@/content/media";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
@@ -32,6 +32,11 @@ export const metadata = createPageMetadata({
 });
 
 export default function PartnersPage() {
+  const partnerHeroImages = ["move-pro", "nexus", "panel"]
+    .map((slug) => productConceptMediaBySlug[slug])
+    .filter((media): media is NonNullable<typeof media> =>
+      Boolean(media?.kind === "image"),
+    );
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 overflow-hidden text-white">
@@ -64,11 +69,10 @@ export default function PartnersPage() {
             </div>
           </ViewportReveal>
           <ImageReveal className="lg:col-span-5 lg:col-start-8">
-            <ResponsiveMedia
-              asset={mediaAssets.homepageHero}
+            <ContextualImageMosaic
+              images={partnerHeroImages}
               priority
-              sizes="(min-width: 1024px) 42vw, 100vw"
-              className="[&_div]:aspect-[4/5]!"
+              className="min-h-[34rem]"
             />
           </ImageReveal>
         </Container>
@@ -135,7 +139,7 @@ export default function PartnersPage() {
               <article
                 key={type.id}
                 id={type.id}
-                className="group bg-surface p-7 md:p-9"
+                className="motion-card group bg-surface p-7 md:p-9"
               >
                 <p className="type-series text-accent">{type.name}</p>
                 <h2 className="type-h3 mt-5">{type.description}</h2>

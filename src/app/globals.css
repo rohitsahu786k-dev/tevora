@@ -156,6 +156,20 @@ a {
   transform: translateX(3px);
 }
 
+.motion-card {
+  transition:
+    transform var(--duration-base) var(--ease-enter),
+    box-shadow var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard);
+}
+
+.motion-card:hover,
+.motion-card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
 section.bg-brand-950 header .text-accent {
   color: #6ee7b7;
 }
@@ -206,7 +220,8 @@ textarea {
 
   .motion-media,
   .motion-arrow,
-  .motion-link {
+  .motion-link,
+  .motion-card {
     transition-duration: 1ms;
     transform: none !important;
   }

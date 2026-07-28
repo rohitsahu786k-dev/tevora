@@ -18,6 +18,7 @@ import {
   MaskedHeading,
   ViewportReveal,
 } from "@/components/motion";
+import { ContextualImageMosaic } from "@/components/media/contextual-image-mosaic";
 import { sharedElementStyle } from "@/lib/motion/shared-elements";
 export const metadata = createPageMetadata({
   title: "Products",
@@ -192,36 +193,39 @@ const technicalWorkstationConcepts = [
     return product && media?.kind === "image" ? { product, media } : null;
   })
   .filter((item): item is NonNullable<typeof item> => Boolean(item));
+const productHeroImages = ["arc", "vista", "forum"]
+  .map((slug) => productConceptMediaBySlug[slug])
+  .filter((media): media is NonNullable<typeof media> =>
+    Boolean(media?.kind === "image"),
+  );
 export default function ProductsPage() {
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
-      <section className="bg-brand-950 relative min-h-[72svh] overflow-hidden text-white">
-        <ImageReveal priority className="absolute inset-0">
-          <Image
-            src="/media/home/technology-learning-hero.png"
-            alt="Integrated presentation and collaboration furniture in a technology-enabled learning environment"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[62%_center] opacity-60"
-          />
-        </ImageReveal>
-        <div className="from-brand-950 via-brand-950/80 absolute inset-0 bg-gradient-to-r to-transparent" />
-        <Container className="relative flex min-h-[72svh] flex-col justify-end pt-32 pb-16">
-          <Breadcrumbs
-            items={[{ label: "Home", href: "/" }, { label: "Products" }]}
-          />
-          <ViewportReveal>
-            <Eyebrow className="mt-16 text-emerald-300">Products</Eyebrow>
-            <MaskedHeading as="h1" className="type-hero mt-7 max-w-5xl">
-              Technology furniture, clearly organised.
-            </MaskedHeading>
-            <p className="type-body-lg mt-7 max-w-2xl text-white/70">
-              Explore twelve product families for presenting, displaying,
-              collaborating, integrating equipment and supporting technology-led
-              spaces.
-            </p>
-          </ViewportReveal>
+      <section className="bg-brand-950 overflow-hidden text-white">
+        <Container className="grid min-h-[72svh] items-end gap-12 pt-32 pb-16 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <Breadcrumbs
+              items={[{ label: "Home", href: "/" }, { label: "Products" }]}
+            />
+            <ViewportReveal>
+              <Eyebrow className="mt-16 text-emerald-300">Products</Eyebrow>
+              <MaskedHeading as="h1" className="type-hero mt-7 max-w-5xl">
+                Technology furniture, clearly organised.
+              </MaskedHeading>
+              <p className="type-body-lg mt-7 max-w-2xl text-white/70">
+                Explore twelve product families for presenting, displaying,
+                collaborating, integrating equipment and supporting
+                technology-led spaces.
+              </p>
+            </ViewportReveal>
+          </div>
+          <ImageReveal priority className="lg:col-span-6">
+            <ContextualImageMosaic
+              images={productHeroImages}
+              priority
+              className="min-h-[34rem]"
+            />
+          </ImageReveal>
         </Container>
       </section>
       <Section>
@@ -271,7 +275,7 @@ export default function ProductsPage() {
                 key={family.slug}
                 href={family.href as never}
                 style={sharedElementStyle("family", family.slug)}
-                className="group bg-surface hover:bg-accent-light grid min-h-[23rem] content-between p-6 md:p-9"
+                className="motion-card group bg-surface hover:bg-accent-light grid min-h-[23rem] content-between p-6 md:p-9"
               >
                 <div className="flex justify-between">
                   <span className="type-model text-ink-muted">
@@ -308,7 +312,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -350,7 +354,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -390,7 +394,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -430,7 +434,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -472,7 +476,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -514,7 +518,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -556,7 +560,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -598,7 +602,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -640,7 +644,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -682,7 +686,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -724,7 +728,7 @@ export default function ProductsPage() {
               <Link
                 key={product.slug}
                 href={routes.product(product.slug)}
-                className="group bg-surface"
+                className="motion-card group bg-surface"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-white">
                   <Image
@@ -802,7 +806,7 @@ export default function ProductsPage() {
               <Link
                 key={space.slug}
                 href={routes.space(space.slug)}
-                className="group bg-canvas hover:bg-accent-light grid min-h-52 content-between p-6"
+                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-52 content-between p-6"
               >
                 <span className="type-caption text-ink-muted">
                   {space.group}

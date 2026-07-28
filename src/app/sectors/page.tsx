@@ -1,17 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { Container, Eyebrow, Section } from "@/components/ui/system";
 import { sectors } from "@/content";
 import { sectorToSpaces } from "@/content/relationships";
+import { productConceptMediaBySlug } from "@/content/media";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
-  ImageReveal,
   MaskedHeading,
+  StaggerContainer,
+  StaggerItem,
   ViewportReveal,
 } from "@/components/motion";
+import { ContextualImageMosaic } from "@/components/media/contextual-image-mosaic";
 export const metadata = createPageMetadata({
   title: "Sectors",
   description:
@@ -20,6 +22,11 @@ export const metadata = createPageMetadata({
 });
 
 export default function SectorsPage() {
+  const sectorHeroImages = ["forum", "touch", "techdesk-pro"]
+    .map((slug) => productConceptMediaBySlug[slug])
+    .filter((media): media is NonNullable<typeof media> =>
+      Boolean(media?.kind === "image"),
+    );
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 text-white">
@@ -38,30 +45,22 @@ export default function SectorsPage() {
                 healthcare, public, media and specialist environments.
               </p>
             </ViewportReveal>
-            <ImageReveal
+            <ContextualImageMosaic
+              images={sectorHeroImages}
               priority
-              className="relative aspect-[4/3] lg:col-span-7"
-            >
-              <Image
-                src="/media/home/technology-learning-hero.png"
-                alt="Technology-integrated furniture in an architectural learning and collaboration environment"
-                fill
-                priority
-                sizes="(min-width:1024px) 58vw, 100vw"
-                className="object-cover"
-              />
-            </ImageReveal>
+              className="lg:col-span-7"
+            />
           </div>
         </Container>
       </section>
       <Section>
         <Container>
-          <ol className="border-line border-t">
+          <StaggerContainer as="ol" className="border-line border-t">
             {sectors.map((sector, index) => (
-              <li key={sector.slug} className="border-line border-b">
+              <StaggerItem key={sector.slug} className="border-line border-b">
                 <Link
                   href={routes.sector(sector.slug)}
-                  className="group hover:bg-accent-light grid min-h-56 gap-6 py-7 md:grid-cols-12 md:px-5"
+                  className="motion-card group hover:bg-accent-light grid min-h-56 gap-6 py-7 md:grid-cols-12 md:px-5"
                 >
                   <span className="type-model text-ink-muted md:col-span-1">
                     {String(index + 1).padStart(2, "0")}
@@ -80,9 +79,9 @@ export default function SectorsPage() {
                     className="motion-arrow size-5 md:col-span-2 md:justify-self-end"
                   />
                 </Link>
-              </li>
+              </StaggerItem>
             ))}
-          </ol>
+          </StaggerContainer>
         </Container>
       </Section>
     </main>

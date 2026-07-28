@@ -14,7 +14,7 @@ export function ProductCard({
 }) {
   const media = productConceptMediaBySlug[entry.slug];
   return (
-    <article className="group">
+    <article className="motion-card group">
       <Link
         href={href as never}
         className="block focus-visible:outline-offset-4"
@@ -68,7 +68,7 @@ export function ProductTile({
   reference: string;
 }) {
   return (
-    <article className="border-line bg-surface grid min-h-52 content-between border p-5">
+    <article className="motion-card border-line bg-surface grid min-h-52 content-between border p-5">
       <span className="type-model text-ink-muted">{reference}</span>
       <div>
         <h3 className="type-product">{entry.title}</h3>

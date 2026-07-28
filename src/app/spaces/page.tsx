@@ -65,7 +65,7 @@ export default function SpacesPage() {
                       <Link
                         href={routes.space(space.slug)}
                         style={sharedElementStyle("space", space.slug)}
-                        className="group bg-surface hover:bg-accent-light grid min-h-80 content-between p-6"
+                        className="motion-card group bg-surface hover:bg-accent-light grid min-h-80 content-between p-6"
                       >
                         <div>
                           <div className="flex justify-between">

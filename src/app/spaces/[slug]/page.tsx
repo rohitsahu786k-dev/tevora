@@ -32,6 +32,7 @@ import {
 import { getContentBreadcrumbs } from "@/lib/navigation/content-navigation";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { productConceptMediaBySlug } from "@/content/media";
 import {
   ImageReveal,
   MaskedHeading,
@@ -73,6 +74,9 @@ export default async function SpacePage({
   const space = spaces.find((item) => item.slug === slug);
   if (!space) notFound();
   const relatedProducts = getRelatedProducts({ space: slug }).slice(0, 6);
+  const heroMedia = relatedProducts
+    .map((product) => productConceptMediaBySlug[product.slug])
+    .find((media) => media?.kind === "image");
   const relatedSectors = relatedProducts
     .flatMap((product) => getRelatedSectors(product.slug))
     .filter(
@@ -137,19 +141,27 @@ export default async function SpacePage({
             </ViewportReveal>
             <ImageReveal
               priority
-              className="bg-surface-muted relative aspect-[4/3] lg:col-span-7"
+              className="relative aspect-[4/3] bg-white lg:col-span-7"
             >
               <div
                 className="absolute inset-0"
                 style={sharedElementStyle("space", space.slug)}
               >
                 <Image
-                  src="/media/home/technology-learning-hero.png"
-                  alt={`Representative technology-enabled ${space.name.toLowerCase()} environment`}
+                  src={
+                    heroMedia?.kind === "image"
+                      ? heroMedia.src
+                      : "/media/home/technology-learning-hero.png"
+                  }
+                  alt={
+                    heroMedia?.kind === "image"
+                      ? heroMedia.alt
+                      : `Technology-enabled ${space.name.toLowerCase()} environment`
+                  }
                   fill
                   priority
                   sizes="(min-width:1024px) 58vw, 100vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             </ImageReveal>
@@ -214,7 +226,7 @@ export default async function SpacePage({
               <Link
                 key={family.slug}
                 href={routes.productFamily(family.slug)}
-                className="group bg-surface hover:bg-accent-light grid min-h-64 content-between p-6"
+                className="motion-card group bg-surface hover:bg-accent-light grid min-h-64 content-between p-6"
               >
                 <span className="type-series text-accent">
                   {family.series.length} series

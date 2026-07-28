@@ -13,7 +13,7 @@ export function ContentGrid({
         <Link
           href={href(entry.slug) as never}
           key={entry.slug}
-          className="bg-surface hover:bg-accent-light min-h-48 p-6 transition-colors"
+          className="motion-card bg-surface hover:bg-accent-light min-h-48 p-6 transition-colors"
         >
           <h2 className="text-xl font-medium">{entry.title}</h2>
           <p className="type-body-sm text-ink-muted mt-3">{entry.summary}</p>

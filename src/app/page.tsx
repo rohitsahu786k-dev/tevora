@@ -101,7 +101,7 @@ export default function HomePage() {
                 key={family.slug}
                 href={routes.productFamily(family.slug)}
                 style={sharedElementStyle("family", family.slug)}
-                className="group bg-canvas hover:bg-accent-light grid min-h-[18rem] content-between p-5 transition-colors sm:min-h-[21rem] sm:p-6 md:min-h-[25rem] md:p-9"
+                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-[18rem] content-between p-5 transition-colors sm:min-h-[21rem] sm:p-6 md:min-h-[25rem] md:p-9"
               >
                 <div className="flex items-start justify-between">
                   <span className="type-model text-ink-muted">
@@ -163,7 +163,7 @@ export default function HomePage() {
                 key={space.slug}
                 href={routes.space(space.slug)}
                 style={sharedElementStyle("space", space.slug)}
-                className="group bg-surface hover:bg-accent-light grid min-h-48 content-between p-5 sm:min-h-64 sm:p-6"
+                className="motion-card group bg-surface hover:bg-accent-light grid min-h-48 content-between p-5 sm:min-h-64 sm:p-6"
               >
                 <div className="flex justify-between">
                   <span className="type-model text-ink-muted">
@@ -335,7 +335,7 @@ export default function HomePage() {
               <Link
                 key={application}
                 href={routes.projects}
-                className="group bg-surface hover:bg-accent-light grid min-h-44 content-between p-5 md:min-h-56"
+                className="motion-card group bg-surface hover:bg-accent-light grid min-h-44 content-between p-5 md:min-h-56"
               >
                 <span className="type-model text-ink-muted">0{index + 1}</span>
                 <div>

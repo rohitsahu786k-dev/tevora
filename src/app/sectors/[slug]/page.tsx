@@ -26,6 +26,7 @@ import {
 import { getContentBreadcrumbs } from "@/lib/navigation/content-navigation";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import { productConceptMediaBySlug } from "@/content/media";
 
 const integrationConsiderations = [
   "Room layout and furniture coordination",
@@ -86,6 +87,9 @@ export default async function SectorPage({
     )
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
   const recommendedProducts = getRelatedProducts({ sector: slug }).slice(0, 6);
+  const heroMedia = recommendedProducts
+    .map((product) => productConceptMediaBySlug[product.slug])
+    .find((media) => media?.kind === "image");
   const relatedProjects = publishedProjects.filter(
     (project) => projectRelationships[project.slug]?.sector === slug,
   );
@@ -109,14 +113,22 @@ export default async function SectorPage({
                 </Link>
               </PrimaryButton>
             </div>
-            <div className="bg-surface-muted relative aspect-[4/3] overflow-hidden lg:col-span-7">
+            <div className="relative aspect-[4/3] overflow-hidden bg-white lg:col-span-7">
               <Image
-                src="/media/home/technology-learning-hero.png"
-                alt={`Representative technology-enabled environment for ${sector.name}`}
+                src={
+                  heroMedia?.kind === "image"
+                    ? heroMedia.src
+                    : "/media/home/technology-learning-hero.png"
+                }
+                alt={
+                  heroMedia?.kind === "image"
+                    ? heroMedia.alt
+                    : `Technology-enabled environment for ${sector.name}`
+                }
                 fill
                 priority
                 sizes="(min-width:1024px) 58vw, 100vw"
-                className="object-cover"
+                className="object-contain"
               />
             </div>
           </div>
@@ -171,7 +183,7 @@ export default async function SectorPage({
               <Link
                 key={space.slug}
                 href={routes.space(space.slug)}
-                className="group bg-surface hover:bg-accent-light grid min-h-56 content-between p-6"
+                className="motion-card group bg-surface hover:bg-accent-light grid min-h-56 content-between p-6"
               >
                 <span className="type-model text-ink-muted">
                   {String(index + 1).padStart(2, "0")}
@@ -204,7 +216,7 @@ export default async function SectorPage({
               <Link
                 key={family.slug}
                 href={routes.productFamily(family.slug)}
-                className="group bg-canvas hover:bg-accent-light grid min-h-56 content-between p-6"
+                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-56 content-between p-6"
               >
                 <span className="type-series text-accent">
                   {family.series.length} series
