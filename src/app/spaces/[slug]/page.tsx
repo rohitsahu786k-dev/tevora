@@ -117,7 +117,7 @@ export default async function SpacePage({
       copy: "Mobile or adaptable product formats considered for spaces that change between activities.",
     },
   ];
-  const spaceEnvironmentMedia = mediaAssets.homepageHero;
+  const spaceEnvironmentMedia = getSpaceEnvironmentMedia(space.group);
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-surface">
@@ -433,6 +433,16 @@ const environmentCalloutPositions = [
   "left-[31%] top-[66%]",
   "left-[83%] top-[58%]",
 ];
+
+function getSpaceEnvironmentMedia(group: string) {
+  if (group === "Education Spaces")
+    return mediaAssets.educationSpaceEnvironment;
+  if (group === "Corporate Spaces")
+    return mediaAssets.corporateSpaceEnvironment;
+  if (group === "Specialist Spaces")
+    return mediaAssets.specialistSpaceEnvironment;
+  return mediaAssets.publicSelfServiceSpaceEnvironment;
+}
 
 function SpaceProductEnvironment({
   spaceName,
