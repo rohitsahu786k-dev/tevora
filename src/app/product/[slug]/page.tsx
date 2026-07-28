@@ -390,7 +390,7 @@ export default async function ProductPage({
           <SectionHeader
             eyebrow="Resources"
             title="Product files and documentation"
-            description="Ask for drawings, data sheets and files matched to your project stage."
+            description="Download drawings, data sheets and project files after signing in with a TEVORA-issued login."
           />
           <div className="border-line bg-line grid gap-px border sm:grid-cols-2 lg:grid-cols-5">
             {resourceTypes.map((resource) => (
@@ -402,7 +402,7 @@ export default async function ProductPage({
                 <div>
                   <h2 className="type-h5">{resource}</h2>
                   <p className="type-caption text-ink-muted mt-2">
-                    Available on request
+                    TEVORA login required
                   </p>
                 </div>
               </div>

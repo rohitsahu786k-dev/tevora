@@ -105,10 +105,12 @@ export function ResourceBrowser() {
   const openResource = (resource: Resource) => {
     if (resource.accessLevel === "registered") setGate(resource);
     else if (resource.accessLevel === "restricted")
-      setNotice("This resource requires approval from the project team.");
+      setNotice(
+        "This download requires a TEVORA-issued login and project approval.",
+      );
     else
       setNotice(
-        "This file is available through Design Support while the online library is being prepared.",
+        "This file will be available to download after signing in with a TEVORA-issued login.",
       );
   };
   const hasFilters = Object.values(filters).some(Boolean);
@@ -121,8 +123,8 @@ export function ResourceBrowser() {
           </p>
           <p className="type-body-sm mt-2 max-w-4xl">
             Browse the types of documents TEVORA can support for planning,
-            specification and coordination. Request the exact file you need and
-            Design Support will guide the next step.
+            specification and coordination. Downloads require a TEVORA-issued
+            login; request access and Design Support will guide the next step.
           </p>
         </div>
       )}
@@ -316,7 +318,7 @@ function ResourceCard({
             </span>
             {requestOnly && (
               <span className="type-model text-ink-muted mt-2 block">
-                Available on request
+                TEVORA login required
               </span>
             )}
           </div>
@@ -341,11 +343,11 @@ function ResourceCard({
         >
           <span>
             {requestOnly
-              ? "Request file"
+              ? "Request TEVORA login"
               : resource.accessLevel === "registered"
-                ? "Request download"
+                ? "Sign in to download"
                 : resource.accessLevel === "restricted"
-                  ? "Request access"
+                  ? "Request approved access"
                   : "Download"}
           </span>
           {requestOnly ? (
@@ -435,7 +437,7 @@ function ResourceGate({
           <div>
             <p className="type-eyebrow text-accent">Registered resource</p>
             <h2 id="resource-gate-title" className="type-h3 mt-4">
-              Request {resource.title}
+              Request TEVORA login for {resource.title}
             </h2>
           </div>
           <button
@@ -448,10 +450,9 @@ function ResourceGate({
           </button>
         </div>
         <p className="type-body-sm text-ink-muted mt-5">
-          We request these details to understand who is using technical project
-          files, provide the appropriate regional follow-up, and support the
-          stated project type. No additional information is collected by this
-          form.
+          Downloads are available after signing in with a TEVORA-issued login.
+          Share these details so Design Support can confirm the right access for
+          your company, region and project type.
         </p>
         <form
           onSubmit={form.handleSubmit(complete)}
@@ -505,7 +506,7 @@ function ResourceGate({
           </SelectControl>
           <div className="sm:col-span-2">
             <PrimaryButton type="submit">
-              Request download <Download aria-hidden className="size-4" />
+              Request TEVORA login <Download aria-hidden className="size-4" />
             </PrimaryButton>
           </div>
         </form>

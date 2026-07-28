@@ -319,7 +319,7 @@ export default async function SectorPage({
                     <div>
                       <h3 className="type-h5">{resource}</h3>
                       <p className="type-caption text-ink-muted mt-2">
-                        Available on request
+                        TEVORA login required
                       </p>
                     </div>
                   </Link>

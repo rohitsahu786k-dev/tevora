@@ -18,7 +18,7 @@ export default function ResourcesPage() {
           <SectionHeader
             eyebrow="Resources"
             title="Information for better specification."
-            description="Find the literature, drawings and planning information you need, or request the right file for your project stage."
+            description="Find the literature, drawings and planning information you need. Downloads are available after signing in with a TEVORA-issued login."
           />
           <Suspense fallback={<ProductBrowserSkeleton />}>
             <ResourceBrowser />

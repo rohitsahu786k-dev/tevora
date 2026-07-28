@@ -314,7 +314,7 @@ export default async function AccessoryPage({
           <SectionHeader
             eyebrow="Technical resources"
             title="Files for installation and specification"
-            description="Ask for drawings, guides and data sheets matched to your project stage."
+            description="Use a TEVORA-issued login to download drawings, guides and data sheets matched to your project stage."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-5">
             {resourceTypes.map((resource) => (
@@ -326,7 +326,7 @@ export default async function AccessoryPage({
                 <div>
                   <h2 className="type-h5">{resource}</h2>
                   <p className="type-caption text-ink-muted mt-2">
-                    Available on request
+                    TEVORA login required
                   </p>
                 </div>
               </div>

@@ -358,7 +358,11 @@ export default async function SpacePage({
       </Section>
       <Section>
         <Container>
-          <SectionHeader eyebrow="Resources" title="Plan the space" />
+          <SectionHeader
+            eyebrow="Resources"
+            title="Plan the space"
+            description="Use a TEVORA-issued login to download planning documents, drawings and technical files for the space."
+          />
           <div className="border-line bg-line grid gap-px border md:grid-cols-4">
             {resources.map((resource) => (
               <Link
@@ -370,7 +374,7 @@ export default async function SpacePage({
                 <div>
                   <h2 className="type-h5">{resource}</h2>
                   <p className="type-caption text-ink-muted mt-2">
-                    Available on request
+                    TEVORA login required
                   </p>
                 </div>
               </Link>
