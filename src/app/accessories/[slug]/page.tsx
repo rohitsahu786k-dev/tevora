@@ -127,7 +127,7 @@ export default async function AccessoryPage({
               ) : (
                 <div className="grid min-h-96 place-items-center">
                   <span className="type-model text-ink-muted">
-                    ACCESSORY MEDIA PENDING
+                    ACCESSORY IMAGE AVAILABLE DURING PROJECT REVIEW
                   </span>
                 </div>
               )}
@@ -140,19 +140,19 @@ export default async function AccessoryPage({
           <SectionHeader
             eyebrow="Compatibility status"
             title={compatibilityStatusLabel(profile.status)}
-            description="This status describes the current evidence level, not verified product or model compatibility."
+            description="Final accessory fit is checked against the product, equipment schedule and installation conditions."
           />
           <div className="grid gap-px border border-white/20 bg-white/20 md:grid-cols-3">
             <StatusBlock
               label="Product relationship"
-              value={`${compatibleProducts.length} provisional links`}
+              value={`${compatibleProducts.length} product links`}
             />
             <StatusBlock
               label="Model-specific evidence"
               value={
                 profile.modelSpecificRules.length
                   ? "Available"
-                  : "Not published"
+                  : "Reviewed by project"
               }
             />
             <StatusBlock
@@ -166,8 +166,8 @@ export default async function AccessoryPage({
         <Container>
           <SectionHeader
             eyebrow="Compatible product families"
-            title="Provisional family relationships"
-            description="Family relationships support discovery. A product, model and equipment review is still required."
+            title="Product families to consider"
+            description="Start with these families, then confirm the exact product, model and equipment requirements."
           />
           <div className="flex flex-wrap gap-2">
             {compatibleFamilies.map((family) => (
@@ -186,8 +186,8 @@ export default async function AccessoryPage({
         <Container>
           <SectionHeader
             eyebrow="Compatible products"
-            title="Products linked by taxonomy"
-            description="These options are not published as technically verified compatibility."
+            title="Products commonly reviewed with this accessory"
+            description="These links help narrow the conversation before final compatibility is confirmed."
           />
           {compatibleProducts.length ? (
             <div className="border-line bg-line grid gap-px border md:grid-cols-3">
@@ -203,7 +203,7 @@ export default async function AccessoryPage({
                   <div>
                     <h2 className="type-h4">{product.name}</h2>
                     <span className="type-caption text-ink-muted mt-3 block">
-                      Provisional — technical review required
+                      Confirm fit during project review
                     </span>
                   </div>
                 </Link>
@@ -211,7 +211,7 @@ export default async function AccessoryPage({
             </div>
           ) : (
             <EmptyState
-              title="No product relationship published"
+              title="No product relationship listed yet"
               description="Use Configure or contact the technical team to review this accessory group."
             />
           )}
@@ -223,9 +223,8 @@ export default async function AccessoryPage({
             <div>
               <h2 className="type-h3">Installation requirements</h2>
               <p className="type-body text-ink-muted mt-5">
-                Installation type and requirements are not yet published.
-                Confirm the base product, equipment schedule and site
-                conditions.
+                Confirm the base product, equipment schedule, cable routes and
+                site conditions before specification.
               </p>
             </div>
             <div>
@@ -244,7 +243,7 @@ export default async function AccessoryPage({
                   <dd className="type-body-sm mt-2">
                     {profile.requiredAccessoryIds.length
                       ? `${profile.requiredAccessoryIds.length} required`
-                      : "None published"}
+                      : "Project dependent"}
                   </dd>
                 </div>
               </dl>
@@ -262,7 +261,7 @@ export default async function AccessoryPage({
                 Excluded combinations:{" "}
                 {profile.excludedAccessoryIds.length
                   ? `${profile.excludedAccessoryIds.length} published`
-                  : "None published"}
+                  : "Checked during review"}
               </p>
             </div>
           </div>
@@ -278,29 +277,33 @@ export default async function AccessoryPage({
             <Evidence
               label="Supported display range"
               value={
-                profile.supportedDisplayRange ? "Published" : "Not published"
+                profile.supportedDisplayRange
+                  ? "Available"
+                  : "Reviewed by project"
               }
             />
             <Evidence
               label="Supported device type"
               value={
                 profile.supportedDeviceTypes.length
-                  ? "Published"
-                  : "Not published"
+                  ? "Available"
+                  : "Reviewed by project"
               }
             />
             <Evidence
               label="Supported VESA pattern"
               value={
                 profile.supportedVesaPatterns.length
-                  ? "Published"
-                  : "Not published"
+                  ? "Available"
+                  : "Reviewed by project"
               }
             />
             <Evidence
               label="Installation type"
               value={
-                profile.installationTypes.length ? "Published" : "Not published"
+                profile.installationTypes.length
+                  ? "Available"
+                  : "Reviewed by project"
               }
             />
           </div>
@@ -311,7 +314,7 @@ export default async function AccessoryPage({
           <SectionHeader
             eyebrow="Technical resources"
             title="Files for installation and specification"
-            description="Resources remain unavailable until each document and revision is verified."
+            description="Ask for drawings, guides and data sheets matched to your project stage."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-5">
             {resourceTypes.map((resource) => (
@@ -323,7 +326,7 @@ export default async function AccessoryPage({
                 <div>
                   <h2 className="type-h5">{resource}</h2>
                   <p className="type-caption text-ink-muted mt-2">
-                    Not yet published
+                    Available on request
                   </p>
                 </div>
               </div>

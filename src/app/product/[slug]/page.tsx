@@ -155,14 +155,14 @@ export default async function ProductPage({
                 <div>
                   <dt className="type-spec-label text-ink-muted">Model</dt>
                   <dd className="type-technical mt-2">
-                    {product.model ?? "Not published"}
+                    {product.model ?? "Project configured"}
                   </dd>
                 </div>
                 <div>
                   <dt className="type-spec-label text-ink-muted">Status</dt>
                   <dd className="type-technical mt-2">
                     {product.productStatus === "placeholder"
-                      ? "Pre-release series"
+                      ? "Project configured"
                       : product.productStatus}
                   </dd>
                 </div>
@@ -252,7 +252,7 @@ export default async function ProductPage({
           <SectionHeader
             eyebrow="Feature stories"
             title="Technology considered through the furniture"
-            description="Representative product narratives are separated from verified technical values."
+            description="See how the series supports equipment, users and room planning before the final specification is confirmed."
           />
           <StickyProductStory
             items={detail.featureStories.map((story) => ({
@@ -269,9 +269,9 @@ export default async function ProductPage({
       <Section tone="white">
         <Container>
           <SectionHeader
-            eyebrow="Product gallery"
-            title="Product, environment and technical views"
-            description="Gallery slots support verified photography, video, diagrams, cutouts and interactive media when available."
+            eyebrow="Product views"
+            title="Concept views for planning"
+            description="These views show the intended form and integration direction so the product can be discussed clearly."
           />
           <ProductGallery
             items={[
@@ -293,8 +293,8 @@ export default async function ProductPage({
         <Container>
           <SectionHeader
             eyebrow="Variants"
-            title="Verified product options"
-            description="Only engineering-approved models, sizes, arrangements, equipment configurations, mobility choices and finishes will appear here."
+            title="Options discussed during specification"
+            description="Sizes, finishes, mounting details and equipment fit are selected with the project team."
           />
           {product.variants.length ||
           product.finishes.length ||
@@ -304,8 +304,8 @@ export default async function ProductPage({
             </div>
           ) : (
             <EmptyState
-              title="Verified variants are not yet published"
-              description="Models, sizes, display arrangements, mobility choices, equipment configurations and finishes remain intentionally blank until verification."
+              title="Project-specific options are reviewed with TEVORA"
+              description="Share the room, equipment list and installation goals so the right size, finish and configuration can be selected."
             />
           )}
         </Container>
@@ -314,8 +314,8 @@ export default async function ProductPage({
         <Container>
           <SectionHeader
             eyebrow="Technical specifications"
-            title="Structured for serious project information"
-            description="The specification framework is complete. Values remain unpublished until verified by product engineering."
+            title="Technical information for project review"
+            description="Dimensions, equipment capacity and compatibility are confirmed against the room and device schedule."
           />
           <div className="grid gap-px border border-white/20 bg-white/20 md:grid-cols-2">
             {specificationGroups.map((group, index) => (
@@ -327,7 +327,7 @@ export default async function ProductPage({
                   </span>
                 </div>
                 <p className="type-technical mt-10 text-white/50">
-                  No verified values published.
+                  Confirmed during project review.
                 </p>
               </section>
             ))}
@@ -338,8 +338,8 @@ export default async function ProductPage({
         <Container>
           <SectionHeader
             eyebrow="Compatible accessories"
-            title="Accessory groups prepared for configuration"
-            description="Navigation relationships indicate potentially relevant groups; product compatibility must be confirmed during configuration."
+            title="Accessory groups that extend this series"
+            description="These groups help adapt the product for displays, cameras, power, cable routing, mobility and service needs."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-3">
             {orderedAccessories.map((accessory) => (
@@ -351,8 +351,8 @@ export default async function ProductPage({
                 <h2 className="type-h4">{accessory.name}</h2>
                 <p className="type-technical text-ink-muted mt-12">
                   {mappedAccessories.has(accessory.slug)
-                    ? "Relationship mapped — compatibility verification required."
-                    : "No compatible selection published."}
+                    ? "Commonly paired - confirm final fit during project review."
+                    : "Available when project requirements call for it."}
                 </p>
               </Link>
             ))}
@@ -363,8 +363,8 @@ export default async function ProductPage({
                 Required components
               </dt>
               <dd className="type-body-sm mt-4">
-                Base product required; no additional required accessory
-                published.
+                Base product required; accessory selections depend on room and
+                device requirements.
               </dd>
             </div>
             <div className="bg-canvas p-5">
@@ -372,8 +372,7 @@ export default async function ProductPage({
                 Compatibility notes
               </dt>
               <dd className="type-body-sm mt-4">
-                All current relationships are provisional and require technical
-                review.
+                Compatibility is confirmed during project review.
               </dd>
             </div>
             <div className="bg-canvas p-5">
@@ -381,7 +380,8 @@ export default async function ProductPage({
                 Excluded combinations
               </dt>
               <dd className="type-body-sm mt-4">
-                No verified exclusions published.
+                Exclusions are checked against selected equipment and
+                installation conditions.
               </dd>
             </div>
           </dl>
@@ -395,7 +395,7 @@ export default async function ProductPage({
           <SectionHeader
             eyebrow="Resources"
             title="Product files and documentation"
-            description="Files appear here only after the document, revision and access level have been verified."
+            description="Ask for drawings, data sheets and files matched to your project stage."
           />
           <div className="border-line bg-line grid gap-px border sm:grid-cols-2 lg:grid-cols-5">
             {resourceTypes.map((resource) => (
@@ -407,7 +407,7 @@ export default async function ProductPage({
                 <div>
                   <h2 className="type-h5">{resource}</h2>
                   <p className="type-caption text-ink-muted mt-2">
-                    Not yet published
+                    Available on request
                   </p>
                 </div>
               </div>

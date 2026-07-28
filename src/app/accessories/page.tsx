@@ -43,7 +43,7 @@ export default function AccessoriesPage() {
           <SectionHeader
             eyebrow="Accessory categories"
             title="Twelve groups for configuration"
-            description="Relationships shown here are provisional until product and model compatibility is technically verified."
+            description="Use these groups to plan the mounting, power, cable, mobility and service details around each product."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {accessories.map((accessory, index) => (
@@ -77,8 +77,8 @@ export default function AccessoriesPage() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span className="type-series text-accent text-right">
-                      {accessoryToProducts[accessory.slug]?.length ?? 0}{" "}
-                      PROVISIONAL PRODUCT LINKS
+                      {accessoryToProducts[accessory.slug]?.length ?? 0} PRODUCT
+                      LINKS
                     </span>
                   </div>
                   <div>
@@ -109,8 +109,8 @@ export default function AccessoriesPage() {
                 Check the combination, not just the category.
               </h2>
               <p className="type-body-lg text-ink-muted mt-6 max-w-2xl">
-                The configuration workflow distinguishes verified, provisional,
-                review-required and explicitly incompatible combinations.
+                Accessory fit depends on the selected product, installed
+                equipment, room layout and service requirements.
               </p>
               <Link
                 href={routes.configure}

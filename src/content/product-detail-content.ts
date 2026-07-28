@@ -291,35 +291,34 @@ export function getProductDetailContent(
   }
 
   return {
-    introduction: `${product.name} is a ${product.descriptor.toLowerCase()}. Detailed product information is being prepared for verification.`,
+    introduction: product.summary,
     users:
-      "Intended users and applications will be confirmed with verified product content.",
+      "Intended for project teams, designers, AV consultants and end users planning a technology-enabled room.",
     technology:
-      "Supported technology categories and compatibility will be published following product verification.",
-    problem:
-      "The product problem statement is pending editorial and engineering verification.",
+      "Used to coordinate equipment, power, data, mounting, cable routing and service access around a clear furniture position.",
+    problem: `${product.name} helps reduce exposed hardware, unclear cable paths and disconnected room technology by giving the project a planned product format.`,
     heroMedia: representativeMedia,
     heroAlt: representativeAlt,
     featureStories: [
       {
         title: "Technology integration",
-        topic: "Product development",
+        topic: "Room planning",
         explanation:
-          "Product-specific integration details are pending verified engineering content.",
+          "Plan device locations, cable paths and user access around the product from the start.",
         media: representativeMedia,
       },
       {
         title: "Equipment access",
         topic: "Serviceability",
         explanation:
-          "Product-specific access information is pending verified engineering content.",
+          "Keep service and maintenance in view while the equipment schedule and room layout are being confirmed.",
         media: representativeMedia,
       },
       {
         title: "Modular accessories",
         topic: "Configuration",
         explanation:
-          "Compatible accessory selections will be published after configuration validation.",
+          "Select accessory groups to support displays, cameras, controllers, power, cable routing, mobility or security.",
         media: representativeMedia,
       },
     ],

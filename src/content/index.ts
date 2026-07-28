@@ -24,13 +24,39 @@ type FamilySeed = Pick<
   ProductFamily,
   "slug" | "title" | "summary" | "productTypes" | "series"
 >;
+const familyStatements: Record<string, string> = {
+  "presentation-stations":
+    "Use Presentation Stations when presenters need a reliable front-of-room position for controls, source devices, microphones, computers and hidden cable paths.",
+  "display-stands":
+    "Use Display Stands when a room needs a clean display position without depending on a simple wall mount or exposed equipment.",
+  "mobile-av-carts":
+    "Use Mobile AV Carts when displays, cameras and collaboration devices need to move between layouts, rooms or teaching modes.",
+  "technology-credenzas":
+    "Use Technology Credenzas when the room needs equipment storage that looks architectural, keeps hardware accessible and avoids visible cable clutter.",
+  "collaboration-tables":
+    "Use Collaboration Tables when meeting-room technology, participant devices and shared content need to be planned directly into the table.",
+  "learning-furniture":
+    "Use Learning Furniture when classrooms, labs and training rooms need flexible furniture with power, devices and teaching technology built in.",
+  "interactive-kiosks":
+    "Use Interactive Kiosks when a touchscreen or tablet needs a durable, branded and serviceable public-facing enclosure.",
+  "room-control-scheduling":
+    "Use Room Control & Scheduling products to place room controls and booking panels where people naturally enter, meet or present.",
+  "av-equipment-enclosures":
+    "Use AV Equipment Enclosures when hardware needs protection, ventilation, cable control and service access outside a traditional rack room.",
+  "media-walls-space-dividers":
+    "Use Media Walls & Space Dividers when display technology also needs to shape the room, divide space or support collaboration.",
+  "technical-workstations":
+    "Use Technical Workstations when operators need multiple screens, equipment access and a focused furniture layout for specialist work.",
+};
 const createFamily = (seed: FamilySeed): ProductFamily => ({
   ...seed,
   id: `family-${seed.slug}`,
   name: seed.title,
   shortDescription: seed.summary,
   longDescription: seed.summary,
-  statement: seed.summary,
+  statement:
+    familyStatements[seed.slug] ??
+    `${seed.title} help project teams plan furniture around the technology, users and service access a room needs.`,
   heroMedia: null,
   thumbnailMedia: null,
   featuredProducts: [],
@@ -48,7 +74,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "presentation-stations",
     title: "Presentation Stations",
     summary:
-      "Technology-integrated furniture for teaching, presenting, speaking and controlling room systems.",
+      "Presenter stations that bring room controls, AV equipment, power and cable routing into one organised furniture position.",
     productTypes: [
       "Lecterns",
       "Podiums",
@@ -73,7 +99,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "display-stands",
     title: "Display Stands",
     summary:
-      "Fixed and freestanding structures for supporting displays, cameras, speakers, soundbars and collaboration equipment.",
+      "Freestanding and wall-supported display structures for cleaner screen, camera, speaker and device integration.",
     productTypes: [
       "Single-display stands",
       "Dual-display stands",
@@ -88,7 +114,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "mobile-av-carts",
     title: "Mobile AV Carts",
     summary:
-      "Mobile products for displays, video collaboration, education, training and flexible technology deployment.",
+      "Mobile display and video-collaboration furniture for rooms that need shared technology to move with the activity.",
     productTypes: [
       "Single-display carts",
       "Dual-display carts",
@@ -103,7 +129,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "technology-credenzas",
     title: "Technology Credenzas",
     summary:
-      "Architectural furniture that conceals, organises and supports AV, IT and video-conferencing equipment.",
+      "Architectural credenzas that conceal AV and IT equipment while keeping ventilation, cabling and service access planned.",
     productTypes: [
       "AV credenzas",
       "Video-conferencing credenzas",
@@ -124,7 +150,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "collaboration-tables",
     title: "Collaboration Tables",
     summary:
-      "Technology-ready tables for hybrid meetings, boardrooms, huddle spaces, teamwork and training.",
+      "Meeting and collaboration tables designed to integrate power, data, devices and shared room technology at the table.",
     productTypes: [
       "Boardroom tables",
       "Video-conference tables",
@@ -140,7 +166,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "learning-furniture",
     title: "Learning Furniture",
     summary:
-      "Flexible technology furniture for teaching, demonstration, group learning and hybrid education.",
+      "Teaching and learning furniture that supports demonstrations, student devices, group work and hybrid classroom technology.",
     productTypes: [
       "Teaching desks",
       "Instructor stations",
@@ -156,7 +182,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "interactive-kiosks",
     title: "Interactive Kiosks",
     summary:
-      "Integrated furniture for self-service, registration, information, room booking and wayfinding.",
+      "Kiosk furniture for touchscreens, tablets and public interfaces used in wayfinding, booking, registration and self-service.",
     productTypes: [
       "Floor-standing kiosks",
       "Wall-mounted kiosks",
@@ -172,7 +198,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "room-control-scheduling",
     title: "Room Control & Scheduling",
     summary:
-      "Dedicated mounts, docks and enclosures for room controllers, scheduling panels and touch interfaces.",
+      "Mounts, stands and docks that give room controllers, scheduling panels and touch interfaces a clean physical location.",
     productTypes: [
       "Scheduler mounts",
       "Touch-controller stands",
@@ -187,7 +213,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "av-equipment-enclosures",
     title: "AV Equipment Enclosures",
     summary:
-      "Secure and serviceable enclosures for AV, IT, control, rack and computing equipment.",
+      "Secure equipment enclosures that organise AV, IT, control and computing hardware while supporting access and airflow.",
     productTypes: [
       "Rack cabinets",
       "Under-table racks",
@@ -209,7 +235,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "media-walls-space-dividers",
     title: "Media Walls & Space Dividers",
     summary:
-      "Architectural products combining display integration, collaboration, acoustics and spatial separation.",
+      "Media walls and dividers that combine display support, collaboration surfaces and spatial separation in one structure.",
     productTypes: [
       "Display-integrated walls",
       "Mobile media walls",
@@ -230,7 +256,7 @@ const productFamilySeeds: FamilySeed[] = [
     slug: "technical-workstations",
     title: "Technical Workstations",
     summary:
-      "Technology-ready workstations for monitoring, editing, broadcasting, analysing and specialist operations.",
+      "Specialist workstations for monitoring, editing, production and analysis where equipment, screens and cables need order.",
     productTypes: [
       "Analyst desks",
       "Editing desks",
@@ -261,61 +287,394 @@ export const accessoryGroups: AccessoryGroup[] = series(
   "Equipment Cooling",
 );
 
+const seriesPositioning: Record<string, { summary: string; overview: string }> =
+  {
+    arc: {
+      summary:
+        "Compact presenter station for classrooms, meeting rooms and presentation spaces that need controls and AV equipment in one place.",
+      overview:
+        "A compact front-of-room station for presenters who need clear access to devices, controls and cable routing.",
+    },
+    "arc-pro": {
+      summary:
+        "Larger presenter station for rooms that need more equipment space, device access and room-control integration.",
+      overview:
+        "A wider presentation station for more complex teaching and meeting spaces.",
+    },
+    lift: {
+      summary:
+        "Height-adjustable presentation station for rooms where presenters need flexible working height and integrated technology.",
+      overview:
+        "A height-adjustable presenter position with room technology planned into the furniture.",
+    },
+    "lift-access": {
+      summary:
+        "Accessible height-adjustable station designed to support inclusive presenting, teaching and room-control use.",
+      overview:
+        "An accessible presenter station for projects where reach, height and usability are central requirements.",
+    },
+    pivot: {
+      summary:
+        "Presentation station for spaces that need a flexible presenter position and technology access from multiple directions.",
+      overview:
+        "A flexible station concept for changing presenter orientation and room layouts.",
+    },
+    "edu-station": {
+      summary:
+        "Instructor station for education spaces that need teaching technology, controls and equipment access in a single desk.",
+      overview:
+        "A teaching-focused station for classrooms, labs and learning environments.",
+    },
+    vista: {
+      summary:
+        "Single-display stand for rooms that need a clean freestanding display position with room for supporting devices.",
+      overview:
+        "A clean single-screen display structure for meeting, teaching and collaboration spaces.",
+    },
+    "vista-duo": {
+      summary:
+        "Dual-display stand for video meetings, training rooms and collaboration spaces that need two screens side by side.",
+      overview:
+        "A two-screen display structure for richer collaboration and presentation layouts.",
+    },
+    "vista-xl": {
+      summary:
+        "Large-format display stand for rooms that need a bigger screen presence and integrated equipment support.",
+      overview:
+        "A larger display-support format for high-impact meeting and presentation rooms.",
+    },
+    frame: {
+      summary:
+        "Floor-to-wall display structure for projects that need an architectural display feature with integrated routing.",
+      overview:
+        "An architectural display frame for rooms where the screen should feel built into the space.",
+    },
+    "frame-wall": {
+      summary:
+        "Wall-mounted display structure for cleaner screen, device and cable integration on existing walls.",
+      overview:
+        "A wall-based display solution that organises screen support and related devices.",
+    },
+    move: {
+      summary:
+        "Single-display mobile AV cart for flexible rooms, shared displays and simple collaboration setups.",
+      overview:
+        "A mobile display cart for moving shared technology where it is needed.",
+    },
+    "move-pro": {
+      summary:
+        "Mobile video-collaboration cart with space for display, camera, audio and supporting equipment.",
+      overview:
+        "A mobile collaboration platform for flexible teaching, training and meeting rooms.",
+    },
+    "move-duo": {
+      summary:
+        "Dual-display mobile cart for collaboration spaces that need two screens on a movable platform.",
+      overview:
+        "A mobile two-screen setup for richer meetings, monitoring or instruction.",
+    },
+    "move-edu": {
+      summary:
+        "Education-focused mobile cart for classrooms and training rooms using interactive or shared displays.",
+      overview:
+        "A classroom-ready mobile cart for teaching technology and flexible learning layouts.",
+    },
+    "move-xl": {
+      summary:
+        "Large mobile AV cart for bigger displays and rooms that need stronger visual presence.",
+      overview:
+        "A larger mobile display platform for training, events and collaborative rooms.",
+    },
+    nexus: {
+      summary:
+        "Technology credenza for hiding AV and IT hardware while keeping equipment accessible and ventilated.",
+      overview:
+        "An architectural credenza that keeps room technology organised and out of sight.",
+    },
+    "nexus-compact": {
+      summary:
+        "Compact technology credenza for smaller rooms that still need organised equipment storage.",
+      overview:
+        "A smaller credenza format for AV storage in rooms with limited space.",
+    },
+    "nexus-rack": {
+      summary:
+        "Rack-focused credenza for projects that need equipment bays inside furniture rather than exposed racks.",
+      overview:
+        "A furniture-led rack enclosure for room equipment and service access.",
+    },
+    "nexus-edu": {
+      summary:
+        "Classroom credenza for organising education technology, devices and supporting AV equipment.",
+      overview:
+        "A teaching-space credenza for storing and supporting classroom technology.",
+    },
+    "nexus-wall": {
+      summary:
+        "Wall-mounted credenza for keeping equipment organised where floor space is limited.",
+      overview:
+        "A wall-based equipment furniture solution for compact technology rooms.",
+    },
+    forum: {
+      summary:
+        "Boardroom and meeting table designed to integrate power, connectivity, AV equipment and cable routing.",
+      overview:
+        "A collaboration table for cleaner boardrooms and hybrid meeting spaces.",
+    },
+    converge: {
+      summary:
+        "Video-conference table shaped for meetings where camera sightlines, shared content and participant devices matter.",
+      overview:
+        "A meeting table format planned around hybrid collaboration technology.",
+    },
+    huddle: {
+      summary:
+        "Compact collaboration table for small meeting rooms, huddle spaces and quick team sessions.",
+      overview:
+        "A small-room table for focused collaboration and simple technology access.",
+    },
+    link: {
+      summary:
+        "Collaboration table for teamwork, training and device-supported group activity.",
+      overview:
+        "A flexible table for shared work, power access and room technology.",
+    },
+    "link-modular": {
+      summary:
+        "Modular collaboration table system for reconfigurable training, teamwork and meeting layouts.",
+      overview: "A modular table format for rooms that change layout often.",
+    },
+    edu: {
+      summary:
+        "Teaching desk for instructors who need power, devices and presentation tools within reach.",
+      overview: "A teaching-focused desk for classrooms and training spaces.",
+    },
+    learn: {
+      summary:
+        "Student collaboration table for group learning, device use and shared classroom activities.",
+      overview:
+        "A learning table for group work and technology-supported instruction.",
+    },
+    lab: {
+      summary:
+        "Technology bench for labs, demonstrations and hands-on learning environments.",
+      overview:
+        "A bench format for practical teaching and specialist classroom equipment.",
+    },
+    flex: {
+      summary:
+        "Flexible learning table for classrooms that need adaptable layouts and integrated power access.",
+      overview:
+        "A classroom table for changing teaching modes and group activities.",
+    },
+    "flex-mobile": {
+      summary:
+        "Mobile learning table for classrooms and training spaces that need quick layout changes.",
+      overview: "A movable table format for flexible learning environments.",
+    },
+    touch: {
+      summary:
+        "Floor-standing touchscreen kiosk for self-service, information and public interaction points.",
+      overview:
+        "A freestanding kiosk enclosure for public-facing touch interfaces.",
+    },
+    "touch-wall": {
+      summary:
+        "Wall-mounted touchscreen kiosk for compact self-service or information points.",
+      overview: "A wall-based kiosk for spaces where floor footprint matters.",
+    },
+    "touch-mini": {
+      summary:
+        "Compact tablet kiosk for check-in, sign-in, booking and simple interactive tasks.",
+      overview:
+        "A smaller tablet-based kiosk for lightweight public interactions.",
+    },
+    way: {
+      summary:
+        "Wayfinding kiosk for directories, maps and public navigation in campuses, offices and venues.",
+      overview: "A tall kiosk format for wayfinding and information display.",
+    },
+    check: {
+      summary:
+        "Registration kiosk for visitor check-in, reception workflows and guided self-service.",
+      overview:
+        "A kiosk format for visitor registration and front-of-house workflows.",
+    },
+    panel: {
+      summary:
+        "Freestanding room-control stand for touch panels used near presenters, meeting tables or room entries.",
+      overview: "A dedicated physical stand for room-control interfaces.",
+    },
+    "panel-desk": {
+      summary:
+        "Desk-mounted controller housing for meeting tables, lecterns and instructor positions.",
+      overview:
+        "A table-based control position for meeting and presentation rooms.",
+    },
+    "panel-wall": {
+      summary:
+        "Wall-mounted controller enclosure for clean room-control placement near doors or presentation zones.",
+      overview: "A wall-based control-panel enclosure for room interfaces.",
+    },
+    schedule: {
+      summary:
+        "Room-scheduling panel enclosure for booking displays outside meeting rooms and shared spaces.",
+      overview: "A scheduling display mount for room booking and availability.",
+    },
+    dock: {
+      summary:
+        "Tablet dock for shared control, booking or simple touchscreen interaction at a table or counter.",
+      overview: "A compact tabletop dock for tablets and touch interfaces.",
+    },
+    core: {
+      summary:
+        "Equipment enclosure for securing AV, IT and control hardware while keeping cables and service access organised.",
+      overview:
+        "A secure enclosure for room technology and supporting hardware.",
+    },
+    "core-compact": {
+      summary:
+        "Compact equipment enclosure for small hardware sets, codecs, mini-PCs and local room devices.",
+      overview: "A smaller enclosure for essential AV and IT equipment.",
+    },
+    "core-wall": {
+      summary:
+        "Wall-mounted equipment enclosure for hardware that needs to stay off the floor and close to room infrastructure.",
+      overview: "A wall-based enclosure for compact equipment installations.",
+    },
+    "core-mobile": {
+      summary:
+        "Mobile equipment enclosure for hardware that needs to move with carts, training rooms or temporary setups.",
+      overview: "A movable enclosure for AV and IT hardware.",
+    },
+    "core-rack": {
+      summary:
+        "Rack-style equipment enclosure for projects that need structured mounting, airflow and service access.",
+      overview:
+        "A rack-focused enclosure for organised equipment installations.",
+    },
+    mediawall: {
+      summary:
+        "Display-integrated wall product for rooms where media, furniture and architecture need to work together.",
+      overview:
+        "A media wall that makes display technology part of the room architecture.",
+    },
+    "mediawall-mobile": {
+      summary:
+        "Mobile media wall for flexible collaboration areas, training spaces and temporary presentation zones.",
+      overview: "A movable display wall for spaces that change layout.",
+    },
+    boundary: {
+      summary:
+        "Space-divider system for creating zones while supporting collaboration and technology needs.",
+      overview:
+        "A divider product for shaping space without losing technology support.",
+    },
+    shift: {
+      summary:
+        "Mobile partition product for quickly changing room layouts and visual boundaries.",
+      overview: "A movable divider for flexible spaces and temporary zones.",
+    },
+    focus: {
+      summary:
+        "Collaboration wall for focused teamwork areas that need shared display support and spatial definition.",
+      overview:
+        "A focused collaboration surface for teams and shared technology.",
+    },
+    analyst: {
+      summary:
+        "Technical workstation for analysts and operators working with multiple screens, devices and information sources.",
+      overview:
+        "A workstation for monitoring, analysis and specialist technology tasks.",
+    },
+    studio: {
+      summary:
+        "Technical workstation for editing, media production and studio environments.",
+      overview:
+        "A workstation for production teams that need equipment and display organisation.",
+    },
+    monitor: {
+      summary:
+        "Monitoring workstation for control, security, operations and continuous information review.",
+      overview:
+        "A workstation for rooms where people monitor information over long sessions.",
+    },
+    techdesk: {
+      summary:
+        "Technology desk for specialist work that needs devices, displays and cable routing in one furniture system.",
+      overview: "A technical desk for focused equipment-heavy work.",
+    },
+    "techdesk-pro": {
+      summary:
+        "Advanced technical workstation for larger equipment sets, multi-display work and specialist operations.",
+      overview:
+        "A higher-capacity workstation for complex technical environments.",
+    },
+  };
+
 export const products: Product[] = productFamilies.flatMap((family) =>
-  family.series.map((item) => ({
-    id: `product-${item.slug}`,
-    slug: item.slug,
-    title: item.name,
-    name: item.name,
-    summary: `${item.name} is a ${family.title.toLowerCase()} series within the TEVORA modular product architecture.`,
-    family: family.slug,
-    productFamily: family.id,
-    series: item.name,
-    model: null,
-    descriptor: `${family.title} series`,
-    overview: `${item.name} provides a product-series starting point for technology-furniture applications within ${family.title.toLowerCase()}.`,
-    useCases: [],
-    heroMedia: null,
-    gallery: [],
-    featureStories: [],
-    keyFeatures: [],
-    technicalSpecifications: [],
-    dimensions: null,
-    equipmentCapacity: null,
-    rackCapacity: null,
-    displayCompatibility: [],
-    vesaCompatibility: [],
-    deviceCompatibility: [],
-    cameraCompatibility: [],
-    soundbarCompatibility: [],
-    cableManagement: null,
-    ventilation: null,
-    cooling: null,
-    serviceAccess: null,
-    accessibility: null,
-    mobility: null,
-    heightAdjustment: null,
-    powerAndData: null,
-    finishes: [],
-    variants: [],
-    compatibleAccessories: [],
-    supportedSpaces: [],
-    supportedSectors: [],
-    standards: [],
-    certifications: [],
-    sustainability: [],
-    downloads: [],
-    configurable: false,
-    customisable: false,
-    enquiryOnly: true,
-    productStatus: "placeholder",
-    seo: draftSeo(
-      item.name,
-      `${item.name} ${family.title.toLowerCase()} series.`,
-    ),
-    dataStatus: "placeholder",
-    features: [],
-  })),
+  family.series.map((item) => {
+    const positioning = seriesPositioning[item.slug];
+    const summary =
+      positioning?.summary ??
+      `${item.name} helps ${family.title.toLowerCase()} projects organise technology, furniture and service access in one planned product.`;
+    return {
+      id: `product-${item.slug}`,
+      slug: item.slug,
+      title: item.name,
+      name: item.name,
+      summary,
+      family: family.slug,
+      productFamily: family.id,
+      series: item.name,
+      model: null,
+      descriptor: summary,
+      overview:
+        positioning?.overview ??
+        `${item.name} gives project teams a clear starting point for ${family.title.toLowerCase()} requirements.`,
+      useCases: [],
+      heroMedia: null,
+      gallery: [],
+      featureStories: [],
+      keyFeatures: [],
+      technicalSpecifications: [],
+      dimensions: null,
+      equipmentCapacity: null,
+      rackCapacity: null,
+      displayCompatibility: [],
+      vesaCompatibility: [],
+      deviceCompatibility: [],
+      cameraCompatibility: [],
+      soundbarCompatibility: [],
+      cableManagement: null,
+      ventilation: null,
+      cooling: null,
+      serviceAccess: null,
+      accessibility: null,
+      mobility: null,
+      heightAdjustment: null,
+      powerAndData: null,
+      finishes: [],
+      variants: [],
+      compatibleAccessories: [],
+      supportedSpaces: [],
+      supportedSectors: [],
+      standards: [],
+      certifications: [],
+      sustainability: [],
+      downloads: [],
+      configurable: false,
+      customisable: false,
+      enquiryOnly: true,
+      productStatus: "placeholder",
+      seo: draftSeo(
+        item.name,
+        `${item.name} ${family.title.toLowerCase()} series.`,
+      ),
+      dataStatus: "placeholder",
+      features: [],
+    };
+  }),
 );
 
 export const accessories: Accessory[] = accessoryGroups.map((group) => ({
@@ -323,13 +682,13 @@ export const accessories: Accessory[] = accessoryGroups.map((group) => ({
   slug: group.slug,
   title: group.name,
   name: group.name,
-  summary: `${group.name} accessories for TEVORA product configurations, subject to model-specific compatibility review.`,
+  summary: `${group.name} accessories help adapt TEVORA products to the equipment, room layout and user workflow of each project.`,
   group: group.slug,
   accessoryGroup: group.slug,
   series: null,
   model: null,
   descriptor: `${group.name} accessory group`,
-  description: `${group.name} options support the modular TEVORA product architecture. Product and model compatibility must be confirmed before specification.`,
+  description: `${group.name} options help project teams solve practical integration needs such as mounting, access, routing, movement and serviceability. Final compatibility is confirmed during project review.`,
   heroMedia: null,
   gallery: [],
   specifications: [],

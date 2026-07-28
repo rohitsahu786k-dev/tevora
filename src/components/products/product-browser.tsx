@@ -209,7 +209,7 @@ export function ProductBrowser({
                           {product.series}
                         </span>
                         <span className="type-model text-ink-muted">
-                          {product.model ?? "MODEL NOT PUBLISHED"}
+                          {product.model ?? "PROJECT CONFIGURED"}
                         </span>
                       </div>
                       <div className="p-6 pt-10">
@@ -228,7 +228,7 @@ export function ProductBrowser({
                             <dd className="type-body-sm mt-2">
                               {primarySpace
                                 ? spaceNames[primarySpace]
-                                : "Application mapping pending"}
+                                : "Project dependent"}
                             </dd>
                           </div>
                           <div>
@@ -236,7 +236,7 @@ export function ProductBrowser({
                               Key differentiator
                             </dt>
                             <dd className="type-body-sm mt-2">
-                              Series within {familyName}
+                              {product.overview}
                             </dd>
                           </div>
                           <div>
@@ -245,7 +245,7 @@ export function ProductBrowser({
                             </dt>
                             <dd className="type-body-sm mt-2">
                               {product.dataStatus === "placeholder"
-                                ? "Technical data not published"
+                                ? "Configured during project review"
                                 : product.configurable
                                   ? "Configurable"
                                   : "Standard configuration"}

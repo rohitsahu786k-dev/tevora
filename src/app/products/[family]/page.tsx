@@ -87,6 +87,9 @@ export default async function ProductFamilyPage({
     .map((product) => productConceptMediaBySlug[product.slug])
     .find((media) => media?.kind === "image");
   const featured = familyProducts[0];
+  const featuredMedia = featured
+    ? productConceptMediaBySlug[featured.slug]
+    : undefined;
   const spaceSlugs = [
     ...new Set(
       familyProducts.flatMap((product) => productToSpaces[product.slug] ?? []),
@@ -245,7 +248,7 @@ export default async function ProductFamilyPage({
           <SectionHeader
             eyebrow="Product browser"
             title={`Browse ${family.name}`}
-            description="Use the relevant taxonomy filters below. Filter selections are stored in the URL so this view can be shared or revisited."
+            description="Compare series by space, application and integration need, then open the product that best matches your room."
           />
           <Suspense fallback={<ProductBrowserSkeleton />}>
             <ProductBrowser
@@ -263,13 +266,23 @@ export default async function ProductFamilyPage({
             <SectionHeader
               eyebrow="Featured product"
               title={`${featured.series} series`}
-              description="Explore the series within this product family. Technical details are published only after product verification."
+              description="Start here to understand the format, then discuss dimensions, equipment and finishes with the TEVORA team."
             />
             <div className="border-line grid gap-8 border-y py-8 md:grid-cols-12">
-              <div className="bg-surface-muted grid min-h-80 place-items-center md:col-span-7">
-                <span className="type-model text-ink-muted">
-                  PRODUCT VIEW NOT PUBLISHED
-                </span>
+              <div className="relative grid min-h-80 place-items-center bg-white md:col-span-7">
+                {featuredMedia?.kind === "image" ? (
+                  <Image
+                    src={featuredMedia.src}
+                    alt={featuredMedia.alt}
+                    fill
+                    sizes="(min-width: 768px) 58vw, 100vw"
+                    className="object-contain"
+                  />
+                ) : (
+                  <span className="type-model text-ink-muted">
+                    PRODUCT VIEW PREPARED DURING PROJECT REVIEW
+                  </span>
+                )}
               </div>
               <div className="flex flex-col justify-end md:col-span-4 md:col-start-9">
                 <p className="type-series text-accent">{family.name}</p>
@@ -292,7 +305,7 @@ export default async function ProductFamilyPage({
           <SectionHeader
             eyebrow="Engineering capabilities"
             title="Designed for integration and access"
-            description="Capability areas indicate the intended product-development framework, not product-specific performance claims."
+            description="These are the practical integration areas customers usually need to resolve before specification."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-3">
             {engineeringCapabilities.map((capability, index) => (
@@ -371,7 +384,7 @@ export default async function ProductFamilyPage({
               <SectionHeader
                 eyebrow="Materials and finishes"
                 title="A coordinated architectural palette"
-                description="Finish names, materials, samples and environmental information will appear only after product-level verification."
+                description="Finish options and material details are reviewed during project specification so the product can match the room and equipment plan."
               />
               <Link
                 href={routes.resources}
@@ -384,7 +397,7 @@ export default async function ProductFamilyPage({
               <SectionHeader
                 eyebrow="Compatible accessories"
                 title="Extend the product"
-                description="Accessory-group relationships are for early navigation and require configuration-level verification."
+                description="Accessory groups help adapt the product for displays, cameras, power, cable routing, mobility and service needs."
               />
               <div className="flex flex-wrap gap-2">
                 {compatibleAccessories.map((accessory) => (
@@ -406,7 +419,7 @@ export default async function ProductFamilyPage({
           <SectionHeader
             eyebrow="Resources"
             title="Information for design and installation"
-            description="Files will be published as verified product resources become available."
+            description="Ask for literature, drawings and technical files matched to your project stage."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-4">
             {[

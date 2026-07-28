@@ -301,7 +301,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Presentation Station Concepts"
             title="Different formats for different presenter positions."
-            description="Representative concept imagery for reviewing visual direction. Final product form, equipment integration and technical details remain subject to design and engineering verification."
+            description="Concept views help compare presenter positions, equipment access and room-control approaches before specification."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {presentationConcepts.map(({ product, media }) => (
@@ -346,7 +346,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Display Stand Concepts"
             title="Structures that make display technology part of the space."
-            description="Representative concept imagery for reviewing visual direction. Displays and peripherals are shown only as installation context; final product form and compatibility remain subject to design and engineering verification."
+            description="Review display structures by screen format, peripheral placement and the amount of architecture the room needs."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {displayStandConcepts.map(({ product, media }) => (
@@ -389,7 +389,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Mobile AV Cart Concepts"
             title="Technology that can move with the space."
-            description="Representative concept imagery for reviewing visual direction. Displays and peripherals are shown only as installation context; final product form, mobility and compatibility remain subject to design and engineering verification."
+            description="Compare mobile formats for flexible rooms, shared displays and video-collaboration setups."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {mobileAvCartConcepts.map(({ product, media }) => (
@@ -432,7 +432,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Technology Credenza Concepts"
             title="Equipment infrastructure behind a calm architectural exterior."
-            description="Representative concept imagery for reviewing visual direction. Internal equipment zones are illustrative only; final product form, rack provision, ventilation and service details remain subject to design and engineering verification."
+            description="Use these concepts to discuss equipment storage, ventilation, cable routing and service access inside architectural furniture."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {technologyCredenzaConcepts.map(({ product, media }) => (
@@ -477,7 +477,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Learning Furniture Concepts"
             title="Furniture for teaching, demonstration and group learning."
-            description="Representative concept imagery for reviewing visual direction. Final product form, equipment integration and technical details remain subject to design and engineering verification."
+            description="Explore teaching and learning formats for classrooms, labs, training spaces and device-supported group work."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {learningConcepts.map(({ product, media }) => (
@@ -522,7 +522,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Collaboration Table Concepts"
             title="Tables designed around shared technology."
-            description="Representative concept imagery for reviewing visual direction. Final product form, equipment integration and technical details remain subject to design and engineering verification."
+            description="Compare table formats for hybrid meetings, boardrooms, huddle rooms, teamwork and training."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {collaborationConcepts.map(({ product, media }) => (
@@ -567,7 +567,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Media Walls & Space Divider Concepts"
             title="Architectural structure for technology and spatial definition."
-            description="Representative concept imagery for reviewing visual direction. Displays and peripherals are installation context only; final product form, mobility, acoustic behaviour and compatibility remain subject to design and engineering verification."
+            description="Review ways to combine display technology with room division, spatial focus and flexible collaboration zones."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {mediaWallConcepts.map(({ product, media }) => (
@@ -612,7 +612,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="AV Equipment Enclosure Concepts"
             title="Secure, serviceable furniture for supporting equipment."
-            description="Representative concept imagery for reviewing visual direction. Internal mounting, ventilation, security and equipment capacity remain subject to design and engineering verification."
+            description="Compare enclosure formats for protecting hardware while keeping airflow, cable routing and service access in view."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {avEquipmentEnclosureConcepts.map(({ product, media }) => (
@@ -657,7 +657,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Room Control & Scheduling Concepts"
             title="Dedicated positions for room interfaces."
-            description="Representative concept imagery for reviewing visual direction. Touch interfaces are contextual placeholders only; final device fit, mounting, cabling and installation details remain subject to design and engineering verification."
+            description="Explore stands, mounts and docks for placing room controls and booking panels where people naturally use them."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {roomControlConcepts.map(({ product, media }) => (
@@ -702,7 +702,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Interactive Kiosk Concepts"
             title="Purpose-built furniture for self-service and public interaction."
-            description="Representative concept imagery for reviewing visual direction. Screens and peripheral positions are contextual placeholders only; final device fit, function and installation details remain subject to design and engineering verification."
+            description="Compare kiosk formats for touchscreens, tablets, wayfinding, check-in and public-facing digital workflows."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {interactiveKioskConcepts.map(({ product, media }) => (
@@ -747,7 +747,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Technical Workstation Concepts"
             title="Focused furniture for monitoring, editing and specialist work."
-            description="Representative concept imagery for reviewing visual direction. Final product form, equipment integration and technical details remain subject to design and engineering verification."
+            description="Review workstation concepts for multi-display work, equipment-heavy tasks and focused technical environments."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2">
             {technicalWorkstationConcepts.map(({ product, media }) => (
