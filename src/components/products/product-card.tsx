@@ -68,7 +68,7 @@ export function ProductTile({
   reference: string;
 }) {
   return (
-    <article className="motion-card border-line bg-surface grid min-h-52 content-between border p-5">
+    <article className="motion-card border-line bg-surface grid min-h-44 content-between border p-5">
       <span className="type-model text-ink-muted">{reference}</span>
       <div>
         <h3 className="type-product">{entry.title}</h3>

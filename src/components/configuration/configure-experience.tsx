@@ -269,7 +269,7 @@ export function ConfigureExperience() {
                 whileTap={{ scale: motionTokens.scale.press }}
                 layout
                 className={cn(
-                  "group bg-surface hover:bg-accent-light grid min-h-56 content-between p-6 text-left",
+                  "group bg-surface hover:bg-accent-light grid min-h-44 content-between p-5 text-left",
                   state.mode === mode && "bg-accent-light",
                 )}
               >
@@ -466,7 +466,7 @@ export function ConfigureExperience() {
                       layout
                       initial={{ opacity: 1, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-surface grid min-h-[28rem] content-between p-6"
+                      className="bg-surface grid min-h-[22rem] content-between p-5"
                     >
                       <div>
                         <span className="type-series text-accent">

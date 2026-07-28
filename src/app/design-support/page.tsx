@@ -86,7 +86,7 @@ export default function DesignSupportPage() {
     <main id="main-content" tabIndex={-1} className="outline-none">
       <Section>
         <Container>
-          <div className="grid gap-12 lg:grid-cols-12">
+          <div className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <Eyebrow>Design Support</Eyebrow>
               <h1 className="type-h1 mt-7">
@@ -113,7 +113,7 @@ export default function DesignSupportPage() {
       </Section>
       <Section tone="dark">
         <Container>
-          <div className="grid gap-12 md:grid-cols-12">
+          <div className="grid gap-8 md:grid-cols-12">
             <Eyebrow className="text-emerald-300 md:col-span-3">
               Who we support
             </Eyebrow>
@@ -125,7 +125,7 @@ export default function DesignSupportPage() {
                 {audiences.map((audience, index) => (
                   <li
                     key={audience}
-                    className="bg-brand-950 grid min-h-40 content-between p-5"
+                    className="bg-brand-950 grid min-h-32 content-between p-5"
                   >
                     <span className="type-model text-emerald-300">
                       {String(index + 1).padStart(2, "0")}

@@ -195,7 +195,7 @@ export default async function AccessoryPage({
                 <Link
                   key={product.slug}
                   href={routes.product(product.slug)}
-                  className="motion-card group bg-surface hover:bg-accent-light grid min-h-48 content-between p-5"
+                  className="motion-card group bg-surface hover:bg-accent-light grid min-h-40 content-between p-5"
                 >
                   <span className="type-series text-accent">
                     {product.series}
@@ -219,7 +219,7 @@ export default async function AccessoryPage({
       </Section>
       <Section>
         <Container>
-          <div className="grid gap-12 lg:grid-cols-3">
+          <div className="grid gap-8 lg:grid-cols-3">
             <div>
               <h2 className="type-h3">Installation requirements</h2>
               <p className="type-body text-ink-muted mt-5">
@@ -267,7 +267,7 @@ export default async function AccessoryPage({
           </div>
         </Container>
       </Section>
-      <section className="bg-surface py-16 md:py-24">
+      <section className="bg-surface py-12 md:py-16">
         <Container>
           <SectionHeader
             eyebrow="Compatibility evidence"
@@ -320,7 +320,7 @@ export default async function AccessoryPage({
             {resourceTypes.map((resource) => (
               <div
                 key={resource}
-                className="bg-canvas grid min-h-40 content-between p-5"
+                className="bg-canvas grid min-h-32 content-between p-5"
               >
                 <Download aria-hidden className="text-accent size-4" />
                 <div>
@@ -346,17 +346,17 @@ export default async function AccessoryPage({
 }
 function StatusBlock({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-brand-950 min-h-44 p-5">
+    <div className="bg-brand-950 min-h-36 p-5">
       <p className="type-spec-label text-emerald-300">{label}</p>
-      <p className="type-h4 mt-14">{value}</p>
+      <p className="type-h4 mt-8">{value}</p>
     </div>
   );
 }
 function Evidence({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-surface min-h-36 p-5">
+    <div className="bg-surface min-h-32 p-5">
       <p className="type-spec-label text-ink-muted">{label}</p>
-      <p className="type-h5 mt-10">{value}</p>
+      <p className="type-h5 mt-8">{value}</p>
     </div>
   );
 }

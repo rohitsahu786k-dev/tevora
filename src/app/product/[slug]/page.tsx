@@ -341,7 +341,7 @@ export default async function ProductPage({
               <Link
                 key={accessory.slug}
                 href={routes.accessory(accessory.slug)}
-                className="bg-canvas hover:bg-accent-light min-h-44 p-5"
+                className="bg-canvas hover:bg-accent-light min-h-36 p-5"
               >
                 <h2 className="type-h4">{accessory.name}</h2>
                 <p className="type-technical text-ink-muted mt-12">
@@ -384,7 +384,7 @@ export default async function ProductPage({
       </Section>
       <section
         id="resources"
-        className="bg-surface scroll-mt-24 py-16 md:py-24"
+        className="bg-surface scroll-mt-24 py-12 md:py-16"
       >
         <Container>
           <SectionHeader
@@ -396,7 +396,7 @@ export default async function ProductPage({
             {resourceTypes.map((resource) => (
               <div
                 key={resource}
-                className="bg-surface grid min-h-40 content-between p-5"
+                className="bg-surface grid min-h-32 content-between p-5"
               >
                 <Download aria-hidden className="text-accent size-4" />
                 <div>
@@ -439,7 +439,7 @@ export default async function ProductPage({
 }
 function IntroBlock({ label, copy }: { label: string; copy: string }) {
   return (
-    <article className="min-h-64 border-white/20 p-6 md:odd:border-r">
+    <article className="min-h-48 border-white/20 p-5 md:odd:border-r">
       <p className="type-spec-label text-emerald-300">{label}</p>
       <p className="type-body-lg mt-14 text-white/75">{copy}</p>
     </article>

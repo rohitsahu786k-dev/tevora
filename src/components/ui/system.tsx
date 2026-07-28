@@ -32,7 +32,7 @@ export function Section({
   return (
     <section
       className={cn(
-        "py-16 md:py-24 lg:py-32",
+        "py-12 md:py-16 lg:py-20",
         tone === "white" && "bg-surface",
         tone === "dark" && "bg-brand-950 text-white",
         tone === "muted" && "bg-surface-muted",
@@ -108,7 +108,7 @@ export function SectionHeader({
     <ViewportReveal>
       <header
         className={cn(
-          "border-line mb-10 grid gap-5 border-t pt-5 md:mb-16 md:grid-cols-12",
+          "border-line mb-8 grid gap-5 border-t pt-5 md:mb-10 md:grid-cols-12",
           className,
         )}
       >

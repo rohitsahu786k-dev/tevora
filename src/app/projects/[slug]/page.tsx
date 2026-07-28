@@ -125,7 +125,7 @@ export default async function ProjectPage({
       </Section>
       <Section>
         <Container>
-          <div className="grid gap-14 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2">
             <Story
               eyebrow="Client challenge"
               title="The project requirement"
@@ -181,7 +181,7 @@ export default async function ProjectPage({
       </Section>
       <Section tone="dark">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-2">
+          <div className="grid gap-8 lg:grid-cols-2">
             <div>
               <SectionHeader
                 eyebrow="Accessories and integrations"
@@ -237,7 +237,7 @@ export default async function ProjectPage({
       </Section>
       <Section tone="white">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-2">
+          <div className="grid gap-8 lg:grid-cols-2">
             <div>
               <SectionHeader
                 eyebrow="Outcomes"
@@ -302,7 +302,7 @@ export default async function ProjectPage({
                 <Link
                   key={item.slug}
                   href={routes.project(item.slug)}
-                  className="bg-surface grid min-h-52 content-between p-6"
+                  className="bg-surface grid min-h-44 content-between p-5"
                 >
                   <span className="type-series text-accent">Project</span>
                   <div>

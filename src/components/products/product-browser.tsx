@@ -186,7 +186,7 @@ export function ProductBrowser({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: motionTokens.duration.component }}
-                      className="motion-card group bg-surface grid min-h-[24rem] content-between"
+                      className="motion-card group bg-surface grid min-h-[20rem] content-between"
                     >
                       {media?.kind === "image" && (
                         <div className="relative aspect-[4/3] overflow-hidden bg-white">

@@ -58,7 +58,7 @@ export default function SectorsPage() {
               <StaggerItem key={sector.slug} className="border-line border-b">
                 <Link
                   href={routes.sector(sector.slug)}
-                  className="motion-card group hover:bg-accent-light grid min-h-56 gap-6 py-7 md:grid-cols-12 md:px-5"
+                  className="motion-card group hover:bg-accent-light grid min-h-40 gap-5 py-5 md:grid-cols-12 md:px-5"
                 >
                   <span className="type-model text-ink-muted md:col-span-1">
                     {String(index + 1).padStart(2, "0")}

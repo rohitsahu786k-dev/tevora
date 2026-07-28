@@ -247,9 +247,9 @@ export default function ProductsPage() {
                 "Access, cable routing and equipment accommodation treated as part of the product architecture.",
               ],
             ].map(([number, title, copy]) => (
-              <article key={number} className="bg-canvas min-h-64 p-6">
+              <article key={number} className="bg-canvas min-h-52 p-5">
                 <span className="type-model text-accent">{number}</span>
-                <h2 className="type-h3 mt-16">{title}</h2>
+                <h2 className="type-h3 mt-10">{title}</h2>
                 <p className="type-body-sm text-ink-muted mt-4">{copy}</p>
               </article>
             ))}
@@ -269,7 +269,7 @@ export default function ProductsPage() {
                 key={family.slug}
                 href={family.href as never}
                 style={sharedElementStyle("family", family.slug)}
-                className="motion-card group bg-surface hover:bg-accent-light grid min-h-[23rem] content-between p-6 md:p-9"
+                className="motion-card group bg-surface hover:bg-accent-light grid min-h-[18rem] content-between p-5 md:p-7"
               >
                 <div className="flex justify-between">
                   <span className="type-model text-ink-muted">
@@ -800,7 +800,7 @@ export default function ProductsPage() {
               <Link
                 key={space.slug}
                 href={routes.space(space.slug)}
-                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-52 content-between p-6"
+                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-44 content-between p-5"
               >
                 <span className="type-caption text-ink-muted">
                   {space.group}
@@ -828,7 +828,7 @@ export default function ProductsPage() {
               <Link
                 key={sector.slug}
                 href={routes.sector(sector.slug)}
-                className={`group min-h-44 p-5 ${index % 4 !== 3 ? "md:border-line md:border-r" : ""}`}
+                className={`group min-h-36 p-5 ${index % 4 !== 3 ? "md:border-line md:border-r" : ""}`}
               >
                 <span className="type-model text-ink-muted">
                   {String(index + 1).padStart(2, "0")}
@@ -883,9 +883,9 @@ function Callout({
   cta: string;
 }) {
   return (
-    <article className="bg-canvas min-h-80 p-7">
+    <article className="bg-canvas min-h-64 p-6">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="type-h2 mt-14">{title}</h2>
+      <h2 className="type-h2 mt-10">{title}</h2>
       <p className="type-body-sm text-ink-muted mt-4">{copy}</p>
       <SecondaryButton asChild className="mt-8">
         <Link href={href as never}>

@@ -78,7 +78,7 @@ export default function SpacesPage() {
                       <Link
                         href={routes.space(space.slug)}
                         style={sharedElementStyle("space", space.slug)}
-                        className="motion-card group bg-surface hover:bg-accent-light grid min-h-80 content-between p-6"
+                        className="motion-card group bg-surface hover:bg-accent-light grid min-h-64 content-between p-5"
                       >
                         <div>
                           <div className="flex justify-between">
@@ -90,7 +90,7 @@ export default function SpacesPage() {
                               className="motion-arrow size-4"
                             />
                           </div>
-                          <h3 className="type-h2 mt-12">{space.name}</h3>
+                          <h3 className="type-h2 mt-8">{space.name}</h3>
                           <p className="type-body-sm text-ink-muted mt-2 max-w-2xl">
                             {space.summary}
                           </p>

@@ -304,7 +304,7 @@ function ResourceCard({
   );
   const requestOnly = resource.dataStatus === "placeholder";
   return (
-    <article className="bg-surface grid min-h-[25rem] content-between p-6">
+    <article className="bg-surface grid min-h-[20rem] content-between p-5">
       <div>
         <div className="flex items-start justify-between">
           <FileText aria-hidden className="text-accent size-5" />
@@ -319,7 +319,7 @@ function ResourceCard({
             )}
           </div>
         </div>
-        <h2 className="type-h3 mt-14">{resource.title}</h2>
+        <h2 className="type-h3 mt-10">{resource.title}</h2>
         <p className="type-body-sm text-ink-muted mt-4">{resource.summary}</p>
       </div>
       <div>

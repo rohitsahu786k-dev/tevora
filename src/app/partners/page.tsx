@@ -196,7 +196,7 @@ export default function PartnersPage() {
           />
           <ol className="bg-line border-line grid gap-px border md:grid-cols-4">
             {partnerJourney.map((step, index) => (
-              <li key={step} className="bg-canvas min-h-44 p-6">
+              <li key={step} className="bg-canvas min-h-36 p-5">
                 <span className="type-model text-accent">0{index + 1}</span>
                 <p className="type-h4 mt-10">{step}</p>
               </li>

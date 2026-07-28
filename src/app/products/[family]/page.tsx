@@ -237,7 +237,7 @@ export default async function ProductFamilyPage({
       </Section>
       <section
         id="product-browser"
-        className="bg-surface scroll-mt-24 py-16 md:py-24"
+        className="bg-surface scroll-mt-24 py-12 md:py-16"
       >
         <Container>
           <SectionHeader
@@ -304,9 +304,9 @@ export default async function ProductFamilyPage({
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-3">
             {engineeringCapabilities.map((capability, index) => (
-              <article key={capability} className="bg-surface min-h-44 p-5">
+              <article key={capability} className="bg-surface min-h-36 p-5">
                 <span className="type-model text-ink-muted">0{index + 1}</span>
-                <h3 className="type-h4 mt-16">{capability}</h3>
+                <h3 className="type-h4 mt-10">{capability}</h3>
               </article>
             ))}
           </div>
@@ -323,7 +323,7 @@ export default async function ProductFamilyPage({
               <Link
                 key={space.slug}
                 href={routes.space(space.slug)}
-                className="motion-card group hover:bg-accent-light min-h-40 p-5"
+                className="motion-card group hover:bg-accent-light min-h-32 p-5"
               >
                 <p className="type-caption text-ink-muted">{space.group}</p>
                 <h3 className="type-h4 mt-10">{space.name}</h3>
@@ -374,7 +374,7 @@ export default async function ProductFamilyPage({
       </Section>
       <Section>
         <Container>
-          <div className="grid gap-14 lg:grid-cols-2">
+          <div className="grid gap-8 lg:grid-cols-2">
             <div>
               <SectionHeader
                 eyebrow="Materials and finishes"
@@ -426,10 +426,10 @@ export default async function ProductFamilyPage({
               <Link
                 key={resource}
                 href={routes.resources}
-                className="motion-card group bg-surface min-h-48 p-5"
+                className="motion-card group bg-surface min-h-36 p-5"
               >
                 <Download aria-hidden className="text-accent size-4" />
-                <h3 className="type-h4 mt-20">{resource}</h3>
+                <h3 className="type-h4 mt-12">{resource}</h3>
               </Link>
             ))}
           </div>
@@ -446,7 +446,7 @@ export default async function ProductFamilyPage({
               <Link
                 key={related.slug}
                 href={routes.productFamily(related.slug)}
-                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-64 content-between p-6"
+                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-52 content-between p-5"
               >
                 <span className="type-series text-accent">
                   {related.series.length} series

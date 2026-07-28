@@ -136,7 +136,7 @@ export default async function SectorPage({
 
       <Section tone="dark">
         <Container>
-          <div className="grid gap-12 md:grid-cols-12">
+          <div className="grid gap-8 md:grid-cols-12">
             <Eyebrow className="text-emerald-300 md:col-span-3">
               Sector overview
             </Eyebrow>
@@ -182,7 +182,7 @@ export default async function SectorPage({
               <Link
                 key={space.slug}
                 href={routes.space(space.slug)}
-                className="motion-card group bg-surface hover:bg-accent-light grid min-h-56 content-between p-6"
+                className="motion-card group bg-surface hover:bg-accent-light grid min-h-44 content-between p-5"
               >
                 <span className="type-model text-ink-muted">
                   {String(index + 1).padStart(2, "0")}
@@ -215,7 +215,7 @@ export default async function SectorPage({
               <Link
                 key={family.slug}
                 href={routes.productFamily(family.slug)}
-                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-56 content-between p-6"
+                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-44 content-between p-5"
               >
                 <span className="type-series text-accent">
                   {family.series.length} series
@@ -261,11 +261,11 @@ export default async function SectorPage({
           />
           <ol className="grid gap-px bg-white/20 md:grid-cols-5">
             {integrationConsiderations.map((item, index) => (
-              <li key={item} className="bg-brand-950 min-h-52 p-5">
+              <li key={item} className="bg-brand-950 min-h-40 p-5">
                 <span className="type-model text-emerald-300">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <p className="type-h5 mt-16">{item}</p>
+                <p className="type-h5 mt-10">{item}</p>
               </li>
             ))}
           </ol>
@@ -329,7 +329,7 @@ export default async function SectorPage({
                   <Link
                     key={resource}
                     href={routes.resources}
-                    className="bg-canvas grid min-h-40 content-between p-5"
+                    className="bg-canvas grid min-h-32 content-between p-5"
                   >
                     <Download aria-hidden className="text-accent size-4" />
                     <div>

@@ -194,7 +194,7 @@ export default async function SpacePage({
       </Section>
       <Section>
         <Container>
-          <div className="grid gap-14 lg:grid-cols-3">
+          <div className="grid gap-8 lg:grid-cols-3">
             <EditorialList
               eyebrow="Primary users"
               title="People in the space"
@@ -225,7 +225,7 @@ export default async function SpacePage({
               <Link
                 key={family.slug}
                 href={routes.productFamily(family.slug)}
-                className="motion-card group bg-surface hover:bg-accent-light grid min-h-64 content-between p-6"
+                className="motion-card group bg-surface hover:bg-accent-light grid min-h-52 content-between p-5"
               >
                 <span className="type-series text-accent">
                   {family.series.length} series
@@ -271,12 +271,12 @@ export default async function SpacePage({
             {configurations.map((configuration, index) => (
               <article
                 key={configuration.name}
-                className="bg-brand-950 min-h-64 p-6"
+                className="bg-brand-950 min-h-52 p-5"
               >
                 <span className="type-model text-emerald-300">
                   0{index + 1}
                 </span>
-                <h2 className="type-h3 mt-16">{configuration.name}</h2>
+                <h2 className="type-h3 mt-10">{configuration.name}</h2>
                 <p className="type-body-sm mt-4 text-white/55">
                   {configuration.copy}
                 </p>
@@ -385,7 +385,7 @@ export default async function SpacePage({
               <Link
                 key={resource}
                 href={routes.resources}
-                className="bg-canvas grid min-h-44 content-between p-5"
+                className="bg-canvas grid min-h-36 content-between p-5"
               >
                 <Download aria-hidden className="text-accent size-4" />
                 <div>
