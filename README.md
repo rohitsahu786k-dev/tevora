@@ -1,6 +1,6 @@
-# TEVORA website
+# ONESPACE website
 
-Production-oriented website for TEVORA Technology Furniture. The repository includes the full route architecture, custom interface system, product and market taxonomies, configuration and compatibility frameworks, Sanity integration, search, forms, SEO, media and quality tooling. Public launch still requires approved product content, brand assets, media, legal documents and production integrations; see `docs/LAUNCH-CHECKLIST.md`.
+Production-oriented website for ONESPACE Technology Furniture. The repository includes the full route architecture, custom interface system, product and market taxonomies, configuration and compatibility frameworks, Sanity integration, search, forms, SEO, media and quality tooling. Public launch still requires approved product content, brand assets, media, legal documents and production integrations; see `docs/LAUNCH-CHECKLIST.md`.
 
 ## Stack
 
@@ -67,7 +67,7 @@ npm run start
 | `SANITY_API_READ_TOKEN`                | Preview    | Server-only token for draft content                    |
 | `SANITY_PREVIEW_SECRET`                | Preview    | Server-only draft-mode URL secret                      |
 | `DATABASE_URL`                         | Forms      | Server-only MongoDB connection string                  |
-| `MONGODB_DATABASE`                     | No         | MongoDB database name; defaults to `tevora`            |
+| `MONGODB_DATABASE`                     | No         | MongoDB database name; defaults to `onespace`          |
 | `CLOUDINARY_URL`                       | Forms      | Server-only Cloudinary API connection URL              |
 | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`    | Media      | Public Cloudinary cloud name                           |
 | `SMTP_USER` / `SMTP_PASSWORD`          | Forms      | Server-only SMTP credentials                           |
@@ -85,7 +85,7 @@ Replace the provisional assets in `public/brand` with approved masters before la
 
 ## Design system
 
-The custom TEVORA system is documented live at `/design-system`. Its semantic tokens and typography roles live in `src/app/globals.css`; reusable primitives are exported from `src/components/ui/index.ts`.
+The custom ONESPACE system is documented live at `/design-system`. Its semantic tokens and typography roles live in `src/app/globals.css`; reusable primitives are exported from `src/components/ui/index.ts`.
 
 The system uses Geist and Geist Mono through `next/font`. Prefer semantic surface utilities such as `bg-canvas`, `bg-surface`, `text-graphite`, `text-ink-muted`, `border-line`, and `text-accent` over raw colour values. Product and layout composition should use `Container`, `Section`, `SectionHeader`, and `ResponsiveGrid` to preserve alignment.
 
@@ -150,4 +150,4 @@ For Vercel, `vercel.json` pins the framework preset to Next.js and clears any in
 
 ## Future OnePWS endorsement
 
-The parent relationship is intentionally hidden initially. `brandSettings` contains `parentBrandName`, `parentBrandVisibility`, and `parentBrandRelationshipText`; the footer demonstrates conditional consumption. The CMS singleton exposes the same controls to support “TEVORA by OnePWS” or “TEVORA — A OnePWS Company” without changing component architecture. Do not encode the parent name directly in presentation components.
+The parent relationship is intentionally hidden initially. `brandSettings` contains `parentBrandName`, `parentBrandVisibility`, and `parentBrandRelationshipText`; the footer demonstrates conditional consumption. The CMS singleton exposes the same controls to support “ONESPACE by OnePWS” or “ONESPACE — A OnePWS Company” without changing component architecture. Do not encode the parent name directly in presentation components.

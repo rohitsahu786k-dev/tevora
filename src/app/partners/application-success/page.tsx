@@ -9,7 +9,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createPageMetadata({
   title: "Partner Application Submitted",
-  description: "TEVORA Partner Network application confirmation.",
+  description: "ONESPACE Partner Network application confirmation.",
   path: routes.partnerApplicationSuccess,
   noIndex: true,
 });
@@ -29,10 +29,10 @@ export default async function PartnerApplicationSuccessPage({
         <Container size="narrow">
           <div className="border-accent border-l-2 pl-6 md:pl-10">
             <Check aria-hidden className="text-accent size-8" />
-            <Eyebrow className="mt-8">TEVORA Partner Network</Eyebrow>
+            <Eyebrow className="mt-8">ONESPACE Partner Network</Eyebrow>
             <h1 className="type-h1 mt-6">Application submitted for review.</h1>
             <p className="type-body-lg text-ink-muted mt-7">
-              Thank you for your interest in the TEVORA Partner Network. Your
+              Thank you for your interest in the ONESPACE Partner Network. Your
               application has been submitted for review. Our team will assess
               your company profile, market coverage and strategic fit before
               contacting you regarding the next stage.

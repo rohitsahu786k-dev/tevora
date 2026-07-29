@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 export const metadata = createPageMetadata({
   title: "Projects",
   description:
-    "Explore published TEVORA technology-furniture applications across professional spaces.",
+    "Explore published ONESPACE technology-furniture applications across professional spaces.",
   path: routes.projects,
 });
 

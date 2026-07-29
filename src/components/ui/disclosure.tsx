@@ -13,7 +13,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { IconButton } from "@/components/ui/system";
 import { motionTokens } from "@/lib/motion/tokens";
-import { TevoraMotionProvider } from "@/components/motion/motion-provider";
+import { OnespaceMotionProvider } from "@/components/motion/motion-provider";
 
 function useEscape(close: () => void, active = true) {
   useEffect(() => {
@@ -84,7 +84,7 @@ export function Modal({
   useEscape(close, open);
   useDialogFocus(open, close, panelRef, triggerRef);
   return (
-    <TevoraMotionProvider>
+    <OnespaceMotionProvider>
       <>
         <button
           ref={triggerRef}
@@ -131,7 +131,7 @@ export function Modal({
           )}
         </AnimatePresence>
       </>
-    </TevoraMotionProvider>
+    </OnespaceMotionProvider>
   );
 }
 export function Drawer({
@@ -151,7 +151,7 @@ export function Drawer({
   useEscape(close, open);
   useDialogFocus(open, close, panelRef, triggerRef);
   return (
-    <TevoraMotionProvider>
+    <OnespaceMotionProvider>
       <>
         <button
           ref={triggerRef}
@@ -197,14 +197,14 @@ export function Drawer({
           )}
         </AnimatePresence>
       </>
-    </TevoraMotionProvider>
+    </OnespaceMotionProvider>
   );
 }
 export type AccordionItem = { title: string; content: ReactNode };
 export function Accordion({ items }: { items: AccordionItem[] }) {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <TevoraMotionProvider>
+    <OnespaceMotionProvider>
       <div className="border-line border-t">
         {items.map((item, index) => {
           const id = `accordion-${index}`;
@@ -249,7 +249,7 @@ export function Accordion({ items }: { items: AccordionItem[] }) {
           );
         })}
       </div>
-    </TevoraMotionProvider>
+    </OnespaceMotionProvider>
   );
 }
 export type TabItem = { label: string; content: ReactNode };
@@ -262,7 +262,7 @@ export function Tabs({ items }: { items: TabItem[] }) {
     refs.current[next]?.focus();
   };
   return (
-    <TevoraMotionProvider>
+    <OnespaceMotionProvider>
       <div>
         <div
           role="tablist"
@@ -308,7 +308,7 @@ export function Tabs({ items }: { items: TabItem[] }) {
           {items[active]?.content}
         </motion.div>
       </div>
-    </TevoraMotionProvider>
+    </OnespaceMotionProvider>
   );
 }
 export function FilterChip({

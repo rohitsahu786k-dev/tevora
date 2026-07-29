@@ -16,7 +16,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 export const metadata = createPageMetadata({
   title: "Accessories",
   description:
-    "Mounting, power, connectivity, cable management and equipment-support accessories for TEVORA products.",
+    "Mounting, power, connectivity, cable management and equipment-support accessories for ONESPACE products.",
   path: routes.accessories,
 });
 export default function AccessoriesPage() {

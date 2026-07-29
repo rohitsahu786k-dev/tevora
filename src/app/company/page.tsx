@@ -17,7 +17,7 @@ export default function Page() {
       description={brandSettings.longDescription}
     >
       <PrimaryButton asChild arrow>
-        <Link href={routes.contact}>Contact TEVORA</Link>
+        <Link href={routes.contact}>Contact ONESPACE</Link>
       </PrimaryButton>
     </PageShell>
   );

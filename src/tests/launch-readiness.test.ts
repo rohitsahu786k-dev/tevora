@@ -11,7 +11,7 @@ import { mainNavigation } from "@/config/navigation";
 
 describe("launch-facing brand contracts", () => {
   it("preserves the primary identity verbatim", () => {
-    expect(brandSettings.brandName).toBe("TEVORA");
+    expect(brandSettings.brandName).toBe("ONESPACE");
     expect(brandSettings.brandDescriptor).toBe("Technology Furniture");
     expect(brandSettings.brandLine).toBe("Technology, built into the space.");
   });

@@ -39,7 +39,7 @@ export const productConfigurationSchema = z.object({
   accessorySlugs: z.array(z.string()),
 });
 
-export const tevoraConfigurationSchema = z.object({
+export const onespaceConfigurationSchema = z.object({
   version: z.literal(CONFIGURATION_VERSION),
   id: z.string().min(1),
   updatedAt: z.iso.datetime(),

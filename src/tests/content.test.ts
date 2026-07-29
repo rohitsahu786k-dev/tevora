@@ -57,7 +57,7 @@ describe("content models", () => {
   });
 
   it("validates global settings and unverified specification values", () => {
-    expect(brandSettingsSchema.parse(brandSettings).brandName).toBe("TEVORA");
+    expect(brandSettingsSchema.parse(brandSettings).brandName).toBe("ONESPACE");
     expect(
       specificationItemSchema.safeParse({
         label: "Width",

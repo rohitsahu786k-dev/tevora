@@ -13,7 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 import { motionTokens } from "@/lib/motion/tokens";
 
-const RECENT_SEARCHES_KEY = "tevora-recent-searches";
+const RECENT_SEARCHES_KEY = "onespace-recent-searches";
 
 export function GlobalSearch({
   inverse = false,
@@ -216,7 +216,7 @@ export function GlobalSearch({
                     <div>
                       <p className="type-eyebrow text-accent">Global search</p>
                       <h2 id="search-title" className="type-h3 mt-2">
-                        Search TEVORA
+                        Search ONESPACE
                       </h2>
                     </div>
                     <button

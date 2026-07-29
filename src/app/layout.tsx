@@ -7,7 +7,7 @@ import { RouteScrollReset } from "@/components/navigation/route-scroll-reset";
 import { SkipToContent } from "@/components/navigation/skip-to-content";
 import { CmsVisualEditing } from "@/components/cms/visual-editing";
 import { OrganisationJsonLd } from "@/components/seo/json-ld";
-import { TevoraMotionProvider } from "@/components/motion";
+import { OnespaceMotionProvider } from "@/components/motion";
 import { brandSettings } from "@/config/brand";
 import "./globals.css";
 
@@ -42,9 +42,9 @@ export default function RootLayout({
         <SkipToContent />
         <RouteScrollReset />
         <PageProgress />
-        <TevoraMotionProvider>
+        <OnespaceMotionProvider>
           <SiteHeader />
-        </TevoraMotionProvider>
+        </OnespaceMotionProvider>
         {children}
         <SiteFooter />
         {process.env.NEXT_PUBLIC_SANITY_VISUAL_EDITING === "true" && (

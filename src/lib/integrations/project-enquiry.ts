@@ -77,7 +77,7 @@ export const projectEnquiryAdapters: {
       await sendEmail({
         to,
         replyTo: input.workEmail,
-        subject: `New TEVORA project enquiry — ${input.projectName}`,
+        subject: `New ONESPACE project enquiry — ${input.projectName}`,
         text: [
           `Reference: ${context.enquiryId}`,
           `Project: ${input.projectName}`,
@@ -102,7 +102,7 @@ export const projectEnquiryAdapters: {
       ]);
       const storedFiles = await storeFiles(
         files,
-        `tevora/submissions/enquiries/${context.enquiryId}`,
+        `onespace/submissions/enquiries/${context.enquiryId}`,
       );
       const database = await getDatabase();
       await database

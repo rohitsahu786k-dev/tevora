@@ -14,7 +14,7 @@ export const partnerTypeContent: PartnerTypeContent[] = [
     id: "authorised-dealer",
     name: "Authorised Dealer",
     description:
-      "For organisations that sell TEVORA products and manage customer relationships within an approved territory or market.",
+      "For organisations that sell ONESPACE products and manage customer relationships within an approved territory or market.",
     idealOrganisation: "Established technology or specialist furniture dealer",
     capabilities:
       "Consultative selling, account development and project coordination",
@@ -43,7 +43,7 @@ export const partnerTypeContent: PartnerTypeContent[] = [
     id: "design-specification-partner",
     name: "Design & Specification Partner",
     description:
-      "For architects, consultants, designers and technical specialists who specify TEVORA products in projects.",
+      "For architects, consultants, designers and technical specialists who specify ONESPACE products in projects.",
     idealOrganisation:
       "Independent design, architecture or consultancy practice",
     capabilities: "Space planning, specification and technical coordination",
@@ -152,7 +152,7 @@ export const partnerFaqs = [
   {
     title: "Can a company apply for more than one partner type?",
     content:
-      "Yes. Select every relevant type and identify the primary area of interest. TEVORA may discuss a different programme fit during review.",
+      "Yes. Select every relevant type and identify the primary area of interest. ONESPACE may discuss a different programme fit during review.",
   },
   {
     title: "Is there an application fee?",
@@ -192,6 +192,6 @@ export const partnerFaqs = [
   {
     title: "What happens after submitting the application?",
     content:
-      "TEVORA reviews the organisation, coverage, capabilities and strategic fit before deciding whether to request information or progress to a discussion. No response time is promised.",
+      "ONESPACE reviews the organisation, coverage, capabilities and strategic fit before deciding whether to request information or progress to a discussion. No response time is promised.",
   },
 ];

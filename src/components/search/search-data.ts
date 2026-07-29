@@ -102,17 +102,17 @@ export const searchIndex: SearchResult[] = [
   },
   {
     id: "login",
-    title: "TEVORA Login",
-    description: "Access technical downloads with a TEVORA-issued account ID.",
+    title: "ONESPACE Login",
+    description: "Access technical downloads with your ONESPACE account ID.",
     href: routes.login,
     category: "Resources" as const,
-    keywords: "login sign in downloads account tevora id access",
+    keywords: "login sign in downloads account onespace id access",
   },
   {
     id: "company",
     title: "Company",
     description:
-      "TEVORA designs technology-integrated furniture for professional spaces.",
+      "ONESPACE designs technology-integrated furniture for professional spaces.",
     href: routes.company,
     category: "Company Pages" as const,
     keywords: "about technology furniture brand",
@@ -129,7 +129,7 @@ export const searchIndex: SearchResult[] = [
   {
     id: "contact",
     title: "Discuss Your Project",
-    description: "Start a project conversation with TEVORA.",
+    description: "Start a project conversation with ONESPACE.",
     href: routes.contact,
     category: "Company Pages" as const,
     keywords: "contact proposal enquiry",

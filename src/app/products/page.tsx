@@ -23,7 +23,7 @@ import { sharedElementStyle } from "@/lib/motion/shared-elements";
 export const metadata = createPageMetadata({
   title: "Products",
   description:
-    "Explore TEVORA technology-integrated furniture product families for presentation, display, collaboration and equipment integration.",
+    "Explore ONESPACE technology-integrated furniture product families for presentation, display, collaboration and equipment integration.",
   path: routes.products,
 });
 
@@ -292,7 +292,7 @@ export default function ProductsPage() {
           <SectionHeader
             eyebrow="Product approach"
             title="Furniture designed around the technology people need to use."
-            description="TEVORA helps project teams place screens, devices, controls, equipment and cables into clean, serviceable furniture."
+            description="ONESPACE helps project teams place screens, devices, controls, equipment and cables into clean, serviceable furniture."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-3">
             {[
@@ -474,7 +474,7 @@ export default function ProductsPage() {
             <Callout
               eyebrow="Design Support"
               title="Get specification support."
-              copy="Share the room requirement with TEVORA for product and integration guidance."
+              copy="Share the room requirement with ONESPACE for product and integration guidance."
               href={routes.designSupport}
               cta="Explore Design Support"
             />

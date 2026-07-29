@@ -30,7 +30,7 @@ export async function submitResourceAccessRequest(
     return {
       ok: false,
       message:
-        "The TEVORA access database is not connected yet. Configure DATABASE_URL to save download access requests.",
+        "The ONESPACE access database is not connected yet. Configure DATABASE_URL to save download access requests.",
     };
 
   const source = payload as { resourceId?: unknown; resourceTitle?: unknown };

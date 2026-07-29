@@ -1,4 +1,4 @@
-# TEVORA Partner Network implementation report
+# ONESPACE Partner Network implementation report
 
 Date: 13 July 2026
 
@@ -10,7 +10,7 @@ Date: 13 July 2026
 
 ## Components and workflow
 
-- Editorial partner programme page using the TEVORA grid, imagery and motion language.
+- Editorial partner programme page using the ONESPACE grid, imagery and motion language.
 - Twelve-stage React Hook Form application with Zod client and server validation.
 - Responsive progress navigation, previous/next controls, review/edit, print/PDF through the browser, repeated office locations and up to three project references.
 - Multiple partner-type, sector and product-family selection.

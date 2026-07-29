@@ -11,7 +11,7 @@ import {
 } from "@/lib/compatibility/engine";
 import { cn } from "@/lib/utils";
 import { motionTokens } from "@/lib/motion/tokens";
-import { TevoraMotionProvider } from "@/components/motion/motion-provider";
+import { OnespaceMotionProvider } from "@/components/motion/motion-provider";
 
 export function CompatibilityConfigurator() {
   const searchParams = useSearchParams();
@@ -46,7 +46,7 @@ export function CompatibilityConfigurator() {
     );
   };
   return (
-    <TevoraMotionProvider>
+    <OnespaceMotionProvider>
       <div className="grid gap-10 lg:grid-cols-[20rem_1fr]">
         <aside>
           <label htmlFor="base-product" className="type-spec-label">
@@ -76,7 +76,7 @@ export function CompatibilityConfigurator() {
           </select>
           <div className="border-accent bg-accent-light mt-6 border-l-2 p-4">
             <p className="type-body-sm">
-              Use this as a planning guide. TEVORA confirms accessory fit
+              Use this as a planning guide. ONESPACE confirms accessory fit
               against the final product, equipment schedule and installation
               conditions.
             </p>
@@ -146,6 +146,6 @@ export function CompatibilityConfigurator() {
           })}
         </div>
       </div>
-    </TevoraMotionProvider>
+    </OnespaceMotionProvider>
   );
 }

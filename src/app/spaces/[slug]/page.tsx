@@ -336,7 +336,7 @@ export default async function SpacePage({
                 <div className="bg-canvas mt-8 p-6">
                   <h3 className="type-h4">Discuss a similar application</h3>
                   <p className="type-body-sm text-ink-muted mt-3 max-w-lg">
-                    Public case studies are being prepared. TEVORA can still
+                    Public case studies are being prepared. ONESPACE can still
                     help compare this space with similar project requirements.
                   </p>
                   <Link
@@ -357,7 +357,7 @@ export default async function SpacePage({
           <SectionHeader
             eyebrow="Resources"
             title="Plan the space"
-            description="Use a TEVORA-issued login to download planning documents, drawings and technical files for the space."
+            description="Use an approved ONESPACE login to download planning documents, drawings and technical files for the space."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-4">
             {resources.map((resource) => (
@@ -370,7 +370,7 @@ export default async function SpacePage({
                 <div>
                   <h2 className="type-h5">{resource}</h2>
                   <p className="type-caption text-ink-muted mt-2">
-                    TEVORA login required
+                    ONESPACE login required
                   </p>
                 </div>
               </Link>
@@ -426,7 +426,7 @@ const environmentPopoverPositions = [
 function getSpaceEnvironmentMedia(space: (typeof spaces)[number]) {
   return {
     src: `/media/spaces/generated/${space.slug}.png`,
-    alt: `${space.name} environment with recommended TEVORA technology furniture products integrated into the room`,
+    alt: `${space.name} environment with recommended ONESPACE technology furniture products integrated into the room`,
   };
 }
 
@@ -463,7 +463,7 @@ function SpaceProductEnvironment({
           .space-product-plan:has([data-product-trigger="3"]:hover) [data-marker="3"] [data-marker-pulse],
           .space-product-plan:has([data-product-trigger="4"]:hover) [data-marker="4"] [data-marker-pulse],
           .space-product-plan:has([data-product-trigger="5"]:hover) [data-marker="5"] [data-marker-pulse] {
-            animation: tevora-marker-ping 1.15s cubic-bezier(0, 0, .2, 1) infinite;
+            animation: onespace-marker-ping 1.15s cubic-bezier(0, 0, .2, 1) infinite;
             opacity: 1;
           }
           .space-product-plan [data-marker]:hover [data-marker-core],
@@ -480,7 +480,7 @@ function SpaceProductEnvironment({
               0 0 28px rgba(67, 176, 151, .52);
             transform: scale(1.45);
           }
-          @keyframes tevora-marker-ping {
+          @keyframes onespace-marker-ping {
             0% {
               opacity: .85;
               transform: scale(.85);
@@ -501,7 +501,7 @@ function SpaceProductEnvironment({
             A room-led product plan for {spaceName.toLowerCase()}
           </h2>
           <p className="type-body-lg text-ink-muted mt-5 max-w-2xl">
-            See the space first, then review the TEVORA product series that
+            See the space first, then review the ONESPACE product series that
             usually support the room activity, equipment and service access.
           </p>
         </div>

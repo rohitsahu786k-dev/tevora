@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const loginAccessSchema = z.object({
-  workEmail: z.email("Enter the email linked to your TEVORA account."),
-  tevoraId: z.string().min(4, "Enter your TEVORA-issued ID."),
+  workEmail: z.email("Enter the email linked to your ONESPACE account."),
+  onespaceId: z.string().min(4, "Enter your ONESPACE-issued ID."),
   company: z.string().min(2, "Enter your company."),
 });
 

@@ -165,7 +165,7 @@ export function ProjectBrowser() {
           <p className="type-body-sm text-ink-muted mt-4">
             {hasFilters
               ? "Reset filters or discuss an application directly with the project team."
-              : "Talk to TEVORA about relevant applications for your sector, space or product family."}
+              : "Talk to ONESPACE about relevant applications for your sector, space or product family."}
           </p>
         </div>
       )}
@@ -209,7 +209,7 @@ function Meta({
     <div>
       <dt className="type-spec-label">{label}</dt>
       <dd className="type-caption text-ink-muted mt-1">
-        {value || "Discuss with TEVORA"}
+        {value || "Discuss with ONESPACE"}
       </dd>
     </div>
   );

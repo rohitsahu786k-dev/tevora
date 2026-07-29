@@ -282,7 +282,7 @@ export default async function SectorPage({
                 Applications in practice
               </h2>
               <p className="type-body-sm text-ink-muted mt-3 max-w-xl">
-                Review project contexts for this sector or speak with TEVORA
+                Review project contexts for this sector or speak with ONESPACE
                 about a comparable application while public case studies are
                 prepared.
               </p>
@@ -305,7 +305,7 @@ export default async function SectorPage({
                 <div className="bg-canvas mt-8 p-6">
                   <h3 className="type-h4">Discuss a similar application</h3>
                   <p className="type-body-sm text-ink-muted mt-3 max-w-lg">
-                    Public case studies are being prepared. TEVORA can help
+                    Public case studies are being prepared. ONESPACE can help
                     compare this sector with similar project requirements.
                   </p>
                   <Link
@@ -336,7 +336,7 @@ export default async function SectorPage({
                     <div>
                       <h3 className="type-h5">{resource}</h3>
                       <p className="type-caption text-ink-muted mt-2">
-                        TEVORA login required
+                        ONESPACE login required
                       </p>
                     </div>
                   </Link>

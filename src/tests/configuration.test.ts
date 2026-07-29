@@ -5,7 +5,7 @@ import {
   parseConfiguration,
   serialiseConfiguration,
 } from "@/lib/configuration/state";
-import { tevoraConfigurationSchema } from "@/lib/validation/configuration";
+import { onespaceConfigurationSchema } from "@/lib/validation/configuration";
 
 describe("configuration state", () => {
   it("creates schema-valid versioned state", () => {
@@ -13,7 +13,7 @@ describe("configuration state", () => {
       id: "test-configuration",
       updatedAt: "2026-07-13T00:00:00.000Z",
     });
-    expect(tevoraConfigurationSchema.safeParse(state).success).toBe(true);
+    expect(onespaceConfigurationSchema.safeParse(state).success).toBe(true);
     expect(state.version).toBe(1);
   });
 
@@ -26,7 +26,7 @@ describe("configuration state", () => {
     const serialised = serialiseConfiguration(state);
     expect(parseConfiguration(serialised)).toEqual(state);
     const url = new URL(
-      createConfigurationShareUrl(state, "https://tevora.example/configure"),
+      createConfigurationShareUrl(state, "https://onespace.example/configure"),
     );
     expect(parseConfiguration(url.searchParams.get("configuration"))).toEqual(
       state,

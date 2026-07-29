@@ -682,7 +682,7 @@ export const accessories: Accessory[] = accessoryGroups.map((group) => ({
   slug: group.slug,
   title: group.name,
   name: group.name,
-  summary: `${group.name} accessories help adapt TEVORA products to the equipment, room layout and user workflow of each project.`,
+  summary: `${group.name} accessories help adapt ONESPACE products to the equipment, room layout and user workflow of each project.`,
   group: group.slug,
   accessoryGroup: group.slug,
   series: null,
@@ -698,7 +698,7 @@ export const accessories: Accessory[] = accessoryGroups.map((group) => ({
   requiredAccessories: [],
   excludedAccessories: [],
   downloads: [],
-  seo: draftSeo(group.name, `${group.name} accessories for TEVORA products.`),
+  seo: draftSeo(group.name, `${group.name} accessories for ONESPACE products.`),
   dataStatus: "placeholder",
 }));
 
@@ -1247,7 +1247,7 @@ export const projects: Project[] = [
     completionDate: null,
     seo: draftSeo(
       "Boardroom Technology Furniture Application",
-      "Sample boardroom application for TEVORA technology furniture.",
+      "Sample boardroom application for ONESPACE technology furniture.",
     ),
     dataStatus: "placeholder",
   },
@@ -1357,10 +1357,10 @@ const resourceSeeds: ResourceSeed[] = [
     productFamily: "family-mobile-av-carts",
   },
   {
-    title: "TEVORA Finish Card",
+    title: "ONESPACE Finish Card",
     slug: "finish-card",
     summary:
-      "Finish reference for reviewing TEVORA surface, trim and accent options with interiors, furniture and client teams.",
+      "Finish reference for reviewing ONESPACE surface, trim and accent options with interiors, furniture and client teams.",
     resourceType: "finish-card",
     fileFormat: "PDF",
   },
@@ -1395,7 +1395,7 @@ const resourceSeeds: ResourceSeed[] = [
     title: "Technology Furniture Product Introduction",
     slug: "product-video",
     summary:
-      "Short product introduction for teams who need a fast overview of TEVORA technology furniture categories and typical applications.",
+      "Short product introduction for teams who need a fast overview of ONESPACE technology furniture categories and typical applications.",
     resourceType: "video",
     fileFormat: "MP4",
   },
@@ -1403,7 +1403,7 @@ const resourceSeeds: ResourceSeed[] = [
     title: "Product Image Library",
     slug: "product-image",
     summary:
-      "Image pack for proposals, internal reviews and project presentations where TEVORA product visuals are needed.",
+      "Image pack for proposals, internal reviews and project presentations where ONESPACE product visuals are needed.",
     resourceType: "product-image",
     fileFormat: "JPG",
   },

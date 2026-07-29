@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 export const metadata = createPageMetadata({
   title: "Configure",
   description:
-    "Configure TEVORA technology furniture, add products to a basket and prepare an order request for project review.",
+    "Configure ONESPACE technology furniture, add products to a basket and prepare an order request for project review.",
   path: routes.configure,
   noIndex: true,
 });
@@ -24,7 +24,7 @@ export default function ConfigurePage() {
               </h1>
               <p className="type-body text-ink-muted mt-3 max-w-3xl">
                 Select products, see estimated pricing, add to basket and place
-                an order request for TEVORA review.
+                an order request for ONESPACE review.
               </p>
             </div>
           </header>

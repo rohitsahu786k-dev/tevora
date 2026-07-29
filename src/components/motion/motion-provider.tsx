@@ -4,7 +4,7 @@ import { MotionConfig } from "motion/react";
 import type { ReactNode } from "react";
 import { motionTokens } from "@/lib/motion/tokens";
 
-export function TevoraMotionProvider({ children }: { children: ReactNode }) {
+export function OnespaceMotionProvider({ children }: { children: ReactNode }) {
   return (
     <MotionConfig
       reducedMotion="user"

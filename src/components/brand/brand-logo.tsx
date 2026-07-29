@@ -21,10 +21,10 @@ export function BrandLogo({
         <Image
           src={brandSettings.logoDark}
           alt={brandSettings.brandName}
-          width={430}
-          height={72}
+          width={620}
+          height={96}
           priority={priority}
-          className={cn("h-auto w-40", className)}
+          className={cn("h-auto w-48", className)}
         />
       </picture>
     );
@@ -34,10 +34,10 @@ export function BrandLogo({
     <Image
       src={brandSettings.logoLight}
       alt={brandSettings.brandName}
-      width={430}
-      height={72}
+      width={620}
+      height={96}
       priority={priority}
-      className={cn("h-auto w-40", className)}
+      className={cn("h-auto w-48", className)}
     />
   );
 }

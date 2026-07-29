@@ -299,7 +299,7 @@ export default async function ProductPage({
             </div>
           ) : (
             <EmptyState
-              title="Project-specific options are reviewed with TEVORA"
+              title="Project-specific options are reviewed with ONESPACE"
               description="Share the room, equipment list and installation goals so the right size, finish and configuration can be selected."
             />
           )}
@@ -390,7 +390,7 @@ export default async function ProductPage({
           <SectionHeader
             eyebrow="Resources"
             title="Product files and documentation"
-            description="Download drawings, data sheets and project files after signing in with a TEVORA-issued login."
+            description="Download drawings, data sheets and project files after signing in with an approved ONESPACE login."
           />
           <div className="border-line bg-line grid gap-px border sm:grid-cols-2 lg:grid-cols-5">
             {resourceTypes.map((resource) => (
@@ -402,7 +402,7 @@ export default async function ProductPage({
                 <div>
                   <h2 className="type-h5">{resource}</h2>
                   <p className="type-caption text-ink-muted mt-2">
-                    TEVORA login required
+                    ONESPACE login required
                   </p>
                 </div>
               </div>

@@ -20,14 +20,14 @@ import { routes } from "@/lib/routes";
 export const metadata = createPageMetadata({
   title: "Resources",
   description:
-    "Browse TEVORA product brochures, data sheets, CAD, BIM, Revit, STEP, planning guides and project documentation through a TEVORA-issued login.",
+    "Browse ONESPACE product brochures, data sheets, CAD, BIM, Revit, STEP, planning guides and project documentation with an approved ONESPACE login.",
   path: routes.resources,
 });
 
 const resourceStats = [
   { label: "Records", value: resources.length.toString() },
   { label: "Formats", value: "PDF, DWG, BIM, RVT, STEP" },
-  { label: "Access", value: "TEVORA ID" },
+  { label: "Access", value: "ONESPACE ID" },
 ];
 
 const resourceActions = [
@@ -44,7 +44,7 @@ const resourceActions = [
   {
     icon: FileCheck2,
     title: "Request",
-    text: "Use a TEVORA login for controlled technical downloads.",
+    text: "Use an ONESPACE login for controlled technical downloads.",
   },
 ];
 
@@ -65,9 +65,9 @@ export default async function ResourcesPage({
               Project files for planning, coordination and specification.
             </h1>
             <p className="type-body-lg mt-4 max-w-3xl text-white/74">
-              Search TEVORA brochures, data sheets, drawings, BIM objects, Revit
-              families, STEP files and planning guides. Controlled downloads are
-              released through a TEVORA-issued login.
+              Search ONESPACE brochures, data sheets, drawings, BIM objects,
+              Revit families, STEP files and planning guides. Controlled
+              downloads are released through an approved ONESPACE login.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
               <PrimaryButton asChild className="text-brand-950! bg-white!">
@@ -79,7 +79,7 @@ export default async function ResourcesPage({
                 asChild
                 className="hover:text-brand-950 border-white/55 text-white hover:bg-white"
               >
-                <Link href={routes.login}>Request TEVORA Login</Link>
+                <Link href={routes.login}>Request ONESPACE Login</Link>
               </SecondaryButton>
             </div>
           </div>
@@ -92,13 +92,13 @@ export default async function ResourcesPage({
                 <h2 className="type-h4">Download access</h2>
                 <p className="type-body-sm mt-2 text-white/68">
                   Public records can be reviewed immediately. Controlled files
-                  require TEVORA login access or project approval.
+                  require ONESPACE login access or project approval.
                 </p>
               </div>
             </div>
             {demoAccess && (
               <p className="mt-4 border border-emerald-300/35 bg-emerald-300/10 p-3 text-sm">
-                Demo TEVORA ID confirmed.
+                Demo ONESPACE ID confirmed.
               </p>
             )}
             <dl className="mt-4 grid gap-px border-y border-white/14 bg-white/10 sm:grid-cols-3">
@@ -148,13 +148,13 @@ export default async function ResourcesPage({
               </h2>
               <p className="type-body-sm text-ink-muted mt-3 max-w-3xl">
                 Filter the library to the file set your project team needs. If a
-                file is controlled, request access and TEVORA will confirm the
+                file is controlled, request access and ONESPACE will confirm the
                 correct release path.
               </p>
             </div>
             <div className="text-ink-muted flex items-center gap-3 text-sm">
               <Download aria-hidden className="text-accent size-4" />
-              Current files are released through TEVORA access.
+              Current files are released through ONESPACE access.
             </div>
           </div>
           <Suspense fallback={<ProductBrowserSkeleton />}>
@@ -172,9 +172,9 @@ export default async function ResourcesPage({
                 Need a coordinated pack for a live project?
               </h2>
               <p className="type-body-sm mt-3 max-w-2xl text-white/68">
-                Share the product families, spaces and project stage. TEVORA can
-                confirm the drawings, models, finish references and notes that
-                match the requirement.
+                Share the product families, spaces and project stage. ONESPACE
+                can confirm the drawings, models, finish references and notes
+                that match the requirement.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 md:justify-end">

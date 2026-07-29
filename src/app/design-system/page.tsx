@@ -37,7 +37,7 @@ import { BrandLogo } from "@/components/brand/brand-logo";
 
 export const metadata = createPageMetadata({
   title: "Design System",
-  description: "Internal TEVORA interface and accessibility reference.",
+  description: "Internal ONESPACE interface and accessibility reference.",
   path: routes.designSystem,
   noIndex: true,
 });
@@ -62,7 +62,7 @@ const typeStyles = [
   ["H5", "type-h5", "Interface heading"],
   ["H6", "type-h6", "Technical heading"],
   ["Product title", "type-product", "Presentation Console"],
-  ["Product series", "type-series", "TEVORA / PRESENT"],
+  ["Product series", "type-series", "ONESPACE / PRESENT"],
   ["Model reference", "type-model", "TVR-PR-2400"],
   ["Eyebrow", "type-eyebrow", "Technology furniture"],
   [

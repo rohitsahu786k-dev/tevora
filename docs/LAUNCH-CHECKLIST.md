@@ -1,4 +1,4 @@
-# TEVORA launch checklist
+# ONESPACE launch checklist
 
 Status date: 13 July 2026  
 Decision: **NO-GO until all Blocked items are resolved.**
@@ -7,7 +7,7 @@ Decision: **NO-GO until all Blocked items are resolved.**
 
 | Area                   | Status  | Launch requirement                                                                                                                       |
 | ---------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Trademark review       | Blocked | Obtain clearance for TEVORA, the symbol, product-family names and every series name in target markets.                                   |
+| Trademark review       | Blocked | Obtain clearance for ONESPACE, the symbol, product-family names and every series name in target markets.                                 |
 | Domain                 | Blocked | Acquire and approve the canonical production domain.                                                                                     |
 | Social handles         | Review  | Reserve approved handles or confirm that no social profiles will launch.                                                                 |
 | Logo                   | Blocked | Replace the provisional typographic SVGs and symbol with approved master artwork and usage variants.                                     |

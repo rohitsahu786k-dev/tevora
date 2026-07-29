@@ -65,7 +65,7 @@ function accessoryConcept(
     blurDataURL: blur,
     caption:
       "Accessory concept for planning product fit and integration details.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -89,7 +89,7 @@ function presentationStationImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -111,7 +111,7 @@ function learningFurnitureImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -135,7 +135,7 @@ function displayStandImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -157,7 +157,7 @@ function mobileAvCartImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -175,7 +175,7 @@ function mediaWallImage(id: string, filename: string, alt: string): MediaAsset {
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -199,7 +199,7 @@ function collaborationTableImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -221,7 +221,7 @@ function technicalWorkstationImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -243,7 +243,7 @@ function technologyCredenzaImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -267,7 +267,7 @@ function avEquipmentEnclosureImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -291,7 +291,7 @@ function roomControlImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -315,7 +315,7 @@ function interactiveKioskImage(
     blurDataURL: blur,
     caption:
       "Product concept view for discussing form, equipment integration and project fit.",
-    credit: "TEVORA concept visualisation",
+    credit: "ONESPACE concept visualisation",
   };
 }
 
@@ -336,7 +336,7 @@ function generatedSectorHero(
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption: `${name} sector technology-furniture environment.`,
-    credit: "Generated TEVORA sector visual",
+    credit: "Generated ONESPACE sector visual",
   };
 }
 
@@ -354,7 +354,7 @@ export const mediaAssets = {
     mobileFocalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption: "Technology furniture product families.",
-    credit: "Generated TEVORA hero visual",
+    credit: "Generated ONESPACE hero visual",
   },
   spacesMainHero: {
     id: "spaces-main-hero",
@@ -369,7 +369,7 @@ export const mediaAssets = {
     mobileFocalPoint: { x: 0.58, y: 0.5 },
     blurDataURL: blur,
     caption: "Technology-shaped spaces.",
-    credit: "Generated TEVORA hero visual",
+    credit: "Generated ONESPACE hero visual",
   },
   sectorsMainHero: {
     id: "sectors-main-hero",
@@ -384,7 +384,7 @@ export const mediaAssets = {
     mobileFocalPoint: { x: 0.55, y: 0.5 },
     blurDataURL: blur,
     caption: "Sector application pathways.",
-    credit: "Generated TEVORA hero visual",
+    credit: "Generated ONESPACE hero visual",
   },
   homepageHero: {
     id: "homepage-learning-hero",
@@ -399,7 +399,7 @@ export const mediaAssets = {
     mobileFocalPoint: { x: 0.66, y: 0.5 },
     blurDataURL: blur,
     caption: "Technology-enabled learning environment.",
-    credit: "TEVORA",
+    credit: "ONESPACE",
   },
   educationSpaceEnvironment: {
     id: "education-technology-space-environment",
@@ -414,8 +414,8 @@ export const mediaAssets = {
     mobileFocalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Education technology space with integrated TEVORA product families.",
-    credit: "Generated TEVORA application visual",
+      "Education technology space with integrated ONESPACE product families.",
+    credit: "Generated ONESPACE application visual",
   },
   corporateSpaceEnvironment: {
     id: "corporate-meeting-space-environment",
@@ -429,8 +429,9 @@ export const mediaAssets = {
     focalPoint: { x: 0.54, y: 0.5 },
     mobileFocalPoint: { x: 0.58, y: 0.5 },
     blurDataURL: blur,
-    caption: "Corporate meeting space with integrated TEVORA product families.",
-    credit: "Generated TEVORA application visual",
+    caption:
+      "Corporate meeting space with integrated ONESPACE product families.",
+    credit: "Generated ONESPACE application visual",
   },
   specialistSpaceEnvironment: {
     id: "specialist-operations-space-environment",
@@ -445,8 +446,8 @@ export const mediaAssets = {
     mobileFocalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Specialist operations space with integrated TEVORA product families.",
-    credit: "Generated TEVORA application visual",
+      "Specialist operations space with integrated ONESPACE product families.",
+    credit: "Generated ONESPACE application visual",
   },
   publicSelfServiceSpaceEnvironment: {
     id: "public-self-service-space-environment",
@@ -461,8 +462,8 @@ export const mediaAssets = {
     mobileFocalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption:
-      "Public self-service space with integrated TEVORA product families.",
-    credit: "Generated TEVORA application visual",
+      "Public self-service space with integrated ONESPACE product families.",
+    credit: "Generated ONESPACE application visual",
   },
   mobileAvStory: {
     id: "mobile-av-cart-story",
@@ -476,7 +477,7 @@ export const mediaAssets = {
     focalPoint: { x: 0.5, y: 0.5 },
     blurDataURL: blur,
     caption: "Mobile AV furniture application.",
-    credit: "TEVORA",
+    credit: "ONESPACE",
   },
   arcConcept: presentationStationImage(
     "arc-presentation-station-concept",

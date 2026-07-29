@@ -290,11 +290,11 @@ export function SiteHeader() {
             <BrandLogo
               variant={transparent ? "light" : "dark"}
               priority
-              className="w-32 sm:w-40"
+              className="w-40 sm:w-52"
             />
             <span
               className={cn(
-                "type-caption mt-1 hidden pl-[1.85rem] min-[23rem]:block sm:pl-[2.05rem]",
+                "type-caption -mt-0.5 hidden pl-[1.9rem] min-[23rem]:block sm:pl-[2.45rem]",
                 transparent ? "text-white/65" : "text-ink-muted",
               )}
             >

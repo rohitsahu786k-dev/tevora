@@ -28,7 +28,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 export const metadata = createPageMetadata({
   title: "Partner Network",
   description:
-    "Apply to join TEVORA's network of AV integrators, consultants, dealers, distributors and project specialists.",
+    "Apply to join ONESPACE's network of AV integrators, consultants, dealers, distributors and project specialists.",
   path: routes.partners,
 });
 
@@ -52,7 +52,7 @@ const programmePillars = [
   {
     icon: Target,
     title: "Market alignment",
-    text: "Align TEVORA solutions with education, enterprise and specialist environments.",
+    text: "Align ONESPACE solutions with education, enterprise and specialist environments.",
   },
 ];
 
@@ -67,7 +67,7 @@ export default function PartnersPage() {
         <Container className="grid gap-6 py-10 md:gap-10 md:py-16 lg:min-h-[34rem] lg:grid-cols-[1.05fr_.95fr]">
           <div>
             <Eyebrow className="text-emerald-300">
-              TEVORA Partner Network
+              ONESPACE Partner Network
             </Eyebrow>
             <h1 className="type-h2 mt-4 max-w-4xl text-balance">
               Grow with a focused technology furniture partner programme.
@@ -106,7 +106,7 @@ export default function PartnersPage() {
               </div>
             </div>
             <p className="type-body-sm mt-5 text-white/68">
-              TEVORA supports partners with product knowledge, technical
+              ONESPACE supports partners with product knowledge, technical
               resources and project coordination so opportunities move from
               enquiry to specification with more confidence.
             </p>
@@ -144,8 +144,8 @@ export default function PartnersPage() {
         <Container>
           <CompactHeader
             eyebrow="Partnership"
-            title="A clearer way to sell, specify and deliver TEVORA projects."
-            description="The programme connects local capability with TEVORA product architecture, documentation and technical support."
+            title="A clearer way to sell, specify and deliver ONESPACE projects."
+            description="The programme connects local capability with ONESPACE product architecture, documentation and technical support."
           />
           <div className="border-line bg-line flex gap-px overflow-x-auto border md:grid md:grid-cols-3 md:overflow-visible">
             {programmePillars.map(({ icon: Icon, title, text }) => (
@@ -213,7 +213,7 @@ export default function PartnersPage() {
           <CompactHeader
             eyebrow="Partner Routes"
             title="Choose the route that matches your business."
-            description="Apply for one or multiple routes. TEVORA will review market fit and capability before onboarding."
+            description="Apply for one or multiple routes. ONESPACE will review market fit and capability before onboarding."
           />
           <div className="border-line bg-line flex gap-px overflow-x-auto border md:grid md:grid-cols-2 md:overflow-visible xl:grid-cols-3">
             {partnerTypeContent.map((type) => (
@@ -249,7 +249,7 @@ export default function PartnersPage() {
             <CompactHeader
               eyebrow="Selection"
               title="What makes a strong application."
-              description="TEVORA looks for real market access, technical credibility, project capability and the ability to represent a premium product portfolio."
+              description="ONESPACE looks for real market access, technical credibility, project capability and the ability to represent a premium product portfolio."
               dark
             />
             <div className="grid gap-px bg-white/16 md:grid-cols-2">
@@ -312,7 +312,7 @@ export default function PartnersPage() {
             </div>
           </div>
           <p className="border-accent bg-accent-light mt-6 border-l-2 p-4 text-sm">
-            Submitting an application does not guarantee acceptance. TEVORA
+            Submitting an application does not guarantee acceptance. ONESPACE
             reviews every application based on market requirements, business
             capability and strategic fit.
           </p>
@@ -336,11 +336,11 @@ export default function PartnersPage() {
             <div>
               <Eyebrow className="text-emerald-300">Partner Network</Eyebrow>
               <h2 className="type-h3 mt-4 max-w-3xl text-balance">
-                Ready to discuss a TEVORA partnership?
+                Ready to discuss partnering with ONESPACE?
               </h2>
               <p className="type-body-sm mt-3 max-w-2xl text-white/68">
                 Share your organisation profile, market focus and capability.
-                TEVORA will review the fit and next steps.
+                ONESPACE will review the fit and next steps.
               </p>
             </div>
             <PrimaryButton asChild className="text-brand-950! bg-white!">

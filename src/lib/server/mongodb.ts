@@ -3,10 +3,10 @@ import "server-only";
 import { MongoClient } from "mongodb";
 
 const uri = process.env.DATABASE_URL;
-const databaseName = process.env.MONGODB_DATABASE ?? "tevora";
+const databaseName = process.env.MONGODB_DATABASE ?? "onespace";
 
 declare global {
-  var __tevoraMongoClient: Promise<MongoClient> | undefined;
+  var __onespaceMongoClient: Promise<MongoClient> | undefined;
 }
 
 function connect() {
@@ -16,8 +16,8 @@ function connect() {
 
 export async function getDatabase() {
   const clientPromise =
-    globalThis.__tevoraMongoClient ??
-    (globalThis.__tevoraMongoClient = connect());
+    globalThis.__onespaceMongoClient ??
+    (globalThis.__onespaceMongoClient = connect());
   return (await clientPromise).db(databaseName);
 }
 

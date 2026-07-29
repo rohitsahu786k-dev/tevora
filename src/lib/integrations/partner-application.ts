@@ -190,7 +190,7 @@ export const partnerApplicationAdapters: PartnerApplicationAdapterSet = {
       ]);
       const storedFiles = await storeFiles(
         files,
-        `tevora/submissions/partner/${context.applicationId}`,
+        `onespace/submissions/partner/${context.applicationId}`,
       );
       const database = await getDatabase();
       await database
@@ -206,7 +206,7 @@ export const partnerApplicationAdapters: PartnerApplicationAdapterSet = {
         import("@/lib/server/mongodb"),
       ]);
       await deleteFolderResources(
-        `tevora/submissions/partner/${applicationId}`,
+        `onespace/submissions/partner/${applicationId}`,
       );
       const database = await getDatabase();
       await database

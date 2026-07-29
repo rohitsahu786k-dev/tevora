@@ -1,16 +1,16 @@
-import { tevoraConfigurationSchema } from "@/lib/validation/configuration";
+import { onespaceConfigurationSchema } from "@/lib/validation/configuration";
 import {
   CONFIGURATION_VERSION,
-  type TevoraConfigurationState,
+  type OnespaceConfigurationState,
 } from "@/types/configuration";
 
-export const CONFIGURATION_STORAGE_KEY = "tevora-configuration-v1";
+export const CONFIGURATION_STORAGE_KEY = "onespace-configuration-v1";
 export const CONFIGURATION_QUERY_KEY = "configuration";
 
 export function createConfigurationState(seed?: {
   id?: string;
   updatedAt?: string;
-}): TevoraConfigurationState {
+}): OnespaceConfigurationState {
   return {
     version: CONFIGURATION_VERSION,
     id:
@@ -56,13 +56,13 @@ export function createConfigurationState(seed?: {
   };
 }
 
-export const serialiseConfiguration = (state: TevoraConfigurationState) =>
+export const serialiseConfiguration = (state: OnespaceConfigurationState) =>
   JSON.stringify(state);
 
 export function parseConfiguration(value: string | null) {
   if (!value) return null;
   try {
-    const result = tevoraConfigurationSchema.safeParse(JSON.parse(value));
+    const result = onespaceConfigurationSchema.safeParse(JSON.parse(value));
     return result.success ? result.data : null;
   } catch {
     return null;
@@ -70,7 +70,7 @@ export function parseConfiguration(value: string | null) {
 }
 
 export function createConfigurationShareUrl(
-  state: TevoraConfigurationState,
+  state: OnespaceConfigurationState,
   baseUrl: string,
 ) {
   const url = new URL(baseUrl);

@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 export const metadata = createPageMetadata({
   title: "Apply to Become a Partner",
   description:
-    "Submit an organisation and capability application for the TEVORA Partner Network.",
+    "Submit an organisation and capability application for the ONESPACE Partner Network.",
   path: routes.partnerApply,
 });
 
@@ -16,7 +16,9 @@ export default function PartnerApplyPage() {
     <main id="main-content" tabIndex={-1} className="outline-none">
       <Section tone="dark" className="pb-16!">
         <Container>
-          <Eyebrow className="text-emerald-300">TEVORA Partner Network</Eyebrow>
+          <Eyebrow className="text-emerald-300">
+            ONESPACE Partner Network
+          </Eyebrow>
           <h1 className="type-h1 mt-7 max-w-5xl text-balance">
             Partner application.
           </h1>

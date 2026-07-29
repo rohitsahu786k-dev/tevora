@@ -8,7 +8,7 @@ import type {
 const label: Record<CompatibilityStatus, string> = {
   verified: "Ready to use",
   provisional: "Review fit",
-  "requires-technical-review": "Confirm with TEVORA",
+  "requires-technical-review": "Confirm with ONESPACE",
   "not-compatible": "Not compatible",
 };
 export const compatibilityStatusLabel = (status: CompatibilityStatus) =>

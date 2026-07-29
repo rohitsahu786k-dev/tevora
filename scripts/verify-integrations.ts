@@ -8,7 +8,7 @@ async function verifyMongoDB() {
   const client = new MongoClient(uri);
   try {
     await client.connect();
-    const database = client.db(process.env.MONGODB_DATABASE ?? "tevora");
+    const database = client.db(process.env.MONGODB_DATABASE ?? "onespace");
     await database.command({ ping: 1 });
     await Promise.all([
       database

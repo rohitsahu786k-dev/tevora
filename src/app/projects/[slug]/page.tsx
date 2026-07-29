@@ -150,7 +150,7 @@ export default async function ProjectPage({
           ) : (
             <EmptyState
               title="Technology requirements are reviewed by project"
-              description="Share the room brief and equipment schedule so TEVORA can help identify the right product direction."
+              description="Share the room brief and equipment schedule so ONESPACE can help identify the right product direction."
             />
           )}
         </Container>
@@ -174,7 +174,7 @@ export default async function ProjectPage({
           ) : (
             <EmptyState
               title="Product selections are project-specific"
-              description="Discuss the space, users and equipment to shortlist the right TEVORA products."
+              description="Discuss the space, users and equipment to shortlist the right ONESPACE products."
             />
           )}
         </Container>
@@ -204,7 +204,7 @@ export default async function ProjectPage({
                 title="Details to review"
               />
               <EmptyState
-                title="Technical highlights are reviewed with TEVORA"
+                title="Technical highlights are reviewed with ONESPACE"
                 description="Dimensions, equipment details, compatibility and service access are confirmed for each project."
               />
             </div>
@@ -230,7 +230,7 @@ export default async function ProjectPage({
           ) : (
             <EmptyState
               title="Project imagery is available by request"
-              description="Talk to TEVORA about relevant visual references for similar applications."
+              description="Talk to ONESPACE about relevant visual references for similar applications."
             />
           )}
         </Container>
@@ -248,7 +248,7 @@ export default async function ProjectPage({
               ) : (
                 <EmptyState
                   title="Outcomes depend on the project brief"
-                  description="TEVORA can help define the operational and integration goals for your room."
+                  description="ONESPACE can help define the operational and integration goals for your room."
                 />
               )}
             </div>
@@ -267,7 +267,7 @@ export default async function ProjectPage({
               ) : (
                 <EmptyState
                   title="Client references are shared selectively"
-                  description="Ask TEVORA about relevant experience for your sector or application."
+                  description="Ask ONESPACE about relevant experience for your sector or application."
                 />
               )}
             </div>
@@ -314,7 +314,7 @@ export default async function ProjectPage({
             </div>
           ) : (
             <EmptyState
-              title="Related examples are available through TEVORA"
+              title="Related examples are available through ONESPACE"
               description="Discuss your application and we can point you toward relevant product and space examples."
             />
           )}
@@ -357,7 +357,7 @@ function Meta({
     <div>
       <dt className="type-spec-label">{label}</dt>
       <dd className="type-caption text-ink-muted mt-2">
-        {value || "Discuss with TEVORA"}
+        {value || "Discuss with ONESPACE"}
       </dd>
     </div>
   );

@@ -5,7 +5,7 @@ import { routes } from "@/lib/routes";
 export const metadata = createPageMetadata({
   title: "Discuss Your Project",
   description:
-    "Share your space, technology requirements and project context with TEVORA.",
+    "Share your space, technology requirements and project context with ONESPACE.",
   path: routes.contact,
 });
 

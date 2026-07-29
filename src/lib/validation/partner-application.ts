@@ -124,7 +124,7 @@ export const partnerApplicationSchema = z
       importCapability: z.boolean(),
       exportCapability: z.boolean(),
       motivation: required(
-        "why the organisation wants to represent TEVORA",
+        "why the organisation wants to represent ONESPACE",
         30,
       ),
       marketOpportunity: required("the market opportunity", 30),

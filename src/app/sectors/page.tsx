@@ -17,7 +17,7 @@ import { SingleHeroImage } from "@/components/media/single-hero-image";
 export const metadata = createPageMetadata({
   title: "Sectors",
   description:
-    "Explore TEVORA product guidance for education, workplace, government, healthcare, public and specialist technology spaces.",
+    "Explore ONESPACE product guidance for education, workplace, government, healthcare, public and specialist technology spaces.",
   path: routes.sectors,
 });
 

@@ -7,10 +7,10 @@ The interface foundation is coherent and the public positioning is correctly cen
 
 ## Brand and positioning review
 
-- The global header and footer consistently pair TEVORA with “Technology Furniture”; the homepage takes the brand line from central settings.
+- The global header and footer consistently pair ONESPACE with “Technology Furniture”; the homepage takes the brand line from central settings.
 - The homepage leads with a learning/collaboration environment. Control Room appears once among six featured spaces and Control & Command remains one of twelve sectors.
 - Primary navigation retains Products, Spaces, Sectors and the requested professional terminology.
-- Copy describes furniture that integrates and supports technology. It does not position TEVORA as an electronics reseller, system integrator, software company or control-room-only company.
+- Copy describes furniture that integrates and supports technology. It does not position ONESPACE as an electronics reseller, system integrator, software company or control-room-only company.
 - The future OnePWS relationship remains configurable in global settings and CMS fields, with public visibility off by default.
 
 ## Interface review and refinements

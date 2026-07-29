@@ -137,7 +137,7 @@ export function ResourceBrowser({
     if (resource.accessLevel === "registered") setGate(resource);
     else if (resource.accessLevel === "restricted")
       setNotice(
-        "This download requires a TEVORA-issued login and project approval.",
+        "This download requires an approved ONESPACE login and project approval.",
       );
     else setGate(resource);
   };
@@ -243,7 +243,7 @@ export function ResourceBrowser({
             <div className="border-line bg-accent-light mb-4 flex items-start gap-3 border p-4">
               <LockKeyhole aria-hidden className="text-accent mt-1 size-4" />
               <p className="type-body-sm text-ink-muted">
-                Signed in with the TEVORA demo ID. Registered resources are
+                Signed in with the ONESPACE demo ID. Registered resources are
                 visible for workflow testing; production downloads can be linked
                 after final files are uploaded.
               </p>
@@ -354,7 +354,7 @@ function ResourceCard({
     resource.accessLevel === "restricted"
       ? "Project approval required"
       : resource.accessLevel === "registered" && !demoAccess
-        ? "TEVORA login required"
+        ? "ONESPACE login required"
         : "Current file request";
   return (
     <article className="bg-surface grid min-h-[15rem] content-between p-4">
@@ -403,7 +403,7 @@ function ResourceCard({
             {resource.accessLevel === "restricted"
               ? "Request approved access"
               : resource.accessLevel === "registered" && !demoAccess
-                ? "Request TEVORA login"
+                ? "Request ONESPACE login"
                 : "Request current file"}
           </span>
           {resource.accessLevel === "restricted" ||
@@ -438,7 +438,7 @@ function Meta({
 
 function formatAccess(accessLevel: Resource["accessLevel"]) {
   if (accessLevel === "restricted") return "Project approval";
-  if (accessLevel === "registered") return "TEVORA ID";
+  if (accessLevel === "registered") return "ONESPACE ID";
   return "Request access";
 }
 
@@ -480,9 +480,9 @@ function ResourceGate({
       return;
     }
     setReference(result.reference);
-    setStatus("Your TEVORA login request has been saved.");
+    setStatus("Your ONESPACE login request has been saved.");
     complete(
-      "Thanks. Your TEVORA login request has been saved for Design Support review.",
+      "Thanks. Your ONESPACE login request has been saved for Design Support review.",
     );
   });
   useEffect(() => {
@@ -613,7 +613,7 @@ function ResourceGate({
             <PrimaryButton type="submit" disabled={form.formState.isSubmitting}>
               {form.formState.isSubmitting
                 ? "Submitting…"
-                : "Request TEVORA login"}
+                : "Request ONESPACE login"}
               <Download aria-hidden className="size-4" />
             </PrimaryButton>
           </div>

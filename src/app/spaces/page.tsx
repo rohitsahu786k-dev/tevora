@@ -17,7 +17,7 @@ import { sharedElementStyle } from "@/lib/motion/shared-elements";
 export const metadata = createPageMetadata({
   title: "Spaces",
   description:
-    "Explore TEVORA product recommendations by room type, from learning spaces and meeting rooms to specialist and public environments.",
+    "Explore ONESPACE product recommendations by room type, from learning spaces and meeting rooms to specialist and public environments.",
   path: routes.spaces,
 });
 
@@ -42,8 +42,8 @@ export default function SpacesPage() {
                 Spaces shaped by technology
               </MaskedHeading>
               <p className="type-body-lg text-ink-muted mt-4 max-w-2xl">
-                Choose the room type and see which TEVORA product families help
-                support presentation, collaboration, control, display and
+                Choose the room type and see which ONESPACE product families
+                help support presentation, collaboration, control, display and
                 equipment integration.
               </p>
             </ViewportReveal>

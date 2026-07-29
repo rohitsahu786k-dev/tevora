@@ -46,7 +46,7 @@ export interface ProductConfiguration {
   accessorySlugs: string[];
 }
 
-export interface TevoraConfigurationState {
+export interface OnespaceConfigurationState {
   version: typeof CONFIGURATION_VERSION;
   id: string;
   updatedAt: string;

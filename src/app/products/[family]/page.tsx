@@ -261,7 +261,7 @@ export default async function ProductFamilyPage({
             <SectionHeader
               eyebrow="Featured product"
               title={`${featured.series} series`}
-              description="Start here to understand the format, then discuss dimensions, equipment and finishes with the TEVORA team."
+              description="Start here to understand the format, then discuss dimensions, equipment and finishes with the ONESPACE team."
             />
             <div className="border-line grid gap-8 border-y py-8 md:grid-cols-12">
               <div className="relative grid min-h-80 place-items-center bg-white md:col-span-7">

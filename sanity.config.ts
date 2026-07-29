@@ -20,8 +20,8 @@ const singletonItem = (S: StructureBuilder, type: string, title: string) =>
     .child(S.document().schemaType(type).documentId(type));
 
 export default defineConfig({
-  name: "tevora",
-  title: "TEVORA Content Studio",
+  name: "onespace",
+  title: "ONESPACE Content Studio",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "replace-me",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
   schema: { types: schemaTypes },

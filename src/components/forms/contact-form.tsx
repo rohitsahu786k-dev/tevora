@@ -19,9 +19,9 @@ import {
 } from "@/lib/validation/contact";
 import { cn } from "@/lib/utils";
 import { motionTokens } from "@/lib/motion/tokens";
-import { TevoraMotionProvider } from "@/components/motion/motion-provider";
+import { OnespaceMotionProvider } from "@/components/motion/motion-provider";
 
-const STORAGE_KEY = "tevora-project-enquiry-v1";
+const STORAGE_KEY = "onespace-project-enquiry-v1";
 const steps = [
   {
     title: "Project",
@@ -146,7 +146,7 @@ export function ContactForm() {
   });
   if (reference)
     return (
-      <TevoraMotionProvider>
+      <OnespaceMotionProvider>
         <motion.div
           initial={{ opacity: 0.7, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -166,10 +166,10 @@ export function ContactForm() {
             response.
           </p>
         </motion.div>
-      </TevoraMotionProvider>
+      </OnespaceMotionProvider>
     );
   return (
-    <TevoraMotionProvider>
+    <OnespaceMotionProvider>
       <form onSubmit={submit} noValidate>
         <nav aria-label="Enquiry progress">
           <ol className="bg-line grid gap-px sm:grid-cols-4">
@@ -422,8 +422,8 @@ export function ContactForm() {
                       className="mt-0.5 size-5 shrink-0 accent-[var(--color-accent)]"
                     />
                     <span className="text-sm">
-                      I consent to TEVORA using these details and attachments to
-                      respond to this project enquiry and coordinate relevant
+                      I consent to ONESPACE using these details and attachments
+                      to respond to this project enquiry and coordinate relevant
                       project support.
                     </span>
                   </label>
@@ -489,7 +489,7 @@ export function ContactForm() {
           </div>
         </div>
       </form>
-    </TevoraMotionProvider>
+    </OnespaceMotionProvider>
   );
 }
 function Review({ label, value }: { label: string; value: string }) {

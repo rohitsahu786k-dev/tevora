@@ -39,7 +39,7 @@ async function main() {
 
   for (const [index, file] of files.entries()) {
     const localPath = `/${relative(publicRoot, file).split(sep).join("/")}`;
-    const publicId = `tevora${localPath.slice(0, -extname(localPath).length)}`;
+    const publicId = `onespace${localPath.slice(0, -extname(localPath).length)}`;
     const result = await cloudinary.uploader.upload(file, {
       public_id: publicId,
       resource_type: "image",

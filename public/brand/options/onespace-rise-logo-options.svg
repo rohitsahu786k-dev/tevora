@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1180" role="img" aria-labelledby="title desc">
+  <title id="title">ONESPACE rising symbol logo options</title>
+  <desc id="desc">Four ONESPACE logo directions based on rising, elevation, clarity and upward spatial movement, without using initials.</desc>
+  <defs>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="1600" y2="1180" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f7f7f3"/>
+      <stop offset="1" stop-color="#e8eee9"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#77dfc4"/>
+      <stop offset="1" stop-color="#2d7968"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#24322f"/>
+      <stop offset="1" stop-color="#0c1d19"/>
+    </linearGradient>
+    <filter id="cardLift" x="-18%" y="-18%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="22" stdDeviation="26" flood-color="#10201c" flood-opacity=".12"/>
+    </filter>
+    <filter id="symbolLift" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="13" stdDeviation="11" flood-color="#10201c" flood-opacity=".18"/>
+    </filter>
+    <style>
+      .eyebrow { fill: #2f7968; font: 700 20px Arial, Helvetica, sans-serif; letter-spacing: 7px; }
+      .headline { fill: #17211f; font: 700 58px Arial, Helvetica, sans-serif; letter-spacing: 0; }
+      .brand { fill: #17211f; font: 700 54px Arial, Helvetica, sans-serif; letter-spacing: 7px; }
+      .copy { fill: #59625f; font: 400 22px Arial, Helvetica, sans-serif; }
+      .option { fill: #2f7968; font: 700 18px Arial, Helvetica, sans-serif; letter-spacing: 5px; }
+      .panel { fill: rgba(255,255,255,.82); stroke: rgba(23,33,31,.12); }
+      .line { stroke: rgba(23,33,31,.14); stroke-width: 1; }
+    </style>
+  </defs>
+  <rect width="1600" height="1180" fill="url(#pageBg)"/>
+  <text x="90" y="105" class="eyebrow">ONESPACE LOGO DIRECTIONS</text>
+  <text x="90" y="174" class="headline">Symbol concepts for rise, height and clarity</text>
+  <text x="90" y="222" class="copy">Abstract brand marks only. These are not applied to the website until one direction is approved.</text>
+
+  <g transform="translate(90 300)" filter="url(#cardLift)">
+    <rect class="panel" width="660" height="330" rx="28"/>
+    <text x="42" y="58" class="option">OPTION A - ASCENT PLANES</text>
+    <g transform="translate(58 98)" filter="url(#symbolLift)">
+      <path d="M16 116 74 78 132 116 74 154Z" fill="#17211f"/>
+      <path d="M16 78 74 40 132 78 74 116Z" fill="#2f7968"/>
+      <path d="M16 40 74 2 132 40 74 78Z" fill="#77dfc4"/>
+      <path d="M74 2v152" stroke="#ffffff" stroke-width="4" opacity=".38"/>
+    </g>
+    <text x="230" y="152" class="brand">ONESPACE</text>
+    <line x1="230" y1="178" x2="584" y2="178" class="line"/>
+    <text x="230" y="222" class="copy">Layered planes rising upward, like platforms moving from base to premium space.</text>
+  </g>
+
+  <g transform="translate(850 300)" filter="url(#cardLift)">
+    <rect class="panel" width="660" height="330" rx="28"/>
+    <text x="42" y="58" class="option">OPTION B - HIGH POINT</text>
+    <g transform="translate(58 98)" filter="url(#symbolLift)">
+      <path d="M74 4 142 150H6Z" fill="url(#ink)"/>
+      <path d="M74 4 112 150H74Z" fill="#2f7968"/>
+      <path d="M74 4 74 150H36Z" fill="#77dfc4"/>
+      <path d="M45 102h58" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity=".72"/>
+    </g>
+    <text x="230" y="152" class="brand">ONESPACE</text>
+    <line x1="230" y1="178" x2="584" y2="178" class="line"/>
+    <text x="230" y="222" class="copy">A sharp upward peak for elevation, ambition and strong specification confidence.</text>
+  </g>
+
+  <g transform="translate(90 710)" filter="url(#cardLift)">
+    <rect class="panel" width="660" height="330" rx="28"/>
+    <text x="42" y="58" class="option">OPTION C - ELEVATED FRAME</text>
+    <g transform="translate(58 96)" filter="url(#symbolLift)">
+      <rect x="15" y="64" width="118" height="74" rx="14" fill="#17211f"/>
+      <path d="M34 83h80v35H34Z" fill="#f7f7f3" opacity=".9"/>
+      <path d="M74 8 121 64H27Z" fill="url(#green)"/>
+      <path d="M74 8v130" stroke="#ffffff" stroke-width="5" opacity=".45"/>
+    </g>
+    <text x="230" y="152" class="brand">ONESPACE</text>
+    <line x1="230" y1="178" x2="584" y2="178" class="line"/>
+    <text x="230" y="222" class="copy">A raised architectural frame, connecting furniture, AV structure and upward motion.</text>
+  </g>
+
+  <g transform="translate(850 710)" filter="url(#cardLift)">
+    <rect class="panel" width="660" height="330" rx="28"/>
+    <text x="42" y="58" class="option">OPTION D - SIGNAL RISE</text>
+    <g transform="translate(58 99)" filter="url(#symbolLift)">
+      <rect x="10" y="100" width="34" height="46" rx="8" fill="#17211f"/>
+      <rect x="57" y="66" width="34" height="80" rx="8" fill="#2f7968"/>
+      <rect x="104" y="22" width="34" height="124" rx="8" fill="#77dfc4"/>
+      <path d="M28 70c24-25 51-39 90-48" fill="none" stroke="#17211f" stroke-width="9" stroke-linecap="round"/>
+      <path d="m111 20 26 0-10 24" fill="none" stroke="#17211f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="230" y="152" class="brand">ONESPACE</text>
+    <line x1="230" y1="178" x2="584" y2="178" class="line"/>
+    <text x="230" y="222" class="copy">A clear growth signal: project capability increasing from planning to delivery.</text>
+  </g>
+</svg>

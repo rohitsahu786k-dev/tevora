@@ -234,7 +234,7 @@ const details: Record<string, ProductDetailContent> = {
     technology:
       "The workstation format is intended to organise user equipment, supporting hardware, cable routes and service requirements.",
     problem:
-      "TECHDESK Pro creates a defined technical working position without presenting TEVORA as a control-room-only brand.",
+      "TECHDESK Pro creates a defined technical working position without presenting ONESPACE as a control-room-only brand.",
     heroMedia: environment,
     heroAlt:
       "Refined technical furniture in a contemporary technology workspace",

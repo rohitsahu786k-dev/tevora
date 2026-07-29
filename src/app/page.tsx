@@ -281,7 +281,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Designed for Professionals"
             title="Clear information for every project team."
-            description="TEVORA supports the people who design, specify, integrate, procure and operate technology-enabled spaces."
+            description="ONESPACE supports the people who design, specify, integrate, procure and operate technology-enabled spaces."
           />
           <div className="border-line grid border-y md:grid-cols-2">
             {professionals.map((professional, index) => (
@@ -328,7 +328,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Projects"
             title="Technology furniture across applications."
-            description="See where TEVORA product families can support education, corporate, government, public and specialist environments."
+            description="See where ONESPACE product families can support education, corporate, government, public and specialist environments."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-5">
             {applications.map((application, index) => (

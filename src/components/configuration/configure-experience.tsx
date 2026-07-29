@@ -39,9 +39,9 @@ import {
 } from "@/lib/validation/configuration";
 import { routes } from "@/lib/routes";
 import { productConceptMediaBySlug } from "@/content/media";
-import type { TevoraConfigurationState } from "@/types/configuration";
+import type { OnespaceConfigurationState } from "@/types/configuration";
 import { motionTokens } from "@/lib/motion/tokens";
-import { TevoraMotionProvider } from "@/components/motion/motion-provider";
+import { OnespaceMotionProvider } from "@/components/motion/motion-provider";
 
 const answerOptions = [
   ["", "Select an answer"],
@@ -124,7 +124,7 @@ function getBasketTotals(basket: BasketItem[]) {
 }
 
 export function ConfigureExperience() {
-  const [state, setState] = useState<TevoraConfigurationState>(() =>
+  const [state, setState] = useState<OnespaceConfigurationState>(() =>
     createConfigurationState({
       id: "configuration-new",
       updatedAt: "2000-01-01T00:00:00.000Z",
@@ -215,7 +215,7 @@ export function ConfigureExperience() {
       accessories: getRelatedAccessories(product.slug).slice(0, 4),
       reasons: [
         !hasFinderContext &&
-          "Popular configurable product for TEVORA projects.",
+          "Popular configurable product for ONESPACE projects.",
         hasFamilyContext &&
           `Part of the ${selectedFamily?.name ?? "selected"} product family.`,
         liveFinder.space &&
@@ -232,7 +232,7 @@ export function ConfigureExperience() {
   );
   const basketTotals = getBasketTotals(basket);
 
-  const updateState = (update: Partial<TevoraConfigurationState>) =>
+  const updateState = (update: Partial<OnespaceConfigurationState>) =>
     setState((current) => ({
       ...current,
       ...update,
@@ -352,7 +352,7 @@ export function ConfigureExperience() {
 
   const download = () => {
     const content = [
-      "TEVORA PROJECT CONFIGURATION STARTER",
+      "ONESPACE PROJECT CONFIGURATION STARTER",
       `Reference: ${state.id}`,
       `Updated: ${state.updatedAt}`,
       `Basket items: ${basketQuantity}`,
@@ -360,7 +360,7 @@ export function ConfigureExperience() {
       `GST (${Math.round(GST_RATE * 100)}%): ${formatPrice(basketTotals.gst)}`,
       `Total: ${formatPrice(basketTotals.total)}`,
       "",
-      "Use this as an order request summary for TEVORA review. Final product selections, dimensions, pricing, lead time and compatibility are confirmed before order acceptance.",
+      "Use this as an order request summary for ONESPACE review. Final product selections, dimensions, pricing, lead time and compatibility are confirmed before order acceptance.",
       "",
       JSON.stringify({ configuration: state, basket }, null, 2),
     ].join("\n");
@@ -369,7 +369,7 @@ export function ConfigureExperience() {
     );
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = `tevora-preliminary-${state.id}.txt`;
+    anchor.download = `onespace-preliminary-${state.id}.txt`;
     anchor.click();
     URL.revokeObjectURL(url);
     setStatus("Order request summary downloaded.");
@@ -409,7 +409,7 @@ export function ConfigureExperience() {
       id: itemId,
       productSlug: product.slug,
       productName: product.name,
-      familyName: family?.name ?? "TEVORA product",
+      familyName: family?.name ?? "ONESPACE product",
       unitPrice: getProductPrice(product.slug),
       model: state.configuration.model,
       finish: state.configuration.finish,
@@ -450,7 +450,7 @@ export function ConfigureExperience() {
     }
     const reference = `TEV-${new Date().getFullYear()}-${String(Date.now()).slice(-6)}`;
     setOrderReference(reference);
-    setStatus(`Order request ${reference} prepared for TEVORA review.`);
+    setStatus(`Order request ${reference} prepared for ONESPACE review.`);
     document
       .getElementById("order-basket")
       ?.scrollIntoView({ behavior: "smooth" });
@@ -461,7 +461,7 @@ export function ConfigureExperience() {
   const productFamilyRegistration = form.register("productFamily");
 
   return (
-    <TevoraMotionProvider>
+    <OnespaceMotionProvider>
       <motion.div
         initial={{ opacity: 1 }}
         animate={{ opacity: ready ? 1 : 0.72 }}
@@ -471,7 +471,7 @@ export function ConfigureExperience() {
           <div className="bg-brand-950 p-5 text-white">
             <p className="type-eyebrow text-emerald-300">Order Builder</p>
             <h2 className="type-h3 mt-3 max-w-3xl text-balance">
-              Shop, configure and send a reviewed TEVORA order request.
+              Shop, configure and send a reviewed ONESPACE order request.
             </h2>
             <p className="type-body-sm mt-4 max-w-3xl text-white/72">
               Choose a product, configure the essentials, add to basket and
@@ -626,7 +626,7 @@ export function ConfigureExperience() {
                   />
                   <TextField
                     label="What display size is required?"
-                    hint="Enter the project requirement; TEVORA will validate support."
+                    hint="Enter the project requirement; ONESPACE will validate support."
                     {...form.register("displaySize")}
                   />
                   <TextField
@@ -710,7 +710,7 @@ export function ConfigureExperience() {
                       className="border-line bg-surface mt-2 min-h-12 w-full border p-3 text-sm"
                     />
                     <span className="type-caption text-ink-muted mt-2 block">
-                      Keep the drawing ready to share with TEVORA during the
+                      Keep the drawing ready to share with ONESPACE during the
                       project review.
                     </span>
                   </label>
@@ -861,7 +861,7 @@ export function ConfigureExperience() {
                 className="type-caption text-ink-muted"
               >
                 {status ||
-                  "Configure products, add them to the basket and place an order request for TEVORA review."}
+                  "Configure products, add them to the basket and place an order request for ONESPACE review."}
               </motion.p>
             </AnimatePresence>
             <div className="flex flex-wrap gap-2">
@@ -890,7 +890,7 @@ export function ConfigureExperience() {
           </div>
         </div>
       </motion.div>
-    </TevoraMotionProvider>
+    </OnespaceMotionProvider>
   );
 }
 
@@ -949,8 +949,8 @@ function ConfigurationWorkspace({
   updateState,
   onAddToBasket,
 }: {
-  state: TevoraConfigurationState;
-  updateState: (update: Partial<TevoraConfigurationState>) => void;
+  state: OnespaceConfigurationState;
+  updateState: (update: Partial<OnespaceConfigurationState>) => void;
   onAddToBasket: () => void;
 }) {
   const selectedProduct = products.find(
@@ -966,7 +966,7 @@ function ConfigurationWorkspace({
     ? getRelatedAccessories(selectedProduct.slug)
     : [];
   const setField = (
-    field: keyof TevoraConfigurationState["configuration"],
+    field: keyof OnespaceConfigurationState["configuration"],
     value: string | string[],
   ) =>
     updateState({ configuration: { ...state.configuration, [field]: value } });
@@ -1014,7 +1014,7 @@ function ConfigurationWorkspace({
             <div className="grid content-between p-6">
               <div>
                 <p className="type-series text-accent">
-                  {selectedFamily?.name ?? "TEVORA Technology Furniture"}
+                  {selectedFamily?.name ?? "ONESPACE Technology Furniture"}
                 </p>
                 <h3 className="type-h3 mt-4">
                   {selectedProduct?.name ?? "No product selected"}
@@ -1189,7 +1189,7 @@ function ConfigurationWorkspace({
           )}
           <div className="border-accent bg-accent-light mt-8 border-l-2 p-4">
             <p className="type-body-sm font-semibold">
-              Basket orders are reviewed by TEVORA for pricing, lead time,
+              Basket orders are reviewed by ONESPACE for pricing, lead time,
               dimensions, equipment fit and installation details before final
               acceptance.
             </p>
@@ -1234,7 +1234,7 @@ function OrderBasket({
             Review the order request.
           </h2>
           <p className="type-body-sm text-ink-muted mt-5 max-w-2xl">
-            Basket lines are sent as an order request. TEVORA confirms
+            Basket lines are sent as an order request. ONESPACE confirms
             commercial terms, drawings, compatibility and delivery details
             before the order is accepted.
           </p>
@@ -1242,7 +1242,9 @@ function OrderBasket({
         <div className="glass-panel-strong p-5">
           <p className="type-model text-accent">Order status</p>
           <p className="type-h4 mt-3">
-            {orderReference ? "Ready for TEVORA review" : "Basket in progress"}
+            {orderReference
+              ? "Ready for ONESPACE review"
+              : "Basket in progress"}
           </p>
           <p className="type-body-sm text-ink-muted mt-3">
             {orderReference
@@ -1343,7 +1345,7 @@ function OrderBasket({
       <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_24rem]">
         <div className="border-accent bg-accent-light border-l-2 p-5">
           <p className="type-body-sm font-semibold">
-            Prices are dummy live estimates for configurator testing. TEVORA
+            Prices are dummy live estimates for configurator testing. ONESPACE
             will confirm final pricing, discounts, freight, installation and
             lead time before accepting the order.
           </p>
@@ -1364,7 +1366,7 @@ function OrderBasket({
       <div className="mt-6 flex flex-wrap justify-end gap-3">
         <SecondaryButton asChild>
           <Link href={`${routes.contact}?configuration=order-review`}>
-            Speak to TEVORA
+            Speak to ONESPACE
           </Link>
         </SecondaryButton>
         <PrimaryButton type="button" onClick={placeOrder}>

@@ -13,7 +13,7 @@ import {
 import { routes } from "@/lib/routes";
 import type { Product } from "@/types/content";
 import { motionTokens } from "@/lib/motion/tokens";
-import { TevoraMotionProvider } from "@/components/motion/motion-provider";
+import { OnespaceMotionProvider } from "@/components/motion/motion-provider";
 import { productConceptMediaBySlug } from "@/content/media";
 
 export function ProductBrowser({
@@ -128,7 +128,7 @@ export function ProductBrowser({
     </div>
   );
   return (
-    <TevoraMotionProvider>
+    <OnespaceMotionProvider>
       <div>
         <div className="border-line mb-8 flex items-center justify-between border-y py-4">
           <p className="type-body-sm text-ink-muted">
@@ -340,6 +340,6 @@ export function ProductBrowser({
           )}
         </AnimatePresence>
       </div>
-    </TevoraMotionProvider>
+    </OnespaceMotionProvider>
   );
 }

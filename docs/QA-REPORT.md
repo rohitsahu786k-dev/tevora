@@ -1,4 +1,4 @@
-# TEVORA QA report
+# ONESPACE QA report
 
 Date: 13 July 2026
 

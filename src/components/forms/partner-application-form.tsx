@@ -26,7 +26,7 @@ import {
   TextArea,
   TextField,
 } from "@/components/forms/controls";
-import { TevoraMotionProvider } from "@/components/motion";
+import { OnespaceMotionProvider } from "@/components/motion";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/button";
 import { productFamilies, sectors } from "@/content";
 import { partnerTypeContent } from "@/content/partners";
@@ -40,7 +40,7 @@ import {
 import { cn } from "@/lib/utils";
 import type { PartnerType } from "@/types/partner";
 
-const STORAGE_KEY = "tevora-partner-application-limited-v1";
+const STORAGE_KEY = "onespace-partner-application-limited-v1";
 const stepDefinitions = [
   { title: "Organisation", short: "Company profile", field: "organisation" },
   { title: "Primary Contact", short: "Application contact", field: "contact" },
@@ -119,11 +119,11 @@ const declarationFields = [
   ["authorised", "I am authorised to apply for this organisation."],
   [
     "contactPermission",
-    "TEVORA may contact the organisation about this application.",
+    "ONESPACE may contact the organisation about this application.",
   ],
   [
     "verificationPermission",
-    "TEVORA may conduct reasonable business verification.",
+    "ONESPACE may conduct reasonable business verification.",
   ],
   ["noGuarantee", "I understand submission does not guarantee approval."],
   [
@@ -464,7 +464,7 @@ export function PartnerApplicationForm() {
   });
 
   return (
-    <TevoraMotionProvider>
+    <OnespaceMotionProvider>
       <form onSubmit={submit} noValidate>
         <div className="lg:grid lg:grid-cols-[15rem_1fr] lg:gap-12">
           <nav
@@ -671,7 +671,7 @@ export function PartnerApplicationForm() {
           aria-hidden="true"
         />
       </form>
-    </TevoraMotionProvider>
+    </OnespaceMotionProvider>
   );
 }
 
@@ -1172,7 +1172,7 @@ function CommercialStep({
       />
       <div className="mt-8 grid gap-7">
         <TextArea
-          label="Why does the organisation want to represent TEVORA?"
+          label="Why does the organisation want to represent ONESPACE?"
           error={fieldError(errors?.motivation)}
           {...register("commercial.motivation")}
         />
@@ -1187,7 +1187,7 @@ function CommercialStep({
           {...register("commercial.firstYearPlan")}
         />
         <TextArea
-          label="What support would it require from TEVORA?"
+          label="What support would it require from ONESPACE?"
           error={fieldError(errors?.supportRequired)}
           {...register("commercial.supportRequired")}
         />
@@ -1257,7 +1257,7 @@ function RelationshipsStep({
         )}
         <div className="border-accent bg-accent-light border-l-2 p-5">
           <Checkbox
-            label="The applicant is responsible for disclosing any current agreements that may affect its ability to represent TEVORA."
+            label="The applicant is responsible for disclosing any current agreements that may affect its ability to represent ONESPACE."
             {...register("relationships.disclosureConfirmed")}
           />
         </div>
@@ -1603,7 +1603,7 @@ function ReviewStep({
       <div className="border-accent bg-accent-light mt-8 border-l-2 p-5">
         <p className="font-semibold">Submission notice</p>
         <p className="type-body-sm mt-2">
-          Submitting this application begins TEVORA’s review process. It does
+          Submitting this application begins ONESPACE’s review process. It does
           not create a dealership, distribution, agency, exclusivity or
           partnership agreement.
         </p>
