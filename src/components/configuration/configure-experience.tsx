@@ -130,6 +130,15 @@ const workflowSteps = [
   "Place order request",
 ];
 
+const defaultRecommendationSlugs = [
+  "vista-duo",
+  "move-pro",
+  "forum",
+  "nexus",
+  "arc",
+  "dock",
+];
+
 const GST_RATE = 0.18;
 const fallbackPriceByFamily: Record<string, number> = {
   "family-presentation-stations": 185000,
@@ -228,11 +237,22 @@ export function ConfigureExperience() {
   }, [ready, state]);
 
   const recommendations = useMemo(() => {
-    const matches = recommendProducts({
-      sectorSlugs: state.finder.sector ? [state.finder.sector] : [],
-      spaceSlugs: state.finder.space ? [state.finder.space] : [],
-      limit: 4,
-    });
+    const hasFinderContext = Boolean(state.finder.sector || state.finder.space);
+    const featuredMatches = defaultRecommendationSlugs
+      .map((slug) => products.find((product) => product.slug === slug))
+      .filter((product): product is (typeof products)[number] =>
+        Boolean(product),
+      );
+    const contextualMatches = hasFinderContext
+      ? recommendProducts({
+          sectorSlugs: state.finder.sector ? [state.finder.sector] : [],
+          spaceSlugs: state.finder.space ? [state.finder.space] : [],
+          limit: 6,
+        })
+      : [];
+    const matches = contextualMatches.length
+      ? contextualMatches
+      : featuredMatches;
     return matches.map((product) => ({
       product,
       family: productFamilies.find(
@@ -240,6 +260,8 @@ export function ConfigureExperience() {
       ),
       accessories: getRelatedAccessories(product.slug).slice(0, 4),
       reasons: [
+        !hasFinderContext &&
+          "Popular configurable product for TEVORA projects.",
         state.finder.space &&
           `Relevant to ${spaces.find((space) => space.slug === state.finder.space)?.name ?? "the selected space"}.`,
         state.finder.sector &&
@@ -695,7 +717,7 @@ export function ConfigureExperience() {
             <div>
               <p className="type-eyebrow text-accent">Recommendations</p>
               <h2 id="recommendations-heading" className="type-h2 mt-4">
-                A considered starting point.
+                Recommended products.
               </h2>
             </div>
             <span className="type-model text-ink-muted">
@@ -812,10 +834,10 @@ export function ConfigureExperience() {
                 animate={{ opacity: 1 }}
                 className="border-line border-b py-16"
               >
-                <h3 className="type-h4">Select a sector or space to begin.</h3>
+                <h3 className="type-h4">Products are loading.</h3>
                 <p className="type-body-sm text-ink-muted mt-3">
-                  Recommendations appear after you choose where the product will
-                  be used.
+                  If recommendations do not appear, refresh the page or select a
+                  sector and space above.
                 </p>
               </motion.div>
             )}
@@ -1020,7 +1042,7 @@ function ConfigurationWorkspace({
                 </p>
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryButton type="button" onClick={onAddToBasket}>
+                <PrimaryButton type="button" onClick={() => onAddToBasket()}>
                   <ShoppingBag aria-hidden className="size-4" />
                   Add to basket
                 </PrimaryButton>
@@ -1183,7 +1205,7 @@ function ConfigurationWorkspace({
           </div>
           <PrimaryButton
             type="button"
-            onClick={onAddToBasket}
+            onClick={() => onAddToBasket()}
             className="mt-5 w-full"
           >
             <ShoppingBag aria-hidden className="size-4" />
