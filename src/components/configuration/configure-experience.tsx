@@ -321,6 +321,22 @@ export function ConfigureExperience() {
     });
   };
 
+  const chooseProductFromFinder = (productSlug: string) => {
+    updateState({
+      mode: "configure-product",
+      configuration: {
+        ...state.configuration,
+        productSlug,
+        accessorySlugs: [],
+      },
+    });
+    setStatus(
+      productSlug
+        ? "Product selected. Continue configuring below or add it to the basket."
+        : "Product selection cleared.",
+    );
+  };
+
   const save = () => {
     localStorage.setItem(
       CONFIGURATION_STORAGE_KEY,
@@ -611,6 +627,26 @@ export function ConfigureExperience() {
                   <option key={space.slug} value={space.slug}>
                     {space.name}
                   </option>
+                ))}
+              </SelectControl>
+              <SelectControl
+                label="Select a product directly"
+                value={state.configuration.productSlug}
+                onChange={(event) =>
+                  chooseProductFromFinder(event.target.value)
+                }
+              >
+                <option value="">Browse all products</option>
+                {productFamilies.map((family) => (
+                  <optgroup key={family.id} label={family.name}>
+                    {products
+                      .filter((product) => product.productFamily === family.id)
+                      .map((product) => (
+                        <option key={product.slug} value={product.slug}>
+                          {product.name}
+                        </option>
+                      ))}
+                  </optgroup>
                 ))}
               </SelectControl>
               <TextField
