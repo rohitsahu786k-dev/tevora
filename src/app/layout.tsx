@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { PageProgress } from "@/components/navigation/page-progress";
+import { RouteScrollReset } from "@/components/navigation/route-scroll-reset";
 import { SkipToContent } from "@/components/navigation/skip-to-content";
 import { CmsVisualEditing } from "@/components/cms/visual-editing";
 import { OrganisationJsonLd } from "@/components/seo/json-ld";
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body className={`${sans.variable} ${mono.variable} antialiased`}>
         <OrganisationJsonLd />
         <SkipToContent />
+        <RouteScrollReset />
         <PageProgress />
         <TevoraMotionProvider>
           <SiteHeader />

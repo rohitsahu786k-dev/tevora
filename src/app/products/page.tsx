@@ -194,21 +194,80 @@ const technicalWorkstationConcepts = [
   })
   .filter((item): item is NonNullable<typeof item> => Boolean(item));
 const productHeroImage = productConceptMediaBySlug.arc;
+const conceptGroups = [
+  {
+    eyebrow: "Presentation Stations",
+    title: "Presenter positions",
+    concepts: presentationConcepts,
+  },
+  {
+    eyebrow: "Display Stands",
+    title: "Display structures",
+    concepts: displayStandConcepts,
+  },
+  {
+    eyebrow: "Mobile AV Carts",
+    title: "Flexible technology",
+    concepts: mobileAvCartConcepts,
+  },
+  {
+    eyebrow: "Technology Credenzas",
+    title: "Equipment furniture",
+    concepts: technologyCredenzaConcepts,
+  },
+  {
+    eyebrow: "Learning Furniture",
+    title: "Teaching and learning",
+    concepts: learningConcepts,
+  },
+  {
+    eyebrow: "Collaboration Tables",
+    title: "Shared technology",
+    concepts: collaborationConcepts,
+  },
+  {
+    eyebrow: "Media Walls & Space Dividers",
+    title: "Spatial technology",
+    concepts: mediaWallConcepts,
+  },
+  {
+    eyebrow: "AV Equipment Enclosures",
+    title: "Secure equipment",
+    concepts: avEquipmentEnclosureConcepts,
+  },
+  {
+    eyebrow: "Room Control & Scheduling",
+    title: "Room interfaces",
+    concepts: roomControlConcepts,
+  },
+  {
+    eyebrow: "Interactive Kiosks",
+    title: "Self-service points",
+    concepts: interactiveKioskConcepts,
+  },
+  {
+    eyebrow: "Technical Workstations",
+    title: "Focused work",
+    concepts: technicalWorkstationConcepts,
+  },
+];
 export default function ProductsPage() {
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 overflow-hidden text-white">
-        <Container className="grid min-h-[42rem] items-end gap-12 pt-32 pb-16 lg:grid-cols-12 lg:gap-16">
+        <Container className="grid gap-8 py-10 md:py-14 lg:grid-cols-12 lg:gap-12">
           <div className="min-w-0 lg:col-span-5">
             <Breadcrumbs
               items={[{ label: "Home", href: "/" }, { label: "Products" }]}
             />
             <ViewportReveal>
-              <Eyebrow className="mt-12 text-emerald-300">Products</Eyebrow>
-              <MaskedHeading as="h1" className="type-h1 mt-7 max-w-4xl">
+              <Eyebrow className="mt-8 text-emerald-300 md:mt-10">
+                Products
+              </Eyebrow>
+              <MaskedHeading as="h1" className="type-h2 mt-5 max-w-4xl">
                 Technology furniture, clearly organised.
               </MaskedHeading>
-              <p className="type-body-lg mt-7 max-w-2xl text-white/70">
+              <p className="type-body-lg mt-5 max-w-2xl text-white/70">
                 Explore twelve product families for presenting, displaying,
                 collaborating, integrating equipment and supporting
                 technology-led spaces.
@@ -222,7 +281,7 @@ export default function ProductsPage() {
           )}
         </Container>
       </section>
-      <Section>
+      <Section className="py-10 md:py-12">
         <Container>
           <SectionHeader
             eyebrow="Product philosophy"
@@ -247,29 +306,29 @@ export default function ProductsPage() {
                 "Access, cable routing and equipment accommodation treated as part of the product architecture.",
               ],
             ].map(([number, title, copy]) => (
-              <article key={number} className="bg-canvas min-h-52 p-5">
+              <article key={number} className="bg-canvas min-h-36 p-5">
                 <span className="type-model text-accent">{number}</span>
-                <h2 className="type-h3 mt-10">{title}</h2>
+                <h2 className="type-h4 mt-6">{title}</h2>
                 <p className="type-body-sm text-ink-muted mt-4">{copy}</p>
               </article>
             ))}
           </div>
         </Container>
       </Section>
-      <Section tone="white">
+      <Section tone="white" className="py-10 md:py-12">
         <Container>
           <SectionHeader
             eyebrow="Product Families"
             title="Twelve clear ways into the range"
             description="Large product families organise furniture by use, form and technology role—not by abstract system language."
           />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
+          <div className="border-line bg-line grid gap-px border md:grid-cols-2 xl:grid-cols-3">
             {familyTiles.map((family, index) => (
               <Link
                 key={family.slug}
                 href={family.href as never}
                 style={sharedElementStyle("family", family.slug)}
-                className="motion-card group bg-surface hover:bg-accent-light grid min-h-[18rem] content-between p-5 md:p-7"
+                className="motion-card group bg-surface hover:bg-accent-light grid min-h-48 content-between p-5"
               >
                 <div className="flex justify-between">
                   <span className="type-model text-ink-muted">
@@ -280,11 +339,11 @@ export default function ProductsPage() {
                   </span>
                 </div>
                 <div>
-                  <h2 className="type-section">{family.name}</h2>
-                  <p className="type-body-sm text-ink-muted mt-5 max-w-xl">
+                  <h2 className="type-h3">{family.name}</h2>
+                  <p className="type-body-sm text-ink-muted mt-3 max-w-xl">
                     {family.description}
                   </p>
-                  <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold">
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold">
                     Explore family{" "}
                     <ArrowRight aria-hidden className="motion-arrow size-4" />
                   </span>
@@ -294,487 +353,44 @@ export default function ProductsPage() {
           </div>
         </Container>
       </Section>
-      <Section tone="muted">
+      <Section tone="muted" className="py-10 md:py-12">
         <Container>
           <SectionHeader
-            eyebrow="Presentation Station Concepts"
-            title="Different formats for different presenter positions."
-            description="Concept views help compare presenter positions, equipment access and room-control approaches before specification."
+            eyebrow="Product Concepts"
+            title="Compare product directions without endless scrolling."
+            description="Each family stays visible as a compact row. Open the product when a concept looks relevant to the project."
+            className="md:mb-6"
           />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {presentationConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">
-                      Presentation Stations
-                    </p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
+          <div className="grid gap-5">
+            {conceptGroups.map((group) => (
+              <ConceptGroup key={group.eyebrow} {...group} />
             ))}
           </div>
         </Container>
       </Section>
-      <Section tone="white">
-        <Container>
-          <SectionHeader
-            eyebrow="Display Stand Concepts"
-            title="Structures that make display technology part of the space."
-            description="Review display structures by screen format, peripheral placement and the amount of architecture the room needs."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {displayStandConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">Display Stands</p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="muted">
-        <Container>
-          <SectionHeader
-            eyebrow="Mobile AV Cart Concepts"
-            title="Technology that can move with the space."
-            description="Compare mobile formats for flexible rooms, shared displays and video-collaboration setups."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {mobileAvCartConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">Mobile AV Carts</p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="white">
-        <Container>
-          <SectionHeader
-            eyebrow="Technology Credenza Concepts"
-            title="Equipment infrastructure behind a calm architectural exterior."
-            description="Use these concepts to discuss equipment storage, ventilation, cable routing and service access inside architectural furniture."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {technologyCredenzaConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">
-                      Technology Credenzas
-                    </p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="muted">
-        <Container>
-          <SectionHeader
-            eyebrow="Learning Furniture Concepts"
-            title="Furniture for teaching, demonstration and group learning."
-            description="Explore teaching and learning formats for classrooms, labs, training spaces and device-supported group work."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {learningConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">
-                      Learning Furniture
-                    </p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="white">
-        <Container>
-          <SectionHeader
-            eyebrow="Collaboration Table Concepts"
-            title="Tables designed around shared technology."
-            description="Compare table formats for hybrid meetings, boardrooms, huddle rooms, teamwork and training."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {collaborationConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">
-                      Collaboration Tables
-                    </p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="muted">
-        <Container>
-          <SectionHeader
-            eyebrow="Media Walls & Space Divider Concepts"
-            title="Architectural structure for technology and spatial definition."
-            description="Review ways to combine display technology with room division, spatial focus and flexible collaboration zones."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {mediaWallConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">
-                      Media Walls &amp; Space Dividers
-                    </p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="white">
-        <Container>
-          <SectionHeader
-            eyebrow="AV Equipment Enclosure Concepts"
-            title="Secure, serviceable furniture for supporting equipment."
-            description="Compare enclosure formats for protecting hardware while keeping airflow, cable routing and service access in view."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {avEquipmentEnclosureConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">
-                      AV Equipment Enclosures
-                    </p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="muted">
-        <Container>
-          <SectionHeader
-            eyebrow="Room Control & Scheduling Concepts"
-            title="Dedicated positions for room interfaces."
-            description="Explore stands, mounts and docks for placing room controls and booking panels where people naturally use them."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {roomControlConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">
-                      Room Control &amp; Scheduling
-                    </p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="white">
-        <Container>
-          <SectionHeader
-            eyebrow="Interactive Kiosk Concepts"
-            title="Purpose-built furniture for self-service and public interaction."
-            description="Compare kiosk formats for touchscreens, tablets, wayfinding, check-in and public-facing digital workflows."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {interactiveKioskConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">
-                      Interactive Kiosks
-                    </p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="muted">
-        <Container>
-          <SectionHeader
-            eyebrow="Technical Workstation Concepts"
-            title="Focused furniture for monitoring, editing and specialist work."
-            description="Review workstation concepts for multi-display work, equipment-heavy tasks and focused technical environments."
-          />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2">
-            {technicalWorkstationConcepts.map(({ product, media }) => (
-              <Link
-                key={product.slug}
-                href={routes.product(product.slug)}
-                className="motion-card group bg-surface"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-white">
-                  <Image
-                    src={media.src}
-                    alt={media.alt}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    placeholder={media.blurDataURL ? "blur" : "empty"}
-                    blurDataURL={media.blurDataURL}
-                    className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
-                  />
-                </div>
-                <div className="flex items-end justify-between gap-5 p-6">
-                  <div>
-                    <p className="type-series text-accent">
-                      Technical Workstations
-                    </p>
-                    <h2 className="type-h3 mt-3">{product.name}</h2>
-                  </div>
-                  <ArrowRight
-                    aria-hidden
-                    className="motion-arrow size-5 shrink-0"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-      <Section tone="dark">
+      <Section tone="dark" className="py-10 md:py-12">
         <Container>
           <SectionHeader
             eyebrow="Product architecture"
             title="A product, extended through modules and accessories."
             description="Product series provide the core furniture form. Accessories extend mounting, equipment support, power, connectivity, cable management, mobility and service requirements."
           />
-          <div className="grid gap-8 md:grid-cols-12">
-            <div className="border-t border-white/20 pt-5 md:col-span-4">
+          <div className="grid gap-5 md:grid-cols-3">
+            <div className="border-t border-white/20 pt-5">
               <p className="type-model text-emerald-300">01 / CORE PRODUCT</p>
-              <h2 className="type-h3 mt-12">
+              <h2 className="type-h4 mt-6">
                 Select the product family and series.
               </h2>
             </div>
-            <div className="border-t border-white/20 pt-5 md:col-span-4">
+            <div className="border-t border-white/20 pt-5">
               <p className="type-model text-emerald-300">02 / EQUIPMENT</p>
-              <h2 className="type-h3 mt-12">
+              <h2 className="type-h4 mt-6">
                 Define the technology categories and room conditions.
               </h2>
             </div>
-            <div className="border-t border-white/20 pt-5 md:col-span-4">
+            <div className="border-t border-white/20 pt-5">
               <p className="type-model text-emerald-300">03 / EXTENSION</p>
-              <h2 className="type-h3 mt-12">
+              <h2 className="type-h4 mt-6">
                 Add relevant modules and accessories.
               </h2>
             </div>
@@ -789,18 +405,18 @@ export default function ProductsPage() {
           </PrimaryButton>
         </Container>
       </Section>
-      <Section>
+      <Section className="py-10 md:py-12">
         <Container>
           <SectionHeader
             eyebrow="Browse by Space"
             title="Start with the room"
           />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-3">
+          <div className="border-line bg-line flex gap-px overflow-x-auto border md:grid md:grid-cols-3 md:overflow-visible">
             {browseSpaces.map((space) => (
               <Link
                 key={space.slug}
                 href={routes.space(space.slug)}
-                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-44 content-between p-5"
+                className="motion-card group bg-canvas hover:bg-accent-light grid min-h-36 min-w-[16rem] content-between p-5 md:min-w-0"
               >
                 <span className="type-caption text-ink-muted">
                   {space.group}
@@ -817,29 +433,29 @@ export default function ProductsPage() {
           </div>
         </Container>
       </Section>
-      <Section tone="white">
+      <Section tone="white" className="py-10 md:py-12">
         <Container>
           <SectionHeader
             eyebrow="Browse by Sector"
             title="Products for different project contexts"
           />
-          <div className="border-line grid gap-px border-y md:grid-cols-4">
+          <div className="border-line flex gap-px overflow-x-auto border-y md:grid md:grid-cols-4 md:overflow-visible">
             {browseSectors.map((sector, index) => (
               <Link
                 key={sector.slug}
                 href={routes.sector(sector.slug)}
-                className={`group min-h-36 p-5 ${index % 4 !== 3 ? "md:border-line md:border-r" : ""}`}
+                className={`group min-h-32 min-w-[13rem] p-5 md:min-w-0 ${index % 4 !== 3 ? "md:border-line md:border-r" : ""}`}
               >
                 <span className="type-model text-ink-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h2 className="type-h4 mt-12">{sector.name}</h2>
+                <h2 className="type-h4 mt-8">{sector.name}</h2>
               </Link>
             ))}
           </div>
         </Container>
       </Section>
-      <Section>
+      <Section className="py-10 md:py-12">
         <Container>
           <div className="bg-line grid gap-px md:grid-cols-3">
             <Callout
@@ -867,6 +483,59 @@ export default function ProductsPage() {
         </Container>
       </Section>
     </main>
+  );
+}
+function ConceptGroup({
+  eyebrow,
+  title,
+  concepts,
+}: {
+  eyebrow: string;
+  title: string;
+  concepts: typeof presentationConcepts;
+}) {
+  return (
+    <section className="border-line bg-surface border p-4 md:p-5">
+      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="type-series text-accent">{eyebrow}</p>
+          <h2 className="type-h4 mt-2">{title}</h2>
+        </div>
+        <span className="type-model text-ink-muted">
+          {concepts.length} concepts
+        </span>
+      </div>
+      <div className="bg-line flex gap-px overflow-x-auto">
+        {concepts.map(({ product, media }) => (
+          <Link
+            key={product.slug}
+            href={routes.product(product.slug)}
+            className="motion-card group bg-surface min-w-[13.5rem] md:min-w-[15rem]"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden bg-white">
+              <Image
+                src={media.src}
+                alt={media.alt}
+                fill
+                sizes="15rem"
+                placeholder={media.blurDataURL ? "blur" : "empty"}
+                blurDataURL={media.blurDataURL}
+                className="object-contain transition-transform duration-[var(--duration-slow)] ease-[var(--ease-soft)] group-hover:scale-[1.015] motion-reduce:transition-none"
+              />
+            </div>
+            <div className="flex min-h-20 items-end justify-between gap-3 p-4">
+              <h3 className="text-base leading-tight font-semibold">
+                {product.name}
+              </h3>
+              <ArrowRight
+                aria-hidden
+                className="motion-arrow size-4 shrink-0"
+              />
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 function Callout({

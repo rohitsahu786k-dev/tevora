@@ -140,7 +140,7 @@ export default async function ResourcesPage({
 
       <Section id="resource-library" className="py-8 md:py-12">
         <Container>
-          <div className="border-line mb-5 grid gap-4 border-t pt-4 md:mb-6 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="mb-5 grid gap-4 md:mb-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
               <Eyebrow>Resource Library</Eyebrow>
               <h2 className="type-h3 mt-3 max-w-3xl text-balance">

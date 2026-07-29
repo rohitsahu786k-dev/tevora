@@ -26,17 +26,17 @@ export default function SectorsPage() {
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 text-white">
-        <Container className="py-12 md:py-20 lg:py-24">
+        <Container className="py-10 md:py-14">
           <Breadcrumbs
             items={[{ label: "Home", href: "/" }, { label: "Sectors" }]}
           />
-          <div className="mt-16 grid items-end gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="mt-8 grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
             <ViewportReveal className="flex min-w-0 flex-col justify-end lg:col-span-5">
               <Eyebrow className="text-emerald-300">Sectors</Eyebrow>
-              <MaskedHeading as="h1" className="type-h1 mt-7">
+              <MaskedHeading as="h1" className="type-h2 mt-5">
                 Technology furniture across sectors.
               </MaskedHeading>
-              <p className="type-body-lg mt-6 text-white/65">
+              <p className="type-body-lg mt-4 text-white/65">
                 Clear application pathways for education, workplace, government,
                 healthcare, public, media and specialist environments.
               </p>
@@ -51,25 +51,25 @@ export default function SectorsPage() {
           </div>
         </Container>
       </section>
-      <Section>
+      <Section className="py-10 md:py-12">
         <Container>
           <StaggerContainer as="ol" className="border-line border-t">
             {sectors.map((sector, index) => (
               <StaggerItem key={sector.slug} className="border-line border-b">
                 <Link
                   href={routes.sector(sector.slug)}
-                  className="motion-card group hover:bg-accent-light grid min-h-40 gap-5 py-5 md:grid-cols-12 md:px-5"
+                  className="motion-card group hover:bg-accent-light grid min-h-28 gap-4 py-4 md:grid-cols-12 md:px-5"
                 >
                   <span className="type-model text-ink-muted md:col-span-1">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div className="md:col-span-4">
-                    <h2 className="type-h2">{sector.name}</h2>
-                    <p className="type-series text-accent mt-4">
+                    <h2 className="type-h4">{sector.name}</h2>
+                    <p className="type-series text-accent mt-2">
                       {sectorToSpaces[sector.slug]?.length ?? 0} TYPICAL SPACES
                     </p>
                   </div>
-                  <p className="type-body-sm text-ink-muted max-w-xl md:col-span-5">
+                  <p className="type-body-sm text-ink-muted line-clamp-2 max-w-xl md:col-span-5">
                     {sector.summary}
                   </p>
                   <ArrowRight

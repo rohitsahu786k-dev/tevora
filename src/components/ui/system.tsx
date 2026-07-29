@@ -107,10 +107,7 @@ export function SectionHeader({
   return (
     <ViewportReveal>
       <header
-        className={cn(
-          "border-line mb-8 grid gap-5 border-t pt-5 md:mb-10 md:grid-cols-12",
-          className,
-        )}
+        className={cn("mb-8 grid gap-5 md:mb-10 md:grid-cols-12", className)}
       >
         <div className="md:col-span-3">
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}

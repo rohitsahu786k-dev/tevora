@@ -16,7 +16,7 @@ export default function ConfigurePage() {
     <main id="main-content" tabIndex={-1} className="outline-none">
       <Section className="py-8 md:py-10 lg:py-12">
         <Container>
-          <header className="border-line mb-6 grid gap-4 border-t pt-5 md:grid-cols-[12rem_1fr] md:items-end">
+          <header className="mb-6 grid gap-4 md:grid-cols-[12rem_1fr] md:items-end">
             <Eyebrow>Configure</Eyebrow>
             <div>
               <h1 className="type-h2 max-w-4xl text-balance">

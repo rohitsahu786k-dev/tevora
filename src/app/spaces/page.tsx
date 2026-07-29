@@ -30,18 +30,18 @@ const groups = [
 export default function SpacesPage() {
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
-      <Section>
+      <Section className="py-10 md:py-12">
         <Container>
           <Breadcrumbs
             items={[{ label: "Home", href: "/" }, { label: "Spaces" }]}
           />
-          <div className="mt-16 grid items-end gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="mt-8 grid items-end gap-8 lg:grid-cols-12 lg:gap-12">
             <ViewportReveal className="min-w-0 lg:col-span-5">
               <Eyebrow>Spaces</Eyebrow>
-              <MaskedHeading as="h1" className="type-h1 mt-7 max-w-4xl">
+              <MaskedHeading as="h1" className="type-h2 mt-5 max-w-4xl">
                 Spaces shaped by technology
               </MaskedHeading>
-              <p className="type-body-lg text-ink-muted mt-6 max-w-2xl">
+              <p className="type-body-lg text-ink-muted mt-4 max-w-2xl">
                 Explore education, workplace, specialist and public environments
                 with clear links to relevant TEVORA product families and series.
               </p>
@@ -61,6 +61,7 @@ export default function SpacesPage() {
           key={group}
           id={group.toLowerCase().replaceAll(" ", "-")}
           tone={groupIndex % 2 ? "white" : "light"}
+          className="py-10 md:py-12"
         >
           <Container>
             <div className="grid gap-8 md:grid-cols-12">
@@ -78,7 +79,7 @@ export default function SpacesPage() {
                       <Link
                         href={routes.space(space.slug)}
                         style={sharedElementStyle("space", space.slug)}
-                        className="motion-card group bg-surface hover:bg-accent-light grid min-h-64 content-between p-5"
+                        className="motion-card group bg-surface hover:bg-accent-light grid min-h-44 content-between p-4 md:p-5"
                       >
                         <div>
                           <div className="flex justify-between">
@@ -90,19 +91,13 @@ export default function SpacesPage() {
                               className="motion-arrow size-4"
                             />
                           </div>
-                          <h3 className="type-h2 mt-8">{space.name}</h3>
-                          <p className="type-body-sm text-ink-muted mt-2 max-w-2xl">
+                          <h3 className="type-h4 mt-5">{space.name}</h3>
+                          <p className="type-body-sm text-ink-muted mt-2 line-clamp-2 max-w-2xl">
                             {space.summary}
                           </p>
                         </div>
-                        <div className="border-line border-t pt-4">
+                        <div className="border-line border-t pt-3">
                           <p className="type-spec-label text-ink-muted">
-                            Primary users
-                          </p>
-                          <p className="type-caption mt-2">
-                            {space.primaryUsers.slice(0, 3).join(" · ")}
-                          </p>
-                          <p className="type-spec-label text-ink-muted mt-4">
                             Recommended product families
                           </p>
                           <p className="type-caption mt-2">
@@ -117,7 +112,7 @@ export default function SpacesPage() {
                               .filter(Boolean)
                               .join(" · ")}
                           </p>
-                          <span className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold">
+                          <span className="mt-3 inline-flex min-h-10 items-center text-sm font-semibold">
                             View Space
                           </span>
                         </div>

@@ -368,7 +368,7 @@ function CompactHeader({
   dark?: boolean;
 }) {
   return (
-    <header className="border-line mb-6 border-t pt-4">
+    <header className="mb-6">
       <Eyebrow className={dark ? "text-emerald-300" : undefined}>
         {eyebrow}
       </Eyebrow>
