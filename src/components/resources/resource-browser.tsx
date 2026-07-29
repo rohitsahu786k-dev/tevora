@@ -205,31 +205,38 @@ export function ResourceBrowser({
               onChange={(value) => updateFilter("format", value)}
               options={formats.map((item) => [item, item])}
             />
-            <Filter
-              label="Language"
-              value={filters.language}
-              onChange={(value) => updateFilter("language", value)}
-              options={[["en", "English"]]}
-            />
-            <Filter
-              label="Revision"
-              value={filters.revision}
-              onChange={(value) => updateFilter("revision", value)}
-              options={revisions.map((item) => [item, item])}
-            />
-            <Filter
-              label="Sector"
-              value={filters.sector}
-              onChange={(value) => updateFilter("sector", value)}
-              options={sectors.map((item) => [item.id, item.name])}
-            />
-            <Filter
-              label="Space"
-              value={filters.space}
-              onChange={(value) => updateFilter("space", value)}
-              options={spaces.map((item) => [item.id, item.name])}
-            />
           </div>
+          <details className="mt-4">
+            <summary className="cursor-pointer text-sm font-semibold">
+              Advanced filters
+            </summary>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <Filter
+                label="Language"
+                value={filters.language}
+                onChange={(value) => updateFilter("language", value)}
+                options={[["en", "English"]]}
+              />
+              <Filter
+                label="Revision"
+                value={filters.revision}
+                onChange={(value) => updateFilter("revision", value)}
+                options={revisions.map((item) => [item, item])}
+              />
+              <Filter
+                label="Sector"
+                value={filters.sector}
+                onChange={(value) => updateFilter("sector", value)}
+                options={sectors.map((item) => [item.id, item.name])}
+              />
+              <Filter
+                label="Space"
+                value={filters.space}
+                onChange={(value) => updateFilter("space", value)}
+                options={spaces.map((item) => [item.id, item.name])}
+              />
+            </div>
+          </details>
         </aside>
         <div>
           {demoAccess && (

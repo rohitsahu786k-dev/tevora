@@ -58,18 +58,18 @@ export default async function ResourcesPage({
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 text-white">
-        <Container className="grid gap-8 py-12 md:py-14 lg:grid-cols-[1fr_24rem] lg:items-end">
+        <Container className="grid gap-6 py-10 md:gap-8 md:py-14 lg:grid-cols-[1fr_24rem] lg:items-end">
           <div>
             <Eyebrow className="text-emerald-300">Resources</Eyebrow>
-            <h1 className="type-h2 mt-5 max-w-4xl text-balance">
+            <h1 className="type-h2 mt-4 max-w-4xl text-balance">
               Project files for planning, coordination and specification.
             </h1>
-            <p className="type-body-lg mt-5 max-w-3xl text-white/74">
+            <p className="type-body-lg mt-4 max-w-3xl text-white/74">
               Search TEVORA brochures, data sheets, drawings, BIM objects, Revit
               families, STEP files and planning guides. Controlled downloads are
               released through a TEVORA-issued login.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
               <PrimaryButton asChild className="text-brand-950! bg-white!">
                 <a href="#resource-library">
                   Browse Library <ArrowRight aria-hidden className="size-4" />
@@ -83,7 +83,7 @@ export default async function ResourcesPage({
               </SecondaryButton>
             </div>
           </div>
-          <div className="border border-white/18 bg-white/[0.04] p-5">
+          <div className="border border-white/18 bg-white/[0.04] p-4 md:p-5">
             <div className="flex items-start gap-3">
               <span className="grid size-10 place-items-center rounded-full bg-white/12">
                 <LockKeyhole aria-hidden className="size-5 text-emerald-300" />
@@ -101,9 +101,12 @@ export default async function ResourcesPage({
                 Demo TEVORA ID confirmed.
               </p>
             )}
-            <dl className="mt-5 grid grid-cols-3 border-y border-white/14">
+            <dl className="mt-4 grid gap-px border-y border-white/14 bg-white/10 sm:grid-cols-3">
               {resourceStats.map((item) => (
-                <div key={item.label} className="py-4 pr-3">
+                <div
+                  key={item.label}
+                  className="bg-brand-950/40 p-3 sm:bg-transparent sm:py-4 sm:pr-3"
+                >
                   <dt className="type-model text-emerald-300">{item.label}</dt>
                   <dd className="mt-2 text-sm text-white/82">{item.value}</dd>
                 </div>
@@ -115,9 +118,12 @@ export default async function ResourcesPage({
 
       <Section tone="white" className="py-8 md:py-10">
         <Container>
-          <div className="border-line bg-line grid gap-px border md:grid-cols-3">
+          <div className="border-line bg-line flex gap-px overflow-x-auto border md:grid md:grid-cols-3 md:overflow-visible">
             {resourceActions.map(({ icon: Icon, title, text }) => (
-              <article key={title} className="bg-surface flex gap-4 p-5">
+              <article
+                key={title}
+                className="bg-surface flex min-w-[16rem] gap-4 p-4 md:min-w-0 md:p-5"
+              >
                 <Icon
                   aria-hidden
                   className="text-accent mt-1 size-5 shrink-0"
@@ -132,9 +138,9 @@ export default async function ResourcesPage({
         </Container>
       </Section>
 
-      <Section id="resource-library" className="py-10 md:py-12">
+      <Section id="resource-library" className="py-8 md:py-12">
         <Container>
-          <div className="border-line mb-6 grid gap-5 border-t pt-4 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="border-line mb-5 grid gap-4 border-t pt-4 md:mb-6 md:grid-cols-[1fr_auto] md:items-end">
             <div>
               <Eyebrow>Resource Library</Eyebrow>
               <h2 className="type-h3 mt-3 max-w-3xl text-balance">
@@ -159,7 +165,7 @@ export default async function ResourcesPage({
 
       <Section tone="dark" className="py-10 md:py-12">
         <Container>
-          <div className="grid items-center gap-6 border border-white/18 bg-white/[0.04] p-6 md:grid-cols-[1fr_auto]">
+          <div className="grid items-center gap-5 border border-white/18 bg-white/[0.04] p-5 md:grid-cols-[1fr_auto] md:p-6">
             <div>
               <Eyebrow className="text-emerald-300">Project Packs</Eyebrow>
               <h2 className="type-h3 mt-4 max-w-3xl text-balance">

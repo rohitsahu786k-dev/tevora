@@ -64,20 +64,20 @@ export default function PartnersPage() {
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 text-white">
-        <Container className="grid min-h-[34rem] items-center gap-10 py-14 md:py-16 lg:grid-cols-[1.05fr_.95fr]">
+        <Container className="grid gap-6 py-10 md:gap-10 md:py-16 lg:min-h-[34rem] lg:grid-cols-[1.05fr_.95fr]">
           <div>
             <Eyebrow className="text-emerald-300">
               TEVORA Partner Network
             </Eyebrow>
-            <h1 className="type-h2 mt-5 max-w-4xl text-balance">
+            <h1 className="type-h2 mt-4 max-w-4xl text-balance">
               Grow with a focused technology furniture partner programme.
             </h1>
-            <p className="type-body-lg mt-6 max-w-2xl text-white/74">
+            <p className="type-body-lg mt-4 max-w-2xl text-white/74 md:mt-6">
               For integrators, dealers, distributors and specification partners
               who help customers plan better meeting, learning, display and
               specialist technology spaces.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3 md:mt-8">
               <PrimaryButton asChild className="text-brand-950! bg-white!">
                 <Link href={routes.partnerApply as never}>
                   Apply to Become a Partner
@@ -93,7 +93,7 @@ export default function PartnersPage() {
             </div>
           </div>
 
-          <div className="border border-white/18 bg-white/[0.04] p-6 md:p-7">
+          <div className="border border-white/18 bg-white/[0.04] p-4 md:p-7">
             <div className="flex items-center gap-3">
               <span className="bg-accent text-brand-950 grid size-11 place-items-center rounded-full">
                 <Handshake aria-hidden className="size-5" />
@@ -110,9 +110,12 @@ export default function PartnersPage() {
               resources and project coordination so opportunities move from
               enquiry to specification with more confidence.
             </p>
-            <dl className="mt-6 grid grid-cols-3 border-y border-white/14">
+            <dl className="mt-5 grid gap-px border-y border-white/14 bg-white/10 sm:grid-cols-3">
               {heroStats.map((stat) => (
-                <div key={stat.label} className="py-4 pr-4">
+                <div
+                  key={stat.label}
+                  className="bg-brand-950/40 p-3 sm:bg-transparent sm:py-4 sm:pr-4"
+                >
                   <dt className="type-model text-white/48">{stat.label}</dt>
                   <dd className="mt-2 text-2xl font-semibold">{stat.value}</dd>
                 </div>
@@ -144,9 +147,12 @@ export default function PartnersPage() {
             title="A clearer way to sell, specify and deliver TEVORA projects."
             description="The programme connects local capability with TEVORA product architecture, documentation and technical support."
           />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-3">
+          <div className="border-line bg-line flex gap-px overflow-x-auto border md:grid md:grid-cols-3 md:overflow-visible">
             {programmePillars.map(({ icon: Icon, title, text }) => (
-              <article key={title} className="bg-surface p-5">
+              <article
+                key={title}
+                className="bg-surface min-w-[16rem] p-4 md:min-w-0 md:p-5"
+              >
                 <Icon aria-hidden className="text-accent size-5" />
                 <h2 className="type-h4 mt-4">{title}</h2>
                 <p className="type-body-sm text-ink-muted mt-2">{text}</p>
@@ -163,11 +169,11 @@ export default function PartnersPage() {
             title="What partners can use immediately."
             description="Practical support for commercial conversations, specification work and project delivery."
           />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2 lg:grid-cols-3">
+          <div className="border-line bg-line flex gap-px overflow-x-auto border sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
             {visibleBenefits.map((benefit) => (
               <div
                 key={benefit}
-                className="bg-surface flex min-h-20 items-center gap-3 p-4"
+                className="bg-surface flex min-h-16 min-w-[17rem] items-center gap-3 p-4 sm:min-w-0"
               >
                 <BadgeCheck
                   aria-hidden
@@ -188,11 +194,11 @@ export default function PartnersPage() {
               title="Who should apply?"
               description="Organisations active in AV, furniture, specification, distribution or specialist technology projects."
             />
-            <div className="flex flex-wrap gap-2.5">
+            <div className="flex gap-2.5 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
               {partnerAudiences.map((audience) => (
                 <span
                   key={audience}
-                  className="border-line bg-surface border px-3.5 py-2 text-sm font-semibold"
+                  className="border-line bg-surface shrink-0 border px-3.5 py-2 text-sm font-semibold"
                 >
                   {audience}
                 </span>
@@ -209,9 +215,13 @@ export default function PartnersPage() {
             title="Choose the route that matches your business."
             description="Apply for one or multiple routes. TEVORA will review market fit and capability before onboarding."
           />
-          <div className="border-line bg-line grid gap-px border md:grid-cols-2 xl:grid-cols-3">
+          <div className="border-line bg-line flex gap-px overflow-x-auto border md:grid md:grid-cols-2 md:overflow-visible xl:grid-cols-3">
             {partnerTypeContent.map((type) => (
-              <article key={type.id} id={type.id} className="bg-surface p-5">
+              <article
+                key={type.id}
+                id={type.id}
+                className="bg-surface min-w-[18rem] p-4 md:min-w-0 md:p-5"
+              >
                 <p className="type-series text-accent">{type.name}</p>
                 <h2 className="mt-3 text-xl leading-tight font-semibold">
                   {type.description}

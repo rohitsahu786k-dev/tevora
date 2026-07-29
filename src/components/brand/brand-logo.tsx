@@ -11,11 +11,28 @@ export function BrandLogo({
   className?: string;
   priority?: boolean;
 }) {
+  if (variant === "dark") {
+    return (
+      <picture>
+        <source
+          media="(prefers-color-scheme: dark)"
+          srcSet={brandSettings.logoLight}
+        />
+        <Image
+          src={brandSettings.logoDark}
+          alt={brandSettings.brandName}
+          width={430}
+          height={72}
+          priority={priority}
+          className={cn("h-auto w-40", className)}
+        />
+      </picture>
+    );
+  }
+
   return (
     <Image
-      src={
-        variant === "light" ? brandSettings.logoLight : brandSettings.logoDark
-      }
+      src={brandSettings.logoLight}
       alt={brandSettings.brandName}
       width={430}
       height={72}
