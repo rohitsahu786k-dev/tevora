@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import {
   ArrowRight,
   Boxes,
-  Building2,
   Download,
   FileCheck2,
   FileText,
@@ -25,57 +24,28 @@ export const metadata = createPageMetadata({
   path: routes.resources,
 });
 
-const resourceGroups = [
-  {
-    title: "Plan the room",
-    description:
-      "Planning guides, product overviews and finish references for early conversations with clients, consultants and internal teams.",
-    items: ["Planning guides", "Product brochures", "Finish cards"],
-    icon: Building2,
-  },
-  {
-    title: "Coordinate the design",
-    description:
-      "CAD, BIM, Revit and STEP resources for checking furniture size, equipment zones, display positions and service clearances.",
-    items: ["CAD drawings", "BIM objects", "Revit families", "STEP models"],
-    icon: Boxes,
-  },
-  {
-    title: "Support specification",
-    description:
-      "Data sheets, technical specifications, certification records and installation guidance for procurement and project delivery.",
-    items: [
-      "Product data sheets",
-      "Technical specifications",
-      "Certification register",
-      "Installation guides",
-    ],
-    icon: FileCheck2,
-  },
-];
-
-const accessSteps = [
-  {
-    title: "Browse by product, space or file type",
-    description:
-      "Use the library filters to find the resources connected to the product family, room type or project stage you are working on.",
-  },
-  {
-    title: "Request or use your TEVORA login",
-    description:
-      "Technical downloads are released through a TEVORA-issued ID so your team receives the current project-ready files.",
-  },
-  {
-    title: "Coordinate with Design Support",
-    description:
-      "For project-specific packs, TEVORA can confirm the right drawings, models, finish references and installation notes before release.",
-  },
-];
-
 const resourceStats = [
-  { label: "Resource records", value: resources.length.toString() },
-  { label: "File formats", value: "PDF, DWG, BIM, RVT, STEP" },
+  { label: "Records", value: resources.length.toString() },
+  { label: "Formats", value: "PDF, DWG, BIM, RVT, STEP" },
   { label: "Access", value: "TEVORA ID" },
+];
+
+const resourceActions = [
+  {
+    icon: FileText,
+    title: "Review",
+    text: "Find brochures, data sheets and planning guides.",
+  },
+  {
+    icon: Boxes,
+    title: "Coordinate",
+    text: "Locate CAD, BIM, Revit and STEP files for design checks.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Request",
+    text: "Use a TEVORA login for controlled technical downloads.",
+  },
 ];
 
 export default async function ResourcesPage({
@@ -88,159 +58,97 @@ export default async function ResourcesPage({
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 text-white">
-        <Container className="py-10 md:py-14">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-            <div className="max-w-4xl lg:col-span-7">
-              <Eyebrow className="text-emerald-300">Resources</Eyebrow>
-              <h1 className="type-h1 mt-6 max-w-4xl text-balance">
-                Project files, drawings and models in one working library.
-              </h1>
-              <p className="type-body-lg mt-6 max-w-3xl text-white/76">
-                Search TEVORA brochures, product data sheets, CAD drawings, BIM
-                objects, Revit families, STEP files and planning guides by
-                product, family, space or sector. Controlled downloads are
-                released through a TEVORA ID so project teams stay on current
-                files.
+        <Container className="grid gap-8 py-12 md:py-14 lg:grid-cols-[1fr_24rem] lg:items-end">
+          <div>
+            <Eyebrow className="text-emerald-300">Resources</Eyebrow>
+            <h1 className="type-h2 mt-5 max-w-4xl text-balance">
+              Project files for planning, coordination and specification.
+            </h1>
+            <p className="type-body-lg mt-5 max-w-3xl text-white/74">
+              Search TEVORA brochures, data sheets, drawings, BIM objects, Revit
+              families, STEP files and planning guides. Controlled downloads are
+              released through a TEVORA-issued login.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <PrimaryButton asChild className="text-brand-950! bg-white!">
+                <a href="#resource-library">
+                  Browse Library <ArrowRight aria-hidden className="size-4" />
+                </a>
+              </PrimaryButton>
+              <SecondaryButton
+                asChild
+                className="hover:text-brand-950 border-white/55 text-white hover:bg-white"
+              >
+                <Link href={routes.login}>Request TEVORA Login</Link>
+              </SecondaryButton>
+            </div>
+          </div>
+          <div className="border border-white/18 bg-white/[0.04] p-5">
+            <div className="flex items-start gap-3">
+              <span className="grid size-10 place-items-center rounded-full bg-white/12">
+                <LockKeyhole aria-hidden className="size-5 text-emerald-300" />
+              </span>
+              <div>
+                <h2 className="type-h4">Download access</h2>
+                <p className="type-body-sm mt-2 text-white/68">
+                  Public records can be reviewed immediately. Controlled files
+                  require TEVORA login access or project approval.
+                </p>
+              </div>
+            </div>
+            {demoAccess && (
+              <p className="mt-4 border border-emerald-300/35 bg-emerald-300/10 p-3 text-sm">
+                Demo TEVORA ID confirmed.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryButton
-                  asChild
-                  className="text-brand-950! hover:border-accent hover:bg-accent! border-white bg-white! hover:text-white!"
-                >
-                  <a href="#resource-library">
-                    Browse Library <ArrowRight aria-hidden className="size-4" />
-                  </a>
-                </PrimaryButton>
-                <SecondaryButton
-                  asChild
-                  className="hover:text-brand-950 border-white/55 text-white hover:border-white hover:bg-white"
-                >
-                  <Link href={routes.login}>Request TEVORA Login</Link>
-                </SecondaryButton>
-              </div>
-            </div>
-            <div className="glass-panel border-white/24 bg-white/12 p-5 text-white shadow-[0_24px_80px_rgba(0,0,0,.24)] lg:col-span-5">
-              <div className="flex items-start gap-4">
-                <div className="grid size-11 shrink-0 place-items-center rounded-full bg-white/20">
-                  <LockKeyhole
-                    aria-hidden
-                    className="size-5 text-emerald-300"
-                  />
+            )}
+            <dl className="mt-5 grid grid-cols-3 border-y border-white/14">
+              {resourceStats.map((item) => (
+                <div key={item.label} className="py-4 pr-3">
+                  <dt className="type-model text-emerald-300">{item.label}</dt>
+                  <dd className="mt-2 text-sm text-white/82">{item.value}</dd>
                 </div>
-                <div>
-                  <h2 className="type-h4">Download access</h2>
-                  <p className="type-body-sm mt-3 text-white/76">
-                    Public records can be reviewed immediately. Product data
-                    sheets and technical files use TEVORA login access, while
-                    project-sensitive packs can be approved for a named project.
-                  </p>
-                </div>
-              </div>
-              {demoAccess && (
-                <div className="mt-5 border border-emerald-300/40 bg-emerald-300/12 p-4">
-                  <p className="type-body-sm text-white">
-                    Demo TEVORA ID confirmed. The resource library is showing
-                    the signed-in test state.
-                  </p>
-                </div>
-              )}
-              <dl className="mt-6 grid gap-3 sm:grid-cols-3">
-                {resourceStats.map((item) => (
-                  <div key={item.label} className="bg-white/10 p-4">
-                    <dt className="type-model text-emerald-300">
-                      {item.label}
-                    </dt>
-                    <dd className="type-body-sm mt-2 text-white/85">
-                      {item.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+              ))}
+            </dl>
           </div>
         </Container>
       </section>
 
-      <Section tone="white">
+      <Section tone="white" className="py-8 md:py-10">
         <Container>
-          <div className="grid gap-5 md:grid-cols-3">
-            {resourceGroups.map(({ title, description, items, icon: Icon }) => (
-              <article
-                key={title}
-                className="border-line bg-surface grid min-h-80 content-between border p-5"
-              >
+          <div className="border-line bg-line grid gap-px border md:grid-cols-3">
+            {resourceActions.map(({ icon: Icon, title, text }) => (
+              <article key={title} className="bg-surface flex gap-4 p-5">
+                <Icon
+                  aria-hidden
+                  className="text-accent mt-1 size-5 shrink-0"
+                />
                 <div>
-                  <Icon aria-hidden className="text-accent size-6" />
-                  <h2 className="type-h4 mt-8">{title}</h2>
-                  <p className="type-body-sm text-ink-muted mt-4">
-                    {description}
-                  </p>
+                  <h2 className="type-h4">{title}</h2>
+                  <p className="type-body-sm text-ink-muted mt-2">{text}</p>
                 </div>
-                <ul className="border-line mt-8 grid gap-3 border-t pt-5">
-                  {items.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-3 text-sm font-semibold"
-                    >
-                      <FileText aria-hidden className="text-accent size-4" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </article>
             ))}
           </div>
         </Container>
       </Section>
 
-      <Section tone="muted">
+      <Section id="resource-library" className="py-10 md:py-12">
         <Container>
-          <div className="grid gap-8 md:grid-cols-12">
-            <div className="md:col-span-4">
-              <Eyebrow>How Access Works</Eyebrow>
-              <h2 className="type-section mt-6 text-balance">
-                The right file, released for the right project stage.
-              </h2>
-            </div>
-            <ol className="border-line bg-line grid gap-px border md:col-span-8 md:grid-cols-3">
-              {accessSteps.map((step, index) => (
-                <li key={step.title} className="bg-canvas p-5">
-                  <span className="type-model text-accent">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="type-h5 mt-10">{step.title}</h3>
-                  <p className="type-body-sm text-ink-muted mt-4">
-                    {step.description}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </Container>
-      </Section>
-
-      <Section id="resource-library">
-        <Container>
-          <div className="border-line mb-8 grid gap-5 border-t pt-5 md:grid-cols-12">
-            <div className="md:col-span-3">
+          <div className="border-line mb-6 grid gap-5 border-t pt-4 md:grid-cols-[1fr_auto] md:items-end">
+            <div>
               <Eyebrow>Resource Library</Eyebrow>
-            </div>
-            <div className="md:col-span-7">
-              <h2 className="type-section text-balance">
-                Search by product family, resource type, format, sector or
-                space.
+              <h2 className="type-h3 mt-3 max-w-3xl text-balance">
+                Search by family, product, format, sector or space.
               </h2>
-              <p className="type-body text-ink-muted mt-5 max-w-3xl">
-                Use the filters to narrow the library to the files your project
-                team needs. If the file is controlled, request access and TEVORA
-                Design Support will confirm the right login or release path.
+              <p className="type-body-sm text-ink-muted mt-3 max-w-3xl">
+                Filter the library to the file set your project team needs. If a
+                file is controlled, request access and TEVORA will confirm the
+                correct release path.
               </p>
             </div>
-            <div className="flex items-start gap-3 md:col-span-2 md:justify-end">
-              <Download aria-hidden className="text-accent mt-1 size-5" />
-              <p className="type-caption text-ink-muted">
-                Current downloads are released through TEVORA access.
-              </p>
+            <div className="text-ink-muted flex items-center gap-3 text-sm">
+              <Download aria-hidden className="text-accent size-4" />
+              Current files are released through TEVORA access.
             </div>
           </div>
           <Suspense fallback={<ProductBrowserSkeleton />}>
@@ -249,25 +157,22 @@ export default async function ResourcesPage({
         </Container>
       </Section>
 
-      <Section tone="dark">
+      <Section tone="dark" className="py-10 md:py-12">
         <Container>
-          <div className="grid gap-8 md:grid-cols-12 md:items-center">
-            <div className="md:col-span-8">
+          <div className="grid items-center gap-6 border border-white/18 bg-white/[0.04] p-6 md:grid-cols-[1fr_auto]">
+            <div>
               <Eyebrow className="text-emerald-300">Project Packs</Eyebrow>
-              <h2 className="type-section mt-6 text-balance">
-                Need a coordinated resource pack for a live project?
+              <h2 className="type-h3 mt-4 max-w-3xl text-balance">
+                Need a coordinated pack for a live project?
               </h2>
-              <p className="type-body-lg mt-5 max-w-3xl text-white/72">
+              <p className="type-body-sm mt-3 max-w-2xl text-white/68">
                 Share the product families, spaces and project stage. TEVORA can
-                help assemble the drawings, models, finish references and
-                technical notes that match the requirement.
+                confirm the drawings, models, finish references and notes that
+                match the requirement.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 md:col-span-4 md:justify-end">
-              <PrimaryButton
-                asChild
-                className="text-brand-950! hover:border-accent hover:bg-accent! border-white bg-white! hover:text-white!"
-              >
+            <div className="flex flex-wrap gap-3 md:justify-end">
+              <PrimaryButton asChild className="text-brand-950! bg-white!">
                 <Link href={routes.contact}>
                   Contact Design Support
                   <ArrowRight aria-hidden className="size-4" />
@@ -275,7 +180,7 @@ export default async function ResourcesPage({
               </PrimaryButton>
               <SecondaryButton
                 asChild
-                className="hover:text-brand-950 border-white/55 text-white hover:border-white hover:bg-white"
+                className="hover:text-brand-950 border-white/55 text-white hover:bg-white"
               >
                 <Link href={routes.login}>
                   <ShieldCheck aria-hidden className="size-4" />

@@ -144,9 +144,9 @@ export function ResourceBrowser({
   const hasFilters = Object.values(filters).some(Boolean);
   return (
     <>
-      <div className="grid gap-8 lg:grid-cols-[18rem_1fr]">
-        <aside>
-          <div className="flex items-center justify-between">
+      <div className="grid gap-5">
+        <aside className="border-line bg-surface border p-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="type-eyebrow text-accent">Filter resources</p>
             <button
               type="button"
@@ -161,9 +161,9 @@ export function ResourceBrowser({
               Reset
             </button>
           </div>
-          <label className="mt-6 block">
+          <label className="mt-4 block">
             <span className="type-spec-label block">Search library</span>
-            <span className="glass-control focus-within:border-accent mt-2 flex min-h-12 items-center gap-3 px-4">
+            <span className="border-line bg-canvas focus-within:border-accent mt-2 flex min-h-11 items-center gap-3 border px-3">
               <Search aria-hidden className="text-accent size-4 shrink-0" />
               <input
                 type="search"
@@ -174,7 +174,7 @@ export function ResourceBrowser({
               />
             </span>
           </label>
-          <div className="mt-5 grid gap-5">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             <Filter
               label="Product family"
               value={filters.family}
@@ -233,7 +233,7 @@ export function ResourceBrowser({
         </aside>
         <div>
           {demoAccess && (
-            <div className="glass-panel-strong mb-5 flex items-start gap-3 p-4">
+            <div className="border-line bg-accent-light mb-4 flex items-start gap-3 border p-4">
               <LockKeyhole aria-hidden className="text-accent mt-1 size-4" />
               <p className="type-body-sm text-ink-muted">
                 Signed in with the TEVORA demo ID. Registered resources are
@@ -255,7 +255,7 @@ export function ResourceBrowser({
             </p>
           </div>
           {filtered.length ? (
-            <div className="bg-line grid gap-px md:grid-cols-2">
+            <div className="bg-line grid gap-px md:grid-cols-2 xl:grid-cols-3">
               {filtered.map((resource) => (
                 <ResourceCard
                   key={resource.id}
@@ -350,9 +350,9 @@ function ResourceCard({
         ? "TEVORA login required"
         : "Current file request";
   return (
-    <article className="bg-surface grid min-h-[20rem] content-between p-5">
+    <article className="bg-surface grid min-h-[15rem] content-between p-4">
       <div>
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between gap-4">
           <FileText aria-hidden className="text-accent size-5" />
           <div className="text-right">
             <span className="type-series text-accent block">
@@ -363,11 +363,15 @@ function ResourceCard({
             </span>
           </div>
         </div>
-        <h2 className="type-h3 mt-10">{resource.title}</h2>
-        <p className="type-body-sm text-ink-muted mt-4">{resource.summary}</p>
+        <h2 className="mt-5 text-xl leading-tight font-semibold">
+          {resource.title}
+        </h2>
+        <p className="type-body-sm text-ink-muted mt-3 line-clamp-3">
+          {resource.summary}
+        </p>
       </div>
       <div>
-        <dl className="border-line grid grid-cols-2 gap-x-5 gap-y-4 border-t pt-5">
+        <dl className="border-line mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-t pt-4">
           <Meta
             label="Related product"
             value={product?.name}
@@ -376,32 +380,17 @@ function ResourceCard({
             }
           />
           <Meta
-            label="Related family"
+            label="Family"
             value={family?.name}
             fallback="Cross-family resource"
           />
-          <Meta label="File format" value={resource.fileFormat} />
-          <Meta
-            label="File size"
-            value={resource.fileSize}
-            fallback="Confirmed on release"
-          />
-          <Meta
-            label="Revision"
-            value={resource.revision}
-            fallback="Current controlled issue"
-          />
-          <Meta
-            label="Last updated"
-            value={resource.lastUpdated}
-            fallback="Verified before release"
-          />
+          <Meta label="Format" value={resource.fileFormat} />
           <Meta label="Access" value={formatAccess(resource.accessLevel)} />
         </dl>
         <button
           type="button"
           onClick={onOpen}
-          className="border-graphite hover:bg-brand-950 mt-6 flex min-h-12 w-full items-center justify-between border px-4 text-sm font-semibold hover:text-white"
+          className="border-graphite hover:bg-brand-950 mt-5 flex min-h-11 w-full items-center justify-between border px-4 text-sm font-semibold hover:text-white"
         >
           <span>
             {resource.accessLevel === "restricted"
