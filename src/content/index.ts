@@ -1257,7 +1257,7 @@ export const projects: Project[] = [
 export const publishedProjects = projects.filter(
   (project) => project.dataStatus === "verified",
 );
-const resourceSeeds: Array<{
+type ResourceSeed = {
   title: string;
   slug: string;
   summary: string;
@@ -1268,7 +1268,9 @@ const resourceSeeds: Array<{
   product?: string;
   sectors?: string[];
   spaces?: string[];
-}> = [
+};
+
+const resourceSeeds: ResourceSeed[] = [
   {
     title: "Presentation Stations Overview Brochure",
     slug: "product-brochure",
@@ -1407,7 +1409,28 @@ const resourceSeeds: Array<{
   },
 ];
 
-export const resources: Resource[] = resourceSeeds.map((seed) => ({
+const explicitResourceProducts = new Set(
+  resourceSeeds.flatMap((resource) =>
+    resource.product ? [resource.product] : [],
+  ),
+);
+
+const productResourceSeeds: ResourceSeed[] = products
+  .filter((product) => !explicitResourceProducts.has(product.id))
+  .map((product) => ({
+    title: `${product.name} Product Data Sheet`,
+    slug: `${product.slug}-product-data-sheet`,
+    summary: `${product.name} product data sheet covering the application intent, technology integration notes and coordination checks for ${product.descriptor.toLowerCase()}`,
+    resourceType: "product-data-sheet",
+    fileFormat: "PDF",
+    accessLevel: "registered",
+    productFamily: product.productFamily,
+    product: product.id,
+  }));
+
+const allResourceSeeds = [...resourceSeeds, ...productResourceSeeds];
+
+export const resources: Resource[] = allResourceSeeds.map((seed) => ({
   id: `resource-${seed.slug}`,
   slug: seed.slug,
   title: seed.title,

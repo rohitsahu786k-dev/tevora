@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ArrowRight,
@@ -12,8 +13,11 @@ import {
   PackageSearch,
   RotateCcw,
   Save,
+  Send,
   Settings2,
   Share2,
+  ShoppingBag,
+  Trash2,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -39,6 +43,7 @@ import {
 } from "@/lib/validation/configuration";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
+import { productConceptMediaBySlug } from "@/content/media";
 import type {
   ConfigureEntryMode,
   TevoraConfigurationState,
@@ -54,40 +59,44 @@ const entryOptions: Array<{
 }> = [
   {
     mode: "find-product",
-    title: "Find a Product",
+    title: "Find products",
     description:
-      "Answer a few project questions and see product families that fit the room.",
+      "Start with the room and technology requirement, then shortlist suitable TEVORA products.",
     icon: PackageSearch,
   },
   {
     mode: "configure-product",
-    title: "Configure a Product",
+    title: "Configure product",
     description:
-      "Start with a known product and capture the main equipment, finish and mobility needs.",
+      "Select a product, confirm equipment needs, choose finish direction and add it to the basket.",
     icon: Settings2,
   },
   {
     mode: "design-space",
-    title: "Design for a Space",
-    description: "Begin with the room, activities and user requirements.",
+    title: "Design by space",
+    description:
+      "Use the room type to guide furniture, technology and accessory decisions.",
     icon: LocateFixed,
   },
   {
     mode: "build-requirement",
-    title: "Build a Requirement",
-    description: "Capture equipment, access and project-stage inputs.",
+    title: "Build requirement",
+    description:
+      "Capture project stage, service access, display, device and documentation needs.",
     icon: ClipboardList,
   },
   {
     mode: "upload-layout",
-    title: "Upload a Layout",
-    description: "Keep room drawings ready for a TEVORA planning conversation.",
+    title: "Attach layout",
+    description:
+      "Keep drawings ready so TEVORA can confirm fit, clearances and service access.",
     icon: FileUp,
   },
   {
     mode: "request-proposal",
-    title: "Request a Proposal",
-    description: "Package the current brief for a TEVORA conversation.",
+    title: "Place order",
+    description:
+      "Review the basket and send an order request for TEVORA confirmation.",
     icon: ArrowRight,
   },
 ];
@@ -99,6 +108,27 @@ const answerOptions = [
   ["unsure", "To be confirmed"],
 ] as const;
 
+type BasketItem = {
+  id: string;
+  productSlug: string;
+  productName: string;
+  familyName: string;
+  model: string;
+  finish: string;
+  mobility: string;
+  displayConfiguration: string;
+  deviceConfiguration: string;
+  accessoryNames: string[];
+  quantity: number;
+};
+
+const workflowSteps = [
+  "Find the right product",
+  "Configure options",
+  "Add to basket",
+  "Place order request",
+];
+
 export function ConfigureExperience() {
   const [state, setState] = useState<TevoraConfigurationState>(() =>
     createConfigurationState({
@@ -106,8 +136,10 @@ export function ConfigureExperience() {
       updatedAt: "2000-01-01T00:00:00.000Z",
     }),
   );
+  const [basket, setBasket] = useState<BasketItem[]>([]);
   const [status, setStatus] = useState("");
   const [ready, setReady] = useState(false);
+  const [orderReference, setOrderReference] = useState("");
   const form = useForm<ProductFinderInput>({
     resolver: zodResolver(productFinderSchema),
     defaultValues: state.finder,
@@ -166,6 +198,11 @@ export function ConfigureExperience() {
     }));
   }, [state.finder.sector, state.finder.space]);
 
+  const basketQuantity = basket.reduce(
+    (total, item) => total + item.quantity,
+    0,
+  );
+
   const updateState = (update: Partial<TevoraConfigurationState>) =>
     setState((current) => ({
       ...current,
@@ -198,7 +235,7 @@ export function ConfigureExperience() {
         accessorySlugs: [],
       },
     });
-    setStatus("Product added to the configuration workspace.");
+    setStatus("Product loaded into the configuration workspace.");
     document.getElementById("workspace")?.scrollIntoView({
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
         ? "auto"
@@ -235,10 +272,11 @@ export function ConfigureExperience() {
       "TEVORA PROJECT CONFIGURATION STARTER",
       `Reference: ${state.id}`,
       `Updated: ${state.updatedAt}`,
+      `Basket items: ${basketQuantity}`,
       "",
-      "Use this as a starting brief for discussion with TEVORA. Final product selections, dimensions and compatibility are confirmed during project review.",
+      "Use this as an order request summary for TEVORA review. Final product selections, dimensions, pricing, lead time and compatibility are confirmed before order acceptance.",
       "",
-      JSON.stringify(state, null, 2),
+      JSON.stringify({ configuration: state, basket }, null, 2),
     ].join("\n");
     const url = URL.createObjectURL(
       new Blob([content], { type: "text/plain" }),
@@ -248,7 +286,87 @@ export function ConfigureExperience() {
     anchor.download = `tevora-preliminary-${state.id}.txt`;
     anchor.click();
     URL.revokeObjectURL(url);
-    setStatus("Preliminary specification downloaded.");
+    setStatus("Order request summary downloaded.");
+  };
+
+  const addCurrentConfigurationToBasket = (productSlug?: string) => {
+    const product = products.find(
+      (item) => item.slug === (productSlug ?? state.configuration.productSlug),
+    );
+    if (!product) {
+      setStatus("Select a product before adding it to the basket.");
+      document
+        .getElementById("workspace")
+        ?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    const family = productFamilies.find(
+      (item) => item.id === product.productFamily,
+    );
+    const accessoryNames = state.configuration.accessorySlugs
+      .map(
+        (slug) =>
+          getRelatedAccessories(product.slug).find((item) => item.slug === slug)
+            ?.name,
+      )
+      .filter((name): name is string => Boolean(name));
+    const itemId = [
+      product.slug,
+      state.configuration.model,
+      state.configuration.finish,
+      state.configuration.mobility,
+      state.configuration.displayConfiguration,
+      state.configuration.deviceConfiguration,
+      state.configuration.accessorySlugs.join("-"),
+    ].join("|");
+    const basketItem: BasketItem = {
+      id: itemId,
+      productSlug: product.slug,
+      productName: product.name,
+      familyName: family?.name ?? "TEVORA product",
+      model: state.configuration.model,
+      finish: state.configuration.finish,
+      mobility: state.configuration.mobility,
+      displayConfiguration: state.configuration.displayConfiguration,
+      deviceConfiguration: state.configuration.deviceConfiguration,
+      accessoryNames,
+      quantity: 1,
+    };
+    setBasket((current) => {
+      const existing = current.find((item) => item.id === itemId);
+      if (existing)
+        return current.map((item) =>
+          item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item,
+        );
+      return [...current, basketItem];
+    });
+    setStatus(`${product.name} added to basket.`);
+  };
+
+  const updateBasketQuantity = (id: string, quantity: number) => {
+    setBasket((current) =>
+      current
+        .map((item) => (item.id === id ? { ...item, quantity } : item))
+        .filter((item) => item.quantity > 0),
+    );
+  };
+
+  const placeOrder = () => {
+    if (!basket.length) {
+      setStatus(
+        "Add at least one configured product before placing an order request.",
+      );
+      document
+        .getElementById("workspace")
+        ?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    const reference = `TEV-${new Date().getFullYear()}-${String(Date.now()).slice(-6)}`;
+    setOrderReference(reference);
+    setStatus(`Order request ${reference} prepared for TEVORA review.`);
+    document
+      .getElementById("order-basket")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -258,6 +376,76 @@ export function ConfigureExperience() {
         animate={{ opacity: ready ? 1 : 0.72 }}
         transition={{ duration: motionTokens.duration.component }}
       >
+        <div className="glass-panel-strong mb-8 grid gap-px overflow-hidden p-2 sm:grid-cols-4">
+          {workflowSteps.map((step, index) => (
+            <div key={step} className="bg-white/42 p-4">
+              <span className="type-model text-accent">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <p className="type-body-sm mt-2 font-semibold">{step}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mb-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-stretch">
+          <div className="bg-brand-950 p-6 text-white">
+            <p className="type-eyebrow text-emerald-300">Order Builder</p>
+            <h2 className="type-h2 mt-4 max-w-3xl text-balance">
+              Shop, configure and send a reviewed TEVORA order request.
+            </h2>
+            <p className="type-body mt-5 max-w-3xl text-white/72">
+              Choose a recommended product, configure the key options, add it to
+              the basket and receive a TEVORA order reference before final
+              commercial review.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <PrimaryButton
+                asChild
+                className="text-brand-950! hover:border-accent hover:bg-accent! border-white bg-white! hover:text-white!"
+              >
+                <a href="#recommendations-heading">
+                  Shop products <ArrowRight aria-hidden className="size-4" />
+                </a>
+              </PrimaryButton>
+              <SecondaryButton
+                asChild
+                className="hover:text-brand-950 border-white/55 text-white hover:border-white hover:bg-white"
+              >
+                <a href="#order-basket">
+                  View basket
+                  {basketQuantity ? ` (${basketQuantity})` : ""}
+                </a>
+              </SecondaryButton>
+            </div>
+          </div>
+          <div className="glass-panel-strong grid content-between p-5">
+            <div>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="type-model text-accent">Basket</p>
+                  <p className="type-h3 mt-3">
+                    {basketQuantity} item{basketQuantity === 1 ? "" : "s"}
+                  </p>
+                </div>
+                <div className="bg-brand-950 grid size-12 place-items-center rounded-full text-white">
+                  <ShoppingBag aria-hidden className="size-5" />
+                </div>
+              </div>
+              <p className="type-body-sm text-ink-muted mt-5">
+                {orderReference
+                  ? `Order reference ${orderReference} is ready.`
+                  : basketQuantity
+                    ? "Review quantities and place the order request when ready."
+                    : "Your configured products will appear here as you add them."}
+              </p>
+            </div>
+            <PrimaryButton type="button" onClick={placeOrder} className="mt-8">
+              <Send aria-hidden className="size-4" />
+              Place order
+            </PrimaryButton>
+          </div>
+        </div>
+
         <div className="border-line bg-line grid gap-px border md:grid-cols-2 xl:grid-cols-3">
           {entryOptions.map(
             ({ mode, title, description, icon: Icon }, index) => (
@@ -466,58 +654,75 @@ export function ConfigureExperience() {
                       layout
                       initial={{ opacity: 1, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="bg-surface grid min-h-[22rem] content-between p-5"
+                      className="bg-surface grid overflow-hidden"
                     >
-                      <div>
-                        <span className="type-series text-accent">
-                          {family?.name}
-                        </span>
-                        <h3 className="type-h2 mt-4">{product.name}</h3>
-                        <p className="type-body-sm text-ink-muted mt-3">
-                          {product.descriptor}
-                        </p>
-                        <h4 className="type-spec-label mt-8">Why it matches</h4>
-                        <ul className="mt-3 space-y-2">
-                          {reasons.map((reason) => (
-                            <li key={reason} className="flex gap-2 text-sm">
-                              <Check
-                                aria-hidden
-                                className="text-accent mt-0.5 size-4 shrink-0"
-                              />
-                              {reason}
-                            </li>
-                          ))}
-                        </ul>
-                        <h4 className="type-spec-label mt-7">
-                          What to confirm next
-                        </h4>
-                        <p className="type-caption text-ink-muted mt-3">
-                          Confirm model, equipment fit, dimensions, mounting,
-                          cable paths and accessory compatibility with TEVORA.
-                        </p>
-                        <h4 className="type-spec-label mt-7">
-                          Compatible accessory groups
-                        </h4>
-                        <p className="type-caption text-ink-muted mt-3">
-                          {relatedAccessories.length
-                            ? relatedAccessories
-                                .map((item) => item.name)
-                                .join(" · ")
-                            : "Accessory groups can be discussed once a product direction is selected."}
-                        </p>
-                      </div>
-                      <div className="mt-8 flex flex-wrap gap-3">
-                        <SecondaryButton asChild>
-                          <Link href={routes.product(product.slug)}>
-                            View Product
-                          </Link>
-                        </SecondaryButton>
-                        <PrimaryButton
-                          type="button"
-                          onClick={() => selectProduct(product.slug)}
-                        >
-                          Configure Product
-                        </PrimaryButton>
+                      <ProductThumbnail
+                        productSlug={product.slug}
+                        productName={product.name}
+                      />
+                      <div className="grid min-h-[22rem] content-between p-5">
+                        <div>
+                          <span className="type-series text-accent">
+                            {family?.name}
+                          </span>
+                          <h3 className="type-h2 mt-4">{product.name}</h3>
+                          <p className="type-body-sm text-ink-muted mt-3">
+                            {product.descriptor}
+                          </p>
+                          <h4 className="type-spec-label mt-8">
+                            Why it matches
+                          </h4>
+                          <ul className="mt-3 space-y-2">
+                            {reasons.map((reason) => (
+                              <li key={reason} className="flex gap-2 text-sm">
+                                <Check
+                                  aria-hidden
+                                  className="text-accent mt-0.5 size-4 shrink-0"
+                                />
+                                {reason}
+                              </li>
+                            ))}
+                          </ul>
+                          <h4 className="type-spec-label mt-7">
+                            What to confirm next
+                          </h4>
+                          <p className="type-caption text-ink-muted mt-3">
+                            Confirm model, equipment fit, dimensions, mounting,
+                            cable paths and accessory compatibility with TEVORA.
+                          </p>
+                          <h4 className="type-spec-label mt-7">
+                            Compatible accessory groups
+                          </h4>
+                          <p className="type-caption text-ink-muted mt-3">
+                            {relatedAccessories.length
+                              ? relatedAccessories
+                                  .map((item) => item.name)
+                                  .join(" · ")
+                              : "Accessory groups can be discussed once a product direction is selected."}
+                          </p>
+                        </div>
+                        <div className="mt-8 flex flex-wrap gap-3">
+                          <PrimaryButton
+                            type="button"
+                            onClick={() => selectProduct(product.slug)}
+                          >
+                            Configure
+                          </PrimaryButton>
+                          <SecondaryButton
+                            type="button"
+                            onClick={() => {
+                              addCurrentConfigurationToBasket(product.slug);
+                            }}
+                          >
+                            <ShoppingBag aria-hidden className="size-4" />
+                            Add to basket
+                          </SecondaryButton>
+                          <SecondaryButton asChild>
+                            <Link href={routes.product(product.slug)}>
+                              Details
+                            </Link>
+                          </SecondaryButton>
+                        </div>
                       </div>
                     </motion.article>
                   ),
@@ -540,7 +745,18 @@ export function ConfigureExperience() {
           </AnimatePresence>
         </section>
 
-        <ConfigurationWorkspace state={state} updateState={updateState} />
+        <ConfigurationWorkspace
+          state={state}
+          updateState={updateState}
+          onAddToBasket={addCurrentConfigurationToBasket}
+        />
+
+        <OrderBasket
+          basket={basket}
+          orderReference={orderReference}
+          updateQuantity={updateBasketQuantity}
+          placeOrder={placeOrder}
+        />
 
         <div className="glass-bar sticky bottom-0 z-30 mt-20 border-t py-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -555,7 +771,7 @@ export function ConfigureExperience() {
                 className="type-caption text-ink-muted"
               >
                 {status ||
-                  "Use this workspace to prepare a clear project brief before speaking with TEVORA."}
+                  "Configure products, add them to the basket and place an order request for TEVORA review."}
               </motion.p>
             </AnimatePresence>
             <div className="flex flex-wrap gap-2">
@@ -573,12 +789,12 @@ export function ConfigureExperience() {
               </SecondaryButton>
               <SecondaryButton type="button" onClick={download}>
                 <Download aria-hidden className="size-4" />
-                Project starter
+                Order summary
               </SecondaryButton>
-              <PrimaryButton asChild>
-                <Link href={`${routes.contact}?configuration=${state.id}`}>
-                  Request proposal
-                </Link>
+              <PrimaryButton type="button" onClick={placeOrder}>
+                <Send aria-hidden className="size-4" />
+                Place order
+                {basketQuantity ? ` (${basketQuantity})` : ""}
               </PrimaryButton>
             </div>
           </div>
@@ -608,16 +824,54 @@ function AnswerSelect({
   );
 }
 
+function ProductThumbnail({
+  productSlug,
+  productName,
+}: {
+  productSlug: string;
+  productName: string;
+}) {
+  const media = productConceptMediaBySlug[productSlug];
+  return (
+    <div className="relative grid aspect-[4/3] place-items-center bg-white">
+      {media?.kind === "image" ? (
+        <Image
+          src={media.src}
+          alt={media.alt}
+          fill
+          sizes="(min-width: 1024px) 24vw, (min-width: 640px) 50vw, 100vw"
+          placeholder={media.blurDataURL ? "blur" : "empty"}
+          blurDataURL={media.blurDataURL}
+          className="object-contain p-6 transition-transform duration-[var(--duration-slow)] hover:scale-[1.02]"
+        />
+      ) : (
+        <div className="text-center">
+          <Settings2 aria-hidden className="text-accent mx-auto size-7" />
+          <p className="type-model text-ink-muted mt-4">{productName}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ConfigurationWorkspace({
   state,
   updateState,
+  onAddToBasket,
 }: {
   state: TevoraConfigurationState;
   updateState: (update: Partial<TevoraConfigurationState>) => void;
+  onAddToBasket: () => void;
 }) {
   const selectedProduct = products.find(
     (product) => product.slug === state.configuration.productSlug,
   );
+  const selectedFamily = productFamilies.find(
+    (family) => family.id === selectedProduct?.productFamily,
+  );
+  const selectedMedia = selectedProduct
+    ? productConceptMediaBySlug[selectedProduct.slug]
+    : null;
   const availableAccessories = selectedProduct
     ? getRelatedAccessories(selectedProduct.slug)
     : [];
@@ -636,16 +890,63 @@ function ConfigurationWorkspace({
         <div>
           <p className="type-eyebrow text-accent">Configuration workspace</p>
           <h2 id="workspace-heading" className="type-h2 mt-4">
-            Organise the preliminary configuration.
+            Configure the product.
           </h2>
-          <div className="border-line bg-surface-muted mt-8 grid aspect-[16/10] place-items-center border text-center">
-            <div>
-              <Settings2 aria-hidden className="text-accent mx-auto size-7" />
-              <p className="type-model text-ink-muted mt-4">PRODUCT VIEWPORT</p>
-              <p className="type-body-sm text-ink-muted mt-2">
-                Product visuals, dimensions and exact options are reviewed with
-                TEVORA during project planning.
-              </p>
+          <p className="type-body-sm text-ink-muted mt-5 max-w-2xl">
+            Set the product, equipment notes, finish direction and accessory
+            groups. Add each configured line to the basket when it is ready for
+            order review.
+          </p>
+          <div className="glass-panel-strong mt-8 grid overflow-hidden md:grid-cols-[1.05fr_.95fr]">
+            <div className="relative grid min-h-[22rem] place-items-center bg-white">
+              {selectedMedia?.kind === "image" ? (
+                <Image
+                  src={selectedMedia.src}
+                  alt={selectedMedia.alt}
+                  fill
+                  sizes="(min-width: 1024px) 46vw, 100vw"
+                  placeholder={selectedMedia.blurDataURL ? "blur" : "empty"}
+                  blurDataURL={selectedMedia.blurDataURL}
+                  className="object-contain p-8"
+                />
+              ) : (
+                <div className="text-center">
+                  <Settings2
+                    aria-hidden
+                    className="text-accent mx-auto size-7"
+                  />
+                  <p className="type-model text-ink-muted mt-4">
+                    Select a product
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="grid content-between p-6">
+              <div>
+                <p className="type-series text-accent">
+                  {selectedFamily?.name ?? "TEVORA Technology Furniture"}
+                </p>
+                <h3 className="type-h3 mt-4">
+                  {selectedProduct?.name ?? "No product selected"}
+                </h3>
+                <p className="type-body-sm text-ink-muted mt-4">
+                  {selectedProduct?.descriptor ??
+                    "Choose a product below or use the recommendations to start configuring a basket line."}
+                </p>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PrimaryButton type="button" onClick={onAddToBasket}>
+                  <ShoppingBag aria-hidden className="size-4" />
+                  Add to basket
+                </PrimaryButton>
+                {selectedProduct && (
+                  <SecondaryButton asChild>
+                    <Link href={routes.product(selectedProduct.slug)}>
+                      View product
+                    </Link>
+                  </SecondaryButton>
+                )}
+              </div>
             </div>
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
@@ -725,7 +1026,7 @@ function ConfigurationWorkspace({
             </SelectControl>
           </div>
         </div>
-        <aside className="border-line border-t pt-6 lg:border-t-0 lg:border-l lg:pl-8">
+        <aside className="glass-panel-strong self-start p-6">
           <p className="type-eyebrow text-accent">Configuration summary</p>
           <h3 className="type-h3 mt-5">
             {selectedProduct?.name ?? "No product selected"}
@@ -753,11 +1054,11 @@ function ConfigurationWorkspace({
           </dl>
           <h4 className="type-spec-label mt-8">Accessory selector</h4>
           {availableAccessories.length ? (
-            <div className="mt-3 space-y-2">
+            <div className="mt-3 grid gap-2">
               {availableAccessories.map((accessory) => (
                 <label
                   key={accessory.slug}
-                  className="border-line flex min-h-11 items-center gap-3 border px-3 text-sm"
+                  className="glass-control flex min-h-11 items-center gap-3 px-3 text-sm"
                 >
                   <input
                     type="checkbox"
@@ -790,13 +1091,156 @@ function ConfigurationWorkspace({
           )}
           <div className="border-accent bg-accent-light mt-8 border-l-2 p-4">
             <p className="type-body-sm font-semibold">
-              TEVORA confirms the final product, equipment fit and installation
-              details before ordering.
+              Basket orders are reviewed by TEVORA for pricing, lead time,
+              dimensions, equipment fit and installation details before final
+              acceptance.
             </p>
           </div>
+          <PrimaryButton
+            type="button"
+            onClick={onAddToBasket}
+            className="mt-5 w-full"
+          >
+            <ShoppingBag aria-hidden className="size-4" />
+            Add configured product
+          </PrimaryButton>
         </aside>
       </div>
     </section>
+  );
+}
+
+function OrderBasket({
+  basket,
+  orderReference,
+  updateQuantity,
+  placeOrder,
+}: {
+  basket: BasketItem[];
+  orderReference: string;
+  updateQuantity: (id: string, quantity: number) => void;
+  placeOrder: () => void;
+}) {
+  const itemCount = basket.reduce((total, item) => total + item.quantity, 0);
+  return (
+    <section
+      id="order-basket"
+      className="scroll-mt-28 pt-20"
+      aria-labelledby="order-basket-heading"
+    >
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div>
+          <p className="type-eyebrow text-accent">Basket</p>
+          <h2 id="order-basket-heading" className="type-h2 mt-4">
+            Review the order request.
+          </h2>
+          <p className="type-body-sm text-ink-muted mt-5 max-w-2xl">
+            Basket lines are sent as an order request. TEVORA confirms
+            commercial terms, drawings, compatibility and delivery details
+            before the order is accepted.
+          </p>
+        </div>
+        <div className="glass-panel-strong p-5">
+          <p className="type-model text-accent">Order status</p>
+          <p className="type-h4 mt-3">
+            {orderReference ? "Ready for TEVORA review" : "Basket in progress"}
+          </p>
+          <p className="type-body-sm text-ink-muted mt-3">
+            {orderReference
+              ? `Reference ${orderReference} has been prepared.`
+              : `${itemCount} configured item${itemCount === 1 ? "" : "s"} in basket.`}
+          </p>
+        </div>
+      </div>
+
+      <div className="border-line bg-line mt-8 grid gap-px border">
+        {basket.length ? (
+          basket.map((item) => (
+            <article
+              key={item.id}
+              className="bg-surface grid gap-5 p-5 md:grid-cols-[minmax(0,1fr)_12rem]"
+            >
+              <div>
+                <p className="type-series text-accent">{item.familyName}</p>
+                <h3 className="type-h4 mt-2">{item.productName}</h3>
+                <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+                  <BasketMeta label="Model" value={item.model} />
+                  <BasketMeta label="Finish" value={item.finish} />
+                  <BasketMeta label="Mobility" value={item.mobility} />
+                  <BasketMeta
+                    label="Accessories"
+                    value={item.accessoryNames.join(", ")}
+                  />
+                </dl>
+              </div>
+              <div className="flex items-center justify-between gap-3 md:justify-end">
+                <div className="glass-control flex min-h-11 items-center">
+                  <button
+                    type="button"
+                    className="grid size-11 place-items-center"
+                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                    aria-label={`Reduce ${item.productName} quantity`}
+                  >
+                    -
+                  </button>
+                  <span className="min-w-8 text-center text-sm font-semibold">
+                    {item.quantity}
+                  </span>
+                  <button
+                    type="button"
+                    className="grid size-11 place-items-center"
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                    aria-label={`Increase ${item.productName} quantity`}
+                  >
+                    +
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  className="border-line hover:bg-brand-950 grid size-11 place-items-center border hover:text-white"
+                  onClick={() => updateQuantity(item.id, 0)}
+                  aria-label={`Remove ${item.productName} from basket`}
+                >
+                  <Trash2 aria-hidden className="size-4" />
+                </button>
+              </div>
+            </article>
+          ))
+        ) : (
+          <div className="bg-surface p-8">
+            <ShoppingBag aria-hidden className="text-accent size-7" />
+            <h3 className="type-h4 mt-5">Your basket is empty.</h3>
+            <p className="type-body-sm text-ink-muted mt-3">
+              Configure a product above, or use the recommendations to add the
+              first product line.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6 flex flex-wrap justify-end gap-3">
+        <SecondaryButton asChild>
+          <Link href={`${routes.contact}?configuration=order-review`}>
+            Speak to TEVORA
+          </Link>
+        </SecondaryButton>
+        <PrimaryButton type="button" onClick={placeOrder}>
+          <Send aria-hidden className="size-4" />
+          Place order request
+        </PrimaryButton>
+      </div>
+    </section>
+  );
+}
+
+function BasketMeta({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <dt className="type-spec-label">{label}</dt>
+      <dd className="type-caption text-ink-muted mt-1">
+        {value || "To be confirmed"}
+      </dd>
+    </div>
   );
 }
 

@@ -1,7 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Download, FileText, LockKeyhole, RotateCcw, X } from "lucide-react";
+import {
+  Download,
+  FileText,
+  LockKeyhole,
+  RotateCcw,
+  Search,
+  X,
+} from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm, type FieldPath } from "react-hook-form";
@@ -41,6 +48,7 @@ const resourceTypeLabels: Record<Resource["resourceType"], string> = {
 };
 
 const filterKeys = [
+  "q",
   "family",
   "product",
   "accessory",
@@ -52,7 +60,11 @@ const filterKeys = [
   "space",
 ] as const;
 
-export function ResourceBrowser() {
+export function ResourceBrowser({
+  demoAccess = false,
+}: {
+  demoAccess?: boolean;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [gate, setGate] = useState<Resource | null>(null);
@@ -75,8 +87,25 @@ export function ResourceBrowser() {
   };
   const filtered = useMemo(
     () =>
-      browserResources.filter(
-        (resource) =>
+      browserResources.filter((resource) => {
+        const product = products.find((item) => item.id === resource.product);
+        const family = productFamilies.find(
+          (item) => item.id === resource.productFamily,
+        );
+        const query = filters.q.trim().toLowerCase();
+        const searchable = [
+          resource.title,
+          resource.summary,
+          resourceTypeLabels[resource.resourceType],
+          resource.fileFormat,
+          product?.name,
+          family?.name,
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        return (
+          (!query || searchable.includes(query)) &&
           (!filters.family || resource.productFamily === filters.family) &&
           (!filters.product || resource.product === filters.product) &&
           (!filters.accessory || resource.accessory === filters.accessory) &&
@@ -85,8 +114,9 @@ export function ResourceBrowser() {
           (!filters.language || resource.language === filters.language) &&
           (!filters.revision || resource.revision === filters.revision) &&
           (!filters.sector || resource.sectors.includes(filters.sector)) &&
-          (!filters.space || resource.spaces.includes(filters.space)),
-      ),
+          (!filters.space || resource.spaces.includes(filters.space))
+        );
+      }),
     [browserResources, filters],
   );
   const formats = [
@@ -131,7 +161,20 @@ export function ResourceBrowser() {
               Reset
             </button>
           </div>
-          <div className="mt-6 grid gap-5">
+          <label className="mt-6 block">
+            <span className="type-spec-label block">Search library</span>
+            <span className="glass-control focus-within:border-accent mt-2 flex min-h-12 items-center gap-3 px-4">
+              <Search aria-hidden className="text-accent size-4 shrink-0" />
+              <input
+                type="search"
+                value={filters.q}
+                onChange={(event) => updateFilter("q", event.target.value)}
+                placeholder="Product, file type or format"
+                className="placeholder:text-ink-muted/65 w-full bg-transparent text-base outline-none"
+              />
+            </span>
+          </label>
+          <div className="mt-5 grid gap-5">
             <Filter
               label="Product family"
               value={filters.family}
@@ -189,6 +232,16 @@ export function ResourceBrowser() {
           </div>
         </aside>
         <div>
+          {demoAccess && (
+            <div className="glass-panel-strong mb-5 flex items-start gap-3 p-4">
+              <LockKeyhole aria-hidden className="text-accent mt-1 size-4" />
+              <p className="type-body-sm text-ink-muted">
+                Signed in with the TEVORA demo ID. Registered resources are
+                visible for workflow testing; production downloads can be linked
+                after final files are uploaded.
+              </p>
+            </div>
+          )}
           <div className="border-line flex min-h-12 items-center justify-between border-b">
             <p className="type-body-sm">
               <strong>{filtered.length}</strong> resources
@@ -208,6 +261,7 @@ export function ResourceBrowser() {
                   key={resource.id}
                   resource={resource}
                   onOpen={() => openResource(resource)}
+                  demoAccess={demoAccess}
                 />
               ))}
             </div>
@@ -279,9 +333,11 @@ function Filter({
 function ResourceCard({
   resource,
   onOpen,
+  demoAccess,
 }: {
   resource: Resource;
   onOpen: () => void;
+  demoAccess: boolean;
 }) {
   const product = products.find((item) => item.id === resource.product);
   const family = productFamilies.find(
@@ -290,9 +346,9 @@ function ResourceCard({
   const accessLabel =
     resource.accessLevel === "restricted"
       ? "Project approval required"
-      : resource.accessLevel === "registered"
+      : resource.accessLevel === "registered" && !demoAccess
         ? "TEVORA login required"
-        : "Request current file";
+        : "Current file request";
   return (
     <article className="bg-surface grid min-h-[20rem] content-between p-5">
       <div>
@@ -312,13 +368,35 @@ function ResourceCard({
       </div>
       <div>
         <dl className="border-line grid grid-cols-2 gap-x-5 gap-y-4 border-t pt-5">
-          <Meta label="Related product" value={product?.name} />
-          <Meta label="Related family" value={family?.name} />
+          <Meta
+            label="Related product"
+            value={product?.name}
+            fallback={
+              resource.productFamily ? "Family-level file" : "All products"
+            }
+          />
+          <Meta
+            label="Related family"
+            value={family?.name}
+            fallback="Cross-family resource"
+          />
           <Meta label="File format" value={resource.fileFormat} />
-          <Meta label="File size" value={resource.fileSize} />
-          <Meta label="Revision" value={resource.revision} />
-          <Meta label="Last updated" value={resource.lastUpdated} />
-          <Meta label="Access" value={resource.accessLevel} />
+          <Meta
+            label="File size"
+            value={resource.fileSize}
+            fallback="Confirmed on release"
+          />
+          <Meta
+            label="Revision"
+            value={resource.revision}
+            fallback="Current controlled issue"
+          />
+          <Meta
+            label="Last updated"
+            value={resource.lastUpdated}
+            fallback="Verified before release"
+          />
+          <Meta label="Access" value={formatAccess(resource.accessLevel)} />
         </dl>
         <button
           type="button"
@@ -328,7 +406,7 @@ function ResourceCard({
           <span>
             {resource.accessLevel === "restricted"
               ? "Request approved access"
-              : resource.accessLevel === "registered"
+              : resource.accessLevel === "registered" && !demoAccess
                 ? "Request TEVORA login"
                 : "Request current file"}
           </span>
@@ -346,18 +424,26 @@ function ResourceCard({
 function Meta({
   label,
   value,
+  fallback,
 }: {
   label: string;
   value: string | null | undefined;
+  fallback?: string;
 }) {
   return (
     <div>
       <dt className="type-spec-label">{label}</dt>
       <dd className="type-caption text-ink-muted mt-1">
-        {value ?? "Discuss with TEVORA"}
+        {value ?? fallback ?? "Confirmed during access review"}
       </dd>
     </div>
   );
+}
+
+function formatAccess(accessLevel: Resource["accessLevel"]) {
+  if (accessLevel === "restricted") return "Project approval";
+  if (accessLevel === "registered") return "TEVORA ID";
+  return "Request access";
 }
 
 function ResourceGate({
@@ -441,7 +527,7 @@ function ResourceGate({
         role="dialog"
         aria-modal="true"
         aria-labelledby="resource-gate-title"
-        className="bg-surface max-h-full w-full max-w-2xl overflow-y-auto p-6 sm:p-9"
+        className="glass-panel-strong max-h-full w-full max-w-2xl overflow-y-auto p-6 sm:p-9"
       >
         <div className="flex items-start justify-between gap-5">
           <div>

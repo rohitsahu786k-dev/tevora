@@ -78,24 +78,31 @@ const resourceStats = [
   { label: "Access", value: "TEVORA ID" },
 ];
 
-export default function ResourcesPage() {
+export default async function ResourcesPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ login?: string }>;
+}) {
+  const params = await searchParams;
+  const demoAccess = params?.login === "demo";
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 text-white">
-        <Container className="py-12 md:py-16">
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
+        <Container className="py-10 md:py-14">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div className="max-w-4xl lg:col-span-7">
               <Eyebrow className="text-emerald-300">Resources</Eyebrow>
-              <h1 className="type-hero mt-7 text-balance">
-                Technical files for better project coordination.
+              <h1 className="type-h1 mt-6 max-w-4xl text-balance">
+                Project files, drawings and models in one working library.
               </h1>
-              <p className="type-body-lg mt-7 max-w-2xl text-white/75">
-                Find brochures, data sheets, drawings, BIM objects, Revit
-                families, STEP files and planning guides for TEVORA technology
-                furniture. Downloads are managed through a TEVORA-issued login
-                so project teams work from current files.
+              <p className="type-body-lg mt-6 max-w-3xl text-white/76">
+                Search TEVORA brochures, product data sheets, CAD drawings, BIM
+                objects, Revit families, STEP files and planning guides by
+                product, family, space or sector. Controlled downloads are
+                released through a TEVORA ID so project teams stay on current
+                files.
               </p>
-              <div className="mt-9 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <PrimaryButton
                   asChild
                   className="text-brand-950! hover:border-accent hover:bg-accent! border-white bg-white! hover:text-white!"
@@ -112,9 +119,9 @@ export default function ResourcesPage() {
                 </SecondaryButton>
               </div>
             </div>
-            <div className="border border-white/20 bg-white/8 p-5 shadow-[0_24px_80px_rgba(0,0,0,.24)] backdrop-blur-xl lg:col-span-5">
+            <div className="glass-panel border-white/24 bg-white/12 p-5 text-white shadow-[0_24px_80px_rgba(0,0,0,.24)] lg:col-span-5">
               <div className="flex items-start gap-4">
-                <div className="grid size-11 shrink-0 place-items-center rounded-full bg-white/18">
+                <div className="grid size-11 shrink-0 place-items-center rounded-full bg-white/20">
                   <LockKeyhole
                     aria-hidden
                     className="size-5 text-emerald-300"
@@ -122,16 +129,24 @@ export default function ResourcesPage() {
                 </div>
                 <div>
                   <h2 className="type-h4">Download access</h2>
-                  <p className="type-body-sm mt-3 text-white/72">
-                    Public records can be reviewed in the library. Controlled
-                    downloads require a TEVORA ID, and restricted files may also
-                    require project approval.
+                  <p className="type-body-sm mt-3 text-white/76">
+                    Public records can be reviewed immediately. Product data
+                    sheets and technical files use TEVORA login access, while
+                    project-sensitive packs can be approved for a named project.
                   </p>
                 </div>
               </div>
-              <dl className="mt-8 grid gap-px overflow-hidden bg-white/18 sm:grid-cols-3">
+              {demoAccess && (
+                <div className="mt-5 border border-emerald-300/40 bg-emerald-300/12 p-4">
+                  <p className="type-body-sm text-white">
+                    Demo TEVORA ID confirmed. The resource library is showing
+                    the signed-in test state.
+                  </p>
+                </div>
+              )}
+              <dl className="mt-6 grid gap-3 sm:grid-cols-3">
                 {resourceStats.map((item) => (
-                  <div key={item.label} className="bg-brand-950/60 p-4">
+                  <div key={item.label} className="bg-white/10 p-4">
                     <dt className="type-model text-emerald-300">
                       {item.label}
                     </dt>
@@ -229,7 +244,7 @@ export default function ResourcesPage() {
             </div>
           </div>
           <Suspense fallback={<ProductBrowserSkeleton />}>
-            <ResourceBrowser />
+            <ResourceBrowser demoAccess={demoAccess} />
           </Suspense>
         </Container>
       </Section>

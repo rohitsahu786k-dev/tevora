@@ -6,6 +6,12 @@ import { hasDatabaseConfig, getDatabase } from "@/lib/server/mongodb";
 import { loginAccessSchema } from "@/lib/validation/login";
 import { routes } from "@/lib/routes";
 
+const demoLogin = {
+  workEmail: "demo@tevora.design",
+  tevoraId: "TEVORA-DEMO-2026",
+  company: "TEVORA Demo",
+};
+
 export async function requestLoginAccess(formData: FormData) {
   const payload = {
     workEmail: String(formData.get("workEmail") ?? ""),
@@ -14,6 +20,12 @@ export async function requestLoginAccess(formData: FormData) {
   };
   const result = loginAccessSchema.safeParse(payload);
   if (!result.success) redirect(`${routes.login}?status=invalid` as never);
+  const isDemoLogin =
+    result.data.workEmail.trim().toLowerCase() === demoLogin.workEmail &&
+    result.data.tevoraId.trim().toUpperCase() === demoLogin.tevoraId &&
+    result.data.company.trim().toLowerCase() ===
+      demoLogin.company.toLowerCase();
+  if (isDemoLogin) redirect(`${routes.resources}?login=demo` as never);
   if (!hasDatabaseConfig())
     redirect(`${routes.login}?status=database` as never);
 

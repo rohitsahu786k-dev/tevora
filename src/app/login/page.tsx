@@ -47,6 +47,23 @@ async function LoginContent({
                   details and the access team can review the request.
                 </p>
               </div>
+              <div className="glass-panel-strong mt-5 p-5">
+                <p className="type-spec-label text-accent">Test login</p>
+                <dl className="type-body-sm text-ink-muted mt-4 grid gap-2">
+                  <div>
+                    <dt className="text-ink font-semibold">Work email</dt>
+                    <dd>demo@tevora.design</dd>
+                  </div>
+                  <div>
+                    <dt className="text-ink font-semibold">TEVORA ID</dt>
+                    <dd>TEVORA-DEMO-2026</dd>
+                  </div>
+                  <div>
+                    <dt className="text-ink font-semibold">Company</dt>
+                    <dd>TEVORA Demo</dd>
+                  </div>
+                </dl>
+              </div>
             </div>
             <div className="lg:col-span-7">
               <LoginPanel
@@ -71,20 +88,22 @@ function LoginPanel({
   const message =
     status === "success"
       ? `Access request saved. Reference: ${reference}`
-      : status === "database"
-        ? "The TEVORA login database is not connected yet. Configure DATABASE_URL to enable account access."
-        : status === "invalid"
-          ? "Please enter a valid work email, company and TEVORA ID."
-          : status === "error"
-            ? "The login request could not be saved. Please try again when access support is available."
-            : "";
+      : status === "demo"
+        ? "Demo TEVORA ID confirmed. Return to Resources to review the signed-in state."
+        : status === "database"
+          ? "The TEVORA login database is not connected yet. Configure DATABASE_URL to enable account access."
+          : status === "invalid"
+            ? "Please enter a valid work email, company and TEVORA ID."
+            : status === "error"
+              ? "The login request could not be saved. Please try again when access support is available."
+              : "";
   return (
     <div className="glass-panel-strong p-6 sm:p-8">
       <LockKeyhole aria-hidden className="text-accent size-6" />
       <h2 className="type-h3 mt-5">Sign in or request access</h2>
       <p className="type-body-sm text-ink-muted mt-3">
-        Enter the work email and TEVORA-issued ID connected to your download
-        account. Requests are saved to the TEVORA access database for review.
+        Enter a TEVORA-issued ID for technical download access. Use the test
+        login on this page to confirm the signed-in resource flow locally.
       </p>
       {message && (
         <div

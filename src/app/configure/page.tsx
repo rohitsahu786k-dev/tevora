@@ -7,7 +7,7 @@ import { routes } from "@/lib/routes";
 export const metadata = createPageMetadata({
   title: "Configure",
   description:
-    "Find a product direction and organise a preliminary TEVORA technology-furniture configuration.",
+    "Configure TEVORA technology furniture, add products to a basket and prepare an order request for project review.",
   path: routes.configure,
   noIndex: true,
 });
@@ -18,8 +18,8 @@ export default function ConfigurePage() {
         <Container>
           <SectionHeader
             eyebrow="Configure"
-            title="Build around your technology."
-            description="Capture the room, equipment and product direction so TEVORA can help shape the right configuration."
+            title="Configure products and build your project basket."
+            description="Choose the space, select TEVORA products, set the main equipment and finish requirements, then place an order request for review."
           />
           <Suspense fallback={<ProductBrowserSkeleton />}>
             <ConfigureExperience />

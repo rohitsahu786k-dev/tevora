@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { resources } from "@/content";
+import { products, resources } from "@/content";
 import { searchContent } from "@/components/search/search-data";
 import { LocalSearchProvider } from "@/lib/search/providers";
 import { resourceAccessSchema } from "@/lib/validation/resource-access";
@@ -9,7 +9,15 @@ describe("resources and global search", () => {
     expect(
       new Set(resources.map((resource) => resource.resourceType)).size,
     ).toBe(14);
-    expect(resources).toHaveLength(14);
+    expect(resources.length).toBeGreaterThanOrEqual(products.length);
+    const resourceProducts = new Set(
+      resources.flatMap((resource) =>
+        resource.product ? [resource.product] : [],
+      ),
+    );
+    products.forEach((product) => {
+      expect(resourceProducts.has(product.id)).toBe(true);
+    });
     resources.forEach((resource) => {
       expect(resource.dataStatus).toBe("placeholder");
       expect(resource.file).toBeNull();
