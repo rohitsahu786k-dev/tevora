@@ -10,7 +10,7 @@ import {
   SectionHeader,
 } from "@/components/ui/system";
 import { productFamilies, products, sectors, spaces } from "@/content";
-import { productConceptMediaBySlug } from "@/content/media";
+import { mediaAssets, productConceptMediaBySlug } from "@/content/media";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
@@ -193,7 +193,7 @@ const technicalWorkstationConcepts = [
     return product && media?.kind === "image" ? { product, media } : null;
   })
   .filter((item): item is NonNullable<typeof item> => Boolean(item));
-const productHeroImage = productConceptMediaBySlug.arc;
+const productHeroImage = mediaAssets.productsMainHero;
 const conceptGroups = [
   {
     eyebrow: "Presentation Stations",
@@ -207,12 +207,12 @@ const conceptGroups = [
   },
   {
     eyebrow: "Mobile AV Carts",
-    title: "Flexible technology",
+    title: "Move technology between rooms",
     concepts: mobileAvCartConcepts,
   },
   {
     eyebrow: "Technology Credenzas",
-    title: "Equipment furniture",
+    title: "Conceal and service AV equipment",
     concepts: technologyCredenzaConcepts,
   },
   {
@@ -222,12 +222,12 @@ const conceptGroups = [
   },
   {
     eyebrow: "Collaboration Tables",
-    title: "Shared technology",
+    title: "Tables ready for devices and displays",
     concepts: collaborationConcepts,
   },
   {
     eyebrow: "Media Walls & Space Dividers",
-    title: "Spatial technology",
+    title: "Divide space and support displays",
     concepts: mediaWallConcepts,
   },
   {
@@ -237,7 +237,7 @@ const conceptGroups = [
   },
   {
     eyebrow: "Room Control & Scheduling",
-    title: "Room interfaces",
+    title: "Control, book and manage rooms",
     concepts: roomControlConcepts,
   },
   {
@@ -247,7 +247,7 @@ const conceptGroups = [
   },
   {
     eyebrow: "Technical Workstations",
-    title: "Focused work",
+    title: "Workstations for specialist operators",
     concepts: technicalWorkstationConcepts,
   },
 ];
@@ -268,15 +268,21 @@ export default function ProductsPage() {
                 Technology furniture, clearly organised.
               </MaskedHeading>
               <p className="type-body-lg mt-5 max-w-2xl text-white/70">
-                Explore twelve product families for presenting, displaying,
-                collaborating, integrating equipment and supporting
-                technology-led spaces.
+                Find the right product family for presentation, display,
+                collaboration, equipment storage, room control and
+                technology-ready spaces.
               </p>
             </ViewportReveal>
           </div>
           {productHeroImage && (
             <ImageReveal priority className="min-w-0 lg:col-span-7">
-              <SingleHeroImage image={productHeroImage} priority />
+              <SingleHeroImage
+                image={productHeroImage}
+                priority
+                fit="cover"
+                aspect="16/9"
+                className="border-white/10 bg-white/5 shadow-2xl shadow-black/25"
+              />
             </ImageReveal>
           )}
         </Container>
@@ -284,26 +290,26 @@ export default function ProductsPage() {
       <Section className="py-10 md:py-12">
         <Container>
           <SectionHeader
-            eyebrow="Product philosophy"
-            title="Begin with the technology. Resolve the furniture around it."
-            description="TEVORA products bring equipment, infrastructure, user interaction and service requirements into one coordinated physical product."
+            eyebrow="Product approach"
+            title="Furniture designed around the technology people need to use."
+            description="TEVORA helps project teams place screens, devices, controls, equipment and cables into clean, serviceable furniture."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-3">
             {[
               [
                 "01",
-                "Integrated",
-                "Furniture and room technology considered together.",
+                "Connected",
+                "Furniture, displays, controls and equipment work as one room system.",
               ],
               [
                 "02",
-                "Modular",
-                "Series and accessories organised for different project requirements.",
+                "Adaptable",
+                "Product families, series and accessories support different room sizes and use cases.",
               ],
               [
                 "03",
-                "Serviceable",
-                "Access, cable routing and equipment accommodation treated as part of the product architecture.",
+                "Easy to support",
+                "Service access, cable routing and equipment ventilation are planned from the start.",
               ],
             ].map(([number, title, copy]) => (
               <article key={number} className="bg-canvas min-h-36 p-5">
@@ -319,8 +325,8 @@ export default function ProductsPage() {
         <Container>
           <SectionHeader
             eyebrow="Product Families"
-            title="Twelve clear ways into the range"
-            description="Large product families organise furniture by use, form and technology role—not by abstract system language."
+            title="Choose the family that matches the job."
+            description="Start with what the room needs to do, then open the product family that fits the presentation, display, storage, control or collaboration requirement."
           />
           <div className="border-line bg-line grid gap-px border md:grid-cols-2 xl:grid-cols-3">
             {familyTiles.map((family, index) => (
@@ -357,8 +363,8 @@ export default function ProductsPage() {
         <Container>
           <SectionHeader
             eyebrow="Product Concepts"
-            title="Compare product directions without endless scrolling."
-            description="Each family stays visible as a compact row. Open the product when a concept looks relevant to the project."
+            title="See the range at a glance."
+            description="Scan each family quickly, compare the product direction and open the series that fits your project."
             className="md:mb-6"
           />
           <div className="grid gap-5">
@@ -371,27 +377,27 @@ export default function ProductsPage() {
       <Section tone="dark" className="py-10 md:py-12">
         <Container>
           <SectionHeader
-            eyebrow="Product architecture"
-            title="A product, extended through modules and accessories."
-            description="Product series provide the core furniture form. Accessories extend mounting, equipment support, power, connectivity, cable management, mobility and service requirements."
+            eyebrow="How to specify"
+            title="Move from product choice to a clear order request."
+            description="Select a core product, confirm the equipment it must support, then add the modules and accessories needed for installation."
           />
           <div className="grid gap-5 md:grid-cols-3">
             <div className="border-t border-white/20 pt-5">
               <p className="type-model text-emerald-300">01 / CORE PRODUCT</p>
               <h2 className="type-h4 mt-6">
-                Select the product family and series.
+                Choose the product family and series.
               </h2>
             </div>
             <div className="border-t border-white/20 pt-5">
               <p className="type-model text-emerald-300">02 / EQUIPMENT</p>
               <h2 className="type-h4 mt-6">
-                Define the technology categories and room conditions.
+                Add the screens, devices and room conditions.
               </h2>
             </div>
             <div className="border-t border-white/20 pt-5">
               <p className="type-model text-emerald-300">03 / EXTENSION</p>
               <h2 className="type-h4 mt-6">
-                Add relevant modules and accessories.
+                Include the required modules and accessories.
               </h2>
             </div>
           </div>
@@ -409,7 +415,7 @@ export default function ProductsPage() {
         <Container>
           <SectionHeader
             eyebrow="Browse by Space"
-            title="Start with the room"
+            title="Find products by room type"
           />
           <div className="border-line bg-line flex gap-px overflow-x-auto border md:grid md:grid-cols-3 md:overflow-visible">
             {browseSpaces.map((space) => (
@@ -437,7 +443,7 @@ export default function ProductsPage() {
         <Container>
           <SectionHeader
             eyebrow="Browse by Sector"
-            title="Products for different project contexts"
+            title="Find products by customer sector"
           />
           <div className="border-line flex gap-px overflow-x-auto border-y md:grid md:grid-cols-4 md:overflow-visible">
             {browseSectors.map((sector, index) => (
@@ -460,22 +466,22 @@ export default function ProductsPage() {
           <div className="bg-line grid gap-px md:grid-cols-3">
             <Callout
               eyebrow="Configure"
-              title="Build around your technology."
-              copy="Create an initial product and project brief."
+              title="Build your order request."
+              copy="Select products, add key requirements and review estimated pricing."
               href={routes.configure}
               cta="Configure a Product"
             />
             <Callout
               eyebrow="Design Support"
-              title="Specify with confidence."
-              copy="Support for integrators, architects and consultants."
+              title="Get specification support."
+              copy="Share the room requirement with TEVORA for product and integration guidance."
               href={routes.designSupport}
               cta="Explore Design Support"
             />
             <Callout
               eyebrow="Resources"
-              title="Information for project teams."
-              copy="Request product files, drawings and planning information for your project stage."
+              title="Download project files."
+              copy="Access brochures, data sheets, drawings and planning files for active projects."
               href={routes.resources}
               cta="Browse Resources"
             />
@@ -501,9 +507,6 @@ function ConceptGroup({
           <p className="type-series text-accent">{eyebrow}</p>
           <h2 className="type-h4 mt-2">{title}</h2>
         </div>
-        <span className="type-model text-ink-muted">
-          {concepts.length} concepts
-        </span>
       </div>
       <div className="bg-line flex gap-px overflow-x-auto">
         {concepts.map(({ product, media }) => (

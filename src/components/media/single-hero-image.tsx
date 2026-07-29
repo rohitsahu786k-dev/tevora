@@ -11,16 +11,19 @@ export function SingleHeroImage({
   className,
   priority = false,
   fit = "contain",
+  aspect = "4/3",
 }: {
   image: HeroImage;
   className?: string;
   priority?: boolean;
   fit?: "contain" | "cover";
+  aspect?: "4/3" | "16/9";
 }) {
   return (
     <figure
       className={cn(
-        "border-line relative aspect-[4/3] overflow-hidden border bg-white",
+        "border-line relative overflow-hidden border bg-white",
+        aspect === "16/9" ? "aspect-[16/9]" : "aspect-[4/3]",
         className,
       )}
     >

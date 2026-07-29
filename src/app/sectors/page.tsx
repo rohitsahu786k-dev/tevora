@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { Container, Eyebrow, Section } from "@/components/ui/system";
 import { sectors } from "@/content";
 import { sectorToSpaces } from "@/content/relationships";
-import { productConceptMediaBySlug } from "@/content/media";
+import { mediaAssets } from "@/content/media";
 import { routes } from "@/lib/routes";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
@@ -17,12 +17,12 @@ import { SingleHeroImage } from "@/components/media/single-hero-image";
 export const metadata = createPageMetadata({
   title: "Sectors",
   description:
-    "Explore TEVORA technology-furniture applications across education, workplace, public and specialist sectors.",
+    "Explore TEVORA product guidance for education, workplace, government, healthcare, public and specialist technology spaces.",
   path: routes.sectors,
 });
 
 export default function SectorsPage() {
-  const sectorHeroImage = productConceptMediaBySlug.forum;
+  const sectorHeroImage = mediaAssets.sectorsMainHero;
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
       <section className="bg-brand-950 text-white">
@@ -37,15 +37,18 @@ export default function SectorsPage() {
                 Technology furniture across sectors.
               </MaskedHeading>
               <p className="type-body-lg mt-4 text-white/65">
-                Clear application pathways for education, workplace, government,
-                healthcare, public, media and specialist environments.
+                Start with your customer sector and find the spaces, products
+                and technology furniture requirements most relevant to that
+                environment.
               </p>
             </ViewportReveal>
             {sectorHeroImage && (
               <SingleHeroImage
                 image={sectorHeroImage}
                 priority
-                className="min-w-0 lg:col-span-7"
+                fit="cover"
+                aspect="16/9"
+                className="min-w-0 border-white/10 bg-white/5 shadow-2xl shadow-black/25 lg:col-span-7"
               />
             )}
           </div>
@@ -66,7 +69,7 @@ export default function SectorsPage() {
                   <div className="md:col-span-4">
                     <h2 className="type-h4">{sector.name}</h2>
                     <p className="type-series text-accent mt-2">
-                      {sectorToSpaces[sector.slug]?.length ?? 0} TYPICAL SPACES
+                      {sectorToSpaces[sector.slug]?.length ?? 0} RELEVANT SPACES
                     </p>
                   </div>
                   <p className="type-body-sm text-ink-muted line-clamp-2 max-w-xl md:col-span-5">

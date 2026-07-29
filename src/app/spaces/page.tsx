@@ -17,7 +17,7 @@ import { sharedElementStyle } from "@/lib/motion/shared-elements";
 export const metadata = createPageMetadata({
   title: "Spaces",
   description:
-    "Explore technology-furniture requirements and product recommendations by space type.",
+    "Explore TEVORA product recommendations by room type, from learning spaces and meeting rooms to specialist and public environments.",
   path: routes.spaces,
 });
 
@@ -42,15 +42,18 @@ export default function SpacesPage() {
                 Spaces shaped by technology
               </MaskedHeading>
               <p className="type-body-lg text-ink-muted mt-4 max-w-2xl">
-                Explore education, workplace, specialist and public environments
-                with clear links to relevant TEVORA product families and series.
+                Choose the room type and see which TEVORA product families help
+                support presentation, collaboration, control, display and
+                equipment integration.
               </p>
             </ViewportReveal>
             <ImageReveal priority className="min-w-0 lg:col-span-7">
               <SingleHeroImage
-                image={mediaAssets.homepageHero}
+                image={mediaAssets.spacesMainHero}
                 priority
                 fit="cover"
+                aspect="16/9"
+                className="bg-transparent shadow-xl shadow-black/10"
               />
             </ImageReveal>
           </div>
@@ -98,7 +101,7 @@ export default function SpacesPage() {
                         </div>
                         <div className="border-line border-t pt-3">
                           <p className="type-spec-label text-ink-muted">
-                            Recommended product families
+                            Relevant product families
                           </p>
                           <p className="type-caption mt-2">
                             {(spaceToProductFamilies[space.slug] ?? [])
@@ -113,7 +116,7 @@ export default function SpacesPage() {
                               .join(" · ")}
                           </p>
                           <span className="mt-3 inline-flex min-h-10 items-center text-sm font-semibold">
-                            View Space
+                            View space
                           </span>
                         </div>
                       </Link>

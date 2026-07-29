@@ -1152,73 +1152,73 @@ export const sectors: Sector[] = [
     name: "Higher Education",
     slug: "higher-education",
     summary:
-      "Technology-furniture applications for universities and other tertiary learning environments.",
+      "Support lecture theatres, classrooms, labs, libraries and collaboration spaces with furniture built around teaching technology.",
   },
   {
     name: "Schools",
     slug: "schools",
     summary:
-      "Technology-furniture applications for primary and secondary education.",
+      "Organise displays, teaching stations, charging, devices and shared learning tools for everyday school environments.",
   },
   {
     name: "Corporate",
     slug: "corporate",
     summary:
-      "Technology-furniture applications for workplaces, meetings and organisational communication.",
+      "Equip boardrooms, meeting rooms, training rooms and briefing spaces for cleaner collaboration and hybrid work.",
   },
   {
     name: "Government",
     slug: "government",
     summary:
-      "Technology-furniture applications for civic, administrative and public-service environments.",
+      "Create reliable meeting, chamber, command and public-service spaces where technology needs to be secure and serviceable.",
   },
   {
     name: "Healthcare",
     slug: "healthcare",
     summary:
-      "Technology-furniture applications for clinical, administrative, teaching and communication spaces.",
+      "Support consultation, training, administration and communication spaces with accessible, easy-to-maintain technology furniture.",
   },
   {
     name: "Hospitality",
     slug: "hospitality",
     summary:
-      "Technology-furniture applications for guest, conference, event and service environments.",
+      "Help guest, conference and event spaces present cleanly while keeping displays, controls and equipment organised.",
   },
   {
     name: "Public Spaces",
     slug: "public-spaces",
     summary:
-      "Technology-furniture applications for information, wayfinding and self-service in shared environments.",
+      "Place kiosks, information displays and room-side interfaces where visitors can use them clearly and safely.",
   },
   {
     name: "Broadcast & Media",
     slug: "broadcast-media",
     summary:
-      "Technology-furniture applications for production, editing, monitoring and media communication.",
+      "Support editing, production, monitoring and presentation workflows with ordered workstations and equipment storage.",
   },
   {
     name: "Control & Command",
     slug: "control-command",
     summary:
-      "Specialist technology furniture for operational monitoring, coordination and command environments.",
+      "Coordinate screens, operator workstations, controls and equipment for monitoring, response and decision-making rooms.",
   },
   {
     name: "Training Centres",
     slug: "training-centres",
     summary:
-      "Technology-furniture applications for professional instruction, rehearsal and skills development.",
+      "Build flexible rooms for instruction, practice, assessment and hybrid participation.",
   },
   {
     name: "Events & Venues",
     slug: "events-venues",
     summary:
-      "Technology-furniture applications for presentation, production and audience-facing venues.",
+      "Support presentation, production and audience engagement with mobile, robust and serviceable AV furniture.",
   },
   {
     name: "Houses of Worship",
     slug: "houses-of-worship",
     summary:
-      "Technology-furniture applications for worship, community communication and media production.",
+      "Organise presentation, streaming, control and community communication technology without cluttering the worship space.",
   },
 ].map(createSector);
 export const projects: Project[] = [
