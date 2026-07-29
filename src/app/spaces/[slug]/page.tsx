@@ -539,7 +539,7 @@ function SpaceProductEnvironment({
                   />
                 </summary>
                 <div
-                  className={`glass-panel-strong ring-brand-950/10 absolute z-10 w-72 max-w-[min(18rem,82vw)] rounded-2xl p-4 text-left ring-1 ${environmentPopoverPositions[index]}`}
+                  className={`glass-popover ring-brand-950/10 absolute z-10 w-72 max-w-[min(18rem,82vw)] rounded-2xl p-4 text-left ring-1 ${environmentPopoverPositions[index]}`}
                 >
                   <p className="type-series text-accent">0{index + 1}</p>
                   <h3 className="type-h5 mt-2">{product.name}</h3>
