@@ -113,6 +113,7 @@ type BasketItem = {
   productSlug: string;
   productName: string;
   familyName: string;
+  unitPrice: number;
   model: string;
   finish: string;
   mobility: string;
@@ -128,6 +129,55 @@ const workflowSteps = [
   "Add to basket",
   "Place order request",
 ];
+
+const GST_RATE = 0.18;
+const fallbackPriceByFamily: Record<string, number> = {
+  "family-presentation-stations": 185000,
+  "family-display-stands": 115000,
+  "family-mobile-av-carts": 145000,
+  "family-technology-credenzas": 225000,
+  "family-collaboration-tables": 325000,
+  "family-learning-furniture": 165000,
+  "family-interactive-kiosks": 195000,
+  "family-room-control-scheduling": 65000,
+  "family-av-equipment-enclosures": 135000,
+  "family-media-walls-space-dividers": 275000,
+  "family-technical-workstations": 245000,
+};
+
+const formatPrice = (price: number) =>
+  new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  }).format(price);
+
+function getProductPrice(productSlug: string) {
+  const product = products.find((item) => item.slug === productSlug);
+  if (!product) return 0;
+  const familyBase = fallbackPriceByFamily[product.productFamily] ?? 125000;
+  const familyProducts = products.filter(
+    (item) => item.productFamily === product.productFamily,
+  );
+  const productIndex = Math.max(
+    0,
+    familyProducts.findIndex((item) => item.slug === product.slug),
+  );
+  return familyBase + productIndex * 18000;
+}
+
+function getBasketTotals(basket: BasketItem[]) {
+  const subtotal = basket.reduce(
+    (total, item) => total + item.unitPrice * item.quantity,
+    0,
+  );
+  const gst = Math.round(subtotal * GST_RATE);
+  return {
+    subtotal,
+    gst,
+    total: subtotal + gst,
+  };
+}
 
 export function ConfigureExperience() {
   const [state, setState] = useState<TevoraConfigurationState>(() =>
@@ -202,6 +252,7 @@ export function ConfigureExperience() {
     (total, item) => total + item.quantity,
     0,
   );
+  const basketTotals = getBasketTotals(basket);
 
   const updateState = (update: Partial<TevoraConfigurationState>) =>
     setState((current) => ({
@@ -273,6 +324,9 @@ export function ConfigureExperience() {
       `Reference: ${state.id}`,
       `Updated: ${state.updatedAt}`,
       `Basket items: ${basketQuantity}`,
+      `Subtotal: ${formatPrice(basketTotals.subtotal)}`,
+      `GST (${Math.round(GST_RATE * 100)}%): ${formatPrice(basketTotals.gst)}`,
+      `Total: ${formatPrice(basketTotals.total)}`,
       "",
       "Use this as an order request summary for TEVORA review. Final product selections, dimensions, pricing, lead time and compatibility are confirmed before order acceptance.",
       "",
@@ -324,6 +378,7 @@ export function ConfigureExperience() {
       productSlug: product.slug,
       productName: product.name,
       familyName: family?.name ?? "TEVORA product",
+      unitPrice: getProductPrice(product.slug),
       model: state.configuration.model,
       finish: state.configuration.finish,
       mobility: state.configuration.mobility,
@@ -435,9 +490,23 @@ export function ConfigureExperience() {
                 {orderReference
                   ? `Order reference ${orderReference} is ready.`
                   : basketQuantity
-                    ? "Review quantities and place the order request when ready."
+                    ? `Estimated total ${formatPrice(basketTotals.total)} including GST.`
                     : "Your configured products will appear here as you add them."}
               </p>
+              <dl className="border-line mt-5 grid grid-cols-2 gap-3 border-t pt-4">
+                <div>
+                  <dt className="type-model text-ink-muted">Subtotal</dt>
+                  <dd className="type-body-sm mt-1 font-semibold">
+                    {formatPrice(basketTotals.subtotal)}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="type-model text-ink-muted">GST</dt>
+                  <dd className="type-body-sm mt-1 font-semibold">
+                    {formatPrice(basketTotals.gst)}
+                  </dd>
+                </div>
+              </dl>
             </div>
             <PrimaryButton type="button" onClick={placeOrder} className="mt-8">
               <Send aria-hidden className="size-4" />
@@ -666,6 +735,14 @@ export function ConfigureExperience() {
                             {family?.name}
                           </span>
                           <h3 className="type-h2 mt-4">{product.name}</h3>
+                          <div className="bg-accent-light mt-4 inline-flex items-baseline gap-2 px-3 py-2">
+                            <span className="type-model text-accent">
+                              Live price
+                            </span>
+                            <span className="text-lg font-semibold">
+                              {formatPrice(getProductPrice(product.slug))}
+                            </span>
+                          </div>
                           <p className="type-body-sm text-ink-muted mt-3">
                             {product.descriptor}
                           </p>
@@ -929,6 +1006,14 @@ function ConfigurationWorkspace({
                 <h3 className="type-h3 mt-4">
                   {selectedProduct?.name ?? "No product selected"}
                 </h3>
+                {selectedProduct && (
+                  <div className="bg-accent-light mt-4 inline-flex items-baseline gap-3 px-4 py-3">
+                    <span className="type-model text-accent">Live price</span>
+                    <span className="type-h4">
+                      {formatPrice(getProductPrice(selectedProduct.slug))}
+                    </span>
+                  </div>
+                )}
                 <p className="type-body-sm text-ink-muted mt-4">
                   {selectedProduct?.descriptor ??
                     "Choose a product below or use the recommendations to start configuring a basket line."}
@@ -1122,6 +1207,7 @@ function OrderBasket({
   placeOrder: () => void;
 }) {
   const itemCount = basket.reduce((total, item) => total + item.quantity, 0);
+  const totals = getBasketTotals(basket);
   return (
     <section
       id="order-basket"
@@ -1150,6 +1236,13 @@ function OrderBasket({
               ? `Reference ${orderReference} has been prepared.`
               : `${itemCount} configured item${itemCount === 1 ? "" : "s"} in basket.`}
           </p>
+          <div className="border-line mt-5 border-t pt-4">
+            <p className="type-model text-ink-muted">Estimated total</p>
+            <p className="type-h3 mt-2">{formatPrice(totals.total)}</p>
+            <p className="type-caption text-ink-muted mt-2">
+              Includes {Math.round(GST_RATE * 100)}% GST
+            </p>
+          </div>
         </div>
       </div>
 
@@ -1158,11 +1251,19 @@ function OrderBasket({
           basket.map((item) => (
             <article
               key={item.id}
-              className="bg-surface grid gap-5 p-5 md:grid-cols-[minmax(0,1fr)_12rem]"
+              className="bg-surface grid gap-5 p-5 md:grid-cols-[minmax(0,1fr)_18rem]"
             >
               <div>
                 <p className="type-series text-accent">{item.familyName}</p>
-                <h3 className="type-h4 mt-2">{item.productName}</h3>
+                <div className="mt-2 flex flex-wrap items-end justify-between gap-3">
+                  <h3 className="type-h4">{item.productName}</h3>
+                  <div className="text-right">
+                    <p className="type-model text-ink-muted">Unit price</p>
+                    <p className="text-lg font-semibold">
+                      {formatPrice(item.unitPrice)}
+                    </p>
+                  </div>
+                </div>
                 <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
                   <BasketMeta label="Model" value={item.model} />
                   <BasketMeta label="Finish" value={item.finish} />
@@ -1173,36 +1274,44 @@ function OrderBasket({
                   />
                 </dl>
               </div>
-              <div className="flex items-center justify-between gap-3 md:justify-end">
-                <div className="glass-control flex min-h-11 items-center">
+              <div className="grid content-between gap-4">
+                <div className="text-right">
+                  <p className="type-model text-ink-muted">Line total</p>
+                  <p className="type-h4 mt-1">
+                    {formatPrice(item.unitPrice * item.quantity)}
+                  </p>
+                </div>
+                <div className="flex items-center justify-between gap-3 md:justify-end">
+                  <div className="glass-control flex min-h-11 items-center">
+                    <button
+                      type="button"
+                      className="grid size-11 place-items-center"
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      aria-label={`Reduce ${item.productName} quantity`}
+                    >
+                      -
+                    </button>
+                    <span className="min-w-8 text-center text-sm font-semibold">
+                      {item.quantity}
+                    </span>
+                    <button
+                      type="button"
+                      className="grid size-11 place-items-center"
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      aria-label={`Increase ${item.productName} quantity`}
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
                     type="button"
-                    className="grid size-11 place-items-center"
-                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    aria-label={`Reduce ${item.productName} quantity`}
+                    className="border-line hover:bg-brand-950 grid size-11 place-items-center border hover:text-white"
+                    onClick={() => updateQuantity(item.id, 0)}
+                    aria-label={`Remove ${item.productName} from basket`}
                   >
-                    -
-                  </button>
-                  <span className="min-w-8 text-center text-sm font-semibold">
-                    {item.quantity}
-                  </span>
-                  <button
-                    type="button"
-                    className="grid size-11 place-items-center"
-                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    aria-label={`Increase ${item.productName} quantity`}
-                  >
-                    +
+                    <Trash2 aria-hidden className="size-4" />
                   </button>
                 </div>
-                <button
-                  type="button"
-                  className="border-line hover:bg-brand-950 grid size-11 place-items-center border hover:text-white"
-                  onClick={() => updateQuantity(item.id, 0)}
-                  aria-label={`Remove ${item.productName} from basket`}
-                >
-                  <Trash2 aria-hidden className="size-4" />
-                </button>
               </div>
             </article>
           ))
@@ -1216,6 +1325,27 @@ function OrderBasket({
             </p>
           </div>
         )}
+      </div>
+
+      <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_24rem]">
+        <div className="border-accent bg-accent-light border-l-2 p-5">
+          <p className="type-body-sm font-semibold">
+            Prices are dummy live estimates for configurator testing. TEVORA
+            will confirm final pricing, discounts, freight, installation and
+            lead time before accepting the order.
+          </p>
+        </div>
+        <dl className="glass-panel-strong p-5">
+          <PriceRow label="Subtotal" value={totals.subtotal} />
+          <PriceRow
+            label={`GST (${Math.round(GST_RATE * 100)}%)`}
+            value={totals.gst}
+          />
+          <div className="border-line mt-4 flex items-center justify-between border-t pt-4">
+            <dt className="type-h4">Total</dt>
+            <dd className="type-h3">{formatPrice(totals.total)}</dd>
+          </div>
+        </dl>
       </div>
 
       <div className="mt-6 flex flex-wrap justify-end gap-3">
@@ -1240,6 +1370,15 @@ function BasketMeta({ label, value }: { label: string; value: string }) {
       <dd className="type-caption text-ink-muted mt-1">
         {value || "To be confirmed"}
       </dd>
+    </div>
+  );
+}
+
+function PriceRow({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="flex items-center justify-between gap-4 py-2">
+      <dt className="type-body-sm text-ink-muted">{label}</dt>
+      <dd className="type-body-sm font-semibold">{formatPrice(value)}</dd>
     </div>
   );
 }
