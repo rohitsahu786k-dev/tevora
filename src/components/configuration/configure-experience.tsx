@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/button";
 import { SelectControl, TextField } from "@/components/forms/controls";
 import { productFamilies, products, sectors, spaces } from "@/content";
@@ -203,6 +203,7 @@ export function ConfigureExperience() {
     resolver: zodResolver(productFinderSchema),
     defaultValues: state.finder,
   });
+  const watchedFinder = useWatch({ control: form.control });
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -237,7 +238,11 @@ export function ConfigureExperience() {
   }, [ready, state]);
 
   const recommendations = useMemo(() => {
-    const hasFinderContext = Boolean(state.finder.sector || state.finder.space);
+    const liveFinder = {
+      ...state.finder,
+      ...watchedFinder,
+    };
+    const hasFinderContext = Boolean(liveFinder.sector || liveFinder.space);
     const featuredMatches = defaultRecommendationSlugs
       .map((slug) => products.find((product) => product.slug === slug))
       .filter((product): product is (typeof products)[number] =>
@@ -245,8 +250,8 @@ export function ConfigureExperience() {
       );
     const contextualMatches = hasFinderContext
       ? recommendProducts({
-          sectorSlugs: state.finder.sector ? [state.finder.sector] : [],
-          spaceSlugs: state.finder.space ? [state.finder.space] : [],
+          sectorSlugs: liveFinder.sector ? [liveFinder.sector] : [],
+          spaceSlugs: liveFinder.space ? [liveFinder.space] : [],
           limit: 6,
         })
       : [];
@@ -262,13 +267,13 @@ export function ConfigureExperience() {
       reasons: [
         !hasFinderContext &&
           "Popular configurable product for TEVORA projects.",
-        state.finder.space &&
-          `Relevant to ${spaces.find((space) => space.slug === state.finder.space)?.name ?? "the selected space"}.`,
-        state.finder.sector &&
-          `Commonly considered for ${sectors.find((sector) => sector.slug === state.finder.sector)?.name ?? "this sector"} projects.`,
+        liveFinder.space &&
+          `Relevant to ${spaces.find((space) => space.slug === liveFinder.space)?.name ?? "the selected space"}.`,
+        liveFinder.sector &&
+          `Commonly considered for ${sectors.find((sector) => sector.slug === liveFinder.sector)?.name ?? "this sector"} projects.`,
       ].filter((reason): reason is string => Boolean(reason)),
     }));
-  }, [state.finder.sector, state.finder.space]);
+  }, [state.finder, watchedFinder]);
 
   const basketQuantity = basket.reduce(
     (total, item) => total + item.quantity,
