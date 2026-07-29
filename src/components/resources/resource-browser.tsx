@@ -109,26 +109,11 @@ export function ResourceBrowser() {
       setNotice(
         "This download requires a TEVORA-issued login and project approval.",
       );
-    else
-      setNotice(
-        "This file will be available to download after signing in with a TEVORA-issued login.",
-      );
+    else setGate(resource);
   };
   const hasFilters = Object.values(filters).some(Boolean);
   return (
     <>
-      {previewMode && (
-        <div className="border-accent bg-accent-light mb-10 border-l-2 p-5">
-          <p className="type-spec-label text-accent">
-            Resource library in preparation
-          </p>
-          <p className="type-body-sm mt-2 max-w-4xl">
-            Browse the types of documents TEVORA can support for planning,
-            specification and coordination. Downloads require a TEVORA-issued
-            login; request access and Design Support will guide the next step.
-          </p>
-        </div>
-      )}
       <div className="grid gap-8 lg:grid-cols-[18rem_1fr]">
         <aside>
           <div className="flex items-center justify-between">
@@ -231,12 +216,12 @@ export function ResourceBrowser() {
               <h2 className="type-h3">
                 {hasFilters
                   ? "No resources match these filters."
-                  : "Resources are available through Design Support."}
+                  : "Select a resource category to begin."}
               </h2>
               <p className="type-body-sm text-ink-muted mt-4">
                 {hasFilters
                   ? "Reset one or more filters, browse another resource type, or contact Design Support for project-specific information."
-                  : "Tell us the product, room or project stage and we can help identify the right literature, drawings or planning information."}
+                  : "Use the filters to narrow by product family, resource type, format, sector or space."}
               </p>
               <SecondaryButton
                 type="button"
@@ -302,7 +287,12 @@ function ResourceCard({
   const family = productFamilies.find(
     (item) => item.id === resource.productFamily,
   );
-  const requestOnly = resource.dataStatus === "placeholder";
+  const accessLabel =
+    resource.accessLevel === "restricted"
+      ? "Project approval required"
+      : resource.accessLevel === "registered"
+        ? "TEVORA login required"
+        : "Request current file";
   return (
     <article className="bg-surface grid min-h-[20rem] content-between p-5">
       <div>
@@ -312,11 +302,9 @@ function ResourceCard({
             <span className="type-series text-accent block">
               {resourceTypeLabels[resource.resourceType]}
             </span>
-            {requestOnly && (
-              <span className="type-model text-ink-muted mt-2 block">
-                TEVORA login required
-              </span>
-            )}
+            <span className="type-model text-ink-muted mt-2 block">
+              {accessLabel}
+            </span>
           </div>
         </div>
         <h2 className="type-h3 mt-10">{resource.title}</h2>
@@ -338,20 +326,17 @@ function ResourceCard({
           className="border-graphite hover:bg-brand-950 mt-6 flex min-h-12 w-full items-center justify-between border px-4 text-sm font-semibold hover:text-white"
         >
           <span>
-            {requestOnly
-              ? "Request TEVORA login"
+            {resource.accessLevel === "restricted"
+              ? "Request approved access"
               : resource.accessLevel === "registered"
                 ? "Request TEVORA login"
-                : resource.accessLevel === "restricted"
-                  ? "Request approved access"
-                  : "Download"}
+                : "Request current file"}
           </span>
-          {requestOnly ? (
-            <FileText aria-hidden className="size-4" />
-          ) : resource.accessLevel === "public" ? (
-            <Download aria-hidden className="size-4" />
-          ) : (
+          {resource.accessLevel === "restricted" ||
+          resource.accessLevel === "registered" ? (
             <LockKeyhole aria-hidden className="size-4" />
+          ) : (
+            <FileText aria-hidden className="size-4" />
           )}
         </button>
       </div>
@@ -460,9 +445,13 @@ function ResourceGate({
       >
         <div className="flex items-start justify-between gap-5">
           <div>
-            <p className="type-eyebrow text-accent">Registered resource</p>
+            <p className="type-eyebrow text-accent">
+              {resource.accessLevel === "public"
+                ? "Resource request"
+                : "Registered resource"}
+            </p>
             <h2 id="resource-gate-title" className="type-h3 mt-4">
-              Request TEVORA login for {resource.title}
+              Request access to {resource.title}
             </h2>
           </div>
           <button
@@ -475,9 +464,8 @@ function ResourceGate({
           </button>
         </div>
         <p className="type-body-sm text-ink-muted mt-5">
-          Downloads are available after signing in with a TEVORA-issued login.
-          Share these details so Design Support can confirm the right access for
-          your company, region and project type.
+          Share these details so Design Support can confirm the right file,
+          revision and access path for your company, region and project type.
         </p>
         {status && (
           <div

@@ -1260,6 +1260,7 @@ export const publishedProjects = projects.filter(
 const resourceSeeds: Array<{
   title: string;
   slug: string;
+  summary: string;
   resourceType: Resource["resourceType"];
   fileFormat: string;
   accessLevel?: Resource["accessLevel"];
@@ -1271,6 +1272,8 @@ const resourceSeeds: Array<{
   {
     title: "Presentation Stations Overview Brochure",
     slug: "product-brochure",
+    summary:
+      "Use this overview to compare presentation station formats, typical room applications and the decisions needed before selecting a lectern, teaching station or presenter console.",
     resourceType: "product-brochure",
     fileFormat: "PDF",
     productFamily: "family-presentation-stations",
@@ -1280,6 +1283,8 @@ const resourceSeeds: Array<{
   {
     title: "ARC Product Data Sheet",
     slug: "product-data-sheet",
+    summary:
+      "Product-level reference for ARC dimensions, technology zones, finish direction and coordination notes used during early specification.",
     resourceType: "product-data-sheet",
     fileFormat: "PDF",
     productFamily: "family-presentation-stations",
@@ -1288,6 +1293,8 @@ const resourceSeeds: Array<{
   {
     title: "Technology Credenza Specification Template",
     slug: "technical-specification",
+    summary:
+      "A specification checklist for NEXUS credenzas covering equipment storage, ventilation, access, cable routing and finish coordination.",
     resourceType: "technical-specification",
     fileFormat: "PDF",
     accessLevel: "registered",
@@ -1297,6 +1304,8 @@ const resourceSeeds: Array<{
   {
     title: "VISTA Display Stand CAD Drawing",
     slug: "cad-drawing",
+    summary:
+      "CAD reference for planning VISTA display stand footprint, display position, service clearance and room coordination.",
     resourceType: "cad",
     fileFormat: "DWG",
     accessLevel: "registered",
@@ -1306,6 +1315,8 @@ const resourceSeeds: Array<{
   {
     title: "ARC Presentation Station BIM Object",
     slug: "bim-object",
+    summary:
+      "BIM object for placing ARC into education, meeting and presentation environments during architectural coordination.",
     resourceType: "bim",
     fileFormat: "BIM",
     accessLevel: "registered",
@@ -1315,6 +1326,8 @@ const resourceSeeds: Array<{
   {
     title: "FORUM Collaboration Table Revit Family",
     slug: "revit-family",
+    summary:
+      "Revit family for coordinating FORUM table size, power/data positions and AV integration within boardroom or collaboration layouts.",
     resourceType: "revit",
     fileFormat: "RVT",
     accessLevel: "registered",
@@ -1324,6 +1337,8 @@ const resourceSeeds: Array<{
   {
     title: "MOVE Pro STEP Model",
     slug: "step-model",
+    summary:
+      "STEP model for reviewing MOVE Pro clearances, component fit and integration requirements with project teams or fabrication partners.",
     resourceType: "step",
     fileFormat: "STEP",
     accessLevel: "registered",
@@ -1333,6 +1348,8 @@ const resourceSeeds: Array<{
   {
     title: "Mobile AV Cart Installation Guide",
     slug: "installation-guide",
+    summary:
+      "Installation guidance for mobile AV cart setup, equipment loading, service access and handover checks.",
     resourceType: "installation-guide",
     fileFormat: "PDF",
     productFamily: "family-mobile-av-carts",
@@ -1340,18 +1357,24 @@ const resourceSeeds: Array<{
   {
     title: "TEVORA Finish Card",
     slug: "finish-card",
+    summary:
+      "Finish reference for reviewing TEVORA surface, trim and accent options with interiors, furniture and client teams.",
     resourceType: "finish-card",
     fileFormat: "PDF",
   },
   {
     title: "Materials and Sustainability Information",
     slug: "sustainability-document",
+    summary:
+      "Material and sustainability information for project documentation, procurement review and responsible specification discussions.",
     resourceType: "sustainability-document",
     fileFormat: "PDF",
   },
   {
     title: "Product Certification Register",
     slug: "certification-document",
+    summary:
+      "Certification register for compliance review where project teams need verified product documentation before procurement.",
     resourceType: "certification",
     fileFormat: "PDF",
     accessLevel: "restricted",
@@ -1359,6 +1382,8 @@ const resourceSeeds: Array<{
   {
     title: "Technology Furniture Planning Guide",
     slug: "planning-guide",
+    summary:
+      "Planning guide for connecting room activity, technology requirements, furniture selection, cable pathways and service access.",
     resourceType: "planning-guide",
     fileFormat: "PDF",
     sectors: ["sector-higher-education", "sector-corporate"],
@@ -1367,12 +1392,16 @@ const resourceSeeds: Array<{
   {
     title: "Technology Furniture Product Introduction",
     slug: "product-video",
+    summary:
+      "Short product introduction for teams who need a fast overview of TEVORA technology furniture categories and typical applications.",
     resourceType: "video",
     fileFormat: "MP4",
   },
   {
     title: "Product Image Library",
     slug: "product-image",
+    summary:
+      "Image pack for proposals, internal reviews and project presentations where TEVORA product visuals are needed.",
     resourceType: "product-image",
     fileFormat: "JPG",
   },
@@ -1382,7 +1411,7 @@ export const resources: Resource[] = resourceSeeds.map((seed) => ({
   id: `resource-${seed.slug}`,
   slug: seed.slug,
   title: seed.title,
-  summary: `${seed.title} can support product selection, coordination or specification. Request the current file from TEVORA for your project stage.`,
+  summary: seed.summary,
   kind: seed.resourceType === "planning-guide" ? "guide" : "download",
   resourceType: seed.resourceType,
   productFamily: seed.productFamily ?? null,
