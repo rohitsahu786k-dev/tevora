@@ -20,6 +20,7 @@ export function createConfigurationState(seed?: {
     updatedAt: seed?.updatedAt ?? new Date().toISOString(),
     mode: "find-product",
     finder: {
+      productFamily: "",
       sector: "",
       space: "",
       activity: "",

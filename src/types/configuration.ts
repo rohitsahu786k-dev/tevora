@@ -11,6 +11,7 @@ export type ConfigureEntryMode =
 export type RequirementAnswer = "" | "yes" | "no" | "unsure";
 
 export interface ProductFinderAnswers {
+  productFamily: string;
   sector: string;
   space: string;
   activity: string;

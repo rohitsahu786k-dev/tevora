@@ -6,11 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ArrowRight,
   Check,
-  ClipboardList,
   Download,
-  FileUp,
-  LocateFixed,
-  PackageSearch,
   RotateCcw,
   Save,
   Send,
@@ -42,64 +38,10 @@ import {
   type ProductFinderInput,
 } from "@/lib/validation/configuration";
 import { routes } from "@/lib/routes";
-import { cn } from "@/lib/utils";
 import { productConceptMediaBySlug } from "@/content/media";
-import type {
-  ConfigureEntryMode,
-  TevoraConfigurationState,
-} from "@/types/configuration";
+import type { TevoraConfigurationState } from "@/types/configuration";
 import { motionTokens } from "@/lib/motion/tokens";
 import { TevoraMotionProvider } from "@/components/motion/motion-provider";
-
-const entryOptions: Array<{
-  mode: ConfigureEntryMode;
-  title: string;
-  description: string;
-  icon: typeof PackageSearch;
-}> = [
-  {
-    mode: "find-product",
-    title: "Find products",
-    description:
-      "Start with the room and technology requirement, then shortlist suitable TEVORA products.",
-    icon: PackageSearch,
-  },
-  {
-    mode: "configure-product",
-    title: "Configure product",
-    description:
-      "Select a product, confirm equipment needs, choose finish direction and add it to the basket.",
-    icon: Settings2,
-  },
-  {
-    mode: "design-space",
-    title: "Design by space",
-    description:
-      "Use the room type to guide furniture, technology and accessory decisions.",
-    icon: LocateFixed,
-  },
-  {
-    mode: "build-requirement",
-    title: "Build requirement",
-    description:
-      "Capture project stage, service access, display, device and documentation needs.",
-    icon: ClipboardList,
-  },
-  {
-    mode: "upload-layout",
-    title: "Attach layout",
-    description:
-      "Keep drawings ready so TEVORA can confirm fit, clearances and service access.",
-    icon: FileUp,
-  },
-  {
-    mode: "request-proposal",
-    title: "Place order",
-    description:
-      "Review the basket and send an order request for TEVORA confirmation.",
-    icon: ArrowRight,
-  },
-];
 
 const answerOptions = [
   ["", "Select an answer"],
@@ -122,13 +64,6 @@ type BasketItem = {
   accessoryNames: string[];
   quantity: number;
 };
-
-const workflowSteps = [
-  "Find the right product",
-  "Configure options",
-  "Add to basket",
-  "Place order request",
-];
 
 const defaultRecommendationSlugs = [
   "vista-duo",
@@ -242,22 +177,36 @@ export function ConfigureExperience() {
       ...state.finder,
       ...watchedFinder,
     };
-    const hasFinderContext = Boolean(liveFinder.sector || liveFinder.space);
+    const selectedFamily = productFamilies.find(
+      (family) => family.id === liveFinder.productFamily,
+    );
+    const hasFamilyContext = Boolean(selectedFamily);
+    const hasFinderContext = Boolean(
+      liveFinder.productFamily || liveFinder.sector || liveFinder.space,
+    );
     const featuredMatches = defaultRecommendationSlugs
       .map((slug) => products.find((product) => product.slug === slug))
       .filter((product): product is (typeof products)[number] =>
         Boolean(product),
       );
-    const contextualMatches = hasFinderContext
-      ? recommendProducts({
-          sectorSlugs: liveFinder.sector ? [liveFinder.sector] : [],
-          spaceSlugs: liveFinder.space ? [liveFinder.space] : [],
-          limit: 6,
-        })
+    const familyMatches = selectedFamily
+      ? products.filter(
+          (product) => product.productFamily === selectedFamily.id,
+        )
       : [];
+    const contextualMatches =
+      !selectedFamily && hasFinderContext
+        ? recommendProducts({
+            sectorSlugs: liveFinder.sector ? [liveFinder.sector] : [],
+            spaceSlugs: liveFinder.space ? [liveFinder.space] : [],
+            limit: 6,
+          })
+        : [];
     const matches = contextualMatches.length
       ? contextualMatches
-      : featuredMatches;
+      : familyMatches.length
+        ? familyMatches
+        : featuredMatches;
     return matches.map((product) => ({
       product,
       family: productFamilies.find(
@@ -267,6 +216,8 @@ export function ConfigureExperience() {
       reasons: [
         !hasFinderContext &&
           "Popular configurable product for TEVORA projects.",
+        hasFamilyContext &&
+          `Part of the ${selectedFamily?.name ?? "selected"} product family.`,
         liveFinder.space &&
           `Relevant to ${spaces.find((space) => space.slug === liveFinder.space)?.name ?? "the selected space"}.`,
         liveFinder.sector &&
@@ -287,17 +238,6 @@ export function ConfigureExperience() {
       ...update,
       updatedAt: new Date().toISOString(),
     }));
-
-  const chooseMode = (mode: ConfigureEntryMode) => {
-    updateState({ mode });
-    document
-      .getElementById(mode === "configure-product" ? "workspace" : "finder")
-      ?.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth",
-      });
-  };
 
   const submitFinder = form.handleSubmit((finder) => {
     updateState({ finder });
@@ -335,6 +275,55 @@ export function ConfigureExperience() {
         ? "Product selected. Continue configuring below or add it to the basket."
         : "Product selection cleared.",
     );
+  };
+
+  const chooseProductFamilyFromFinder = (productFamily: string) => {
+    form.setValue("productFamily", productFamily, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    form.setValue("sector", "", {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    form.setValue("space", "", {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    updateState({
+      finder: {
+        ...state.finder,
+        productFamily,
+        sector: "",
+        space: "",
+      },
+    });
+    setStatus(
+      productFamily
+        ? "Product family selected. Sector and space filters cleared."
+        : "Product family selection cleared.",
+    );
+  };
+
+  const clearProductFamilyForContext = (
+    field: "sector" | "space",
+    value: string,
+  ) => {
+    form.setValue(field, value, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    form.setValue("productFamily", "", {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    updateState({
+      finder: {
+        ...state.finder,
+        productFamily: "",
+        [field]: value,
+      },
+    });
   };
 
   const save = () => {
@@ -467,6 +456,10 @@ export function ConfigureExperience() {
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const sectorRegistration = form.register("sector");
+  const spaceRegistration = form.register("space");
+  const productFamilyRegistration = form.register("productFamily");
+
   return (
     <TevoraMotionProvider>
       <motion.div
@@ -474,29 +467,17 @@ export function ConfigureExperience() {
         animate={{ opacity: ready ? 1 : 0.72 }}
         transition={{ duration: motionTokens.duration.component }}
       >
-        <div className="glass-panel-strong mb-8 grid gap-px overflow-hidden p-2 sm:grid-cols-4">
-          {workflowSteps.map((step, index) => (
-            <div key={step} className="bg-white/42 p-4">
-              <span className="type-model text-accent">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <p className="type-body-sm mt-2 font-semibold">{step}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mb-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-stretch">
-          <div className="bg-brand-950 p-6 text-white">
+        <div className="mb-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-stretch">
+          <div className="bg-brand-950 p-5 text-white">
             <p className="type-eyebrow text-emerald-300">Order Builder</p>
-            <h2 className="type-h2 mt-4 max-w-3xl text-balance">
+            <h2 className="type-h3 mt-3 max-w-3xl text-balance">
               Shop, configure and send a reviewed TEVORA order request.
             </h2>
-            <p className="type-body mt-5 max-w-3xl text-white/72">
-              Choose a recommended product, configure the key options, add it to
-              the basket and receive a TEVORA order reference before final
-              commercial review.
+            <p className="type-body-sm mt-4 max-w-3xl text-white/72">
+              Choose a product, configure the essentials, add to basket and
+              place an order request.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-3">
               <PrimaryButton
                 asChild
                 className="text-brand-950! hover:border-accent hover:bg-accent! border-white bg-white! hover:text-white!"
@@ -516,12 +497,12 @@ export function ConfigureExperience() {
               </SecondaryButton>
             </div>
           </div>
-          <div className="glass-panel-strong grid content-between p-5">
+          <div className="glass-panel-strong grid content-between p-4">
             <div>
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="type-model text-accent">Basket</p>
-                  <p className="type-h3 mt-3">
+                  <p className="type-h4 mt-2">
                     {basketQuantity} item{basketQuantity === 1 ? "" : "s"}
                   </p>
                 </div>
@@ -529,14 +510,14 @@ export function ConfigureExperience() {
                   <ShoppingBag aria-hidden className="size-5" />
                 </div>
               </div>
-              <p className="type-body-sm text-ink-muted mt-5">
+              <p className="type-body-sm text-ink-muted mt-4">
                 {orderReference
                   ? `Order reference ${orderReference} is ready.`
                   : basketQuantity
                     ? `Estimated total ${formatPrice(basketTotals.total)} including GST.`
                     : "Your configured products will appear here as you add them."}
               </p>
-              <dl className="border-line mt-5 grid grid-cols-2 gap-3 border-t pt-4">
+              <dl className="border-line mt-4 grid grid-cols-2 gap-3 border-t pt-3">
                 <div>
                   <dt className="type-model text-ink-muted">Subtotal</dt>
                   <dd className="type-body-sm mt-1 font-semibold">
@@ -551,65 +532,38 @@ export function ConfigureExperience() {
                 </div>
               </dl>
             </div>
-            <PrimaryButton type="button" onClick={placeOrder} className="mt-8">
+            <PrimaryButton type="button" onClick={placeOrder} className="mt-5">
               <Send aria-hidden className="size-4" />
               Place order
             </PrimaryButton>
           </div>
         </div>
 
-        <div className="border-line bg-line grid gap-px border md:grid-cols-2 xl:grid-cols-3">
-          {entryOptions.map(
-            ({ mode, title, description, icon: Icon }, index) => (
-              <motion.button
-                key={mode}
-                type="button"
-                onClick={() => chooseMode(mode)}
-                aria-pressed={state.mode === mode}
-                whileTap={{ scale: motionTokens.scale.press }}
-                layout
-                className={cn(
-                  "group bg-surface hover:bg-accent-light grid min-h-44 content-between p-5 text-left",
-                  state.mode === mode && "bg-accent-light",
-                )}
-              >
-                <div className="flex items-center justify-between">
-                  <Icon aria-hidden className="text-accent size-5" />
-                  <span className="type-model text-ink-muted">
-                    0{index + 1}
-                  </span>
-                </div>
-                <div>
-                  <h2 className="type-h3">{title}</h2>
-                  <p className="type-body-sm text-ink-muted mt-3">
-                    {description}
-                  </p>
-                </div>
-              </motion.button>
-            ),
-          )}
-        </div>
-
         <section
           id="finder"
-          className="scroll-mt-28 pt-24"
+          className="scroll-mt-28 pt-10"
           aria-labelledby="finder-heading"
         >
-          <div className="grid gap-12 lg:grid-cols-[18rem_1fr]">
+          <div className="grid gap-8 lg:grid-cols-[16rem_1fr]">
             <div>
               <p className="type-eyebrow text-accent">Product finder</p>
-              <h2 id="finder-heading" className="type-h2 mt-5">
+              <h2 id="finder-heading" className="type-h3 mt-4">
                 Define the requirement.
               </h2>
               <p className="type-body-sm text-ink-muted mt-5">
-                Tell us the sector, room and equipment direction so the product
-                shortlist starts from the real project context.
+                Start with a product family, or use sector and space to tune the
+                recommendations.
               </p>
             </div>
-            <form onSubmit={submitFinder} className="grid gap-7 sm:grid-cols-2">
+            <form onSubmit={submitFinder} className="grid gap-5 sm:grid-cols-3">
               <SelectControl
                 label="Which sector are you working in?"
-                {...form.register("sector")}
+                {...sectorRegistration}
+                value={watchedFinder.sector ?? state.finder.sector}
+                onChange={(event) => {
+                  sectorRegistration.onChange(event);
+                  clearProductFamilyForContext("sector", event.target.value);
+                }}
               >
                 <option value="">Select a sector</option>
                 {sectors.map((sector) => (
@@ -620,7 +574,12 @@ export function ConfigureExperience() {
               </SelectControl>
               <SelectControl
                 label="Which space are you designing?"
-                {...form.register("space")}
+                {...spaceRegistration}
+                value={watchedFinder.space ?? state.finder.space}
+                onChange={(event) => {
+                  spaceRegistration.onChange(event);
+                  clearProductFamilyForContext("space", event.target.value);
+                }}
               >
                 <option value="">Select a space</option>
                 {spaces.map((space) => (
@@ -630,134 +589,142 @@ export function ConfigureExperience() {
                 ))}
               </SelectControl>
               <SelectControl
-                label="Select a product directly"
-                value={state.configuration.productSlug}
-                onChange={(event) =>
-                  chooseProductFromFinder(event.target.value)
+                label="Select a product family"
+                {...productFamilyRegistration}
+                value={
+                  watchedFinder.productFamily ?? state.finder.productFamily
                 }
+                onChange={(event) => {
+                  productFamilyRegistration.onChange(event);
+                  chooseProductFamilyFromFinder(event.target.value);
+                }}
               >
-                <option value="">Browse all products</option>
+                <option value="">Browse by sector or space</option>
                 {productFamilies.map((family) => (
-                  <optgroup key={family.id} label={family.name}>
-                    {products
-                      .filter((product) => product.productFamily === family.id)
-                      .map((product) => (
-                        <option key={product.slug} value={product.slug}>
-                          {product.name}
-                        </option>
-                      ))}
-                  </optgroup>
+                  <option key={family.id} value={family.id}>
+                    {family.name}
+                  </option>
                 ))}
               </SelectControl>
-              <TextField
-                label="What activity will take place?"
-                {...form.register("activity")}
-              />
-              <TextField
-                label="Who will use the product?"
-                {...form.register("users")}
-              />
-              <TextField
-                label="What display size is required?"
-                hint="Enter the project requirement; TEVORA will validate support."
-                {...form.register("displaySize")}
-              />
-              <TextField
-                label="How many displays are required?"
-                {...form.register("displayQuantity")}
-              />
-              <TextField
-                label="Which camera is required?"
-                {...form.register("camera")}
-              />
-              <TextField
-                label="Which soundbar or speaker is required?"
-                {...form.register("soundbar")}
-              />
-              <TextField
-                label="Which control device is required?"
-                {...form.register("controlDevice")}
-              />
-              <TextField
-                label="Which computing devices must be supported?"
-                {...form.register("computingDevices")}
-              />
-              <AnswerSelect
-                label="Is rack equipment required?"
-                registration={form.register("rackEquipment")}
-              />
-              <AnswerSelect
-                label="Is mobility required?"
-                registration={form.register("mobility")}
-              />
-              <AnswerSelect
-                label="Is height adjustment required?"
-                registration={form.register("heightAdjustment")}
-              />
-              <AnswerSelect
-                label="Is accessibility required?"
-                registration={form.register("accessibility")}
-              />
-              <AnswerSelect
-                label="Is concealed equipment storage required?"
-                registration={form.register("concealedStorage")}
-              />
-              <SelectControl
-                label="Is front or rear service access required?"
-                {...form.register("serviceAccess")}
-              >
-                <option value="">Select an answer</option>
-                <option value="front">Front</option>
-                <option value="rear">Rear</option>
-                <option value="both">Front and rear</option>
-                <option value="unsure">To be confirmed</option>
-              </SelectControl>
-              <AnswerSelect
-                label="Are CAD or BIM files required?"
-                registration={form.register("cadBimRequired")}
-              />
-              <SelectControl
-                label="What is the project stage?"
-                {...form.register("projectStage")}
-              >
-                <option value="">Select a stage</option>
-                <option value="concept">Concept</option>
-                <option value="design-development">Design development</option>
-                <option value="specification">Specification</option>
-                <option value="procurement">Procurement</option>
-                <option value="delivery">Delivery planning</option>
-              </SelectControl>
-              <TextField
-                label="Where is the project located?"
-                {...form.register("projectLocation")}
-              />
-              <label className="block">
-                <span className="type-spec-label block">Upload a layout</span>
-                <input
-                  type="file"
-                  accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
-                  className="border-line bg-surface mt-2 min-h-12 w-full border p-3 text-sm"
-                />
-                <span className="type-caption text-ink-muted mt-2 block">
-                  Keep the drawing ready to share with TEVORA during the project
-                  review.
-                </span>
-              </label>
               <div className="flex items-end">
-                <PrimaryButton type="submit">
-                  Review recommendations{" "}
-                  <ArrowRight aria-hidden className="size-4" />
+                <PrimaryButton type="submit" className="w-full">
+                  Update matches <ArrowRight aria-hidden className="size-4" />
                 </PrimaryButton>
               </div>
+              <details className="glass-panel-strong p-5 sm:col-span-3">
+                <summary className="cursor-pointer text-sm font-semibold">
+                  Add advanced project details
+                </summary>
+                <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  <TextField
+                    label="What activity will take place?"
+                    {...form.register("activity")}
+                  />
+                  <TextField
+                    label="Who will use the product?"
+                    {...form.register("users")}
+                  />
+                  <TextField
+                    label="What display size is required?"
+                    hint="Enter the project requirement; TEVORA will validate support."
+                    {...form.register("displaySize")}
+                  />
+                  <TextField
+                    label="How many displays are required?"
+                    {...form.register("displayQuantity")}
+                  />
+                  <TextField
+                    label="Which camera is required?"
+                    {...form.register("camera")}
+                  />
+                  <TextField
+                    label="Which soundbar or speaker is required?"
+                    {...form.register("soundbar")}
+                  />
+                  <TextField
+                    label="Which control device is required?"
+                    {...form.register("controlDevice")}
+                  />
+                  <TextField
+                    label="Which computing devices must be supported?"
+                    {...form.register("computingDevices")}
+                  />
+                  <AnswerSelect
+                    label="Is rack equipment required?"
+                    registration={form.register("rackEquipment")}
+                  />
+                  <AnswerSelect
+                    label="Is mobility required?"
+                    registration={form.register("mobility")}
+                  />
+                  <AnswerSelect
+                    label="Is height adjustment required?"
+                    registration={form.register("heightAdjustment")}
+                  />
+                  <AnswerSelect
+                    label="Is accessibility required?"
+                    registration={form.register("accessibility")}
+                  />
+                  <AnswerSelect
+                    label="Is concealed equipment storage required?"
+                    registration={form.register("concealedStorage")}
+                  />
+                  <SelectControl
+                    label="Is front or rear service access required?"
+                    {...form.register("serviceAccess")}
+                  >
+                    <option value="">Select an answer</option>
+                    <option value="front">Front</option>
+                    <option value="rear">Rear</option>
+                    <option value="both">Front and rear</option>
+                    <option value="unsure">To be confirmed</option>
+                  </SelectControl>
+                  <AnswerSelect
+                    label="Are CAD or BIM files required?"
+                    registration={form.register("cadBimRequired")}
+                  />
+                  <SelectControl
+                    label="What is the project stage?"
+                    {...form.register("projectStage")}
+                  >
+                    <option value="">Select a stage</option>
+                    <option value="concept">Concept</option>
+                    <option value="design-development">
+                      Design development
+                    </option>
+                    <option value="specification">Specification</option>
+                    <option value="procurement">Procurement</option>
+                    <option value="delivery">Delivery planning</option>
+                  </SelectControl>
+                  <TextField
+                    label="Where is the project located?"
+                    {...form.register("projectLocation")}
+                  />
+                  <label className="block">
+                    <span className="type-spec-label block">
+                      Upload a layout
+                    </span>
+                    <input
+                      type="file"
+                      accept=".pdf,.dwg,.dxf,.png,.jpg,.jpeg"
+                      className="border-line bg-surface mt-2 min-h-12 w-full border p-3 text-sm"
+                    />
+                    <span className="type-caption text-ink-muted mt-2 block">
+                      Keep the drawing ready to share with TEVORA during the
+                      project review.
+                    </span>
+                  </label>
+                </div>
+              </details>
             </form>
           </div>
         </section>
 
-        <section className="pt-24" aria-labelledby="recommendations-heading">
+        <section className="pt-12" aria-labelledby="recommendations-heading">
           <div className="border-line flex items-end justify-between gap-6 border-b pb-6">
             <div>
               <p className="type-eyebrow text-accent">Recommendations</p>
-              <h2 id="recommendations-heading" className="type-h2 mt-4">
+              <h2 id="recommendations-heading" className="type-h3 mt-4">
                 Recommended products.
               </h2>
             </div>
@@ -772,7 +739,7 @@ export function ConfigureExperience() {
                 initial={{ opacity: 1, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="bg-line grid gap-px md:grid-cols-2"
+                className="bg-line grid gap-px md:grid-cols-2 xl:grid-cols-3"
               >
                 {recommendations.map(
                   ({
@@ -792,12 +759,12 @@ export function ConfigureExperience() {
                         productSlug={product.slug}
                         productName={product.name}
                       />
-                      <div className="grid min-h-[22rem] content-between p-5">
+                      <div className="grid min-h-[16rem] content-between p-5">
                         <div>
                           <span className="type-series text-accent">
                             {family?.name}
                           </span>
-                          <h3 className="type-h2 mt-4">{product.name}</h3>
+                          <h3 className="type-h4 mt-4">{product.name}</h3>
                           <div className="bg-accent-light mt-4 inline-flex items-baseline gap-2 px-3 py-2">
                             <span className="type-model text-accent">
                               Live price
@@ -823,23 +790,6 @@ export function ConfigureExperience() {
                               </li>
                             ))}
                           </ul>
-                          <h4 className="type-spec-label mt-7">
-                            What to confirm next
-                          </h4>
-                          <p className="type-caption text-ink-muted mt-3">
-                            Confirm model, equipment fit, dimensions, mounting,
-                            cable paths and accessory compatibility with TEVORA.
-                          </p>
-                          <h4 className="type-spec-label mt-7">
-                            Compatible accessory groups
-                          </h4>
-                          <p className="type-caption text-ink-muted mt-3">
-                            {relatedAccessories.length
-                              ? relatedAccessories
-                                  .map((item) => item.name)
-                                  .join(" · ")
-                              : "Accessory groups can be discussed once a product direction is selected."}
-                          </p>
                         </div>
                         <div className="mt-8 flex flex-wrap gap-3">
                           <PrimaryButton
@@ -1023,13 +973,13 @@ function ConfigurationWorkspace({
   return (
     <section
       id="workspace"
-      className="scroll-mt-28 pt-24"
+      className="scroll-mt-28 pt-12"
       aria-labelledby="workspace-heading"
     >
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_24rem]">
         <div>
           <p className="type-eyebrow text-accent">Configuration workspace</p>
-          <h2 id="workspace-heading" className="type-h2 mt-4">
+          <h2 id="workspace-heading" className="type-h3 mt-4">
             Configure the product.
           </h2>
           <p className="type-body-sm text-ink-muted mt-5 max-w-2xl">
@@ -1274,13 +1224,13 @@ function OrderBasket({
   return (
     <section
       id="order-basket"
-      className="scroll-mt-28 pt-20"
+      className="scroll-mt-28 pt-12"
       aria-labelledby="order-basket-heading"
     >
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div>
           <p className="type-eyebrow text-accent">Basket</p>
-          <h2 id="order-basket-heading" className="type-h2 mt-4">
+          <h2 id="order-basket-heading" className="type-h3 mt-4">
             Review the order request.
           </h2>
           <p className="type-body-sm text-ink-muted mt-5 max-w-2xl">

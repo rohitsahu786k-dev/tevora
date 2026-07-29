@@ -4,6 +4,7 @@ import { CONFIGURATION_VERSION } from "@/types/configuration";
 const answerSchema = z.enum(["", "yes", "no", "unsure"]);
 
 export const productFinderSchema = z.object({
+  productFamily: z.string(),
   sector: z.string(),
   space: z.string(),
   activity: z.string().max(200),

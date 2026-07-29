@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { ConfigureExperience } from "@/components/configuration/configure-experience";
 import { ProductBrowserSkeleton } from "@/components/products/product-browser-skeleton";
-import { Container, Section, SectionHeader } from "@/components/ui/system";
+import { Container, Eyebrow, Section } from "@/components/ui/system";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { routes } from "@/lib/routes";
 export const metadata = createPageMetadata({
@@ -14,13 +14,20 @@ export const metadata = createPageMetadata({
 export default function ConfigurePage() {
   return (
     <main id="main-content" tabIndex={-1} className="outline-none">
-      <Section>
+      <Section className="py-8 md:py-10 lg:py-12">
         <Container>
-          <SectionHeader
-            eyebrow="Configure"
-            title="Configure products and build your project basket."
-            description="Choose the space, select TEVORA products, set the main equipment and finish requirements, then place an order request for review."
-          />
+          <header className="border-line mb-6 grid gap-4 border-t pt-5 md:grid-cols-[12rem_1fr] md:items-end">
+            <Eyebrow>Configure</Eyebrow>
+            <div>
+              <h1 className="type-h2 max-w-4xl text-balance">
+                Configure products. Build your basket.
+              </h1>
+              <p className="type-body text-ink-muted mt-3 max-w-3xl">
+                Select products, see estimated pricing, add to basket and place
+                an order request for TEVORA review.
+              </p>
+            </div>
+          </header>
           <Suspense fallback={<ProductBrowserSkeleton />}>
             <ConfigureExperience />
           </Suspense>
